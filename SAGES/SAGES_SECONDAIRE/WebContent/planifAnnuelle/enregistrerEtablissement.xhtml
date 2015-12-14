@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Paramètres de l'établissement
+    </ui:define>
+    
+    <ui:define name="content">
+	    <h2>
+	   		<h:outputText value="Etablissement"/>
+	   	</h2>
+    <br/>
+    
+    <p:messages id="messages" autoUpdate="true"/>
+    
+   	<h:form id="formetab" enctype="multipart/form-data">
+   	
+   	<p:panel id="paneletab"  style="margin-bottom:10px;" rendered="#{not etablissementBean.estCharge}"> 
+   		<f:facet name="header">
+    		<center>
+    			<p:graphicImage value="#configuration.imgpath/#{etablissementBean.codeetablissement}.jpg"/>
+    		</center>	    	
+	    </f:facet>
+   		
+	    <p:panelGrid columns="2" style="width:100%;" id="perso">	    
+	    		    
+			<h:outputText value="Code de l'etablissement *"/>	            			
+      		<p:inputText value="#{etablissementBean.codeetablissement}" id="code" required="true" requiredMessage="Code etablissement obligatoire"/>
+      		 	
+		 	<h:outputText value="Nom *"/>	            			
+      		<p:inputText value="#{etablissementBean.nom}" id="Nom" required="true" requiredMessage="Nom obligatoire"/>
+      		
+      		<h:outputText value="Acronyme"/>	            			
+      		<p:inputText value="#{etablissementBean.acronyme}" id="acronyme" required="true" requiredMessage="Acronyme etablissement obligatoire"/>
+      		 	
+		 	<h:outputText value="Devise"/>	            			
+      		<p:inputText value="#{etablissementBean.devise}" id="devise" required="true" requiredMessage="Devise obligatoire"/>
+      		
+      		<h:outputText value="Logo"/>	            			
+      		<p:fileUpload value="#{etablissementBean.logoUploaded}" allowTypes="/(\.|\/)(gif|jpeg|png)$/" showButtons="false" mode="simple" id="logo" required="true" requiredMessage="Logo etablissement obligatoire"/>
+      		 	
+		 	<h:outputText value="Type"/>	            			
+      		<p:inputText value="#{etablissementBean.type}" id="type"/>
+      		
+      		<h:outputText value="Code postal"/>	            			
+      		<p:inputText value="#{etablissementBean.codepostal}" id="codepostal" required="true" requiredMessage="Code postal obligatoire"/>
+      		 	
+		 	<h:outputText value="Email"/>	            			
+      		<p:inputText value="#{etablissementBean.email}" id="email"/>
+      		
+      		
+   	    	<h:outputText value="Telephone *"/>	            			
+      		<p:inputText value="#{etablissementBean.telephone}" id="telephone" required="true" requiredMessage="Champ Telephone obligatoire" validator="PhoneValidator"/>
+      		
+      		<h:outputText value="Site Web"/>	            			
+      		<p:inputText value="#{etablissementBean.siteweb}" id="site"/>
+      		 
+      		<h:outputText value="Pays"/>	            			
+      		<p:inputText value="#{etablissementBean.pays}" id="pays"/>
+      		 	
+		 	<h:outputText value="Région"/>	            			
+      		<p:inputText value="#{etablissementBean.region}" id="region"/>
+      		
+      		<h:outputText value="Département"/>	            			
+      		<p:inputText value="#{etablissementBean.departement}" id="departement" />
+      		 	
+		 	<h:outputText value="Arrondissement"/>	            			
+      		<p:inputText value="#{etablissementBean.arrondissement}" id="arrondissement" />
+      		
+      		<h:outputText value="Adresse *"/>	            			
+      		<p:inputText value="#{etablissementBean.adresse}" id="adresse" required="true" requiredMessage="Adresse obligatoire"/>
+      		            			
+	     </p:panelGrid>		
+		 <br/>
+							
+		  <center>	
+		  								
+		 		<p:commandButton value="Enregistrer"  icon="ui-icon-check" id="submitetab" action="#{etablissementBean.saveEtablissement}" />
+		 		<p:commandButton value="Annuler" immediate="true" type="reset" icon="ui-icon-close"/>	
+		 </center>
+	</p:panel>
+	
+	<p:blockUI block="paneletab" trigger="submitetab">  
+        Enregistrement...<br />  
+    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+    </p:blockUI> 
+    
+	</h:form>
+	
+	
+	<p:panel id="paneletabvue"  style="margin-bottom:10px;" rendered="#{etablissementBean.estCharge}" header="Code: #{etablissementBean.codeetablissement}"> 
+   	   	
+   	   	<f:facet name="header">
+    		<center>
+    			<p:graphicImage value="#{etablissementBean.logo}"/>
+    		</center>	    	
+    	</f:facet>
+  	   		
+	    <p:panelGrid columns="2" style="width:100%;" columnClasses="label,value">	    
+	    		
+		 	<h:outputText value="Nom"/>	            			
+      		<h:outputText value="#{etablissementBean.nom}"/>
+      		
+      		<h:outputText value="Acronyme"/>	            			
+      		<h:outputText value="#{etablissementBean.acronyme}"/>
+      		 	
+		 	<h:outputText value="Devise"/>	            			
+      		<h:outputText value="#{etablissementBean.devise}"/>
+      		      		 	
+		 	<h:outputText value="Type"/>	            			
+      		<h:outputText value="#{etablissementBean.type}"/>
+      		
+      		<h:outputText value="Code postal"/>	            			
+      		<h:outputText value="#{etablissementBean.codepostal}"/>
+      		 	
+		 	<h:outputText value="Email"/>	            			
+      		<h:outputText value="#{etablissementBean.email}"/>
+      		
+      		
+   	    	<h:outputText value="Telephone"/>	            			
+      		<h:outputText value="#{etablissementBean.telephone}"/>
+      		
+      		<h:outputText value="Site Web"/>	            			
+      		<h:outputText value="#{etablissementBean.siteweb}"/>
+      		 
+      		<h:outputText value="Pays"/>	            			
+      		<h:outputText value="#{etablissementBean.pays}"/>
+      		 	
+		 	<h:outputText value="Région"/>	            			
+      		<h:outputText value="#{etablissementBean.region}"/>
+      		
+      		<h:outputText value="Département"/>	            			
+      		<h:outputText value="#{etablissementBean.departement}" />
+      		 	
+		 	<h:outputText value="Arrondissement"/>	            			
+      		<h:outputText value="#{etablissementBean.arrondissement}"/>
+      		
+      		<h:outputText value="Adresse"/>	            			
+      		<h:outputText value="#{etablissementBean.adresse}"/>
+      		            			
+	     </p:panelGrid>
+	     <f:facet name="footer">
+	     	<center>
+	     		
+	     	</center>
+	     
+	     </f:facet>		
+		 <br/>
+		<h:form>				
+			 <center>		  								
+			 		<p:commandButton value="Modifier"  icon="ui-icon-pencil" id="submitetab" action="#{navBean.etabmodify}" />
+			 </center>
+		</h:form>	
+	</p:panel>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codepersonnel" value="#{personnelBean.codepersonnel}"/>
+	  		<f:event type="preRenderView" listener="#{personnelBean.initialize}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Suppression de Personnel
+    </ui:define>
+   
+    <ui:define name="content">
+    	
+    
+	    <h2>
+	   		<h:outputText value="Supprimer le personnel -- Code: #{personnelBean.codepersonnel} --"/>
+	   	</h2>
+	   	
+	   	<p:messages autoUpdate="true"/>
+    
+	   	<h:form id="formapplication">
+	   	
+		   	<p:panel id="panel"  style="margin-bottom:10px;"> 
+		   		
+			     <p:panelGrid columns="2" style="width:85%;" id="perso" columnClasses="label,value">	    
+			    			 	
+				 	<h:outputText value="Nom"/>	            			
+		      		<h:outputText value="#{personnelBean.nom}" id="nom"/>
+		      		 	
+				 	<h:outputText value="Prénom"/>	            			
+		      		<h:outputText value="#{personnelBean.prenom}" id="prenom"/>
+		      		
+		      		<h:outputText value="Sexe"/>	            			
+		      		<h:outputText value="#{personnelBean.sexe}" id="sexe"/>
+		    				      				
+					<h:outputText value="Adresse"/>				
+		   			<h:outputText value="#{personnelBean.adresse}" id="adresse"/>
+		    		
+		   	    	
+		   	    	<h:outputText value="Email"/>			
+		      		<h:outputText value="#{personnelBean.email}" id="email"/>      		
+		       		    
+		       		    
+		       		<h:outputText value="Telephone"/>	            			
+		      		<h:outputText value="#{personnelBean.telephone}" id="telephone"/>
+		      		 	
+				 	<h:outputText value="Civilité"/>
+				 	<h:outputText  value="#{personnelBean.civilite}" id="civilite"/>
+		      				
+					<h:outputText value="Date arrivée"/>				
+		   			<h:outputText value="#{personnelBean.datearrivee}">
+						 <f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputText>
+					  	    	
+		   	    	<h:outputText value="Fonction"/>			
+		      		<h:outputText value="#{personnelBean.fonction}" id="fonction"/>     	      		               			
+			        	    	    	      		               			
+			     </p:panelGrid>		
+			 	  <br/> 									
+				  <center>										
+				 		<p:commandButton value="Confirmation Suppression"  id="buttonsubmit" icon="ui-icon-check"  action="#{personnelBean.supprimerpersonnel}" update="panel"/>
+				 									
+				  </center>
+				
+			</p:panel>
+			<p:blockUI block="panel" trigger="buttonsubmit">  
+		        Suppression...<br />  
+		    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+		    </p:blockUI> 
+		</h:form>
+   	
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

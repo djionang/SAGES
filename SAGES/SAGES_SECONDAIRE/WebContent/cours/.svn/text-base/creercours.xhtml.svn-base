@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Enregistrer un cours
+    </ui:define>
+   
+    <ui:define name="content">
+    <f:view>
+	    <h2>
+	   		<h:outputText value="Nouveau cours"/>
+	   	</h2>
+	   	
+	   	<p:messages autoUpdate="true"/>
+    
+	   	<h:form id="formcours">
+	   	
+	   	<p:panel id="panelcours"  style="margin-bottom:10px;"> 
+	   	
+		    <p:panelGrid columns="2" style="width:100%;" id="perso">	    
+		    	<h:outputText value="Matière"/>
+		    	<h:selectOneMenu value="#{coursBean.codematiere}" required="true" requiredMessage="La Matière ne peut être vide">
+		    		<f:selectItems value="#{etablissement.listeMatieres}" var="mat" itemLabel="#{mat.libelle}" itemValue="#{mat.codematiere}" itemDescription="#{mat.description} #{not empty mat.animateur?'animée par':''} #{mat.animateur}"/>
+		    	</h:selectOneMenu>
+		    	
+		    	<h:outputText value="Classe"/>
+		    	<h:selectOneMenu value="#{coursBean.codeclasse}" required="true" requiredMessage="La classe ne peut être vide">
+		    		<f:selectItems value="#{etablissement.listeClasses}" var="clas" itemLabel="#{clas.libelle}" itemValue="#{clas.codeClasse}" itemDescription="#{clas.libelle}"/>
+		    	</h:selectOneMenu>
+		    		
+			 	<h:outputText value="libellé *"/>	            			
+	      		<p:inputText value="#{coursBean.libelle}" id="libelle" required="true" requiredMessage="Libellé de la cours obligatoire"/>
+	      		
+	      		<h:outputText value="description"/>
+	      		<p:inputTextarea value="#{coursBean.description}"/>           			
+		    
+		    	<h:outputText value="Coefficient"/>
+	      		<p:spinner value="#{coursBean.coeficient}" min="0" max="100" maxlength="2" size="4"/>          			
+		    
+		    	<h:outputText value="Groupe Matière"/>
+		    	<h:selectOneMenu value="#{coursBean.libellegm}" required="true" requiredMessage="Groupe de matière Obligatoire">
+		    		<f:selectItems value="#{etablissement.listeGms}" var="gm" itemLabel="#{gm.libelle}" itemValue="#{gm.libelle}" itemDescription="#{gm.description}"/>
+		    	</h:selectOneMenu>
+		    	
+		    </p:panelGrid>		
+			
+			 <br/>				
+			 <center>			  								
+			 		<p:commandButton value="Enregistrer"  icon="ui-icon-check" id="submitcours" action="#{coursBean.saveCours}" />
+			 		<p:commandButton value="Annuler" immediate="true" type="reset" icon="ui-icon-close" />	
+			 </center>
+		</p:panel>
+		
+		<p:blockUI block="panelcours" trigger="submitcours">  
+	        Enregistrement...<br />  
+	    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+	    </p:blockUI> 
+	    
+		</h:form>
+	
+   </f:view>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

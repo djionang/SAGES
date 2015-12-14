@@ -1,0 +1,239 @@
+10
+
+dir
+10
+http://localhost:81/svn/school/SAGES_SECONDAIRE/WebContent
+http://localhost:81/svn/school
+
+
+
+2015-08-26T09:00:35.978800Z
+10
+berlin
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+f38c5289-1cc0-f241-8855-0c4d07faf64f
+
+
+
+
+
+
+0
+
+ADMINISTRATOR
+dir
+
+META-INF
+dir
+
+WEB-INF
+dir
+
+access-control
+dir
+
+accueil.xhtml
+file
+
+
+
+
+2013-07-05T21:14:00.008000Z
+b9975a54ab53a903a2c230c91ebdf710
+2015-08-26T09:00:35.978800Z
+10
+berlin
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+552
+
+accueil2.xhtml
+file
+
+
+
+
+2013-07-05T21:14:16.504000Z
+a593e2047a5165993011824ae1e8976e
+2015-08-26T09:00:35.978800Z
+10
+berlin
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+546
+
+administration
+dir
+
+anneeAcademique
+dir
+
+atelier
+dir
+
+audit
+dir
+
+budget
+dir
+
+classe
+dir
+
+contact
+dir
+
+cours
+dir
+
+discipline
+dir
+
+eleve
+dir
+
+enseignant
+dir
+
+erreur
+dir
+
+etablissement
+dir
+
+evaluation
+dir
+
+index.jsp
+file
+
+
+
+
+2013-07-05T21:14:29.786000Z
+0401183eeaa3d8d9a6cba90d9baa13b3
+2015-08-26T09:00:35.978800Z
+10
+berlin
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+454
+
+inscription
+dir
+
+materiel
+dir
+
+matiere
+dir
+
+note
+dir
+
+personnel
+dir
+
+planifAnnuelle
+dir
+
+programmation
+dir
+
+recrutement
+dir
+
+reports
+dir
+
+resources
+dir
+
+responsabilite
+dir
+
+salle
+dir
+
+statistique
+dir
+
+upimages
+dir
+
+users
+dir
+
+vie-scolaire
+dir
+

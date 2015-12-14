@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/statistique
+END
+BilanAnBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/statistique/BilanAnBean.java
+END
+AnneeDataModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/statistique/AnneeDataModel.java
+END
+SequenceDataModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/statistique/SequenceDataModel.java
+END
+BilanDataModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/statistique/BilanDataModel.java
+END
+ListeBilanTrimBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/statistique/ListeBilanTrimBean.java
+END
+BilanTrimDataModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/statistique/BilanTrimDataModel.java
+END
+ListeBilanBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/statistique/ListeBilanBean.java
+END
+ListeBilanAnBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/statistique/ListeBilanAnBean.java
+END
+TrimestreDataModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/statistique/TrimestreDataModel.java
+END
+BilanTrimBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/statistique/BilanTrimBean.java
+END
+BilanAnnuelDataModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/statistique/BilanAnnuelDataModel.java
+END
+BilanBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/statistique/BilanBean.java
+END

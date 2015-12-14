@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<ui:composition>
+   
+   
+    <br/>
+	<br/>
+   <h2>SAGES SECONDAIRE</h2> 
+   
+   C' est l'outil d'interface entre quatre pôles essentiels :
+Administration - Enseignants - Parents - Elèves .
+<p>
+
+C'est une plateforme éducative qui vous permet, au jour le jour, d'accéder aux informations relatives à la vie de votre l'établissement, que vous soyez une école primaire, un collège, un lycée ou une université, à savoir :
+
+    les notes quotidiennes des élèves,
+    les bulletins trimestriels, semestriels ou périodiques,
+    les circulaires administratives envoyées aux parents,
+    les circulaires administratives envoyées aux professeurs,
+    les informations sur la vie scolaire (retards, absences),
+    l'envoi de messages personnels aux parents, aux enseignants,
+    l'envoi de SMS aux parents pour les absences et retards,
+    le carnet de suivi, l'emploi du temps,
+    etc...
+</p>
+
+    De n'importe quel ordinateur doté d'un accès à Internet, la Vie Scolaire peut transmettre tous ses messages, les enseignants peuvent transmettre leurs notes et  les parents peuvent consulter les résultats scolaires de leur enfant.
+
+    Notre plateforme éducatif s'efforce de répondre au mieux aux exigences engendrées par les nouvelles technologies, nous espérons qu'il vous donnera satisfaction. 
+   
+    
+   </ui:composition>
+</html>

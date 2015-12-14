@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="SAGES_SE">
+        <wb-resource deploy-path="/" source-path="/EarContent"/>
+        <dependent-module archiveName="SAGES_SECONDAIRE_Ejb.jar" deploy-path="/" handle="module:/resource/SAGES_SECONDAIRE_Ejb/SAGES_SECONDAIRE_Ejb">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="SAGES_SECONDAIRE.war" deploy-path="/" handle="module:/resource/SAGES_SECONDAIRE/SAGES_SECONDAIRE">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+    </wb-module>
+</project-modules>

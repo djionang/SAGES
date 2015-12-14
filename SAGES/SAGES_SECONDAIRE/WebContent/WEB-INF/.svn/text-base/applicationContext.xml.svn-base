@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xmlns:p="http://www.springframework.org/schema/p" 
+  xmlns:context="http://www.springframework.org/schema/context" 
+  xmlns:tx="http://www.springframework.org/schema/tx" 
+  xmlns:jee="http://www.springframework.org/schema/jee"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans 
+  	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
+    http://www.springframework.org/schema/context  
+    http://www.springframework.org/schema/context/spring-context-2.5.xsd
+    http://www.springframework.org/schema/jee 
+    http://www.springframework.org/schema/jee/spring-jee-2.5.xsd">
+
+  <bean id="jndiFactory"
+    class="org.springframework.jndi.support.SimpleJndiBeanFactory">
+    <property name="resourceRef" value="false" />
+  </bean>
+
+  <!--
+    Configure the CommonAnnotationBeanPostProcessor to always use JNDI lookup (for EJBs)
+    and use the custom JNDI bean factory above.
+  -->
+  <bean
+    class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor">
+    <property name="alwaysUseJndiLookup" value="true" />
+    <property name="jndiFactory" ref="jndiFactory" />
+  </bean>
+
+  <!--
+    Since we're turning off "annotation-config" in the context:component-scan below, we need
+    to explicitly configure an AutowiredAnnotationBeanPostProcessor.
+  -->
+  <bean
+    class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
+
+	<context:component-scan base-package="utils" annotation-config="false"/>
+	
+	<bean id="filterChainProxy"
+		class="org.acegisecurity.util.FilterChainProxy">
+		<property name="filterInvocationDefinitionSource">
+			<value>
+				CONVERT_URL_TO_LOWERCASE_BEFORE_COMPARISON
+				PATTERN_TYPE_APACHE_ANT 
+				/erreur/**=httpSessionContextIntegrationFilter
+				/assets/**=httpSessionContextIntegrationFilter
+				/users/login.jsf=httpSessionContextIntegrationFilter
+				/accueil.jsf=httpSessionContextIntegrationFilter
+				/index.jsp=httpSessionContextIntegrationFilter
+				/resources/**=httpSessionContextIntegrationFilter
+								
+				/**=httpSessionContextIntegrationFilter,logoutFilter,authenticationProcessingFilter,securityContextHolderAwareRequestFilter,anonymousProcessingFilter,exceptionTranslationFilter,filterInvocationInterceptor
+				
+			</value>
+		</property>
+	</bean>
+
+
+	<bean id="httpSessionContextIntegrationFilter"
+		class="org.acegisecurity.context.HttpSessionContextIntegrationFilter" />
+
+	<bean id="logoutFilter"
+		class="org.acegisecurity.ui.logout.LogoutFilter">
+		<constructor-arg value="/index.jsp" />
+		<constructor-arg>
+			<list>
+				<bean
+					class="org.acegisecurity.ui.logout.SecurityContextLogoutHandler" />
+			</list>
+		</constructor-arg>
+		<property name="filterProcessesUrl">
+			<value>/j_acegi_logout.jsp</value>
+		</property>
+	</bean>
+
+	<bean id="authenticationProcessingFilter"
+		class="org.acegisecurity.ui.webapp.AuthenticationProcessingFilter">
+
+		<property name="filterProcessesUrl">
+			<value>/j_acegi_security_check.jsp</value>
+		</property>
+		<property name="authenticationFailureUrl">
+			<value>/accueil.jsf?login=lid</value>
+		</property>
+		<property name="defaultTargetUrl">
+			<value>/accueil2.jsf</value>
+		</property>
+		<property name="authenticationManager">
+			<ref bean="authenticationManager" />
+		</property>
+	</bean>
+
+	<bean id="securityContextHolderAwareRequestFilter"
+		class="org.acegisecurity.wrapper.SecurityContextHolderAwareRequestFilter" />
+
+	<bean id="anonymousProcessingFilter"
+		class="org.acegisecurity.providers.anonymous.AnonymousProcessingFilter">
+		<property name="key" value="changeThis" />
+		<property name="userAttribute"
+			value="anonymousUser,ROLE_ANONYMOUS" />
+	</bean>
+
+	<bean id="exceptionTranslationFilter"
+		class="org.acegisecurity.ui.ExceptionTranslationFilter">
+		<property name="authenticationEntryPoint">
+			<bean
+				class="org.acegisecurity.ui.webapp.AuthenticationProcessingFilterEntryPoint">
+				<property name="loginFormUrl" value="/accueil.jsf" />
+				<property name="forceHttps" value="false" />
+			</bean>
+		</property>
+		<property name="accessDeniedHandler">
+			<bean
+				class="org.acegisecurity.ui.AccessDeniedHandlerImpl">
+				<property name="errorPage" value="/erreur/accessInterdit.jsf" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="accessDecisionManager"
+		class="org.acegisecurity.vote.AffirmativeBased">
+		<property name="allowIfAllAbstainDecisions" value="false" />
+		<property name="decisionVoters">
+			<list>
+				<bean class="org.acegisecurity.vote.RoleVoter" />
+				<bean class="org.acegisecurity.vote.AuthenticatedVoter" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="authenticationManager"
+		class="org.acegisecurity.providers.ProviderManager">
+		<property name="providers">
+			<list>
+				<ref local="daoAuthenticationProvider" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="daoAuthenticationProvider"
+		class="org.acegisecurity.providers.dao.DaoAuthenticationProvider">
+		<property name="userDetailsService" ref="userDetailsService" />
+	</bean>
+
+	<bean id="service" class="utils.Service" scope="singleton" lazy-init="true">
+		
+	</bean>
+
+	<bean id="userDetailsService" class="utils.UserDetailsServiceImpl">
+		<property name="service" ref="service"/>
+	</bean>
+	
+
+	<bean id="attributes"
+		class="org.acegisecurity.annotation.SecurityAnnotationAttributes" />
+
+	<bean id="objectDefinitionSource"
+		class="org.acegisecurity.intercept.method.MethodDefinitionAttributes">
+		<property name="attributes">
+			<ref local="attributes" />
+		</property>
+	</bean>
+
+
+	<bean id="securityInterceptor"
+		class="org.acegisecurity.intercept.method.aopalliance.MethodSecurityInterceptor">
+		<property name="validateConfigAttributes">
+			<value>false</value>
+		</property>
+		<property name="authenticationManager">
+			<ref local="authenticationManager" />
+		</property>
+		<property name="accessDecisionManager">
+			<ref local="accessDecisionManager" />
+		</property>
+
+		<property name="objectDefinitionSource">
+			<ref local="objectDefinitionSource" />
+		</property>
+	</bean>
+
+	<bean id="autoproxy"
+		class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator">
+	</bean>
+
+
+	<bean id="methodSecurityAdvisor"
+		class="org.acegisecurity.intercept.method.aopalliance.MethodDefinitionSourceAdvisor"
+		autowire="constructor">
+	</bean>
+	
+</beans>

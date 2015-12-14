@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codematiere" value="#{matiereBean.codematiere}"/>
+	  		<f:event type="preRenderView" listener="#{matiereBean.initmatiereAnimateur}"/>
+		</f:metadata>
+    </ui:define>
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Animateur pédagogique
+    </ui:define>
+   
+    <ui:define name="content">
+    
+	    <h2>
+	   		<h:outputText value="Animateur pédagogique matiere #{matiereBean.codematiere}"/>
+	   	</h2>
+	   	
+       	<br/>  
+       	
+       	<p:messages autoUpdate="true"/>
+     <h:form  id="form">
+       	<p:panel id="panel">	
+	       		
+			    <p:panelGrid columns="2" style="width:100%;" id="perso" columnClasses="label,value">
+		      		 	
+				 	<h:outputText value="libellé"/>	            			
+		      		<h:outputText value="#{matiereBean.libelle}" id="libelle"/>
+		      		
+		      		<h:outputText value="description"/>
+		      		<h:outputText value="#{matiereBean.description}"/>
+		      		
+		      		<h:outputText value="Animateur pédagogique actuel"/>
+		      		<h:outputText value="#{empty matiereBean.animateur?' Aucun ':matiereBean.animateur}"/>       		             			
+			     </p:panelGrid>	
+				<br/>
+				<h:panelGrid columns="2" style="width:80%;" columnClasses="label,value">
+		      		<f:facet name="header">
+		      			Nouvel animateur pédagogique
+		      		</f:facet> 	
+				 	<h:outputText value="Animateur"/>	            			
+		      		<h:selectOneMenu value="#{matiereBean.nouvelAnimateur}" required="true" requiredMessage="Le nouvel animateur pédagogique ne peut être vide">
+		      			<f:selectItems value="#{matiereBean.enseignants}" var="ens" itemValue="#{ens.codeenseignant}" itemLabel="#{ens.nomens} #{ens.prenomens}"/>
+		      		</h:selectOneMenu>
+		      	</h:panelGrid>
+			     <br/>
+				
+			
+			
+			<f:facet name="footer">
+				
+				<center>
+					<p:commandButton value="Valider" action="#{matiereBean.saveAnimateur}" icon="ui-icon-check" id="submit"/>
+					<p:commandButton value="Retour à la liste des matieres" action="#{navBean.gestmatlisting}" icon="ui-icon-arrowreturnthick-1-w"/>
+				</center>
+					
+			</f:facet>
+		
+			<p:blockUI block=":form:panel" trigger="submit">  
+		        Mise a jour...<br />  
+		    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+		    </p:blockUI>
+		    
+		</p:panel>
+	</h:form>
+  
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

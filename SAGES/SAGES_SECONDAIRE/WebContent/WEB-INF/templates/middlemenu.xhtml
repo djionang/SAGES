@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<body>
+	<ui:composition>
+		 
+  	<h:form>
+    <p:growl id="messages"/>  
+  
+    <p:menubar>  
+            
+        <p:submenu label="Candidature" icon="ui-icon-document">  
+        	<p:menuitem value="Nouvelle" action="#{navBean.nouvellecandidature}" ajax="false"/> 
+        	<p:menuitem value="Gérer" action="#{navBean.listercandidatures}" /> 
+        	
+        </p:submenu>  
+        
+        <p:submenu label="Inscription" icon="ui-icon-document">  
+        	<p:menuitem value="Inscrire" action="#{navBean.inscriptioneleve}" /> 
+        	<p:menuitem value="Transfert" action="#{navBean.inscriptioneleveversclasse}" /> 
+        	<p:menuitem value="Couts" action="#{navBean.inscriptiondetailtranches}" /> 
+        	<p:separator/>
+        	<p:menuitem value="Parametres" action="#{navBean.inscriptionfraisparam}" />
+        	
+        </p:submenu>
+  
+        <p:submenu label="Ressources" icon="ui-icon-pencil">
+        	<p:menuitem value="Personnel" action="#{navBean.personellisting}" /> 
+        	<p:menuitem value="Enseignants" action="#{navBean.personenseignlisting}" /> 
+        	<p:menuitem value="Eleves" action="#{navBean.elevelisting}" /> 
+        	<p:separator/>
+        	<p:menuitem value="Salles" action="#{navBean.ressoursallelisting}" /> 
+        	<p:menuitem value="Ateliers" action="#{navBean.ressouratelierlisting}" /> 
+        	<p:menuitem value="Classes" action="#{navBean.ressourclasselisting}" /> 
+        	
+        </p:submenu>  
+        
+        <p:submenu label="Notes" icon="ui-icon-pencil">
+        	<p:menuitem value="Enregistrer" action="#{navBean.examnotecreate}" /> 
+        	<p:menuitem value="Bulletins Séquentiel" action="#{navBean.examimpressbullseq}" /> 
+        	<p:menuitem value="Bulletins trimestriel" action="#{navBean.examimpressbulltrim}" /> 
+        	       	
+        </p:submenu>
+        
+        <p:submenu label="Comptes" icon="ui-icon-pencil">
+        	<p:menuitem value="Mon compte" action="#{navBean.gestionmoncompte}" /> 
+        	<p:menuitem value="Utilisateur" action="#{navBean.listingutilisateur}" /> 
+        	<p:menuitem value="Groupe utilisateur" action="#{navBean.listinggroupeuser}" /> 
+        	       	
+        </p:submenu>
+        
+        <p:submenu label="Discipline" icon="ui-icon-pencil">
+        	<p:menuitem value="Retards" action="#{navBean.listingretards}" /> 
+        	<p:menuitem value="Absences" action="#{navBean.listingabsences}" /> 
+        	<p:menuitem value="Sanctions" action="#{navBean.dissanctlisting}" />
+        	<p:menuitem value="Convocations" action="#{navBean.listingconvocations}" />
+        	<p:menuitem value="Journal disciplinaire" action="#{navBean.disjournalvue}" /> 
+        	       	
+        </p:submenu>   
+             
+    </p:menubar>  
+  
+</h:form>  
+	</ui:composition>
+	
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/etablissement
+END
+EnseignementBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/etablissement/EnseignementBean.java
+END
+NiveauBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/etablissement/NiveauBean.java
+END
+ListEnseignementBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/etablissement/ListEnseignementBean.java
+END
+ListNiveauBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/etablissement/ListNiveauBean.java
+END
+ListCycleBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/etablissement/ListCycleBean.java
+END
+ListEtablissementBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/etablissement/ListEtablissementBean.java
+END
+ListSectionBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/etablissement/ListSectionBean.java
+END
+CycleBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/etablissement/CycleBean.java
+END
+EtablissementBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/etablissement/EtablissementBean.java
+END
+OptionBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/etablissement/OptionBean.java
+END
+SectionBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/etablissement/SectionBean.java
+END
+ListOptionBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/etablissement/ListOptionBean.java
+END

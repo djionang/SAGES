@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Ajouter une classe
+    </ui:define>
+   
+    <ui:define name="content">
+	    <h2>
+	   		<h:outputText value="Nouvelle Classe"/>
+	   	</h2>
+	   	
+	   	<p:messages id="messages" autoUpdate="true"/>
+    <br/>
+   	<h:form id="formclasse">
+   	
+   	<p:panel id="panelclasse"  style="margin-bottom:10px;"> 
+   	
+	    <p:panelGrid columns="2" style="width:100%;" id="perso">	    
+	    		    
+			<h:outputText value="Code de la classe *"/>	            			
+      		<p:inputText value="#{classeBean.codeClasse}" id="code" required="true" requiredMessage="Code obligatoire"/>
+      		 	
+		 	<h:outputText value="libellé *"/>	            			
+      		<p:inputText value="#{classeBean.libelle}" id="libelle" required="true" requiredMessage="libellé obligatoire"/>
+      				
+			<h:outputText value="Option de la classe"/>				
+   			<p:selectOneMenu value="#{classeBean.option}" id="option" required="true" requiredMessage="Champ Option requis">
+    			<f:selectItems value="#{configuration.optionItems}"/>
+   	    	</p:selectOneMenu>
+   	    	
+   	    	<h:outputText value="Effectif maximal"/>			
+      		<p:inputText value="#{classeBean.effectifMax}" id="effectifmax" validator="IntegerValidator" validatorMessage="Format Effectif maximal incorrect"/>      		
+       		   
+       		<h:outputText value="Salle par défaut"/>			
+      		<h:selectOneMenu value="#{classeBean.salleDefaut}">
+       			<f:selectItem itemLabel="Aucune" itemValue=""/>
+       			<f:selectItems value="#{etablissement.listeSalles}" var="salle" itemLabel="#{salle.libelle}" itemValue="#{salle.codeSalle}"/>
+       		</h:selectOneMenu>          			
+	     </p:panelGrid>		
+		 <br/>
+							
+		  <center>	
+		  								
+		 		<p:commandButton value="Enregistrer"  icon="ui-icon-check" id="submitclasse" action="#{classeBean.saveclasse}" />
+		 		<p:commandButton value="Annuler" immediate="true" type="reset" icon="ui-icon-close"/>	
+		 </center>
+	</p:panel>
+	
+	<p:blockUI block="panelclasse" trigger="submitclasse">  
+        Enregistrement...<br />  
+    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+    </p:blockUI> 
+    
+	</h:form>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

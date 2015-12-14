@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="matricule" value="#{inscriptionBean.matricule}"/>
+	  		<f:event type="preRenderView" listener="#{inscriptionBean.loadElevesFees}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Droits de scolarité 
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2><h:outputText value="Droits de scolarité de l'eleve"/></h2>
+   		<br/>
+   		<p:messages autoUpdate="true" />
+   		
+		<p:outputPanel id="p" autoUpdate="true">
+			<h:form id="formdroit">
+				<p:panel id="paneleleve" header="Droits de scolarité">
+					
+					<br/>
+					<center>
+						<p:panelGrid columns="2" rendered="#{not empty inscriptionBean.selectedEleve}" id="paneleve" columnClasses="label,value" style="width:80%;align:center;">
+												
+							<f:facet name="header">
+								<h:outputText value="Elève de matricule #{inscriptionBean.selectedEleve.matricule}"/>
+							</f:facet>
+				            
+				            <h:outputText value="Nom"/>
+				            <h:outputText value="#{inscriptionBean.selectedEleve.nom}"/>
+							
+							<h:outputText value="Prénom"/>	
+							<h:outputText value="#{inscriptionBean.selectedEleve.prenom}"/>
+							
+							<h:outputText value="Date de naissance"/>
+							<h:outputText value="#{inscriptionBean.selectedEleve.dateNaissance}">
+								<f:convertDateTime pattern="dd/MM/yyyy"/>
+							</h:outputText>
+							
+							<h:outputText value="Lieu de naissance"/>
+							<h:outputText value="#{inscriptionBean.selectedEleve.lieuNaissance}"/>
+							
+							<h:outputText value="Classe"/>
+							<h:outputText value="#{inscriptionBean.selectedEleve.codeClasse} -- #{inscriptionBean.selectedEleve.libelleClasse}"/>
+							
+							<h:outputText value="Tuteur"/>
+							<h:outputText value="#{inscriptionBean.selectedEleve.nomTuteur}"/>
+							
+						</p:panelGrid>
+					</center>
+				</p:panel>
+			</h:form>
+   			<br/>
+   			<h:form id="formversement">
+			   	<p:panel rendered="#{not empty inscriptionBean.selectedEleve}" id="panelfees" header="Inscription">
+			   			<h:panelGrid columns="3" width="100%" cellpadding="0" cellspacing="0" style="vertical-align: top;">
+							<p:dataTable value="#{inscriptionBean.listeTranchesClasse}" var="tranche" 
+					   			emptyMessage="frais de scolarité de la classe non trouvés" tableStyleClass="tablelist">
+						   		
+						   		<f:facet name="header">
+						   			<h:outputText value="Tranches"/>
+						   		</f:facet>
+						   							
+								<p:column id="id" headerText="N°" sortBy="#{tranche.id}">
+									<h:outputText value="#{tranche.id}"/>
+								</p:column>
+								
+								<p:column id="type" headerText="Type">
+									<h:outputText value="#{tranche.type}"/>
+								</p:column>
+												
+								<p:column id="montant" headerText="Montant">
+									<h:outputText value="#{tranche.montant}">
+						   				<f:convertNumber type="currency" currencySymbol="F."  maxFractionDigits="1" />
+									</h:outputText>
+								</p:column> 
+								
+								<p:column id="delai" headerText="Délai vers.">
+									<h:outputText value="#{tranche.delaiVersement}">
+						   				<f:convertDateTime pattern="dd/MM/yyyy"/>
+									</h:outputText>
+								</p:column>
+								
+								<p:columnGroup type="footer">
+								 <p:row>
+									 <p:column colspan="2" style="text-align:right;" footerText="Total:"/>
+									 <p:column footerText="#{inscriptionBean.totalAverser} F" />
+									 <p:column footerText="" />
+								 </p:row>
+							   </p:columnGroup>
+						   		
+					   		</p:dataTable>
+					   		
+							<p:spacer width="5"/>
+							
+							<p:dataTable value="#{inscriptionBean.listeVersements}" var="versement" tableStyleClass="tablelist"
+					   			emptyMessage="Aucun versement enregistré pour cet élève" rowIndexVar="numro">
+						   		<f:facet name="header">
+						   			<h:outputText value="Versé"/>
+						   		</f:facet>					
+								<p:column id="num" headerText="N°" sortBy="#{versement.id}">
+									<h:outputText value="#{numro+1}"/>
+								</p:column>
+												
+								<p:column id="montant" headerText="Montant">
+									<h:outputText value="#{versement.montant}">
+						   				<f:convertNumber type="currency" currencySymbol="F." maxFractionDigits="1" />
+									</h:outputText>
+								</p:column> 
+								
+								<p:column id="delai" headerText="Date vers.">
+									<h:outputText value="#{versement.dateVers}">
+						   				<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+									</h:outputText>
+								</p:column>
+								
+								<p:columnGroup type="footer">
+								 <p:row>
+									 <p:column style="text-align:right;" footerText="Total:"/>
+									 <p:column footerText="#{inscriptionBean.totalverse} F" />
+									 <p:column footerText="" />
+								 </p:row>
+							   </p:columnGroup>
+						   		
+					   		</p:dataTable>
+						</h:panelGrid>
+				   	<br/>
+				   	<center>	
+				   		<p:panelGrid columns="2" rendered="#{not inscriptionBean.feesFull and not empty inscriptionBean.listeTranchesClasse}">
+				   			<f:facet name="header">
+				   				<h:outputText value="Versement"/>
+				   			</f:facet>
+				   			<h:outputText value="Type de Versement (ex: inscr.)" />
+			        		<p:selectOneMenu value="#{inscriptionBean.typeversement}" style="width:140px;" required="true" requiredMessage="Type versement ne peut être vide" editable="true">
+			        		<f:selectItems value="#{configuration.typesTranchesItems}"/>
+			       			 </p:selectOneMenu>
+							<h:outputText value="Montant (Frs)"/>
+							<p:inputText value="#{inscriptionBean.montantVerse}" required="true" requiredMessage="Montant du versement requis" validator="MontantFrValidator"/>
+							
+							<h:outputText value="Date versement"/>
+			   				<p:calendar value="#{inscriptionBean.dateVersement}" mindate="01/01/1960" maxdate="#{configuration.datejour}" required="true"  pattern="dd/MM/yyyy" requiredMessage="Date de versement requise"/>
+							
+							<f:facet name="footer">
+								<center>
+									<p:commandButton value="Enregistrer"  icon="ui-icon-check" id="submitinscrip" action="#{inscriptionBean.saveDroitScolaire}" ajax="false"/>
+									<p:commandButton value="Annuler" immediate="true" type="reset" icon="ui-icon-close"/>	
+								</center>
+				      		</f:facet>
+				   		</p:panelGrid>
+				 	</center>
+				 	
+				 	<center>	
+				   		<h2><h:outputText value="Totalité des droits versés" rendered="#{inscriptionBean.feesFull and not empty inscriptionBean.listeTranchesClasse}"/></h2>
+				 	</center>	      	 	  	  	
+				</p:panel>
+			</h:form>
+		</p:outputPanel>
+	
+		<p:blockUI block=":formversement:panelfees"  trigger=":formversement:submitinscrip">  
+	        Chargement...<br />  
+	    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+	    </p:blockUI>
+	    
+    
+   </ui:define>
+   
+   
+   </ui:composition>
+ 
+</html>

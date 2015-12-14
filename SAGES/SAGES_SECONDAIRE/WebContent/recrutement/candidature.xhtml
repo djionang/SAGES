@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="/WEB-INF/templates/template.xhtml">
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codedossier" value="#{dossierBean.codedossier}" required="true" requiredMessage="Code is missing"/>
+	  		<f:event type="preRenderView" listener="#{dossierBean.initDossier}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Candidature
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2>Dossier de candidature</h2>
+   		<br/>
+   		<p:messages/>
+	   <h:form id="formdisplay">
+	   <p:panel id="paneldossier">
+	   
+	   		<p:panelGrid columns="2" style="width:100%;" id="perso" columnClasses="label,value">	    
+	    
+	    		<f:facet name="header">
+		  			<h:outputText value="Dossier de candidature -- #{dossierBean.codedossier} --"/>
+				</f:facet>
+				
+			 	<h:outputText value="Nom"/>	            			
+       			<h:outputText value="#{dossierBean.nom}"/>
+       		
+				<h:outputText value="Prénom"/>			
+       			<h:outputText value="#{dossierBean.prenom}"/>
+       			
+				<h:outputText value="Date de naissance"/>			
+				<h:outputText value="#{dossierBean.dateNaissance}">
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:outputText>
+				
+				<h:outputText value="Date de naissance"/>			
+				<h:outputText value="#{dossierBean.lieuNaissance}"/>
+				
+	       		<h:outputText value="Sexe"/>				
+       			<h:outputText value="#{dossierBean.sexe}"/>
+	       			
+				<h:outputText value="Nationalité" />				
+       			<h:outputText value="#{dossierBean.nationalite}"/>	       		                   		
+	               	    
+				<h:outputText value="Mot de passe dossier"/>				
+				<h:outputText value="#{dossierBean.password}"/>
+	               			                 		
+	            <h:outputText value="date de préinscription"/>
+	            <h:outputText value="#{dossierBean.datePreinscription}">
+	            	<f:convertDateTime pattern="dd/MM/yyyy"/>
+	            </h:outputText>
+	            
+               	<h:outputText value="numero de payement préinscription"/>			
+				<h:outputText value="#{dossierBean.numeroPayement}"/>
+               			
+               	<h:outputText value="Niveau sollicité"/>			
+				<h:outputText value="#{dossierBean.niveauDemande}" />
+               			
+               	<h:outputText value="Option sollicitée" />			
+				<h:outputText value="#{dossierBean.optionDemande}"/>				
+				
+				<h:outputText value="Adresse"/>	 						
+				<h:outputText value="#{dossierBean.adresse}"/>
+		              			
+		        <h:outputText value="Email"/>				
+				<h:outputText value="#{dossierBean.email}"/>
+		              			                    	
+				<h:outputText value="Telephone"/>				 
+				<h:outputText value="#{dossierBean.telephone}"/>
+								
+				<h:outputText value="Boite postale"/>					
+				<h:outputText value="#{dossierBean.boitePostale}"/>
+				
+				<h:outputText value="Nom du pere"/>	 						
+				<h:outputText value="#{dossierBean.nomPere}"/>
+	               		
+	            <h:outputText value="telephone du père"/>				
+				<h:outputText value="#{dossierBean.telephonePere}"/>
+	               			
+				<h:outputText value="profession"/>				
+				<h:outputText value="#{dossierBean.professionPere}"/>
+	               			
+				<h:outputText value="Adresse email"/>
+				<h:outputText value="#{dossierBean.emailPere}"/>
+	               		
+				<h:outputText value="Nom de la mère"/>				
+				<h:outputText value="#{dossierBean.nomMere}"/>
+	             
+	            <h:outputText value="telephone de la mère"/>				
+				<h:outputText value="#{dossierBean.telephoneMere}" />
+	               			
+				<h:outputText value="profession"/>				
+				<h:outputText value="#{dossierBean.professionMere}"/>
+	             	               		
+				<h:outputText value="Adresse email"/>				
+				<h:outputText value="#{dossierBean.emailMere}"/>
+				
+				<h:outputText value="Nom du tuteur"/>				
+				<h:outputText value="#{dossierBean.nomTuteur}" />
+	             
+	            <h:outputText value="telephone du tuteur"/>				
+				<h:outputText value="#{dossierBean.telephoneTuteur}"/>
+	               			
+				<h:outputText value="profession"/>				
+				<h:outputText value="#{dossierBean.professionTuteur}"/>
+	               		
+				<h:outputText value="email du tuteur"/>				
+				<h:outputText value="#{dossierBean.emailTuteur}"/>
+				
+				<h:outputText value="Etablissement d'origine"/>	 						
+				<h:outputText value="#{dossierBean.ancienEtablissement}"/>
+		        
+				<h:outputText value="Dernière classe fréquentée"/>				
+				<h:outputText value="#{dossierBean.classeAncienEtablissement}"/>
+				
+				<h:outputText value="Moyenne derniere année"/>	
+		        <h:outputText  value="#{dossierBean.dernieremoyenne} /20"/>	
+		            	
+				<h:outputText value="Derniere année dans l'établissement d'origine"/>				
+				<h:outputText value="#{dossierBean.anneeAncienEtablissement}"/>
+				
+	   	</p:panelGrid>
+	   	
+		<f:facet name="footer">
+			<center>
+				<p:commandButton value="Imprimer" action="#{dossierBean.imprimerCandidature}" icon="ui-icon-print" ajax="false" />  
+				<p:commandButton value="Liste Candidatures"  icon="ui-icon-arrowreturnthick-1-w"  action="#{navBean.listercandidatures}"/>
+			</center>
+		
+		</f:facet>	  
+	    
+	   </p:panel>
+	   </h:form>
+      
+   </ui:define>   
+   
+   </ui:composition>
+ 
+</html>

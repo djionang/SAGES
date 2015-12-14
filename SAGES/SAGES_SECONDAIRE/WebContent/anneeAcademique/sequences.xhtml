@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Listing Sequences
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2>Sequences enregistrées</h2>
+   		
+   		<br/>
+   		<p:growl autoUpdate="true"/>
+   			
+   		<p:scrollPanel style="width:100%;">
+   		
+	   		 <h2>
+		   		<h:outputText value="Année académique #{sessionBean.anneeacademique} -- " rendered="#{not empty sessionBean.anneeacademique}"/>
+		   		<h:outputText value="  Du " rendered="#{not empty sessionBean.anneeacademique}"/>
+		   		<h:outputText value="#{sessionBean.datedebutannee}" rendered="#{not empty sessionBean.anneeacademique}">
+		   			<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:outputText>
+		   		<h:outputText value="  Au " rendered="#{not empty anneeEnCoursBean.anneeacademique}"/>
+		   		<h:outputText value="#{sessionBean.datefinannee}" rendered="#{not empty sessionBean.anneeacademique}">
+		   			<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:outputText>
+			</h2>
+		 	<h:form id="form1">
+   			 
+		    	<p:dataTable id="tablesequences" value="#{listSequenceBean.sequences}" var="sequence" emptyMessage="Aucune séquence enregistrée pour l'année en cours"
+		    		tableStyleClass="tablelist" >
+			  	   
+			  	    <p:column id="numero" headerText="Numero">  
+	            		<h:outputText value="#{sequence.numero}" />  
+	        		</p:column>
+			  	      
+	        		<p:column id="datedebut" headerText="Du">  
+	            		<h:outputText value="#{sequence.datedebut}" >
+	            			<f:convertDateTime pattern="dd/MM/yyyy"/>
+						</h:outputText>  
+	        		</p:column>         		
+	        
+					<p:column id="datefin" headerText="Au">  
+			            <h:outputText value="#{sequence.datefin}" >
+					       <f:convertDateTime pattern="dd/MM/yyyy"/>
+						</h:outputText>  
+			        </p:column> 
+			        
+			        <p:column id="trimestre" headerText="Trimestre">  
+			            <h:outputText value="#{sequence.trimestre}" />
+			        </p:column>			        
+	        
+			        <p:column id="option" headerText="Options" width="48"> 
+			         	<p:panelGrid columns="3">	
+			         	
+			         		<h:link  includeViewParams="true" id="view"  title="Visualiser" outcome="visualisersequence">  
+						        <p:graphicImage value="../resources/img/view16.png" style="border:#CCCCCC 1px solid"/>   
+						        <f:param name="numerosequence" value="#{sequence.numero}"/>
+						    </h:link>
+			         				        	
+				            <h:link  includeViewParams="true" id="edit"  title="Editer" outcome="modifiersequence">  
+						        <p:graphicImage value="../resources/img/edit16.png" style="border:#CCCCCC 1px solid"/>   
+						        <f:param name="numerosequence" value="#{sequence.numero}"/>
+						    </h:link>
+						    
+				            <h:link  includeViewParams="true" id="delete" outcome="supprimersequence" title="Supprimer">  
+						        <p:graphicImage value="../resources/img/delete16.png" style="border:#CCCCCC 1px solid"/>
+						        <f:param name="numerosequence" value="#{sequence.numero}"/>
+						   </h:link>
+						   
+						   <h:link  includeViewParams="true" id="cloture" outcome="cloturersequence" title="Cloturer">  
+						        <p:graphicImage value="../resources/img/delete16.png" style="border:#CCCCCC 1px solid"/>
+						        <f:param name="numerosequence" value="#{sequence.numero}"/>
+						   </h:link>
+			            </p:panelGrid>
+			        </p:column> 
+				</p:dataTable>
+				
+				<br/>
+				<center>
+					<p:commandButton value="Nouvelle sequence" action="#{navBean.creerSequence}" icon="ui-icon-check"/>
+				</center>
+			</h:form>
+  			
+   		</p:scrollPanel>
+   		
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

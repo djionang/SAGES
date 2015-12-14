@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Listing des années enregistrées
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2>Années académiques enregistrées</h2>
+   		<br/>
+   		<p:growl autoUpdate="true" globalOnly="true"/>
+   			    			 
+            <br/>
+	    	<p:dataTable id="tableannees" value="#{listAnneeBean.annees}" var="annee" emptyMessage="Aucun année académique paramétrée"
+	    		sortBy="#{annee.anneeacademique}" sortOrder="ascending" rowIndexVar="ligne" paginator="true" rows="10">
+		  	        
+        		<p:column id="num" headerText="N°">  
+            		<h:outputText value="#{ligne+1}" />  
+        		</p:column> 
+        
+        		<p:column id="code"  headerText="Code">  
+            		<h:outputText value="#{annee.anneeacademique}" />  
+        		</p:column> 
+        
+        		<p:column id="debut" headerText="Du">  
+            		<h:outputText value="#{annee.datedebut}">
+            			<f:convertDateTime pattern="dd/MM/yyyy"/>
+            		</h:outputText>  
+        		</p:column> 
+        		
+        		<p:column id="fin" headerText="Au">  
+            		<h:outputText value="#{annee.datefin}">
+            			<f:convertDateTime pattern="dd/MM/yyyy"/>
+            		</h:outputText>  
+        		</p:column>
+        		
+        		<p:column id="etat" headerText="Etat">  
+            		<h:outputText value="#{typeEvaluation.clos?'Close':'Ouverte'}" />  
+        		</p:column>	       
+		
+			</p:dataTable>
+  			
+  			
+		<p:separator/>
+		<br/>
+   		
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Ajouter une salle
+    </ui:define>
+   
+    <ui:define name="content">
+    <f:view>
+	    <h2>
+	   		<h:outputText value="Nouvelle salle"/>
+	   	</h2>
+    
+   		<p:messages id="messages" autoUpdate="true"/>
+   		<br/>
+   	<h:form id="formsalle">
+   	
+   	<p:panel id="panelsalle"  style="margin-bottom:10px;"> 
+   	
+   		
+	    <p:panelGrid columns="2" style="width:100%;" id="perso">	    
+	    		    
+			<h:outputText value="Code Salle (ex: S12)*"/>	            			
+      		<p:inputText value="#{salleBean.codeSalle}" id="code" required="true" requiredMessage="Code de la salle obligatoire"/>
+      		 	
+		 	<h:outputText value="libellé (ex: Salle 12)*"/>	            			
+      		<p:inputText value="#{salleBean.libelle}" id="libelle" required="true" requiredMessage="Libellé de la salle obligatoire"/>
+      		
+			<h:outputText value="Type"/>				
+   			<p:selectOneMenu value="#{salleBean.codeType}" id="type">
+    			<f:selectItems value="#{configuration.typeSalleItems}"/>
+   	    	</p:selectOneMenu>
+   	    	
+   	    	<h:outputText value="Contenance maximale *"/>	            			
+      		<p:inputText value="#{salleBean.capacite}" id="capacite" required="true" requiredMessage="Contenance de la salle obligatoire" validator="IntegerValidator" validatorMessage="Format contenance max. invalide"/>
+      		
+   	    	<h:outputText value="Description"/>
+   	    	<p:inputTextarea value="#{salleBean.description}"/>			
+      		             			
+	    </p:panelGrid>		
+		
+		  <br/>				
+		  <center>	
+		  								
+		 		<p:commandButton value="Enregistrer"  icon="ui-icon-check" id="submitsalle" action="#{salleBean.saveSalle}" />
+		 		<p:commandButton value="Annuler" immediate="true" type="reset" icon="ui-icon-close" />	
+		 </center>
+	</p:panel>
+	
+	<p:blockUI block="panelsalle" trigger="submitsalle">  
+        Enregistrement...<br />  
+    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+    </p:blockUI> 
+    
+	</h:form>
+	
+   </f:view>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

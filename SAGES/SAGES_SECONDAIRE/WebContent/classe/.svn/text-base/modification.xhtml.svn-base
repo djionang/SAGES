@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="/WEB-INF/templates/template.xhtml">
+   
+    <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codeclasse" value="#{classeBean.codeClasse}"/>
+	  		<f:event type="preRenderView" listener="#{classeBean.initialize}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Edition de classe
+    </ui:define>
+   
+    <ui:define name="content">
+    	
+    
+	    <h2>
+	   		<h:outputText value="Modifier la classe -- Code: #{classeBean.codeClasse}--"/>
+	   	</h2>
+    
+   	<h:form id="formapplication">
+   	
+   	<p:panel id="panel"  style="margin-bottom:10px;"> 
+   		
+   		<p:messages id="messages" autoUpdate="true"/>
+   		
+	    <p:panelGrid columns="2" style="width:85%;" id="perso">	    
+	    			 	
+		 	<h:outputText value="libellé *"/>	            			
+      		<p:inputText value="#{classeBean.libelle}" id="libelle" required="true" requiredMessage="libellé obligatoire"/>
+      		      		
+			<h:outputText value="Option de la classe"/>				
+   			<p:selectOneMenu value="#{classeBean.option}" id="option" >
+    			<f:selectItems value="#{configuration.optionItems}"/>
+   	    	</p:selectOneMenu>
+   	    	
+   	    	<h:outputText value="Effectif maximal"/>			
+      		<p:inputText value="#{classeBean.effectifMax}" id="effectifmax" validator="IntegerValidator" validatorMessage="Fromat Effectif maximal incorrect"/>      		
+       		
+       		<h:outputText value="Salle par défaut"/>			
+      		<h:selectOneMenu value="#{classeBean.salleDefaut}">
+       			<f:selectItem itemLabel="Aucune" itemValue=""/>
+       			<f:selectItems value="#{etablissement.listeSalles}" var="salle" itemLabel="#{salle.libelle}" itemValue="#{salle.codeSalle}"/>
+       		</h:selectOneMenu> 
+       		    	    	      		               			
+	     </p:panelGrid>		
+	 	  <br/> 									
+		  <center>										
+		 		<p:commandButton value="Mettre à jour"  id="buttonsubmit" icon="ui-icon-check"  action="#{classeBean.modifierclasse}" update="panel"/>
+		 		<p:commandButton value="Retour"  icon="ui-icon-arrowreturnthick-1-w"  action="#{navBean.ressourclasselisting}" immediate="true"/>							
+		  </center>
+	</p:panel>
+	<p:blockUI block="panel" trigger="buttonsubmit">  
+        Mise a jour...<br />  
+    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+    </p:blockUI> 
+</h:form>
+   	
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

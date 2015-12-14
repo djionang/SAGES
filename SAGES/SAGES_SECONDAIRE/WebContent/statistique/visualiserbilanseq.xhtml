@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codeclasse" value="#{bilanBean.codeclasse}"/>
+	  		<f:viewParam name="numerosequence" value="#{bilanBean.numerosequence}"/>
+	  		<f:event type="preRenderView" listener="#{bilanBean.initBilan}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Visualiser Bilan classe
+   </ui:define>
+   
+   <ui:define name="content">
+    <f:view>
+	    <h2>
+	   		<h:outputText value="Bilan sequentiel de la #{bilanBean.libelleclasse}"/>
+	   	</h2>
+       	  <br/> 
+       	<h:form id="formetab" enctype="multipart/form-data">
+       	<p:panel id="paneletab"  style="margin-bottom:10px;"> 		
+	    <h:panelGrid columns="2" style="width:70%;" id="perso" columnClasses="label,value">
+      		 	
+		 	<h:outputText value="Sequence"/>	            			
+      		<h:outputText value="#{bilanBean.numerosequence}" id="se" required="true" />
+      		
+			<h:outputText value="Effectif"/>				
+   			<h:outputText value="#{bilanBean.effectif}"/>
+   	    	
+   	    	<h:outputText value="Moyenne de la classe "/>	            			
+      		<h:outputText value="#{bilanBean.moyenneclasse}" id="moy"/>
+      		
+      		<h:outputText value="Moyenne du premier "/>	            			
+      		<h:outputText value="#{bilanBean.moyeneepremier}" id="moyp"/>
+      		
+      		<h:outputText value="Moyenne du dernier "/>	            			
+      		<h:outputText value="#{bilanBean.moyennedernier}" id="moyd"/>
+   	    	
+   	    	<h:outputText value="Taux Ruessite"/>			
+      		<h:outputText value="#{bilanBean.tauxreussite}" id="taux"> 
+      		<f:convertNumber type="currency" currencySymbol="%" />
+			</h:outputText>
+			
+			<h:outputText value="Taux Echec"/>			
+      		<h:outputText value="#{bilanBean.tauxechec}" id="tauxechec"> 
+      		<f:convertNumber type="currency" currencySymbol="%" />
+			</h:outputText>      		             			
+	    </h:panelGrid>	
+		<f:facet name="footer">
+		<h:form>
+			<center>
+				<p:commandButton value="Retour au bilan" action="bilanseq"/>
+			</center>
+		</h:form>
+	   </f:facet>
+	   
+	   </p:panel> 
+	   </h:form>
+   </f:view>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

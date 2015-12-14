@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="/WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Impression Bilan bulletins trimestriel
+    </ui:define>
+   
+    <ui:define name="content">
+	    <h2>
+	   		<h:outputText value="Impression bilan bulletins trimestriel"/>
+	   	</h2>
+	   	<br/>
+   		<p:growl id="messages" autoUpdate="true"/>
+	   	
+	   	<p:outputPanel id="panelbulletin"  style="margin-bottom:10px;">    	
+			
+	   		<h:form id="formchoose">	   			
+				
+				<p:panel id="pan1"> 		
+					    <h:panelGrid columns="2" style="width:100%;" id="f1">	    
+							
+							<h:panelGroup>
+						    	<h:outputText value="Trimestre:"/>	            			
+					      		<h:selectOneMenu value="#{printBullBean.portee}" required="true" requiredMessage="Trimestre obligatoire" converter="javax.faces.Integer">
+					    			<f:selectItems value="#{etablissement.listeTrimestres}" var="trimestre" itemLabel="Trimestre #{trimestre.numero}" itemValue="#{trimestre.numero}" itemDescription="Trimestre #{trimestre.numero}"/>
+					   	    	</h:selectOneMenu>
+							</h:panelGroup>
+							
+							<h:panelGroup>  	    	
+								<h:outputText value="Classe"/>				
+					   			<h:selectOneMenu value="#{printBullBean.codeclasse}" id="classe" required="true" requiredMessage="">
+					   				<f:selectItem itemLabel="classe" itemValue="" itemDescription="selectionner une classe"/>
+					    			<f:selectItems value="#{etablissement.listeClasses}" var="classe" itemLabel="#{classe.libelle}" itemValue="#{classe.codeClasse}" itemDescription="#{classe.libelle}"/>
+					   	    	</h:selectOneMenu> 	
+		   	    			</h:panelGroup>
+						</h:panelGrid>	
+								
+						<f:facet name="footer">
+		   	    		<center>
+		   	    			<p:commandButton value="Charger" actionListener="#{printBullBean.loadElevesClasseT}" icon="ui-icon-arrowrefresh-1-w" update=":panelbulletin" id="load"/>
+		   	    		</center>
+		   	    		</f:facet>
+										</p:panel>
+			     </h:form>	
+					<br/>	
+						
+				<h:form id="formnote">
+					<p:panel id="panel">
+					
+					<p:dataTable id="tablebula" value="#{printBullBean.listeelevesT}" var="eleve"
+		    		 sortBy="#{eleve.nom}" sortOrder="ascending" widgetVar="tablebula"
+		    		tableStyleClass="tablelist"  filteredValue="#{printBullBean.listeelevesT}">
+			  	      
+	        		<p:column id="code" headerText="Matricule" >  
+	            		<h:outputText value="#{eleve.matricule}" />  
+	        		</p:column> 
+	        
+	        		<p:column id="nom" headerText="Nom" sortBy="#{eleve.nom}"
+	        		filterBy="#{eleve.nom}" filterMatchMode="contains">  
+	            		<h:outputText value="#{eleve.nom} #{eleve.prenom}" />  
+	        		</p:column>
+			        
+					<p:column id="Moyenne" headerText="Moyenne">  
+			             <h:outputText value="#{eleve.dernieremoyenne}" /> 
+			        </p:column> 
+				   </p:dataTable>
+					
+					
+					<f:facet name="footer">
+						<center>
+							<p:commandButton action="#{printBullBean.imprimerBilanTrimestriel}" value="Imprimer" icon="ui-icon-print" ajax="false"/>
+						</center>
+					</f:facet>
+					
+				</p:panel>
+			</h:form>
+				 
+		</p:outputPanel>
+		
+		<p:blockUI block=":formchoose:pan1" trigger=":formchoose:load">  
+	      Enregistrement...<br />  
+	  		<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+		</p:blockUI>
+				
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

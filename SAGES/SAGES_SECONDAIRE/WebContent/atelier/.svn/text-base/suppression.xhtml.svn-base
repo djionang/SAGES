@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codeatelier" value="#{salleBean.codeSalle}"/>
+	  		<f:event type="preRenderView" listener="#{salleBean.initSalle}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Suppression d'atelier
+    </ui:define>
+   
+    <ui:define name="content">
+    	
+    
+	    <h2>
+	   		<h:outputText value="Supprimer l'atelier -- Code: #{salleBean.codeSalle} --"/>
+	   	</h2>
+    
+   	<h:form id="formmodifsalle">
+   	
+   	<p:panel id="panel"  style="margin-bottom:10px;"> 
+   		<p:panelGrid columns="2" style="width:70%;" id="sallemodification" columnClasses="label,value">	  	    		  
+			      		 	
+		 	<h:outputText value="libellé"/>	            			
+      		<h:outputText value="#{salleBean.libelle}" id="libelle" required="true" />
+      		
+			<h:outputText value="Type"/>				
+   			<h:outputText value="#{salleBean.type}" id="type"/>
+    			
+   	    	
+   	    	<h:outputText value="Contenance maximale"/>	            			
+      		<h:outputText value="#{salleBean.capacite}"/>
+   	    	
+   	    	<h:outputText value="Utilisation"/>			
+      		<h:outputText value="#{salleBean.description}" id="description"/>
+       		             			
+	     </p:panelGrid>	
+			<br/>									
+		  <center>										
+		 		<p:commandButton value="Supprimer"  id="buttonsubmit" icon="ui-icon-check"  action="#{salleBean.supprimerAtelier}"/>
+		 									
+		  </center>
+	</p:panel>
+	
+	<p:blockUI block="panel" trigger="buttonsubmit">  
+        Suppression...<br />  
+    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+    </p:blockUI> 
+</h:form>
+   	
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

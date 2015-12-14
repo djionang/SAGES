@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="/WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codepartie" value="#{listPartieCoursBean.codepartie}"/>
+	  		<f:event type="preRenderView" listener="#{listPartieCoursBean.initParties}"/>
+		</f:metadata>
+    </ui:define>
+    
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Parties [Chapitres] Cours
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2>Parties Cours [Chapitres]</h2>
+   		
+   		<br/>
+   		
+   		<p:growl autoUpdate="true"/>
+   		
+   		<h:form id="form">
+   		
+   		<p:outputPanel style="width:100%;" id="panel">
+   				<p:ajaxStatus>
+					 <f:facet name="start">
+						 <p:graphicImage value="/resources/img/loading.gif" />
+					 </f:facet>
+											
+					 <f:facet name="complete">
+						 <h:outputText value="" />
+					 </f:facet>
+				</p:ajaxStatus>		 	
+   			 
+	            <p:panelGrid columns="2" style="width:100%;" id="grid2">
+		   			<p:panel>
+			   			<h:selectOneMenu value="#{listPartieCoursBean.codeclasse}">
+			   				<f:selectItem itemLabel="Classe" itemValue="" itemDescription="Selectionner une classe"/>
+					 	    <f:selectItems value="#{etablissement.listeClasses}" var="classe" itemLabel="#{classe.codeClasse} - #{classe.libelle}" itemValue="#{classe.codeClasse}" itemDescription="#{classe.libelle}"/>
+					 		<p:ajax async="true" partialSubmit="true" listener="#{listPartieCoursBean.loadCours}" update="cours,table" process="@this"/>
+					 	</h:selectOneMenu >
+		   			</p:panel>
+			    	    
+			    	<p:panel id="pancours" header="Cours">
+			   			<h:selectOneListbox value="#{listPartieCoursBean.codecours}" style="max-height:60px;" required="true" requiredMessage="Aucun cours sélectionné" size="7" id="cours" validatorMessage="Erreur de validation des données">
+					 		<f:selectItems value="#{listPartieCoursBean.cours}" var="cours" itemLabel="#{cours.libelle} - #{cours.libellematiere} #{cours.libelleclasse}" itemValue="#{cours.codecours}" itemDescription="#{cours.description}"/>
+					 		<p:ajax async="true" partialSubmit="true" listener="#{listPartieCoursBean.loadPartiesCours}" update=":form:panel" process="@this"/>
+					 	</h:selectOneListbox>
+		   			</p:panel>   	   			
+			    </p:panelGrid>		
+			    <br/>
+	            
+		    	<p:dataTable id="table" value="#{listPartieCoursBean.partiescours}" var="partie" emptyMessage="Aucune partie cours trouvée" rowIndexVar="num">
+			  	    
+			  	    <p:column id="num" headerText="N°" >  
+	            		<h:outputText value="#{num+1}" />  
+	        		</p:column>
+			  	      
+	        		<p:column id="libelle" headerText="Libellé" >  
+	            		<h:outputText value="#{partie.libelle}" />  
+	        		</p:column> 
+	        
+	        		<p:column id="description" headerText="Description" >  
+	            		<h:outputText value="#{partie.description}" />  
+	        		</p:column>
+	        
+					<p:column id="fin" headerText="Programmé Du">  
+			            <h:outputText value="#{partie.datedebut}">
+			            	<f:convertDateTime pattern="dd/MM/yyyy"/>
+			            </h:outputText>
+			        </p:column> 
+			        
+					<p:column id="debut" headerText="Au">  
+			             <h:outputText value="#{partie.datefin}">
+			             	<f:convertDateTime pattern="dd/MM/yyyy"/>
+			             </h:outputText> 
+			        </p:column> 
+			        
+	        
+			        <p:column id="option" headerText="Options" width="30"> 
+			         	<p:panelGrid columns="2">				        	
+				            <h:link  includeViewParams="true" id="edit"  title="Editer" outcome="modifierpartiecours">  
+						        <p:graphicImage value="/resources/img/edit16.png" style="border:#CCCCCC 1px solid"/>   
+						        <f:param name="codepartie" value="#{partie.codepartie}"/>
+						    </h:link>
+						    
+				            <h:link  includeViewParams="true" id="delete" outcome="supprimerpartiecours" title="Supprimer">  
+						        <p:graphicImage value="/resources/img/delete16.png" style="border:#CCCCCC 1px solid"/>
+						       <f:param name="codepartie" value="#{partie.codepartie}"/>
+						   </h:link>
+			            </p:panelGrid>
+			        </p:column> 
+				</p:dataTable>
+				
+				<br/>
+				
+				<br/>
+			    <p:panelGrid columns="2" style="width:100%;" id="grid1">
+		   		    
+		   		    <f:facet name="header">
+		   		    	<h:outputText value="Nouvelle Partie | Chapitre"/>
+		   		    </f:facet>
+		   		    
+		   		    <h:outputText value="Libellé *"/>
+		   		    <p:inputText value="#{listPartieCoursBean.nouveaulibelle}" required="true" requiredMessage="Libellé obligatoire"/>
+		   		    
+		   		    <h:outputText value="Description *" required="true" requiredMessage="Description obligatoire"/>
+		   		    <p:inputTextarea value="#{listPartieCoursBean.nouvelledescription}"/>
+		   		    
+		   		    <h:outputText value="Programée Du"/>
+		   		    <p:calendar value="#{listPartieCoursBean.nouvelledatedebut}" navigator="true" pattern="dd/MM/yyyy HH:mm" required="true" requiredMessage="Date Debut obligatoire"/>
+		   		    
+		   		    <h:outputText value="Au"/>
+				 	<p:calendar value="#{listPartieCoursBean.nouvelledatefin}" navigator="true" pattern="dd/MM/yyyy HH:mm" required="true" requiredMessage="Date Finobligatoire"/>	    
+		      		
+		      		<f:facet name="footer">
+		      			<center>
+			   				<p:commandButton value="Enregistrer" id="send" actionListener="#{listPartieCoursBean.enregistrerPartieCours}" icon="ui-icon-check" update=":form:panel"/>
+			   			</center>
+		      		</f:facet>
+				</p:panelGrid>
+   			
+   		</p:outputPanel>
+   		</h:form>	   				
+			
+		<p:blockUI block=":form:panel" trigger=":form:send">  
+	        Chargement...<br />  
+	    	<p:graphicImage value="../../resources/img/ajax-loader.gif"/>  
+	    </p:blockUI>
+   		
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

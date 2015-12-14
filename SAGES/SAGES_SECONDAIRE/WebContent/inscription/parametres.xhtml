@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codeclasse" value="#{listeTrancheBean.codeclasse}"/>
+	  		<f:event type="preRenderView" listener="#{listeTrancheBean.initialize}"/>
+		</f:metadata>
+    </ui:define>
+    
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Paramètres Inscription
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2><h:outputText value="paramètres -- Frais d'inscription"/></h2>
+   
+			<br/>
+			<p:messages autoUpdate="true"/>
+			
+			<p:growl autoUpdate="true" id="growl"/>
+
+			<p:outputPanel id="optranche">
+				<h:form id="formselectclasse">
+					<p:panel id="panelclasse" header="Classe">
+						<p:dataTable var="classe" value="#{etablissement.modeleClasse}" rowKey="#{classe.codeClasse}" id="tabclas"
+							selection="#{listeTrancheBean.selectedClasse}" selectionMode="single" paginator="true" rows="20"  
+							emptyMessage="Aucune classe trouvée">
+					
+							<p:column id="code" headerText="Code Classe.">
+								<h:outputText value="#{classe.codeClasse}"/>
+							</p:column>
+							
+							<p:column headerText="Libellé">
+								<h:outputText value="#{classe.libelle}"/>				
+							</p:column>
+							
+							<p:column headerText="Option">
+								<h:outputText value="#{classe.option}"/>				
+							</p:column>
+						
+						</p:dataTable>
+						
+						<f:facet name="footer">
+							<center>
+								<p:commandButton id="loadtranche" value="Charger la liste tranches" actionListener="#{listeTrancheBean.chargerTranches}" update=":optranche"/>
+							</center>
+						</f:facet>
+						
+					</p:panel>
+				</h:form>
+				
+				<br/>
+				
+				<h:form id="formselecttranche">
+					<p:panel  id="pantranche" header="Tranches" rendered="#{not empty listeTrancheBean.modeleTranche}">
+					
+						<p:dataTable value="#{listeTrancheBean.modeleTranche}" var="tranche" emptyMessage="Aucune tranche trouvée" >
+						
+							<f:facet name="header">
+								<h:outputText value="Liste des tranches #{listeTrancheBean.selectedClasse.libelle}"/>
+							</f:facet>
+				              
+				            <p:column id="id" headerText="ID." sortBy="#{tranche.id}">
+								<h:outputText value="#{tranche.id}"/>
+							</p:column>
+							
+							  
+							<p:column id="columnlabel" headerText="Libellé">
+								<h:outputText value="#{tranche.type}"/>
+							</p:column>
+							
+							<p:column headerText="Montant">
+								<h:outputText value="#{tranche.montant}">
+					   				<f:convertNumber type="currency" currencySymbol="F." />
+								</h:outputText>
+							</p:column> 
+							
+							<p:column id="delaiversement" headerText="Délai Vers.">
+								<h:outputText value="#{tranche.delaiVersement}">
+									<f:convertDateTime pattern="dd/MM/yyyy"/>
+								</h:outputText>
+							</p:column>
+															
+							<p:column headerText="Options" width="38" style="padding:0px;">
+								<p:panelGrid columns="2">
+									<h:link includeViewParams="true" outcome="modifierTranche" title="Modifier" >
+								    	<p:graphicImage value="../resources/img/edit16.png" style="border:#CCCCCC 1px solid"/>  						        
+								    	<f:param name="codeclasse" value="#{tranche.codeclasse}"/>
+								    	<f:param name="idtranche" value="#{tranche.id}"/>				    
+								    </h:link>
+								    <h:link includeViewParams="true" outcome="supprimerTranche" title="Supprimer" >
+								    	<p:graphicImage value="../resources/img/delete16.png" style="border:#CCCCCC 1px solid"/>  						        
+								    	<f:param name="idtranche" value="#{tranche.id}"/>		
+								    	<f:param name="codeclasse" value="#{tranche.codeclasse}"/>							    
+								    </h:link>
+							    </p:panelGrid>
+							</p:column>
+							
+						</p:dataTable>
+						<f:facet name="footer">  
+			         		<center>
+								<p:commandButton id="addBtn" value="Nouvelle tranche" action="#{listeTrancheBean.navnouvelleTranche}"/>
+							</center> 
+			     		</f:facet> 
+					</p:panel>	
+				</h:form>
+			</p:outputPanel>
+		
+			
+		    <p:blockUI block=":formselectclasse:panelclasse"  trigger=":formselectclasse:loadtranche">  
+		        Chargement...<br />  
+		    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+		    </p:blockUI>			
+		    
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

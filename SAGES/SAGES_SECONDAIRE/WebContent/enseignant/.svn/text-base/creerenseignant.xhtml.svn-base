@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Ajouter une enseignant
+    </ui:define>
+   
+    <ui:define name="content">
+	    <h2>
+	   		<h:outputText value="Nouvel Enseignant"/>
+	   	</h2>
+	   	
+	   	<p:messages id="messages" autoUpdate="true"/>
+    <br/>
+   	<h:form id="formenseignant" enctype="multipart/form-data">
+   	
+   	<p:panel id="panelenseignant"  style="margin-bottom:10px;"> 
+   	
+	    <p:panelGrid columns="2" style="width:100%;" id="perso">	    
+	    		    
+			<h:outputText value="Nom *"/>	            			
+      		<p:inputText value="#{enseignantBean.nomens}" id="nom" required="true" requiredMessage="Nom obligatoire"/>
+      		 	
+		 	<h:outputText value="Prénom"/>	            			
+      		<p:inputText value="#{enseignantBean.prenomens}" id="prenom"/>
+      		
+      		<h:outputText value="Sexe *"/>	            			
+      		<p:selectOneMenu value="#{enseignantBean.sexe}" id="sexe" required="true" requiredMessage="Champ Sexe requis">
+    			<f:selectItems value="#{configuration.sexeItems}"/>
+   	    	</p:selectOneMenu>
+      				
+			<h:outputText value="Adresse *"/>				
+   			<p:inputText value="#{enseignantBean.adresse}" id="adresse" required="true" requiredMessage="Champ Adresse requis"/>
+    		   	    	
+   	    	<h:outputText value="Email"/>			
+      		<p:inputText value="#{enseignantBean.email}" id="email" validator="EmailValidator" validatorMessage="Format Email incorrect"/>      		
+       		        		    
+       		<h:outputText value="Telephone *"/>	            			
+      		<p:inputText value="#{enseignantBean.telephone}" id="telephone" validator="PhoneValidator" required="true" requiredMessage="Telephone obligatoire"/>
+      		 	
+		 	<h:outputText value="Civilité"/>	            			
+      		<p:selectOneMenu  value="#{enseignantBean.civilite}" id="civilite">
+    			<f:selectItems value="#{configuration.civiliteItems}"/>
+   	    	</p:selectOneMenu>
+   	    	  	    	
+   	    	<h:outputText value="Login"/>			
+      		<p:inputText value="#{enseignantBean.loginens}" id="login"/>  
+      		
+      		<h:outputText value="Mot de passe *"/>			
+      		<p:inputText value="#{enseignantBean.passens}" id="pass"/>
+      		
+      		<h:outputText value="Photo"/>			
+      		<p:fileUpload value="#{enseignantBean.photosent}" id="photo" showButtons="false" mode="simple"/>    		
+       		       				
+			<h:outputText value="Date arrivée *"/>				
+   			<p:calendar mindate="01/01/1960" required="true"  maxdate="#{configuration.datejour}" pattern="dd/MM/yyyy" value="#{enseignantBean.datearrivee}" id="datearrivee" requiredMessage="Date d'arrivée obligatoire" />
+			 
+       		<h:outputText value="Compétences -- Matières,Niveaux"/>
+			<p:inputTextarea value="#{enseignantBean.competences}"/>
+       		         	             			
+	     </p:panelGrid>		
+		 <br/>
+		 <p:panelGrid columns="2" style="width:100%;">	    
+	    	<f:facet name="header">
+	    		<h:outputText value="Enseignant Vacataire"/>
+	    		<br/>
+	    		<h:selectBooleanCheckbox label="Vacataire *" value="#{enseignantBean.vacataire}"/>
+	    	</f:facet>
+	    	<h:outputText value="Salaire Horaire"/>
+			<p:inputText value="#{enseignantBean.salairehoraire}"/>
+			
+			<h:outputText value="Nombre d'heures mensuel"/>
+			<p:inputText value="#{enseignantBean.travailmensuel}"/>	    
+			       		         	             			
+	     </p:panelGrid>
+	     <br/>
+							
+		  <center>			  								
+		 		<p:commandButton value="Enregistrer"  icon="ui-icon-check" id="submitenseignant" action="#{enseignantBean.saveenseignant}" ajax="false"/>
+		 		<p:commandButton value="Annuler" immediate="true" type="reset" icon="ui-icon-close"/>	
+		 </center>
+	</p:panel>
+	
+	<p:blockUI block="panelenseignant" trigger="submitenseignant">  
+        Enregistrement...<br />  
+    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+    </p:blockUI> 
+    
+	</h:form>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

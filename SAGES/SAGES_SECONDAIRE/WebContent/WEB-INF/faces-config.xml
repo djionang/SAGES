@@ -1,0 +1,1942 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faces-config
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+    version="2.0">
+		
+	<!-- ************************************************************************************* -->
+	<!-- **************************************** NAVIGATION ********************************* -->
+	
+	
+	<!-- ************************************************************************************* -->
+	<!-- *********************** NAVIGATION RESULTATS DOPERATIONS **************************** -->
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+    	<navigation-case>
+        	<from-outcome>logout</from-outcome>
+        	<to-view-id>/j_acegi_logout.jsp</to-view-id>
+    	</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/accueil.xhtml</from-view-id>
+    	<navigation-case>
+        	<from-outcome>login</from-outcome>
+        	<to-view-id>/j_acegi_security_check.jsp</to-view-id>
+    	</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/ADMINISTRATOR/accueil.xhtml</from-view-id>
+    	<navigation-case>
+        	<from-outcome>login</from-outcome>
+        	<to-view-id>/j_acegi_security_check.jsp</to-view-id>
+    	</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/ADMINISTRATOR/accueil.xhtml</from-view-id>
+    	<navigation-case>
+        	<from-outcome>accueil</from-outcome>
+        	<to-view-id>/ADMINISTRATOR/accueil.xhtml</to-view-id>
+    	</navigation-case>
+	</navigation-rule>
+		
+	<navigation-rule>
+		<from-view-id>/recrutement/recrutement.xhtml</from-view-id>
+    	<navigation-case>
+        	<from-outcome>_success</from-outcome>
+        	<to-view-id>/recrutement/recrutementd.xhtml</to-view-id>
+    	</navigation-case>
+    	<navigation-case>
+        	<from-outcome>_error</from-outcome>
+        	<to-view-id>/recrutement/recrutementn.xhtml</to-view-id>
+    	</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/etablissement/modifierEtablissement</from-view-id>
+    	<navigation-case>
+        	<from-outcome>_success</from-outcome>
+        	<to-view-id>/etablissement/enregistrerEtablissement.xhtml</to-view-id>
+    		<redirect />
+    	</navigation-case>
+    	<navigation-case>
+        	<from-outcome>_error</from-outcome>
+        	<to-view-id>/etablissement/etablissementn.xhtml</to-view-id>
+    	</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/etablissement/*</from-view-id>
+    	<navigation-case>
+        	<from-outcome>_success</from-outcome>
+        	<to-view-id>/etablissement/etablissementd.xhtml</to-view-id>
+    		
+    	</navigation-case>
+    	<navigation-case>
+        	<from-outcome>_error</from-outcome>
+        	<to-view-id>/etablissement/etablissementn.xhtml</to-view-id>
+    	</navigation-case>
+	</navigation-rule>
+	
+	
+	
+	<navigation-rule>
+		<from-view-id>/inscription/droitsscolaires.xhtml</from-view-id>
+    	<navigation-case>
+        	<from-outcome>_success</from-outcome>
+        	<to-view-id>/inscription/droitsscolaires.xhtml</to-view-id>
+    	</navigation-case>
+    	<navigation-case>
+        	<from-outcome>_error</from-outcome>
+        	<to-view-id>/inscription/droitsscolaires.xhtml</to-view-id>
+    	</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/inscription/inscription.xhtml</from-view-id>
+    	<navigation-case>
+        	<from-outcome>_success</from-outcome>
+        	<to-view-id>/inscription/inscriptiond.xhtml</to-view-id>
+    	</navigation-case>
+    	<navigation-case>
+        	<from-outcome>_error</from-outcome>
+        	<to-view-id>/inscription/inscriptionn.xhtml</to-view-id>
+    	</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/salle/creersalle.xhtml</from-view-id>
+    	<navigation-case>
+        	<from-outcome>_success</from-outcome>
+        	<to-view-id>/salle/salled.xhtml</to-view-id>
+    	</navigation-case>
+    	<navigation-case>
+        	<from-outcome>_error</from-outcome>
+        	<to-view-id>/salle/sallen.xhtml</to-view-id>
+    	</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/salle/typesalle/creertypesalle.xhtml</from-view-id>
+    	<navigation-case>
+        	<from-outcome>_success</from-outcome>
+        	<to-view-id>/salle/typesalle/listing.xhtml</to-view-id>
+    	</navigation-case>
+    	<navigation-case>
+        	<from-outcome>_error</from-outcome>
+        	<to-view-id>/salle/typesalle/creertypesalle.xhtml</to-view-id>
+    	</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/filiere/creerclasse.xhtml</from-view-id>
+    	<navigation-case>
+        	<from-outcome>_success</from-outcome>
+        	<to-view-id>/filiere/classed.xhtml</to-view-id>
+    	</navigation-case>
+    	<navigation-case>
+        	<from-outcome>_error</from-outcome>
+        	<to-view-id>/filiere/classen.xhtml</to-view-id>
+    	</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/inscription/droitsscolaires.xhtml</from-view-id>
+    	<navigation-case>
+        	<from-outcome>_success</from-outcome>
+        	<to-view-id>/inscription/visualiser.xhtml</to-view-id>
+    	</navigation-case>
+    	<navigation-case>
+        	<from-outcome>_error</from-outcome>
+        	<to-view-id>/inscription/droitsscolaires.xhtml</to-view-id>
+    	</navigation-case>
+	</navigation-rule>
+	
+	
+	<!-- ************************************************************************************* -->
+	
+	
+	<navigation-rule>
+		<display-name>navigation</display-name>
+		<navigation-case>
+			<from-outcome>accueil</from-outcome>
+			<to-view-id>/accueil.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>contact</from-outcome>
+			<to-view-id>/contact/contact.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>regards</from-outcome>
+			<to-view-id>/agesregards/regards.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>recrutement</from-outcome>
+			<to-view-id>/recrutement/recrutement.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>inscriptionfraisNR</from-outcome>
+			<to-view-id>/recrutement/inscriptiond.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>nouvellecandidature</from-outcome>
+			<to-view-id>/recrutement/recrutement.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>listercandidatures</from-outcome>
+			<to-view-id>/recrutement/listing.xhtml</to-view-id>			
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>listercandidaturesacceptees</from-outcome>
+			<to-view-id>/recrutement/listingacceptees.xhtml</to-view-id>			
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>listercandidaturesrejetees</from-outcome>
+			<to-view-id>/recrutement/listingrejetees.xhtml</to-view-id>			
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>listercandidaturesattente</from-outcome>
+			<to-view-id>/recrutement/listingattente.xhtml</to-view-id>			
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>visualisercandidature</from-outcome>
+			<to-view-id>/recrutement/candidature.xhtml</to-view-id>			
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>etudiercandidature</from-outcome>
+			<to-view-id>/recrutement/etude.xhtml</to-view-id>	
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>inscriptionlisteprovisoire</from-outcome>
+			<to-view-id>/inscription/listeprovisoire.xhtml</to-view-id>	
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>inscriptioneleve</from-outcome>
+			<to-view-id>/inscription/inscriptionRe.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>inscriptioneleveform</from-outcome>
+			<to-view-id>/inscription/inscription.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>inscriptioneleveversclasse</from-outcome>
+			<to-view-id>/inscription/affectationclasse.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>modifiercandidature</from-outcome>
+			<to-view-id>/recrutement/modification.xhtml</to-view-id>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>inscriptionfrais</from-outcome>
+			<to-view-id>/inscription/droitsscolaires.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>inscriptionfraisN</from-outcome>
+			<to-view-id>/eleve/droitsscolairesN.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>bilanfinancier</from-outcome>
+			<to-view-id>/inscription/Bilanfinancier.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>etatverclas</from-outcome>
+			<to-view-id>/inscription/EtatVersementClasse.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		
+		<navigation-case>
+			<from-outcome>inscriptionlisteversement</from-outcome>
+			<to-view-id>/inscription/versementsEnregistres.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>modifierverse</from-outcome>
+			<to-view-id>/inscription/modifierVersements.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>inscriptionfraisindiv</from-outcome>
+			<to-view-id>/inscription/visualiser.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>inscriptiondetailtranches</from-outcome>
+			<to-view-id>/inscription/detailstranches.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>enregistrerTranche</from-outcome>
+			<to-view-id>/inscription/enregistrerTranche.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		
+		<navigation-case>
+			<from-outcome>modifierTranche</from-outcome>
+			<to-view-id>/inscription/modifierTranche.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>supprimerTranche</from-outcome>
+			<to-view-id>/inscription/supprimerTranche.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>parametresTranche</from-outcome>
+			<to-view-id>/inscription/parametres.xhtml</to-view-id>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>inscriptionfraisparam</from-outcome>
+			<to-view-id>/inscription/parametres.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>inscriptionetateleve</from-outcome>
+			<to-view-id>/inscription/impression-etateleve.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>supprimercandidature</from-outcome>
+			<to-view-id>/recrutement/suppression.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>detailcandidature</from-outcome>
+			<to-view-id>/recrutement/candidature.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		
+		<navigation-case>
+			<from-outcome>elevesenregle</from-outcome>
+			<to-view-id>/inscription/elevesEnregle.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>elevesnenregle</from-outcome>
+			<to-view-id>/inscription/eleveNEnregle.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>elevesinscrits</from-outcome>
+			<to-view-id>/inscription/inscrits.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>inscriptionfraispropag</from-outcome>
+			<to-view-id>/inscription/copieparametres.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+			
+		
+		<!-- ************************************************ -->
+		
+		
+		<navigation-case>
+			<from-outcome>ressourclassecreate</from-outcome>
+			<to-view-id>/classe/creerclasse.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>ressourclasselisting</from-outcome>
+			<to-view-id>/classe/listing.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>ressourclassevue</from-outcome>
+			<to-view-id>/classe/visualisation.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>ressourclasseedit</from-outcome>
+			<to-view-id>/classe/modification.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>ressourclassedelete</from-outcome>
+			<to-view-id>/classe/suppression.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>progclassevue</from-outcome>
+			<to-view-id>/classe/allocation.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<!-- ********************************************************************************** -->
+		
+		<navigation-case>
+			<from-outcome>ressoursallecreate</from-outcome>
+			<to-view-id>/salle/creersalle.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>ressoursallelisting</from-outcome>
+			<to-view-id>/salle/listing.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>detailsalle</from-outcome>
+			<to-view-id>/salle/visualisation.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>ressoursalleedit</from-outcome>
+			<to-view-id>/salle/modification.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>ressoursalledelete</from-outcome>
+			<to-view-id>/salle/suppression.xhtml</to-view-id>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>progsallevue</from-outcome>
+			<to-view-id>/salle/allocation.xhtml</to-view-id>
+		</navigation-case>
+		
+		
+		<!-- ********************************************************************************** -->
+		
+		<navigation-case>
+			<from-outcome>ressourtypesallecreate</from-outcome>
+			<to-view-id>/salle/typesalle/creertypesalle.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>ressourtypesallelisting</from-outcome>
+			<to-view-id>/salle/typesalle/listing.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>detailtypesalle</from-outcome>
+			<to-view-id>/salle/typesalle/visualisation.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>typesalleedit</from-outcome>
+			<to-view-id>/salle/typesalle/modification.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>typesalledelete</from-outcome>
+			<to-view-id>/salle/typesalle/suppression.xhtml</to-view-id>
+		</navigation-case>
+		
+		<!-- ******************************************************************* -->
+		
+		
+		<navigation-case>
+			<from-outcome>ressourateliercreate</from-outcome>
+			<to-view-id>/atelier/creeratelier.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>ressouratelierlisting</from-outcome>
+			<to-view-id>/atelier/listing.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>detailatelier</from-outcome>
+			<to-view-id>/atelier/visualisation.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>ressouratelieredit</from-outcome>
+			<to-view-id>/atelier/modification.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>ressouratelierdelete</from-outcome>
+			<to-view-id>/atelier/suppression.xhtml</to-view-id>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>progateliervue</from-outcome>
+			<to-view-id>/atelier/allocation.xhtml</to-view-id>
+		</navigation-case>
+		
+		<!-- ******************************************************************* -->
+		
+		
+		
+		<navigation-case>
+			<from-outcome>etaboptioncreate</from-outcome>
+			<to-view-id>/etablissement/enregistrerOption.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>etaboptionlisting</from-outcome>
+			<to-view-id>/etablissement/listingOptions.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>detailoption</from-outcome>
+			<to-view-id>/etablissement/visualiserOption.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>modifieroption</from-outcome>
+			<to-view-id>/etablissement/modifierOption.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>supprimeroption</from-outcome>
+			<to-view-id>/etablissement/supprimerOption.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		
+		
+		<navigation-case>
+			<from-outcome>etabcreate</from-outcome>
+			<to-view-id>/administration/enregistrerEtablissement.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+			
+		<navigation-case>
+			<from-outcome>etablisting</from-outcome>
+			<to-view-id>/administration/listingEtablissements.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>addetailetablissement</from-outcome>
+			<to-view-id>/administration/visualiserEtablissement.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>admodifieretablissement</from-outcome>
+			<to-view-id>/administration/modifierEtablissement.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>adsupprimeretablissement</from-outcome>
+			<to-view-id>/administration/supprimerEtablissement.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>modifieretablissement</from-outcome>
+			<to-view-id>/etablissement/modifierEtablissement.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>etabenseicreate</from-outcome>
+			<to-view-id>/etablissement/enregistrerEnseignement.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>etabenseilisting</from-outcome>
+			<to-view-id>/etablissement/listingEnseignements.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>detailenseignement</from-outcome>
+			<to-view-id>/etablissement/visualiserEnseignement.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>modifierenseignement</from-outcome>
+			<to-view-id>/etablissement/modifierEnseignement.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>supprimerenseignement</from-outcome>
+			<to-view-id>/etablissement/supprimerEnseignement.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>etabsectioncreate</from-outcome>
+			<to-view-id>/etablissement/enregistrerSection.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>etabsectionlisting</from-outcome>
+			<to-view-id>/etablissement/listingSections.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>	
+		
+		
+		<navigation-case>
+			<from-outcome>detailsection</from-outcome>
+			<to-view-id>/etablissement/visualiserSection.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>modifiersection</from-outcome>
+			<to-view-id>/etablissement/modifierSection.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>supprimersection</from-outcome>
+			<to-view-id>/etablissement/supprimerSection.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>etabcyclecreate</from-outcome>
+			<to-view-id>/etablissement/enregistrerCycle.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>etabcyclelisting</from-outcome>
+			<to-view-id>/etablissement/listingCycles.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>detailcycle</from-outcome>
+			<to-view-id>/etablissement/visualiserCycle.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>modifiercycle</from-outcome>
+			<to-view-id>/etablissement/modifierCycle.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>supprimercycle</from-outcome>
+			<to-view-id>/etablissement/supprimerCycle.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>etabnivocreate</from-outcome>
+			<to-view-id>/etablissement/enregistrerNiveau.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>etabnivolisting</from-outcome>
+			<to-view-id>/etablissement/listingNiveaux.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>detailniveau</from-outcome>
+			<to-view-id>/etablissement/visualiserNiveau.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>modifierniveau</from-outcome>
+			<to-view-id>/etablissement/modifierNiveau.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>supprimerniveau</from-outcome>
+			<to-view-id>/etablissement/supprimerNiveau.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		
+		<!-- ********************************************************** -->
+		
+		<navigation-case>
+			<from-outcome>personelcreate</from-outcome>
+			<to-view-id>/personnel/creerpersonnel.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>personellisting</from-outcome>
+			<to-view-id>/personnel/listing.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>personelvue</from-outcome>
+			<to-view-id>/personnel/visualisation.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>personeledit</from-outcome>
+			<to-view-id>/personnel/modification.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>personeldelete</from-outcome>
+			<to-view-id>/personnel/suppression.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<!-- ********************************************************************************** -->
+		
+		
+		<navigation-case>
+			<from-outcome>anneecreate</from-outcome>
+			<to-view-id>/anneeAcademique/enregistrerAnnee.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>anneean</from-outcome>
+			<to-view-id>/anneeAcademique/anneeEncours.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>anneetrim</from-outcome>
+			<to-view-id>/anneeAcademique/trimestres.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>anneeseq</from-outcome>
+			<to-view-id>/anneeAcademique/sequences.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>anneebilan</from-outcome>
+			<to-view-id>/anneeAcademique/bilan.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>anneecloture</from-outcome>
+			<to-view-id>/anneeAcademique/cloture.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>modifierAnnee</from-outcome>
+			<to-view-id>/anneeAcademique/modifierAnnee.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>creerTrimestre</from-outcome>
+			<to-view-id>/anneeAcademique/enregistrerTrimestre.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>visualisertrimestre</from-outcome>
+			<to-view-id>/anneeAcademique/trimestre.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>modifiertrimestre</from-outcome>
+			<to-view-id>/anneeAcademique/modifierTrimestre.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>supprimertrimestre</from-outcome>
+			<to-view-id>/anneeAcademique/supprimerTrimestre.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>supprimerAnnee</from-outcome>
+			<to-view-id>/anneeAcademique/supprimerAnnee.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>creerSequence</from-outcome>
+			<to-view-id>/anneeAcademique/enregistrerSequence.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>visualisersequence</from-outcome>
+			<to-view-id>/anneeAcademique/sequence.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>modifiersequence</from-outcome>
+			<to-view-id>/anneeAcademique/modifierSequence.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>supprimersequence</from-outcome>
+			<to-view-id>/anneeAcademique/supprimerSequence.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>anneelisting</from-outcome>
+			<to-view-id>/anneeAcademique/annees.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		
+	<!-- ********************************************************************************** -->
+		
+		
+		<navigation-case>
+			<from-outcome>personenseigncreate</from-outcome>
+			<to-view-id>/enseignant/creerenseignant.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>personenseignlisting</from-outcome>
+			<to-view-id>/enseignant/listing.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>enseignantedit</from-outcome>
+			<to-view-id>/enseignant/modification.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>enseignantdelete</from-outcome>
+			<to-view-id>/enseignant/suppression.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>enseignantvue</from-outcome>
+			<to-view-id>/enseignant/visualisation.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>			
+		
+		<navigation-case>
+			<from-outcome>enseignantstatus</from-outcome>
+			<to-view-id>/enseignant/modifierStatut.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<!-- ********************************************************************************** -->
+		
+		
+		<navigation-case>
+			<from-outcome>gestmatcreate</from-outcome>
+			<to-view-id>/matiere/creermatiere.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>gestmatlisting</from-outcome>
+			<to-view-id>/matiere/listing.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>matiereedit</from-outcome>
+			<to-view-id>/matiere/modification.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>matieredelete</from-outcome>
+			<to-view-id>/matiere/suppression.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>detailmatiere</from-outcome>
+			<to-view-id>/matiere/visualisation.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>matiereanimateur</from-outcome>
+			<to-view-id>/matiere/animateurpedagogique.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		
+		<!-- ********************************************************************************** -->
+		
+		<navigation-case>
+			<from-outcome>gestgrpecreate</from-outcome>
+			<to-view-id>/matiere/groupematiere/creerGroupematiere.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>gestgrpelisting</from-outcome>
+			<to-view-id>/matiere/groupematiere/listing.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>gmedit</from-outcome>
+			<to-view-id>/matiere/groupematiere/modification.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>gmdelete</from-outcome>
+			<to-view-id>/matiere/groupematiere/suppression.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>detailgm</from-outcome>
+			<to-view-id>/matiere/groupematiere/visualisation.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		
+		<!-- ********************************************************************************** -->
+		
+		<navigation-case>
+			<from-outcome>gestcourscreate</from-outcome>
+			<to-view-id>/cours/creercours.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>gestcourscopier</from-outcome>
+			<to-view-id>/cours/copiecours.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>gestcourslisting</from-outcome>
+			<to-view-id>/cours/listing.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>modifiercours</from-outcome>
+			<to-view-id>/cours/modification.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>supprimercours</from-outcome>
+			<to-view-id>/cours/suppression.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>detailcours</from-outcome>
+			<to-view-id>/cours/visualisation.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+			
+		<navigation-case>
+			<from-outcome>enseignantcours</from-outcome>
+			<to-view-id>/cours/attributionenseignant.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		
+		
+		<navigation-case>
+			<from-outcome>gestcourspartiecreate</from-outcome>
+			<to-view-id>/cours/partie-chapitre/parties-chapitres.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+				
+		<navigation-case>
+			<from-outcome>modifierpartiecours</from-outcome>
+			<to-view-id>/cours/partie-chapitre/modification.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>supprimerpartiecours</from-outcome>
+			<to-view-id>/cours/partie-chapitre/suppression.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<!-- ********************************************************************************** -->
+		
+		
+		<navigation-case>
+			<from-outcome>enregistrerEleve</from-outcome>
+			<to-view-id>/eleve/enregistrerEleve.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+				
+		<navigation-case>
+			<from-outcome>elevelisting</from-outcome>
+			<to-view-id>/eleve/listing.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>classelisting</from-outcome>
+			<to-view-id>/eleve/listingClasse.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>rechercheeleve</from-outcome>
+			<to-view-id>/eleve/rechercheeleve.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>supprimereleve</from-outcome>
+			<to-view-id>/eleve/suppression.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>detaileleve</from-outcome>
+			<to-view-id>/eleve/visualisation.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>modifiereleve</from-outcome>
+			<to-view-id>/eleve/modification.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>migrereleve</from-outcome>
+			<to-view-id>/eleve/migration.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>certificateleve</from-outcome>
+			<to-view-id>/eleve/certificat.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<!-- ********************************************************************************** -->
+		
+		<navigation-case>
+			<from-outcome>typeevalcreate</from-outcome>
+			<to-view-id>/evaluation/typeevaluation/creertypeevaluation.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>typeevallisting</from-outcome>
+			<to-view-id>/evaluation/typeevaluation/listing.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>detailtypeevaluation</from-outcome>
+			<to-view-id>/evaluation/typeevaluation/visualisation.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>typeevaluationedit</from-outcome>
+			<to-view-id>/evaluation/typeevaluation/modification.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>typeevaluationdelete</from-outcome>
+			<to-view-id>/evaluation/typeevaluation/suppression.xhtml</to-view-id>
+		</navigation-case>
+		
+		<!-- ********************************************************************************** -->
+		
+		<navigation-case>
+			<from-outcome>examevalcreate</from-outcome>
+			<to-view-id>/evaluation/creerevaluation.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>examevallistecreate</from-outcome>
+			<to-view-id>/evaluation/creerSetevaluation.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>examevallisting</from-outcome>
+			<to-view-id>/evaluation/listing.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>detailevaluation</from-outcome>
+			<to-view-id>/evaluation/visualisation.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>evaluationedit</from-outcome>
+			<to-view-id>/evaluation/modification.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>evaluationdelete</from-outcome>
+			<to-view-id>/evaluation/suppression.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>progevaluationvue</from-outcome>
+			<to-view-id>/evaluation/allocation.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>exambullvue</from-outcome>
+			<to-view-id>/note/bulletin.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>exambullparam</from-outcome>
+			<to-view-id>/note/parametres-bulletin.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>examimpressbulltrim</from-outcome>
+			<to-view-id>/note/impression-bulletintrim.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>examimpressbulltrimC</from-outcome>
+			<to-view-id>/note/impression-bulletintrimC.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>examimpressbullannuel</from-outcome>
+			<to-view-id>/note/impression-bulletinannuel.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>examimpressbullseq</from-outcome>
+			<to-view-id>/note/impression-bulletinseq.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>examimprimtoutesnotes</from-outcome>
+			<to-view-id>/note/formulaireToutesNotes.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>bilanreussitematiere</from-outcome>
+			<to-view-id>/note/bilanreussitematiere.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>tauxreussitesequence</from-outcome>
+			<to-view-id>/note/tauxreussitesequence.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>examnoteelevecreate</from-outcome>
+			<to-view-id>/note/enregistrerNoteEleve.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>pvr</from-outcome>
+			<to-view-id>/note/pvr.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>pvrt</from-outcome>
+			<to-view-id>/note/pvrt.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>pvrm</from-outcome>
+			<to-view-id>/note/pvrm.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>pvrtm</from-outcome>
+			<to-view-id>/note/pvrtm.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>examimpresstab</from-outcome>
+			<to-view-id>/note/impression-tableauHonneur.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>examimpressbilanbul</from-outcome>
+			<to-view-id>/note/impression-bilanannuel.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>examimpressbilanbulSeq</from-outcome>
+			<to-view-id>/note/impression-bilansequentiel.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>examimpressbilanbulTrim</from-outcome>
+			<to-view-id>/note/impression-bilantrimestriel.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		
+		<!-- ********************************************************************************** -->
+		
+		
+		<!-- ********************************************************************************** -->
+		
+		
+		<navigation-case>
+			<from-outcome>absenceexamen</from-outcome>
+			<to-view-id>/note/absences.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>invabsenceexamen</from-outcome>
+			<to-view-id>/note/annulerjustification.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>	
+		
+		<navigation-case>
+			<from-outcome>examnotecreate</from-outcome>
+			<to-view-id>/note/enregistrerNote.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>detailnotes</from-outcome>
+			<to-view-id>/note/visualiserNotes.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>editionnotes</from-outcome>
+			<to-view-id>/note/enregistrerNoteSaisie.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>importnotes</from-outcome>
+			<to-view-id>/note/enregistrerNoteimport.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>exportnotes</from-outcome>
+			<to-view-id>/note/exportNotes.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>		
+		
+		<navigation-case>
+			<from-outcome>telformulairenote</from-outcome>
+			<to-view-id>/note/formulaireNote.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<!-- ********************************************************************************** -->
+		
+		<navigation-case>
+			<from-outcome>loginpage</from-outcome>
+			<to-view-id>/users/login.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<!-- ********************************************************************************** -->
+		
+		<navigation-case>
+			<from-outcome>createtypesanction</from-outcome>
+			<to-view-id>/discipline/sanction/typesanction/creertypesanction.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>listingtypesanction</from-outcome>
+			<to-view-id>/discipline/sanction/typesanction/listing.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>detailtypesanction</from-outcome>
+			<to-view-id>/discipline/sanction/typesanction/visualisation.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>typesanctionedit</from-outcome>
+			<to-view-id>/discipline/sanction/typesanction/modification.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>typesanctiondelete</from-outcome>
+			<to-view-id>/discipline/sanction/typesanction/suppression.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>		
+		
+		<navigation-case>
+			<from-outcome>dissanctcreate</from-outcome>
+			<to-view-id>/discipline/sanction/creersanction.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>dissanctlisting</from-outcome>
+			<to-view-id>/discipline/sanction/listing.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>disabsencecreate</from-outcome>
+			<to-view-id>/discipline/nouvelleAbsence.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>disretardcreate</from-outcome>
+			<to-view-id>/discipline/nouveauRetard.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+		<from-outcome>detailsanction</from-outcome>
+		<to-view-id>/discipline/sanction/visualisation.xhtml</to-view-id>
+		<redirect />
+	</navigation-case>
+		
+	<navigation-case>
+		<from-outcome>dissanctionedit</from-outcome>
+		<to-view-id>/discipline/sanction/modification.xhtml</to-view-id>
+		<redirect />
+	</navigation-case>
+		
+	<navigation-case>
+		<from-outcome>dissanctioncancel</from-outcome>
+		<to-view-id>/discipline/sanction/annulation.xhtml</to-view-id>
+		<redirect />
+	</navigation-case>
+	
+	<navigation-case>
+		<from-outcome>listingretards</from-outcome>
+		<to-view-id>/discipline/listingRetards.xhtml</to-view-id>
+		<redirect />
+	</navigation-case>
+	
+	<navigation-case>
+		<from-outcome>listingabsences</from-outcome>
+		<to-view-id>/discipline/listingAbsences.xhtml</to-view-id>
+		<redirect />
+	</navigation-case>
+	
+	<navigation-case>
+		<from-outcome>editretard</from-outcome>
+		<to-view-id>/discipline/editionRetard.xhtml</to-view-id>
+		<redirect />
+	</navigation-case>
+	
+	<navigation-case>
+		<from-outcome>cancelretard</from-outcome>
+		<to-view-id>/discipline/annulationRetard.xhtml</to-view-id>
+		<redirect />
+	</navigation-case>
+	
+	<navigation-case>
+		<from-outcome>editabsence</from-outcome>
+		<to-view-id>/discipline/editionAbsence.xhtml</to-view-id>
+		<redirect />
+	</navigation-case>
+	
+	<navigation-case>
+		<from-outcome>cancelabsence</from-outcome>
+		<to-view-id>/discipline/annulationAbsence.xhtml</to-view-id>
+		<redirect />
+	</navigation-case>
+	
+	<navigation-case>
+		<from-outcome>disjournalvue</from-outcome>
+		<to-view-id>/discipline/journal.xhtml</to-view-id>
+		<redirect />
+	</navigation-case>
+	
+	
+	<navigation-case>
+		<from-outcome>disconvoccreate</from-outcome>
+		<to-view-id>/discipline/convocation/creerconvocation.xhtml</to-view-id>
+		<redirect />
+	</navigation-case>
+		
+	<navigation-case>
+		<from-outcome>listingconvocations</from-outcome>
+			<to-view-id>/discipline/convocation/listing.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		
+		<navigation-case>
+		<from-outcome>detailconvocation</from-outcome>
+		<to-view-id>/discipline/convocation/visualisation.xhtml</to-view-id>
+		<redirect />
+	</navigation-case>
+		
+	<navigation-case>
+		<from-outcome>disconvocationedit</from-outcome>
+		<to-view-id>/discipline/convocation/modification.xhtml</to-view-id>
+		<redirect />
+	</navigation-case>
+		
+	<navigation-case>
+		<from-outcome>disconvocationcancel</from-outcome>
+		<to-view-id>/discipline/convocation/annulation.xhtml</to-view-id>
+		<redirect />
+	</navigation-case>
+	
+	<navigation-case>
+		<from-outcome>examimpresssanct</from-outcome>
+		<to-view-id>/discipline/impression-profil.xhtml</to-view-id>
+		<redirect />
+	</navigation-case>
+	
+	<!-- ********************************************************************************** -->	
+	
+	<navigation-case>
+		<from-outcome>gestscoolcdtcreate</from-outcome>
+		<to-view-id>/cours/cdtexte/nouvelleentreeCdt.xhtml</to-view-id>
+		<redirect />
+	</navigation-case>
+		
+	<navigation-case>
+		<from-outcome>gestscoolcdtvue</from-outcome>
+			<to-view-id>/cours/cdtexte/listing.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		
+		<navigation-case>
+		<from-outcome>detailcdt</from-outcome>
+		<to-view-id>/cours/cdtexte/visualisation.xhtml</to-view-id>
+		<redirect />
+	</navigation-case>
+		
+	<navigation-case>
+		<from-outcome>cdtedit</from-outcome>
+		<to-view-id>/cours/cdtexte/modification.xhtml</to-view-id>
+		<redirect />
+	</navigation-case>
+		
+	<navigation-case>
+		<from-outcome>cdtdelete</from-outcome>
+		<to-view-id>/cours/cdtexte/suppression.xhtml</to-view-id>
+		<redirect />
+	</navigation-case>
+	
+	<!-- ***************************ROLES ET COMPTES************************************************** -->	
+	
+	<navigation-case>
+		<from-outcome>creeritemrole</from-outcome>
+		<to-view-id>/access-control/item-role/creer-item.xhtml</to-view-id>
+		<redirect />
+	</navigation-case>
+		
+	<navigation-case>
+		<from-outcome>listingdroitdacces</from-outcome>
+			<to-view-id>/access-control/item-role/listing.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		
+		<navigation-case>
+			<from-outcome>updateitemrole</from-outcome>
+			<to-view-id>/access-control/item-role/modification.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>deleteitemrole</from-outcome>
+			<to-view-id>/access-control/item-role/suppression.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	
+		<navigation-case>
+			<from-outcome>creergroupeuser</from-outcome>
+			<to-view-id>/access-control/groupe-utilisateur/creer-groupe.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	
+		<navigation-case>
+			<from-outcome>listinggroupeuser</from-outcome>
+			<to-view-id>/access-control/groupe-utilisateur/listing.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>updategroupeuser</from-outcome>
+			<to-view-id>/access-control/groupe-utilisateur/modification.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>deletegroupeuser</from-outcome>
+			<to-view-id>/access-control/groupe-utilisateur/suppression.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>visualisergroupeuser</from-outcome>
+			<to-view-id>/access-control/groupe-utilisateur/visualisation.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>gestionmoncompte</from-outcome>
+			<to-view-id>/users/myaccount.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		
+		<navigation-case>
+			<from-outcome>editcompteadmin</from-outcome>
+			<to-view-id>/administration/myaccount.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>creerutilisateur</from-outcome>
+			<to-view-id>/users/enregistrerUtilisateur.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>listingutilisateur</from-outcome>
+			<to-view-id>/users/listing.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>visualiseruser</from-outcome>
+			<to-view-id>/users/visualisation.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		
+		<navigation-case>
+			<from-outcome>updateuser</from-outcome>
+			<to-view-id>/users/modification.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>deleteuser</from-outcome>
+			<to-view-id>/users/suppression.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>creermanager</from-outcome>
+			<to-view-id>/users/enregistrerManager.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		
+		<navigation-case>
+			<from-outcome>updaterespo</from-outcome>
+			<to-view-id>/responsabilite/modification.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>deleterespo</from-outcome>
+			<to-view-id>/responsabilite/suppression.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>assigner</from-outcome>
+			<to-view-id>/responsabilite/assigner.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>listingrespo</from-outcome>
+			<to-view-id>/responsabilite/listing.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>modifierrespo</from-outcome>
+			<to-view-id>/responsabilite/modification.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<!-- ***************************VIE SCOLAIRE************************************************** -->	
+	
+		<navigation-case>
+			<from-outcome>etabclasseelevvue</from-outcome>
+			<to-view-id>/vie-scolaire/eleves-classe.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>etabclasseoptionvue</from-outcome>
+			<to-view-id>/vie-scolaire/classes-option.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>etabclasseenseignvue</from-outcome>
+			<to-view-id>/vie-scolaire/enseignants-classe.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>etabclassedeleguevue</from-outcome>
+			<to-view-id>/vie-scolaire/delegues-classe.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>editdelegue</from-outcome>
+			<to-view-id>/vie-scolaire/editiondelegues-classe.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<!-- ********************************************************************************** -->
+		
+		<!-- ********************************************************************************** -->
+		
+		<navigation-case>
+			<from-outcome>progenseivue</from-outcome>
+			<to-view-id>/programmation/cours/emploi-de-temps.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>ajoutertimetable</from-outcome>
+			<to-view-id>/programmation/cours/add-emploi-de-temps.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>editertimetable</from-outcome>
+			<to-view-id>/programmation/cours/edit-emploi-de-temps.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>progactivvue</from-outcome>
+			<to-view-id>/programmation/activites/programmation-activites.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>listingactivites</from-outcome>
+			<to-view-id>/programmation/activites/listing.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>progactivedit</from-outcome>
+			<to-view-id>/programmation/activites/modification.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>progactivview</from-outcome>
+			<to-view-id>/programmation/activites/visualisation.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>progactivsave</from-outcome>
+			<to-view-id>/programmation/activites/creer-activite.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>progactivdelete</from-outcome>
+			<to-view-id>/programmation/activites/suppression.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>accueil2</from-outcome>
+			<to-view-id>/accueil2.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>interdit</from-outcome>
+			<to-view-id>/erreur/accessInterdit.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+	
+	
+	<!-- *******************Statistique*************************************************** -->
+	
+		<navigation-case>
+			<from-outcome>bilanseq</from-outcome>
+			<to-view-id>/statistique/bilanseq.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>bilantrim</from-outcome>
+			<to-view-id>/statistique/bilantrim.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>bilanannuel</from-outcome>
+			<to-view-id>/statistique/bilanannuel.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>visualiserbilanseq</from-outcome>
+			<to-view-id>/statistique/visualiserbilanseq.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>visualiserbilantrim</from-outcome>
+			<to-view-id>/statistique/visualiserbilantrim.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	
+		<navigation-case>
+			<from-outcome>visualiserbilanannuel</from-outcome>
+			<to-view-id>/statistique/visualiserbilanannuel.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	
+	
+	<!-- *******************Materiel*************************************************** -->
+	
+	
+		<navigation-case>
+			<from-outcome>materielvue</from-outcome>
+			<to-view-id>/materiel/visualisation.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	
+		<navigation-case>
+			<from-outcome>materieledit</from-outcome>
+			<to-view-id>/materiel/modification.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>materieldelete</from-outcome>
+			<to-view-id>/materiel/suppression.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>materielcreate</from-outcome>
+			<to-view-id>/materiel/newmateriel.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>ajoutermateriel</from-outcome>
+			<to-view-id>/materiel/ajoutermateriel.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>ajoutermaterielN</from-outcome>
+			<to-view-id>/materiel/ajoutermaterielN.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>materiellisting</from-outcome>
+			<to-view-id>/materiel/listing.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>sortielisting</from-outcome>
+			<to-view-id>/materiel/listingS.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>sortiemateriel</from-outcome>
+			<to-view-id>/materiel/sortiemateriel.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>materielvueS</from-outcome>
+			<to-view-id>/materiel/visualisationS.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		
+		<!-- *******************BUDGET*************************************************** -->
+	
+	
+		<navigation-case>
+			<from-outcome>previsionvue</from-outcome>
+			<to-view-id>/budget/visualisationp.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	
+		<navigation-case>
+			<from-outcome>previsionedit</from-outcome>
+			<to-view-id>/budget/modificationp.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>previsioncreate</from-outcome>
+			<to-view-id>/budget/newprevision.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>ajouterprevision</from-outcome>
+			<to-view-id>/budget/ajouterprevision.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>ajouterprevisionN</from-outcome>
+			<to-view-id>/budget/ajouterprevisionN.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>previsionlisting</from-outcome>
+			<to-view-id>/budget/listing.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>depenselisting</from-outcome>
+			<to-view-id>/budget/listingD.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>depense</from-outcome>
+			<to-view-id>/budget/newdepense.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>depensevueD</from-outcome>
+			<to-view-id>/budget/visualisationD.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>transfert</from-outcome>
+			<to-view-id>/budget/transfert.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	
+	</navigation-rule>
+	<application>
+        <el-resolver>
+    		org.springframework.web.jsf.el.SpringBeanFacesELResolver
+    	</el-resolver>
+    </application>
+</faces-config>

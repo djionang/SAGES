@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../../../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codetypesanction" value="#{typeSanctionBean.id}"/>
+	  		<f:event type="preRenderView" listener="#{typeSanctionBean.initTypeSanction}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Modification de type de sanction
+    </ui:define>
+   
+    <ui:define name="content">
+    	
+    
+	    <h2>
+	   		<h:outputText value="Modifier le type sanction -- Code: #{typeSanctionBean.id} --"/>
+	   	</h2>
+    
+   	<h:form id="formdeletesanction">
+   	
+   	<p:panel id="panel"  style="margin-bottom:10px;"> 
+   		<p:panelGrid columns="2" style="width:100%;" id="perso">	    
+	    		
+		 	<h:outputText value="libellé type"/>	            			
+      		<p:inputText value="#{typeSanctionBean.libelle}" id="libelle" required="true" requiredMessage="Libellé de la typeSanction obligatoire"/>
+      		
+   	    	<h:outputText value="Description"/>
+   	    	<p:inputTextarea value="#{typeSanctionBean.description}"/>			
+      		             			
+	    </p:panelGrid>		
+		
+		  <br/>				
+		  <center>			  								
+		 		<p:commandButton value="Enregistrer"  icon="ui-icon-check" id="submittypeSanction" action="#{typeSanctionBean.modifierTypeSanction}" />
+		 		<p:commandButton value="Retour à la liste" action="#{navBean.listingtypesanction}" icon="ui-icon-arrowreturnthick-1-w" immediate="true"/>							
+		 </center>
+	</p:panel>
+	
+	<p:blockUI block="panel" trigger="buttonsubmit">  
+        Suppression...<br />  
+    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+    </p:blockUI> 
+</h:form>
+   	
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="matricule" value="#{inscriptionBean.matricule}"/>
+	  		<f:event type="preRenderView" listener="#{inscriptionBean.loadElevesFees}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Droits de scolarité
+   </ui:define>
+   
+   <ui:define name="content">
+   <h2><h:outputText value="Droits de scolarité"/></h2>
+   		<br/>
+   		<p:messages autoUpdate="true" />
+   		
+   		<h:form id="form1">
+
+			<p:outputPanel id="p">
+				<p:panel id="paneleleve" header="Recherche de l'élève">
+					<h:panelGrid columns="3">
+						<h:outputText value="Matricule"/>
+						<p:inputText value="#{inscriptionBean.matricule}" required="true" requiredMessage="Matricule de l'élève non fourni"/>
+						<p:commandButton id="loadeleve" value="Rechercher" actionListener="#{inscriptionBean.chargerEleveFees}" update="p"/>
+					
+					</h:panelGrid>
+					
+					<br/>
+						<center>
+							<p:panelGrid columns="2" rendered="#{not empty inscriptionBean.selectedEleve}" id="paneleve" columnClasses="label,value" style="width:80%;align:center;">
+													
+								<f:facet name="header">
+									<h:outputText value="Elève de matricule #{inscriptionBean.selectedEleve.matricule}"/>
+								</f:facet>
+					            
+					            <h:outputText value="Nom"/>
+					            <h:outputText value="#{inscriptionBean.selectedEleve.nom}"/>
+								
+								<h:outputText value="Prénom"/>	
+								<h:outputText value="#{inscriptionBean.selectedEleve.prenom}"/>
+								
+								<h:outputText value="Date de naissance"/>
+								<h:outputText value="#{inscriptionBean.selectedEleve.dateNaissance}">
+									<f:convertDateTime pattern="dd/MM/yyyy"/>
+								</h:outputText>
+								
+								<h:outputText value="Lieu de naissance"/>
+								<h:outputText value="#{inscriptionBean.selectedEleve.lieuNaissance}"/>
+								
+								<h:outputText value="Classe"/>
+								<h:outputText value="#{inscriptionBean.selectedEleve.codeClasse} -- #{inscriptionBean.selectedEleve.libelleClasse}"/>
+								
+								<h:outputText value="Tuteur"/>
+								<h:outputText value="#{inscriptionBean.selectedEleve.nomTuteur}"/>
+								
+							</p:panelGrid>
+						</center>
+				</p:panel>
+	   			<br/>
+	   			
+			   	<p:panel rendered="#{not empty inscriptionBean.selectedEleve}" id="panelfees" header="Inscription">
+			   		
+			   		<p:dataTable value="#{inscriptionBean.listeTranchesClasse}" var="tranche" 
+					   			emptyMessage="frais de scolarité de la classe non trouvés" tableStyleClass="tablelist">
+						   		
+						   		<f:facet name="header">
+						   			<h:outputText value="Tranches"/>
+						   		</f:facet>
+						   							
+								<p:column id="id" headerText="N°" sortBy="#{tranche.id}">
+									<h:outputText value="#{tranche.id}"/>
+								</p:column>
+								
+								<p:column id="type" headerText="Type">
+									<h:outputText value="#{tranche.type}"/>
+								</p:column>
+												
+								<p:column id="montant" headerText="Montant">
+									<h:outputText value="#{tranche.montant}">
+						   				<f:convertNumber type="currency" currencySymbol="F." />
+									</h:outputText>
+								</p:column> 
+								
+								<p:column id="delai" headerText="Délai vers.">
+									<h:outputText value="#{tranche.delaiVersement}">
+						   				<f:convertDateTime pattern="dd/MM/yyyy"/>
+									</h:outputText>
+								</p:column>
+								
+								<p:columnGroup type="footer">
+								 <p:row>
+									 <p:column colspan="2" style="text-align:right;" footerText="Total:"/>
+									 <p:column footerText="#{inscriptionBean.totalAverser} F" />
+									 <p:column footerText="" />
+								 </p:row>
+							   </p:columnGroup>
+						   		
+					   		</p:dataTable>
+					   		
+							<br/>
+							<br/>
+							<p:dataTable value="#{inscriptionBean.listeVersements}" var="versement" tableStyleClass="tablelist"
+					   			emptyMessage="Aucun versement enregistré pour cet élève" rowIndexVar="numro">
+						   		<f:facet name="header">
+						   			<h:outputText value="Versé"/>
+						   		</f:facet>					
+								<p:column id="num" headerText="N°" sortBy="#{versement.id}">
+									<h:outputText value="#{numro+1}"/>
+								</p:column>
+												
+								<p:column id="montant" headerText="Montant">
+									<h:outputText value="#{versement.montant}">
+						   				<f:convertNumber type="currency" currencySymbol="F."/>
+									</h:outputText>
+								</p:column> 
+								
+								<p:column id="delai" headerText="Date vers.">
+									<h:outputText value="#{versement.dateVers}">
+						   				<f:convertDateTime pattern="dd/MM/yyyy"/>
+									</h:outputText>
+								</p:column>
+								
+								<p:columnGroup type="footer">
+								 <p:row>
+									 <p:column style="text-align:right;" footerText="Total:"/>
+									 <p:column footerText="#{inscriptionBean.totalverse} F" />
+									 <p:column footerText="" />
+								 </p:row>
+							   </p:columnGroup>
+						   		
+					   		</p:dataTable>
+					   		
+					   		<br/>
+					   		<h2>
+					   			<h:outputText value="Reste à payer: #{inscriptionBean.totalAverser-inscriptionBean.totalverse} F."/>
+					   		</h2>
+				   	  	 	  	  	
+				</p:panel>
+		
+			</p:outputPanel>
+		
+		    <p:blockUI block="paneleleve"  trigger=":form1:loadeleve">  
+		        Chargement...<br />  
+		    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+		    </p:blockUI> 
+	    </h:form>
+    
+   </ui:define>
+   
+   
+   </ui:composition>
+ 
+</html>

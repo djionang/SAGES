@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:t="http://myfaces.apache.org/tomahawk">
+
+   <ui:composition template="/WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+   			<f:viewParam name="user" value="#{compteBean.idcompte}"/>
+	  		<f:event type="preRenderView" listener="#{compteBean.initUserLoaded}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Modification utilisateur
+    </ui:define>
+   
+    <ui:define name="content">
+    	
+	    <h2>
+	   		<h:outputText value="Compte Utilisateur #{compteBean.nom}"/>
+	   	</h2>
+    	<br/>
+    	
+    	<p:messages autoUpdate="true"/>
+   		
+   		<h:form id="formuser">
+	  		<p:panel id="panel">
+	  			<p:panelGrid columns="2" columnClasses="label,value" style="width:80%;">
+	  					  					  				
+	  				<h:outputText value="Login"/>
+	  				<p:inputText value="#{compteBean.login}"/>
+	  				
+	  				<h:outputText value="Mot de passe"/>
+	  				<p:password id="pwd1" value="#{compteBean.password}" feedback="true" match="pwd2" label="Mot de passe1" required="true" promptLabel="Entrez un mot de passe"  strongLabel="Securisé" weakLabel="Faible" goodLabel="Acceptable"/>
+	  				  				
+	  				<h:outputText value="Confirmer Mot de passe"/>
+	  				<p:password id="pwd2" value="#{compteBean.password}" feedback="false" label="Mot de passe2" required="true"/>
+	  				
+	  				<h:outputText value="Groupe Utilisateur"/>
+	  				 <p:scrollPanel style="width:250px;height:90px" scrollMode="native"> 
+	  				<p:selectManyCheckbox value="#{compteBean.groupesusers}" converter="javax.faces.Integer" >
+	  					
+	  					<f:selectItems value="#{etablissement.groupesUtilisateurs}" var="groupe" itemLabel="#{groupe.libelle}" itemValue="#{groupe.idgroupe}" itemDescription="#{groupe.description}" />
+	  					
+	  				</p:selectManyCheckbox>
+	  				</p:scrollPanel>
+	  				
+	  			</p:panelGrid>
+	  			<f:facet name="footer">
+		  				<br/>
+   						<center>
+   							<p:commandButton value="Mettre à jour" action="#{compteBean.updateUser}" icon="ui-icon-check" id="save"/>
+   							<p:commandButton value="Annuler" type="reset" icon="ui-icon-cancel"/>
+   						</center>   				
+	   			</f:facet>
+	   		</p:panel>
+		
+			<p:blockUI block="panel" trigger=":formuser:save">  
+			   Mise à jour...<br />  
+		    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+		    </p:blockUI>
+		    
+   		</h:form>
+   		
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Cloturer l'annee
+   </ui:define>
+   
+   <ui:define name="content">
+   <h:form id="formmodcloture">
+   <p:panel id="panelparam"  style="margin-bottom:10px;"> 
+   		<p:panelGrid columns="2" cellpadding="5" id="pann">  
+			    
+			    <f:facet name="header">
+				   <h:outputText value="Cloture de l'Annee"/>
+				</f:facet>
+			       <h:outputText value="Annees" />
+			        <p:selectOneMenu value="#{anneeBean.anneeacademique}" editable="true" style="width:180px;" required="true" requiredMessage="annee ne peut être vide">
+			        	<f:selectItems value="#{configuration.annee}"/>
+			        </p:selectOneMenu>
+			          
+			    </p:panelGrid>
+			    
+	       <br/>
+	        	<center>
+	            	<p:commandButton id="cloture" icon="ui-icon-check" value="Cloturer" action="#{anneeBean.cloture}"/>
+	            </center>
+	   		
+		</p:panel>
+		
+		<p:blockUI block="panelparam" trigger="cloture">  
+	        Cloture en cours...<br />  
+	    	<p:graphicImage value="/resources/img/ajax-loader.gif"/> 
+	    </p:blockUI>
+	    
+	    </h:form>
+   		
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/budget
+END
+ListPrevisionBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/budget/ListPrevisionBean.java
+END
+ListDepenseBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/budget/ListDepenseBean.java
+END
+ListTransfertBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/budget/ListTransfertBean.java
+END
+PrevisionBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/budget/PrevisionBean.java
+END
+DepenseBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/budget/DepenseBean.java
+END
+TransfertBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/budget/TransfertBean.java
+END

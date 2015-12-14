@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="/WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Parametres Bulletins
+    </ui:define>
+   
+    <ui:define name="content">
+	    <h2>
+	   		<h:outputText value="Parametres bulletin"/>
+	   	</h2>
+	   	<br/>
+   		<p:growl id="messages" autoUpdate="true"/>
+	   	
+	   	<p:outputPanel id="panelbulletin"  style="margin-bottom:10px;">    	
+	   		<center>
+		   		<p:ajaxStatus>
+					 <f:facet name="start">
+						 <p:graphicImage value="/resources/img/loading.gif" />
+					 </f:facet>
+					 <f:facet name="complete">
+							 <h:outputText value="" />
+					</f:facet>
+				</p:ajaxStatus>
+			</center>
+			
+	   		<h:form id="formbulletin">	   			
+				
+				<p:panel id="panel">
+				
+					<f:facet name="header">
+						#{sessionBean.codeetablissement}   		
+					    Modele bulletin								
+						<br/>
+					</f:facet>
+					
+					<p:selectOneRadio value="#{paramBullBean.modele}" required="true" requiredMessage="Sélection modele requise">
+						<f:selectItem itemLabel="Modele Simple" itemValue="simple" id="simple"></f:selectItem>
+						<br/>
+						
+						<f:selectItem itemLabel="Modele Opticis" itemValue="opticis" id="opticis"></f:selectItem>
+						<br/>
+						<f:selectItem itemLabel="Modele Stats" itemValue="stats" id="stats"></f:selectItem>
+						<br/>
+					</p:selectOneRadio>
+					
+					<p:tooltip for="simple">
+						 <p:graphicImage value="/resources/img/bulletinsimple.png" />
+						 <h:outputText value="Modele Simple" />
+					</p:tooltip>
+					
+					<p:tooltip for="opticis">
+						 <p:graphicImage value="/resources/img/bulletinopticis.png" />
+						 <h:outputText value="Modele Opticis" />
+					</p:tooltip>
+					
+					<p:tooltip for="stats">
+						 <p:graphicImage value="/resources/img/bulletinstats.png" />
+						 <h:outputText value="Modele Stats" />
+					</p:tooltip>
+					
+					<f:facet name="footer">
+						<center>
+							<p:commandButton  value="Enregistrer" icon="ui-icon-check" actionListener="#{paramBullBean.enregistrerParametres}"/>
+						</center>
+					</f:facet>
+					
+				</p:panel>
+			</h:form>
+				 
+		</p:outputPanel>
+				
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

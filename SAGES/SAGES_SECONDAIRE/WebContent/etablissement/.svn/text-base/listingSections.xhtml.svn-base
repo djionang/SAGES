@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Listing Sections
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2>Sections</h2>
+   		<p:growl autoUpdate="true" globalOnly="true"/>
+   		<br/>
+   		
+   		<p:scrollPanel style="width:100%;">
+		 	<h:form id="form1">
+   			 
+		    	<p:dataTable id="tablesections" value="#{listSectionBean.sections}" var="sect" emptyMessage="Aucune section enregistrée"
+		    		paginator="true" widgetVar="tablesect" tableStyleClass="tablelist" >
+			  	     
+			  	    <f:facet name="header">
+			  	    	<p:outputPanel>
+			  	    		<h:outputText value="Recherche"/>
+	                		<p:inputText id="globalFilter" onkeyup="tablesect.filter()"/> 
+	                	</p:outputPanel>
+			  	    </f:facet> 
+			  	      
+	        		<p:column id="libelle" headerText="Libellé">  
+	            		<h:outputText value="#{sect.libelle}" />  
+	        		</p:column> 
+	        
+	        		<p:column id="description" headerText="Description">  
+	            		<h:outputText value="#{sect.description}" />  
+	        		</p:column>
+	        
+					<p:column id="enseignement" headerText="Enseignement">  
+			            <h:outputText value="#{sect.enseignement}" />  
+			        </p:column> 
+			        
+	        
+			        <p:column id="option" headerText="Options" width="46"> 
+			         	<h:panelGrid columns="3">
+				        	
+						    <h:link  includeViewParams="true" outcome="detailsection" title="Visualiser" >
+						    	<p:graphicImage value="../resources/img/view16.png" style="border:#CCCCCC 1px solid"/>  						        
+						    	<f:param name="codesection" value="#{sect.codesection}"/>						    
+						    </h:link>
+						    
+				            <h:link  includeViewParams="true" id="edit"  title="Editer" outcome="modifiersection">  
+						        <p:graphicImage value="../resources/img/edit16.png" style="border:#CCCCCC 1px solid"/>   
+						        <f:param name="codesection" value="#{sect.codesection}"/>
+						    </h:link>
+						    
+				            <h:link  includeViewParams="true" id="delete" outcome="supprimersection" title="Supprimer">  
+						        <p:graphicImage value="../resources/img/delete16.png" style="border:#CCCCCC 1px solid"/>
+						        <f:param name="codesection" value="#{sect.codesection}"/>
+						   </h:link>
+			            </h:panelGrid>
+			        </p:column> 
+			        <f:facet name="footer">
+			        	<center>
+				 			<p:commandButton value="Imprimer" type="button" icon="ui-icon-print">  
+        						<p:printer target="tablesections" />  
+    						</p:commandButton> 
+    					</center>
+			        </f:facet>
+				</p:dataTable>
+				
+				<br/>
+   			
+				<center>
+					<p:commandButton value="Nouvelle section" action="#{navBean.etabsectioncreate}" icon="ui-icon-check"/>
+				</center>
+				
+			</h:form>
+  			
+			<p:separator/>
+			<br/>
+   		</p:scrollPanel>
+   		
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codesanction" value="#{sanctionBean.idsanction}"/>
+	  		<f:event type="preRenderView" listener="#{sanctionBean.initSanction}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Visualisation de sanction
+    </ui:define>
+   
+    <ui:define name="content">
+    	
+    
+	    <h2>
+	   		<h:outputText value="Visualiser la sanction -- Code: #{sanctionBean.idsanction} --"/>
+	   	</h2>
+    
+   	<h:form id="formmodifsanction">
+   	
+   	<p:panel id="panel"  style="margin-bottom:10px;"> 
+   		<p:panelGrid columns="2" style="width:100%;" id="sanctionmodification">	  	    		  
+			<h:outputText value="Elève concerné"/>
+				<h:outputText value="#{sanctionBean.matriculeeleve} - #{sanctionBean.nomeleve}"/>
+					      		 	
+				<h:outputText value="Type de sanction"/>
+				<h:outputText value="#{sanctionBean.libelletype}"/>
+	   	    	
+	   	    	<h:outputText value="Date décision"/>
+			 	<h:outputText value="#{sanctionBean.datedecision}">
+			 		<f:convertDateTime pattern="dd/MM/yyyy"/>
+			 	</h:outputText>
+	   	    		
+			 	<h:outputText value="Date effet"/>
+			 	<h:outputText value="#{sanctionBean.dateeffet}">
+			 		<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+			 	</h:outputText>	    
+	      		
+				<h:outputText value="Durée"/>	
+	   			<h:outputText value="#{sanctionBean.duree} #{sanctionBean.uniteduree}" />
+	   			
+	   	    	<h:outputText value="Motif"/>	            			
+	      		<h:outputText value="#{sanctionBean.motif}" id="motif" />
+	      		 
+	      		<h:outputText value="Etat"/>
+	      		<h:outputText value="#{sanctionBean.annule?'Annulé':'Non annulé'}" />
+	      		       	
+	     </p:panelGrid>	
+			<br/>									
+		  <center>
+				<p:commandButton value="Retour à la liste" action="listing" icon="ui-icon-arrowreturnthick-1-w"/>							
+		  </center>
+	</p:panel>
+</h:form>
+   	
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+    <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codepersonnel" value="#{personnelBean.codepersonnel}"/>
+	  		<f:event type="preRenderView" listener="#{personnelBean.initialize}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Edition de personnel
+    </ui:define>
+   
+    <ui:define name="content">
+    	
+    
+	    <h2>
+	   		<h:outputText value="Modifier le personnel -- Code: #{personnelBean.codepersonnel}--"/>
+	   	</h2>
+    
+   	<h:form id="formapplication">
+   	
+   	<p:panel id="panel"  style="margin-bottom:10px;"> 
+   		
+   		<p:messages id="messages" autoUpdate="true"/>
+   		
+	    <p:panelGrid columns="2" style="width:85%;" id="perso">	    
+	    			 	
+		 	<h:outputText value="Nom *"/>	            			
+      		<p:inputText value="#{personnelBean.nom}" id="nom" required="true" requiredMessage="Nom obligatoire"/>
+      		 	
+		 	<h:outputText value="Prénom"/>	            			
+      		<p:inputText value="#{personnelBean.prenom}" id="prenom"/>
+      		
+      		<h:outputText value="Sexe *"/>	            			
+      		<p:selectOneMenu value="#{personnelBean.sexe}" id="sexe" required="true" requiredMessage="Champ Sexe requis">
+    			<f:selectItems value="#{configuration.sexeItems}"/>
+   	    	</p:selectOneMenu>
+      				
+			<h:outputText value="Adresse"/>				
+   			<p:inputText value="#{personnelBean.adresse}" id="adresse" required="true" requiredMessage="Champ Adresse requis"/>
+    		
+   	    	
+   	    	<h:outputText value="Email"/>			
+      		<p:inputText value="#{personnelBean.email}" id="email" validator="EmailValidator" validatorMessage="Format Effectif maximal incorrect"/>      		
+       		    
+       		    
+       		<h:outputText value="Telephone *"/>	            			
+      		<p:inputText value="#{personnelBean.telephone}" id="telephone" required="true" requiredMessage="Telephone obligatoire"/>
+      		 	
+		 	<h:outputText value="Civilité"/>
+		 	<p:selectOneMenu  value="#{personnelBean.civilite}" id="civilite">
+    			<f:selectItems value="#{configuration.civiliteItems}"/>
+   	    	</p:selectOneMenu>
+      				
+			<h:outputText value="Date arrivée"/>				
+   			<p:calendar mindate="01/01/1960" required="true"  maxdate="#{configuration.datejour}" pattern="dd/MM/yyyy" value="#{personnelBean.datearrivee}" id="datearrivee" requiredMessage="Date d'arrivée obligatoire" />
+			   	    	
+   	    	<h:outputText value="Fonction *"/>			
+      		<h:selectOneMenu value="#{personnelBean.fonction}" id="fonction">
+      			<f:selectItems value="#{configuration.fonctionItems}"/>
+      		</h:selectOneMenu>
+      		
+	     </p:panelGrid>		
+	 	  <br/> 									
+		  <center>										
+		 		<p:commandButton value="Mettre à jour"  id="buttonsubmit" icon="ui-icon-check"  action="#{personnelBean.modifierpersonnel}" update="panel"/>
+		 									
+		  </center>
+	</p:panel>
+	<p:blockUI block="panel" trigger="buttonsubmit">  
+        Mise à jour...<br />  
+    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+    </p:blockUI> 
+</h:form>
+   	
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

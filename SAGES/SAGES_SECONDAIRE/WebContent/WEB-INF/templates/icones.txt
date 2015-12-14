@@ -1,0 +1,19 @@
+LISTE DES ICONES DE BOUTONS PRIMEFACE
+
+ui-icon-close  --> fermeture
+ui-icon-pencil --> pencil modifier
+ui-icon-arrowreturnthick-1-w --> retourner en arriere
+ui-icon-document --> document
+ui-icon-search --> recherche
+ui-icon-check --> valider
+ui-icon-disk --> enregistrer
+ui-icon-arrowrefresh-1-w --> rafraichir
+ui-icon-extlink --> lien externe
+ui-icon-folder-open --> folder open
+ui-icon-folder-collapsed --> folder ferme
+ui-icon-image --> image
+ui-icon-video --> video
+ui-icon-person --> persone
+ui-icon-trash --> Corbeille delete
+ui-icon-print --> impression
+ui-icon-arrowthichk-s --> telechargement

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:t="http://myfaces.apache.org/tomahawk">
+
+<ui:composition>
+   
+    <br/>
+	<br/>
+	
+   
+   <table cellpadding="25px" cellspacing="25">
+   
+   	<tr>
+   		<td width="65%">
+   			
+			<center>
+			
+		   		<h2>SAGES SECONDAIRE [Accueil] </h2> 
+		   </center>
+		   
+			<br/>
+	
+   			<p:panel >
+   			 C' est l'outil d'interface entre quatre pôles essentiels :
+			Administration - Enseignants - Parents - Elèves .
+			<p>
+			
+			C'est une plateforme éducative qui vous permet, au jour le jour, d'accéder aux informations relatives à la vie de votre l'établissement, que vous soyez une école primaire, un collège, un lycée ou une université, à savoir :
+			
+			    les notes quotidiennes des élèves,
+			    les bulletins trimestriels, semestriels ou périodiques,
+			    les circulaires administratives envoyées aux parents,
+			    les circulaires administratives envoyées aux professeurs,
+			    les informations sur la vie scolaire (retards, absences),
+			    l'envoi de messages personnels aux parents, aux enseignants,
+			    l'envoi de SMS aux parents pour les absences et retards,
+			    le carnet de suivi, l'emploi du temps,
+			    etc...
+			</p>
+			
+			    De n'importe quel ordinateur doté d'un accès à Internet, la Vie Scolaire peut transmettre tous ses messages, les enseignants peuvent transmettre leurs notes et  les parents peuvent consulter les résultats scolaires de leur enfant.
+			
+			    Notre plate éducatif s'efforce de répondre au mieux aux exigences engendrées par les nouvelles technologies, nous espérons qu'il vous donnera satisfaction. 
+			   
+			</p:panel>    
+   		</td>
+   		
+   		<td>
+   			<center>
+		    <h2>
+		    	<h:panelGrid columns="2">
+			    	<p:graphicImage value="/resources/img/cadena48.png"/>
+			   		<h:outputText value="Connexion"/>
+			   	</h:panelGrid>
+		   	</h2>
+	   	</center>
+	   	<br/>
+	   	
+	   	
+	   	<p:ajaxStatus style="width:16px;height:16px;" id="ajaxStatusPanel">  
+		     <f:facet name="start">  
+		         <h:graphicImage value="/resources/img/loading.gif" />  
+		     </f:facet>  
+		       
+		     <f:facet name="complete">  
+		         <h:outputText value="" />  
+		     </f:facet>  
+		 </p:ajaxStatus> 
+		 
+    	<p:panel id="panel">
+    		<f:facet name="header">
+    			<center>
+    				<p:graphicImage value="/resources/img/key32.png"/>
+    			</center>
+    		</f:facet>
+    		
+		   	<p:messages autoUpdate="true"/>
+		   	<br/>
+	   		<h:form id="formlogin">
+		   		<center>
+		   			
+		   			<h:panelGrid columns="2">
+		   				<h:outputLabel value="Login" for="j_username"/>
+		   				<t:inputText id="j_username" forceId="true"
+							value="#{userBean.login}" size="30" maxlength="40"></t:inputText>
+		   				
+		   				<h:outputLabel value="Mot de passe" for="j_password"/>
+		   				<t:inputSecret id="j_password" forceId="true"
+							value="#{userBean.password}" size="30" maxlength="40" redisplay="true"></t:inputSecret>
+		   				
+		   				<h:outputText value="Annee" />
+			        	<p:selectOneMenu value="#{userBean.annee}" editable="false" style="width:180px;" required="true" requiredMessage="annee ne peut être vide">
+			        	<f:selectItems value="#{configuration.annee}"/>
+			        	</p:selectOneMenu>
+		   				<f:facet name="footer">
+		   					<br/>
+	   						<center>
+	   							<h:commandButton action="#{userBean.loguser}" value="#{not userBean.logged?'Login':'Deconnexion'}" id="connect"/>
+	   						</center>	   				
+		   				</f:facet>
+		   			</h:panelGrid>
+		   			<br/>
+		   			<br/>
+		   			<h:commandLink action="accueil2" rendered="#{userBean.logged}" value="[Entrer]"/>
+		   		</center>
+			</h:form>
+		</p:panel>
+   		</td>
+   	</tr>
+   </table>
+  
+  
+   </ui:composition>
+</html>

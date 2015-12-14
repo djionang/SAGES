@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Nouvelle Classe
+   </ui:define>
+   
+   <ui:define name="content">
+   <h2><h:outputText value="Classe enregistrée"/></h2>
+   
+   <p:panel>
+   
+   	<h:panelGrid columns="2" columnClasses="label,value">
+   		<h:outputText value="Code de la classe"/>
+   		<h:outputText value="#{classeBean.codeClasse}"/>
+   		
+   		<h:outputText value="libelle"/>
+		<h:outputText value="#{classeBean.libelle}"/> 
+		
+		<h:outputText value="Option"/>
+		<h:outputText value="#{classeBean.option}"/>
+ 		
+ 		
+		<h:outputText value="Effectif maximal"/>
+		<h:outputText value="#{classeBean.effectifMax}"/>
+ 		
+   		
+   	</h:panelGrid>	
+   </p:panel>
+   <br/>
+   <p:separator/>
+   <br/>
+   <h:form id="formbouton">
+   		<center>										
+		 	<p:commandButton value="Nouvelle classe"  icon="ui-icon-check"  action="#{navBean.ressourclassecreate}" />
+		 	<p:commandButton value="Retour au listing"  icon="ui-icon-arrowreturnthick-1-w"  action="#{navBean.ressourclasselisting}" />
+		 </center>
+	</h:form>
+	<br/>
+	   	  	
+   </ui:define>
+   
+   
+   </ui:composition>
+ 
+</html>

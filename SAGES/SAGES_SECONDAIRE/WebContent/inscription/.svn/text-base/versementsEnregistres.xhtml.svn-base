@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Versements enregistrés
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2><h:outputText value="Versements enregistrés"/></h2>
+      		   			
+			<br/>
+			<p:messages autoUpdate="true"/>
+			
+			<p:outputPanel id="panel" autoUpdate="true">
+			<h:form id="form">
+				<p:panel >
+					<h:panelGrid columns="2" style="width:100%;" id="f1">	    
+						    	
+						<h:panelGroup>			
+						   	<h:selectOneMenu value="#{ListeVersementBean.classe}" id="classe">
+						   		<f:selectItem itemLabel="Selection de la classe" itemValue=""/>
+				    			<f:selectItems value="#{etablissement.listeClasses}" var="classe" itemLabel="#{classe.libelle}" itemValue="#{classe.codeClasse}" itemDescription="#{classe.libelle}"/>
+						   	
+						   	</h:selectOneMenu> 	
+						   	    <p:commandButton id="filter" icon="ui-icon-search" title="Charger" actionListener="#{ListeVersementBean.chargerVersements}"  update=":panel"/>
+			   	    	</h:panelGroup>
+			   	    			
+			   	    			<!-- <h:panelGroup>
+								 <h:outputText value=" Du" />
+								 <p:calendar value="#{ListeVersementBean.datedebut}" navigator="true" locale="fr"/>
+								 <h:outputText value=" Au "/>
+								 <p:calendar value="#{ListeVersementBean.datefin}" navigator="true" locale="fr"/>
+								
+								</h:panelGroup> -->
+					</h:panelGrid>
+				</p:panel>
+				<br/>
+				<p:panel id="panel1">
+					<p:dataTable value="#{ListeVersementBean.listeVersss}" var="versement" id="tabeleve" paginator="true" widgetVar="table" rows="70" tableStyle="tablelist"
+					emptyMessage="Aucun versement trouvé" sortBy="#{versement.dateVers}" sortOrder="descending" rowIndexVar="index">
+					
+			              
+			            <p:column id="id" headerText="N°" >
+							<h:outputText value="#{index+1}"/>
+							<f:facet name="footer">
+								<h:outputText value="Total:"/>
+							</f:facet>
+						</p:column>
+						
+						
+						<p:column id="montant" headerText="Montant">
+							<h:outputText value="#{versement.montant}">
+				   				<f:convertNumber type="currency" currencySymbol="F." />
+							</h:outputText>
+							
+							<f:facet name="footer">
+								<h:outputText value="Classe: #{ListeVersementBean.totalclasse}" rendered="#{not empty ListeVersementBean.classe}">
+									<f:convertNumber type="currency" currencySymbol="F." />
+								</h:outputText>
+								<br/>
+								<h:outputText value="Global: #{ListeVersementBean.total}">
+									<f:convertNumber type="currency" currencySymbol="F." />
+								</h:outputText>
+							</f:facet>
+						</p:column>
+						
+						<p:column id="datevers" headerText="Date">
+							<h:outputText value="#{versement.dateVers}">
+								<f:convertDateTime pattern="dd/MM/yyyy"/>
+							</h:outputText>
+						</p:column>
+						  
+						<p:column id="eleve" headerText="Pour l'élève">
+							<h:outputText value="#{versement.matricule} - #{versement.nom} #{versement.prenom}"/>
+						</p:column>
+						
+						<p:column id="option" headerText="Options" width="20"> 
+		         	  <p:panelGrid columns="1">		        
+					    
+			            <h:link  includeViewParams="true" id="edit"  title="Editer" outcome="modifierverse">  
+					        <p:graphicImage value="/resources/img/edit16.png" style="border:#CCCCCC 1px solid"/>   
+					        <f:param name="idversement" value="#{versement.id}"/>
+					    </h:link>
+					   
+			          </p:panelGrid>
+			         
+		        </p:column>
+						
+					</p:dataTable>
+					
+				<p:pieChart id="custom" value="#{ListeVersementBean.pieModel}" legendPosition="e" fill="false" showDataLabels="true"  
+                title="Versement par classe" style="width:500px;height:400px" sliceMargin="3" diameter="300" />
+	    		
+	    		<br/>
+   			
+				<center>
+					<p:commandButton value="Imprimer" action="#{ListeVersementBean.imprimerVersements}" icon="ui-icon-print" immediate="true" ajax="false" rendered="#{not empty ListeVersementBean.listeVers}"/>
+							
+					<p:commandButton value="Nouveau Versement" action="#{navBean.inscriptionfrais}" icon="ui-icon-check"/>
+				</center>
+		   </p:panel>
+			</h:form>	
+			
+		</p:outputPanel>  
+		
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

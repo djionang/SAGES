@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Candidature Rejetée" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="120" splitType="Stretch">
+			<image>
+				<reportElement x="399" y="2" width="91" height="76"/>
+				<imageExpression><![CDATA["coffee.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="17" y="1" width="151" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Republique du ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="12" width="173" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ministére des Enseignements]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="41" y="24" width="115" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Delegation Régionale du]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="18" y="38" width="133" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Délégation Departementale de la]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="707" y="41" width="32" height="13"/>
+				<textElement/>
+				<text><![CDATA[BP:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="683" y="53" width="62" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tel:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="688" y="65" width="38" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[site:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="214" y="93" width="326" height="26" backcolor="#CCFFFF"/>
+				<textElement textAlignment="Center">
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[LISTE DES CANDIDATS DU NIVEAU]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="537" y="93" width="100" height="26" backcolor="#CCFFFF"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pre_inscription_niveaudemande}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="134" y="1" width="100" height="13"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{etablissement_pays}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="152" y="12" width="100" height="13"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{etablissement_type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="142" y="24" width="100" height="13"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{etablissement_region}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="149" y="38" width="100" height="13"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{etablissement_departement}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="669" y="0" width="119" height="17"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{etablissement_nometab}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="653" y="17" width="135" height="16"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{etablissement_adresse}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="653" y="27" width="135" height="14"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{etablissement_devise}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="732" y="41" width="66" height="13"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{etablissement_codepostal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="733" y="53" width="68" height="13"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{etablissement_telephone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="722" y="64" width="74" height="14"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{etablissement_siteweb}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

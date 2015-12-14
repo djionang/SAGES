@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/auth
+END
+CompteBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/auth/CompteBean.java
+END
+ListGroupeUserBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/auth/ListGroupeUserBean.java
+END
+ListCompteBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/auth/ListCompteBean.java
+END
+UserBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/auth/UserBean.java
+END
+ItemRoleBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/auth/ItemRoleBean.java
+END
+ListItemRoleBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/auth/ListItemRoleBean.java
+END
+GroupeCompte.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/auth/GroupeCompte.java
+END
+Habilitations.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/auth/Habilitations.java
+END
+GroupeUserBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/auth/GroupeUserBean.java
+END

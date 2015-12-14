@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   	<ui:composition template="../WEB-INF/templates/smoothtemplate.xhtml">
+   
+   	<ui:define name="title">
+   		SAGES SECONDAIRE | Erreur Innatendue
+   	</ui:define>
+	   
+    <ui:define name="content">
+    
+	    <h2>
+	   		<h:outputText value="Erreur, Veuillez contacter l'administrateur"/>
+	   	</h2>
+    	<br/>
+    	<br/>
+    	<p:graphicImage value="/resources/img/erreur.png"/>
+    	
+    	<br/>
+    	<br/>
+    	<p:separator/>
+    	<h:form>
+	   		<center>				
+				<h:commandLink action="#{navBean.accueil}" value="Page d'Accueil"/>	
+			</center>
+		</h:form>
+   
+   
+   </ui:define>
+   </ui:composition>
+ 
+</html>

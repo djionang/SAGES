@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="/WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Paramètres de l'établissement
+    </ui:define>
+    
+    <ui:define name="content">
+	    <h2>
+	   		<h:outputText value="Etablissement"/>
+	   	</h2>
+    <br/>
+    
+    <p:messages id="messages" autoUpdate="true"/>
+    
+   	<h:form id="formetab" enctype="multipart/form-data">
+   	
+   	<p:panel id="paneletab"  style="margin-bottom:10px;" rendered="#{not etablissementBean.estCharge}"> 
+   		
+	    <p:panelGrid columns="2" style="width:100%;" id="perso">	    
+	    		    
+			<h:outputText value="Code de l'etablissement *"/>	            			
+      		<p:inputText value="#{etablissementBean.codeetablissement}" id="code"/>
+      		 	
+		 	<h:outputText value="Nom *"/>	            			
+      		<p:inputText value="#{etablissementBean.nom}" id="Nom" required="true" requiredMessage="Nom obligatoire"/>
+      		
+      		<h:outputText value="Login gestionnaire *"/>	            			
+      		<p:inputText value="#{etablissementBean.logingest}" id="login"/>
+      		 	
+		 	<h:outputText value="Mot de passe gestionnaire *"/>
+			<p:password id="pwd1" value="#{etablissementBean.passgest}" feedback="false" match="pwd2" label="Mot de passe1" required="true"/>
+			  				
+			<h:outputText value="Confirmer Mot de passe"/>
+			<p:password id="pwd2" value="#{etablissementBean.passgest}" feedback="false" label="Mot de passe2" required="true"/>
+	  		 
+      		 			
+	     </p:panelGrid>		
+		 <br/>
+		 <p:watermark value="Automatique" for="code"/>					
+		 <center>		  								
+		 		<p:commandButton value="Enregistrer"  icon="ui-icon-check" id="submitetab" action="#{etablissementBean.saveEtablissement}" ajax="false" />
+		 		<p:commandButton value="Annuler" immediate="true" type="reset" icon="ui-icon-close"/>	
+		 </center>
+	</p:panel>
+	
+	<p:blockUI block="paneletab" trigger="submitetab">  
+        Enregistrement...<br />  
+    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+    </p:blockUI> 
+    
+	</h:form>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

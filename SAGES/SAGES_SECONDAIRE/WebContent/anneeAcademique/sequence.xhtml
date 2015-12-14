@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="numerosequence" value="#{sequenceBean.numero}" required="true" requiredMessage="Numéro sequence non trouvé"/>
+	  		<f:event type="preRenderView" listener="#{sequenceBean.initsequenceProgrammation}"/>
+		</f:metadata>
+    </ui:define>
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Visualisation Séquence
+    </ui:define>
+    <ui:define name="content">
+	    <h2>
+	   		<h:outputText value="Visualiser la séquence #{sequenceBean.numero}"/>
+	   		<h:outputText value="Année académique #{sessionBean.anneeacademique} --" rendered="#{not empty sessionBean.anneeacademique}"/>
+		
+	   	</h2>
+    <br/>
+    
+    <p:messages id="messages" autoUpdate="true"/>
+   	
+   	<p:panel id="panelsequence"  style="margin-bottom:10px;">
+   		<h:form>
+   		
+		<p:schedule locale="fr" draggable="false" resizable="false" value="#{sequenceBean.modeleProgrammation}"/>	
+	   		
+   		<br/>
+		<center>			
+				<p:commandButton value="Retour"  icon="ui-icon-arrowreturnthick-1-w" action="#{navBean.anneeseq}" immediate="true"/>
+			
+		</center>
+		</h:form> 
+	</p:panel>
+	
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

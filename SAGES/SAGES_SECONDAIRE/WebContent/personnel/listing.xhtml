@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Listing Personnels
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2>Personnels enregistrés</h2>
+   		<br/>
+   		<h:form>
+   		<p:scrollPanel style="width:100%;">
+   			
+            
+	    	<p:dataTable id="tablepersonnels" value="#{listPersonnelBean.personnels}" var="personnel" emptyMessage="Aucun personnel enregistré"
+	    		paginator="true" rows="30" rowsPerPageTemplate="30,50,70">
+		  	    
+		  	    <p:column id="code" sortBy="#{personnel.codepersonnel}" headerText="Code">  
+            		<h:outputText value="#{personnel.codepersonnel}" />  
+        		</p:column> 
+		  	            
+        		<p:column id="nom" sortBy="#{personnel.nom}" headerText="Nom">  
+            		<h:outputText value="#{personnel.nom}" />  
+        		</p:column> 
+        		
+        
+        		<p:column id="prenom" headerText="Prenom" sortBy="#{personnel.prenom}">  
+            		<h:outputText value="#{personnel.prenom}" />  
+        		</p:column> 
+        
+				<p:column id="telephone" headerText="Tel.">  
+		            <h:outputText value="#{personnel.telephone}">
+		            	<f:convertDateTime pattern="dd/MM/yyyy"/>
+		            </h:outputText>  
+		        </p:column>
+		        
+		        <p:column id="fonction" headerText="Fonction">  
+		            <h:outputText value="#{personnel.fonction}" />  
+		        </p:column>
+        
+		        <p:column id="options" headerText="Options" width="60"> 
+		         	<h:panelGrid columns="4">
+				        	
+					    <h:link  includeViewParams="true" outcome="personelvue" title="Visualiser" >
+					    	<p:graphicImage value="../resources/img/view16.png" style="border:#CCCCCC 1px solid"/>  						        
+					    	<f:param name="codepersonnel" value="#{personnel.codepersonnel}"/>						    
+					    </h:link>
+					    
+			            <h:link  includeViewParams="true" id="edit"  title="Editer" outcome="personeledit">  
+					        <p:graphicImage value="../resources/img/edit16.png" style="border:#CCCCCC 1px solid"/>   
+					        <f:param name="codepersonnel" value="#{personnel.codepersonnel}"/>
+					    </h:link>
+					    
+			            <h:link  includeViewParams="true" id="delete" outcome="personeldelete" title="Supprimer">  
+					        <p:graphicImage value="../resources/img/delete16.png" style="border:#CCCCCC 1px solid"/>
+					       <f:param name="codepersonnel" value="#{personnel.codepersonnel}"/>
+					   </h:link>
+		            </h:panelGrid>
+			        
+		        </p:column> 
+		
+			</p:dataTable>
+			
+			<br/>
+   			
+			<center>
+				<p:commandButton value="Nouveau personnel" action="#{navBean.personelcreate}" icon="ui-icon-check"/>
+			</center>
+		
+		<p:separator/>
+		<br/>
+   		</p:scrollPanel>
+   		</h:form>
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

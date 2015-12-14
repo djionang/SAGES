@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Listing absences
+    </ui:define>
+   
+    <ui:define name="content">
+    <f:view>
+	    <h2>
+	   		<h:outputText value="Listing absences"/>
+	   	</h2>
+    
+   		<p:growl id="messages" autoUpdate="true"/>
+   		<br/>
+   	<h:form id="formabsence">
+   	
+   	<p:panel id="panelabsence"  style="margin-bottom:10px;"> 
+   		<p:panelGrid columns="2" style="width:100%;" id="grid2">
+   			<p:panel>
+	   			<h:selectOneMenu value="#{listAbsenceBean.codeclasse}" required="true" requiredMessage="Aucune classe sélectionnée">
+	   				<f:selectItem itemLabel="Classe" itemValue="" itemDescription=""/>
+			 	    <f:selectItems value="#{etablissement.listeClasses}" var="classe" itemLabel="#{classe.codeClasse} - #{classe.libelle}" itemValue="#{classe.codeClasse}" itemDescription="#{classe.libelle}"/>
+			 		<p:ajax async="true" partialSubmit="true" listener="#{listAbsenceBean.loadElevesClasse}" update="eleves,absences" process="@this"/>
+			 	</h:selectOneMenu >
+   			</p:panel>
+	    	    
+	    	<p:panel id="paneleves" header="Elèves">
+	   			<h:selectOneListbox value="#{listAbsenceBean.matriculeeleve}" style="max-height:600px;" required="true" requiredMessage="Aucun élève sélectionné" size="15" id="eleves" validatorMessage="Erreur de validation des données">
+			 		<f:selectItems value="#{listAbsenceBean.eleves}" var="eleve" itemLabel="#{eleve.matricule} - #{eleve.nom} #{eleve.prenom}" itemValue="#{eleve.matricule}" itemDescription="Né le: #{eleve.dateNaissance}"/>
+			 		<p:ajax async="true" partialSubmit="true" listener="#{listAbsenceBean.loadAbsences}" update="eleves,absences" process="@this"/>
+			 	</h:selectOneListbox>
+   			</p:panel>   	   			
+	    </p:panelGrid>		
+	    <br/>
+	    
+	    <p:dataTable value="#{listAbsenceBean.absences}" var="absence" id="absences" emptyMessage="Aucune absence trouvé" sortBy="#{absence.dateabsence}" sortOrder="descending">
+	    	
+	    	<p:column headerText="Date">
+	    		<h:outputText value="#{absence.dateabsence}">
+	    			<f:convertDateTime pattern="dd/MM/yyyy"/>
+	    		</h:outputText>
+	    	</p:column>
+	    	
+	    	<p:column headerText="Absence">
+				<h:outputText value="#{absence.duree} h"/>
+   	    	</p:column>
+   	    	
+   	    	<p:column headerText="Justifiés">
+   	    		<h:outputText value="#{absence.justifie} h"/>
+   	    	</p:column>
+   	    	
+   	    	<p:column headerText="Concerné">
+   	    		<h:outputText value="#{absence.nomeleve}"/>
+   	    	</p:column>  
+   	    	
+   	    	<p:column id="option" headerText="Options" width="30"> 
+		         	<p:panelGrid columns="2">
+				        					    
+			            <h:link  includeViewParams="true" id="edit"  title="Editer" outcome="editabsence" >  
+					        <p:graphicImage value="../resources/img/edit16.png" style="border:#CCCCCC 1px solid"/>   
+					        <f:param name="codeabsence" value="#{absence.codeabsence}"/>
+					    </h:link>
+					    
+			            <h:link  includeViewParams="true" id="cancel" outcome="cancelabsence" title="Annuler l'absence">  
+					        <p:graphicImage value="../resources/img/delete16.png" style="border:#CCCCCC 1px solid"/>
+					       	<f:param name="codeabsence" value="#{absence.codeabsence}"/>
+					   </h:link>
+					</p:panelGrid>    
+		        </p:column>           			
+      		
+		</p:dataTable>
+		
+		<br/>
+   			
+		<center>
+			<p:commandButton value="Nouvelle absence" action="#{navBean.disabsencecreate}" icon="ui-icon-check"/>
+		</center>
+	</p:panel>
+    
+	</h:form>
+	
+   </f:view>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

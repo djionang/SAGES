@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="/WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="idgroupe" value="#{groupeUserBean.idgroupe}"/>
+	  		<f:event type="preRenderView" listener="#{groupeUserBean.initGroupeUser}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Suppression de groupe Utilisateur
+    </ui:define>
+   
+    <ui:define name="content">
+    	
+    
+	    <h2>
+	   		<h:outputText value="Supprimer un groupe Utilisateur"/>
+	   	</h2>
+    
+   	<h:form id="formmodifgroupeUser">
+   	
+   	<p:panel id="panel"  style="margin-bottom:10px;"> 
+   		<p:panelGrid columns="2" style="width:100%;" id="groupeUsermodification">	  	    		  
+			      		 	
+		 	<h:outputText value="libellé"/>	            			
+      		<h:outputText value="#{groupeUserBean.libelle}" id="libelle" />
+      		
+   	    	<h:outputText value="Description"/>			
+      		<h:outputText value="#{groupeUserBean.description}" id="description"/>
+      		
+      		<h:outputText value="Droits d'accès"/>
+      		<p:dataGrid var="habil" value="#{groupeUserBean.habilitations}" columns="3"  
+         		 paginator="true">  
+   				
+   				<p:column>
+			         <p:panel header="#{habil.item.libelle}" style="text-align:center">
+		                 <h:selectBooleanCheckbox value="#{habil.create}" disabled="true"/> Créer <br/>
+		                 <h:selectBooleanCheckbox value="#{habil.update}" disabled="true"/> Modifier <br/>
+		                 <h:selectBooleanCheckbox value="#{habil.delete}" disabled="true"/> Supprimer <br/>
+		                 <h:selectBooleanCheckbox value="#{habil.view}" disabled="true"/> Visualiser <br/>
+			               
+			         </p:panel>  
+   				</p:column>
+   				
+     		</p:dataGrid>
+       		             			
+	     </p:panelGrid>	
+		<br/>										
+		  <center>										
+		 		<p:commandButton value="Supprimer"  id="buttonsubmit" icon="ui-icon-check"  action="#{groupeUserBean.supprimerGroupeUser}"/>
+		 		<p:commandButton value="Retour à la liste des itemRoles" action="listing" icon="ui-icon-arrowreturnthick-1-w"/>							
+		  </center>
+	</p:panel>
+	
+	<p:blockUI block="panel" trigger="buttonsubmit">  
+        Suppression...<br />  
+    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+    </p:blockUI> 
+</h:form>
+   	
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

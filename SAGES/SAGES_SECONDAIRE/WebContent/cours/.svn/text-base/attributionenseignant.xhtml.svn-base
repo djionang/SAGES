@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codecours" value="#{coursBean.codecours}"/>
+	  		<f:event type="preRenderView" listener="#{coursBean.initcoursEns}"/>
+		</f:metadata>
+    </ui:define>
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Enseignant d'un cours
+    </ui:define>
+   
+    <ui:define name="content">
+	    <h2>
+	   		<h:outputText value="Enseignant du cours #{coursBean.libelle}"/>
+	   	</h2>
+	   	
+       	<br/>  
+       	
+       	<p:messages autoUpdate="true"/>
+       	
+       	<p:panel id="panel">	
+	       	<h:form id="formulaire">	
+			    <p:panelGrid columns="2" style="width:100%;" id="perso" columnClasses="label,value">
+		      		<h:outputText value="Matière"/>
+			    	<h:outputText value="#{coursBean.libellematiere}" />	    	
+			    	
+			    	<h:outputText value="Classe"/>
+			    	<h:outputText value="#{coursBean.libelleclasse}"/>
+	    	 	
+				 	<h:outputText value="libellé"/>	            			
+		      		<h:outputText value="#{coursBean.libelle}" id="libelle"/>
+		      		
+		      		<h:outputText value="description"/>
+		      		<h:outputText value="#{coursBean.description}"/>
+		      		
+		      		<h:outputText value="Enseignant actuel"/>
+		      		<h:outputText value="#{empty coursBean.libelleenseignant?' Aucun ':coursBean.libelleenseignant}"/>       		             			
+			     </p:panelGrid>	
+				<br/>
+				<h:panelGrid columns="2" style="width:80%;" columnClasses="label,value">
+		      		<f:facet name="header">
+		      			Nouvel Enseignant
+		      		</f:facet> 	
+				 	<h:outputText value="Enseignant"/>	            			
+		      		<h:selectOneMenu value="#{coursBean.codeenseignant}" required="true" requiredMessage="Le nouvel Enseignant ne peut être vide" id="enseignant" validatorMessage="Enseignant invalide">
+		      			<f:selectItems value="#{coursBean.enseignants}" var="ens" itemValue="#{ens.codeenseignant}" itemLabel="#{ens.nomens} #{ens.prenomens}"/>
+		      		</h:selectOneMenu>
+		      	</h:panelGrid>
+			     <br/>
+			     
+				<center>
+					<p:commandButton value="Valider" action="#{coursBean.saveEnsCours}" icon="ui-icon-check" id="submit"/>
+					<p:commandButton value="Retour à la liste des cours" action="#{navBean.gestcourslisting}" icon="ui-icon-arrowreturnthick-1-w"/>
+				</center>
+		
+		   </h:form>
+		   
+			<p:blockUI block=":panel" trigger=":formulaire:submit">  
+		        Mise à jour...<br />  
+		    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+		    </p:blockUI>
+		</p:panel>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

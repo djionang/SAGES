@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="libelleens" value="#{enseignementBean.libelleens}" required="true" requiredMessage="Libelle Enseignement non trouvé"/>
+	  		<f:event type="preRenderView" listener="#{enseignementBean.initenseignement}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Enseignement
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2><h:outputText value="Modifier enseignement #{enseignementBean.libelleens}"/></h2>
+   		<br/>
+   		<p:messages/>
+	   <h:form id="formdisplay">
+	   <p:panel id="panelenseignement">
+	   
+	   		<p:panelGrid columns="2" style="width:100%;" id="perso" columnClasses="label,value">	    
+	    				
+				<h:outputText value="Libellé*"/>	            			
+	      		<h:outputText value="#{enseignementBean.libelleens}" id="code" required="true" requiredMessage="Libellé enseignement obligatoire"/>
+	      		 	
+			 	<h:outputText value="Type"/>	            			
+	      		<p:inputText value="#{enseignementBean.type}" id="type" required="true" requiredMessage="Champ Type obligatoire"/>
+	      		
+	      		<h:outputText value="Description"/>	            			
+	      		<p:inputTextarea value="#{enseignementBean.description}" id="description"/>
+				
+               	
+				<f:facet name="footer">
+					<center>
+						<br/>
+						<p:commandButton value="Mettre a jour"  id="update" icon="ui-icon-check"  action="#{enseignementBean.modifyEnseignement}"/>
+					</center>
+				
+				</f:facet>
+	   	</p:panelGrid>	  
+	    
+	   </p:panel>
+	   <p:blockUI block="panelenseignement" trigger="update">  
+	        Enregistrement...<br />  
+	    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+	    </p:blockUI>
+	   </h:form>
+      
+   </ui:define>
+   
+   
+   </ui:composition>
+ 
+</html>

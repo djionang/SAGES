@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Contact
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2><h:outputText value="Contacter l'administrateur"/></h2>
+   		<br/>
+   		<p:messages autoUpdate="true"/>
+   		<p:growl autoUpdate="true"/>
+   		<h:form id="form1">
+			<p:panelGrid columns="2" id="panelcontact">
+				<h:outputText value="Nom *"/>
+				<p:inputText value="#{contactBean.nom}" required="true" requiredMessage="Nom obligatoire"/>
+				
+				<h:outputText value="e-mail *"/>
+				<p:inputText value="#{contactBean.email}" validator="EmailValidator" required="true" requiredMessage="Email obligatoire" validatorMessage="Email non conforme"/>
+				
+				<h:outputText value="Message *"/>
+				<p:editor value="#{contactBean.message}" controls="bold italic underline strikethrough" requiredMessage="Message obligatoire" required="true" height="250" width="400"/>
+								
+				<f:facet name="footer">  
+	         		<center>
+						<p:commandButton value="Envoyer" icon="ui-icon-check" id="load" action="#{contactBean.envoyerMessage}" />
+					</center> 
+	     		</f:facet> 		
+			</p:panelGrid>
+		   	
+			<p:blockUI block="panelcontact" trigger=":form1:load">  
+		        Envoi en cours...<br />  
+		    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+		    </p:blockUI> 
+	    </h:form>
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

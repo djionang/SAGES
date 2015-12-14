@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../../../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Listing Types de Sanctions
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2>Types de sanctions enregistrés</h2>
+   		<br/>
+   		<p:growl autoUpdate="true" globalOnly="true"/>
+   			 <h:form id="form1">
+   			 
+            <br/>
+	    	<p:dataTable id="tabletypeSanctions" value="#{listTypeSanctionBean.listeTypeSanctions}" var="typeSanction" emptyMessage="Aucun type de sanction enregistré"
+	    		sortBy="#{typeSanction.libelle}" sortOrder="ascending" rowIndexVar="ligne" paginator="true" rows="10">
+		  	        
+        		<p:column id="code" headerText="N°">  
+            		<h:outputText value="#{ligne+1}" />  
+        		</p:column> 
+        
+        		<p:column id="libelle"  sortBy="#{typeSanction.libelle}" headerText="Libellé">  
+            		<h:outputText value="#{typeSanction.libelle}" />  
+        		</p:column> 
+        
+        		<p:column id="description" headerText="Description">  
+            		<h:outputText value="#{typeSanction.description}" />  
+        		</p:column> 
+        
+		        <p:column id="option" headerText="Options" width="46"> 
+		         	<p:panelGrid columns="3">
+				        	
+					    <h:link  includeViewParams="true" outcome="detailtypesanction" title="Visualiser" >
+					    	<p:graphicImage value="../../../resources/img/view16.png" style="border:#CCCCCC 1px solid"/>  						        
+					    	<f:param name="codetypesanction" value="#{typeSanction.id}"/>						    
+					    </h:link>
+					    
+			            <h:link  includeViewParams="true" id="edit"  title="Editer" outcome="typesanctionedit">  
+					        <p:graphicImage value="../../../resources/img/edit16.png" style="border:#CCCCCC 1px solid"/>   
+					        <f:param name="codetypesanction" value="#{typeSanction.id}"/>
+					    </h:link>
+					    
+			            <h:link  includeViewParams="true" id="delete" outcome="typesanctiondelete" title="Supprimer">  
+					        <p:graphicImage value="../../../resources/img/delete16.png" style="border:#CCCCCC 1px solid"/>
+					       	<f:param name="codetypesanction" value="#{typeSanction.id}"/>
+					   </h:link>
+			         </p:panelGrid>
+			         
+		        </p:column> 
+		
+			</p:dataTable>
+			
+			<br/>
+   			
+			<center>
+				<p:commandButton value="Nouveau type" action="#{navBean.createtypesanction}" icon="ui-icon-check"/>
+			</center>
+			</h:form>
+  			
+  			
+		<p:separator/>
+		<br/>
+   		
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="agespersist" transaction-type="RESOURCE_LOCAL">
+		<non-jta-data-source>java:/SAGES_SECONDAIRE_DS</non-jta-data-source>
+		<class>entities.Absence</class>
+		<class>entities.Activite</class>
+		<class>entities.Annee</class>
+		<class>entities.CahierDeTexte</class>
+		<class>entities.Direction</class>
+		<class>entities.Classe</class>
+		<class>entities.Cour</class>
+		<class>entities.CodeSection</class>
+		<class>entities.CodeCycle</class>
+		<class>entities.CodeNiveau</class>
+		<class>entities.CodeEtablissement</class>
+		<class>entities.Cycle</class>
+		<class>entities.Programmation</class>
+		<class>entities.DispenserPK</class>
+		<class>entities.Enseignant</class>
+		<class>entities.Eleve</class>
+		<class>entities.Composer</class>
+		<class>entities.ComposerPK</class>
+		<class>entities.Enseignement</class>
+		<class>entities.EnseignerPK</class>
+		<class>entities.Etablissement</class>
+		<class>entities.CahierCours</class>
+		<class>entities.CahierCoursPK</class>
+		<class>entities.Evaluation</class>
+		<class>entities.Exercice</class>
+		<class>entities.Groupematiere</class>
+		<class>entities.Matiere</class>
+		<class>entities.Niveau</class>
+		<class>entities.OptionSerie</class>
+		<class>entities.ParametreTranche</class>
+		<class>entities.ParametreTranchePK</class>
+		<class>entities.PartieCour</class>
+		<class>entities.Personnel</class>
+		<class>entities.PlanificationAnnuelle</class>
+		<class>entities.GpUserRole</class>
+		<class>entities.PreInscription</class>
+		<class>entities.Retard</class>
+		<class>entities.Salle</class>
+		<class>entities.Sanction</class>
+		<class>entities.Section</class>
+		<class>entities.Sequence</class>
+		<class>entities.Trimestre</class>
+		<class>entities.TrimestrePK</class>
+		<class>entities.TypeEvaluation</class>
+		<class>entities.Utilisateur</class>
+		<class>entities.EnsTitulaire</class>
+		<class>entities.EnsTitulairePK</class>
+		<class>entities.AnimateurPedagogiquePK</class>
+		<class>entities.AnimateurPedagogique</class>
+		<class>entities.Versement</class>
+		<class>entities.CodePers</class>
+		<class>entities.CodeDossier</class>
+		<class>entities.TypeSalle</class>
+		<class>entities.TypeSanction</class>
+		<class>entities.Convocation</class>
+		<class>entities.GroupeUser</class>
+		<class>entities.ItemRole</class>
+		<class>entities.UtilisateurGroupe</class>
+		<class>entities.CodeVersement</class>
+		<class>entities.Configuration</class>
+		<class>entities.Materiel</class>
+		<class>entities.CodeMateriel</class>
+		<class>entities.SortieM</class>
+		<class>entities.CodeDepense</class>
+		<class>entities.CodePrevision</class>
+		<class>entities.Prevision</class>
+		<class>entities.Depense</class>
+		<class>entities.Transfert</class>
+		<class>entities.TransfertPK</class>
+		<class>entities.EtudCoursPK</class>
+		
+		<properties>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+
+			<property name="dialect" value="org.hibernate.dialect.MySQLDialect"/>
+
+	    </properties>
+	</persistence-unit>
+</persistence>

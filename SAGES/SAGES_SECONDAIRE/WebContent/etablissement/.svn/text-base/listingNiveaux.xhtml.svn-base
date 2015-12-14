@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Listing Niveaux
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2>Niveaux enregistrés</h2>
+   		
+   		<br/>
+   		<p:growl autoUpdate="true" globalOnly="true"/>
+   		<p:scrollPanel style="width:100%;">
+		 	<h:form id="form1">
+   			 
+		    	<p:dataTable id="tableniveaux" value="#{listNiveauBean.niveaux}" var="niveau" emptyMessage="Aucun niveau enregistré"
+		    		paginator="true" widgetVar="tableniveau" tableStyleClass="tablelist" >
+			  	    			  	    
+			  	    <p:column id="code" headerText="Code Niveau">  
+	            		<h:outputText value="#{niveau.codeNiveau}" />  
+	        		</p:column>
+			  	      
+	        		<p:column id="libelle" headerText="Libellé">  
+	            		<h:outputText value="#{niveau.libelle}" />  
+	        		</p:column> 
+	        
+	        		
+	        
+					<p:column id="cycle" headerText="Cycle">  
+			            <h:outputText value="#{niveau.codeCycle}(#{niveau.libellecycle})" />  
+			        </p:column> 
+			        
+	        
+			        <p:column id="option" headerText="Options" width="46"> 
+			         	<h:panelGrid columns="3">
+				        	
+						    <h:link  includeViewParams="true" outcome="detailniveau" title="Visualiser" >
+						    	<p:graphicImage value="../resources/img/view16.png" style="border:#CCCCCC 1px solid"/>  						        
+						    	<f:param name="codeniveau" value="#{niveau.codeNiveau}"/>						    
+						    </h:link>
+						    
+				            <h:link  includeViewParams="true" id="edit"  title="Editer" outcome="modifierniveau">  
+						        <p:graphicImage value="../resources/img/edit16.png" style="border:#CCCCCC 1px solid"/>   
+						        <f:param name="codeniveau" value="#{niveau.codeNiveau}"/>
+						    </h:link>
+						    
+				            <h:link  includeViewParams="true" id="delete" outcome="supprimerniveau" title="Supprimer">  
+						        <p:graphicImage value="../resources/img/delete16.png" style="border:#CCCCCC 1px solid"/>
+						        <f:param name="codeniveau" value="#{niveau.codeNiveau}"/>
+						   </h:link>
+			            </h:panelGrid>
+			        </p:column> 
+			        <f:facet name="footer">
+			        	<center>
+				 			<p:commandButton value="Imprimer" type="button" icon="ui-icon-print">  
+        						<p:printer target="tableniveaux" />  
+    						</p:commandButton> 
+    					</center>
+			        </f:facet>
+				</p:dataTable>
+				
+				<br/>
+   			
+				<center>
+					<p:commandButton value="Nouveau Niveau" action="#{navBean.etabnivocreate}" icon="ui-icon-check"/>
+				</center>
+							
+			</h:form>
+  			
+			<p:separator/>
+			<br/>
+   		</p:scrollPanel>
+   		
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

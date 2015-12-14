@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="/WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Profil Disciplinaire
+    </ui:define>
+   
+    <ui:define name="content">
+    <f:view>
+	    <h2>
+	   		<h:outputText value="Profil disciplinaire"/>
+	   	</h2>
+    
+   		<p:growl id="messages" autoUpdate="true"/>
+   		<br/>
+   		
+   	<h:form id="formjournal">
+   		<center>
+	   		<p:ajaxStatus>
+				 <f:facet name="start">
+					 <p:graphicImage value="/resources/img/loading.gif" />
+				 </f:facet>
+				 <f:facet name="complete">
+						 <h:outputText value="" />
+				</f:facet>
+			</p:ajaxStatus>
+		</center>
+   	
+	   	<p:panel id="paneljournal"  style="margin-bottom:10px;" header="#{sessionBean.codeetablissement} "> 
+	   		<p:panelGrid columns="2" style="width:100%;" id="grid2">
+	   			<p:panel>
+		   			<h:selectOneMenu value="#{journalBean.codeclasse}" required="true" requiredMessage="Aucune classe sélectionnée">
+		   				<f:selectItem itemLabel="Classe" itemValue="" itemDescription=""/>
+				 	    <f:selectItems value="#{etablissement.listeClasses}" var="classe" itemLabel="#{classe.codeClasse} - #{classe.libelle}" itemValue="#{classe.codeClasse}" itemDescription="#{classe.libelle}"/>
+				 		<p:ajax async="true" partialSubmit="true" listener="#{journalBean.loadEleves}" update="eleves,journal" process="@this"/>
+				 	</h:selectOneMenu >
+				 	<br/>
+				 	<br/>
+				 	<h:selectOneMenu value="#{journalBean.vue}" required="true" requiredMessage="Veuillez sélectionner une vue" id="view" validatorMessage="Erreur de validation des données">
+				 		<f:selectItem itemLabel="Vue" itemValue="" itemDescription="Vue"/>
+				 		<f:selectItem itemLabel="Séquentiel" itemValue="sequentiel" itemDescription="Vue séquentielle"/>
+				 		<f:selectItem itemLabel="Trimestriel" itemValue="trimestriel" itemDescription="Vue trimestrielle"/>
+				 		<f:selectItem itemLabel="Annuel" itemValue="annuel" itemDescription="Vue annuelle"/>
+				 		<p:ajax async="true" partialSubmit="true" listener="#{journalBean.loadVues}" update="vue" process="@this" />
+				 	</h:selectOneMenu>
+				 	
+				 	<h:outputText value="  "/>
+				 	
+				 	<h:selectOneMenu value="#{journalBean.valeurvue}" id="vue">
+				 		<f:selectItems value="#{journalBean.vues}" />
+				 	</h:selectOneMenu>
+	   			</p:panel>
+		    	    
+		    	<p:panel id="paneleves" header="Elèves">
+		   			<h:selectOneListbox value="#{journalBean.matriculeeleve}" style="max-height:600px;" required="true" requiredMessage="Aucun élève sélectionné" size="15" id="eleves" validatorMessage="Erreur de validation des données">
+				 		<f:selectItems value="#{journalBean.eleves}" var="eleve" itemLabel="#{eleve.matricule} - #{eleve.nom} #{eleve.prenom}" itemValue="#{eleve.matricule}" itemDescription="Né le: #{eleve.dateNaissance}"/>
+				 	</h:selectOneListbox>
+	   			</p:panel>
+	   			
+	   			<f:facet name="footer">
+	   				<center>
+	   					<p:commandButton value="Charger" actionListener="#{journalBean.loadItems}" icon="ui-icon-check" update="journal"/>
+	   				</center>
+	   			</f:facet>   	   			
+		    </p:panelGrid>		
+		    <br/>
+		    <p:dataGrid var="item" value="#{journalBean.items}" columns="4" rows="7" id="journal" emptyMessage="Journal Vide">
+				 <f:facet name="header">
+				 	Profil disciplinaire #{journalBean.nomeleve} #{journal.valeurvue}
+				 	Année #{journalBean.anneeacademique}
+				 </f:facet>				
+				 <p:column>
+				    <p:panel header="#{item.label}">
+				       <h:panelGrid columns="1">									
+					    <h:outputText value="#{item.nombre}" />
+					    <h:outputText value="T: #{item.heures} H" />
+					 </h:panelGrid>
+				    </p:panel>
+				 </p:column>
+			</p:dataGrid>
+			
+		</p:panel>
+		
+		<br/>
+		<br/>
+		
+		<center>
+			<p:commandButton value="Imprimer" type="button" icon="ui-icon-print">
+				<p:printer target="journal" />
+			</p:commandButton>
+		</center>
+	</h:form>
+	
+   </f:view>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

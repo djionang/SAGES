@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Nouvelle Salle
+   </ui:define>
+   
+   <ui:define name="content">
+   <h2><h:outputText value="Salle enregistrée"/></h2>
+   
+   <p:panel>
+   
+   	<h:panelGrid columns="2" columnClasses="label,value">
+   		<h:outputText value="Code de la salle"/>
+   		<h:outputText value="#{salleBean.codeSalle}"/>
+   		
+   		<h:outputText value="libelle"/>
+		<h:outputText value="#{salleBean.libelle}"/> 
+		
+		<h:outputText value="Description"/>
+		<h:outputText value="#{salleBean.description}"/>
+ 		
+		<h:outputText value="Type"/>
+		<h:outputText value="#{salleBean.type}"/>
+ 		
+		<h:outputText value="Capacité"/>
+		<h:outputText value="#{salleBean.capacite} #{optionDemande}"/>
+ 		
+   		
+   	</h:panelGrid>	
+   </p:panel>
+   <br/>
+   <p:separator/>
+   <br/>
+   <h:form id="formbouton">
+   		<center>										
+		 	<p:commandButton value="Nouvelle salle"  icon="ui-icon-check"  action="#{navBean.ressoursallecreate}" />
+		 </center>
+	</h:form>
+	<br/>
+	   	  	
+   </ui:define>
+   
+   
+   </ui:composition>
+ 
+</html>

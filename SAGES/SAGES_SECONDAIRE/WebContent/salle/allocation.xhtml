@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+    <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codesalle" value="#{salleBean.codeSalle}"/>
+	  		<f:event type="preRenderView" listener="#{salleBean.initModeleSalle}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Allocation salle
+    </ui:define>
+   
+    <ui:define name="content">
+    
+	    <h2>
+	   		<h:outputText value="Occupation de la salle  #{salleBean.codeSalle}"/>
+	   	</h2>
+    	<br/>
+    	<p:messages autoUpdate="true"/>
+    	
+    	<h:form id="form">
+    	
+	    	<p:outputPanel  id="panelcentral">
+					<center>
+			   			<p:panelGrid columns="2">
+				   			<h:selectOneMenu value="#{salleBean.codeSalle}">
+				   				<f:selectItem itemLabel="Salle" itemValue=""/>
+				   				<f:selectItems value="#{etablissement.listeSalles}" var="salle" itemLabel="#{salle.codeSalle} - #{salle.libelle}" itemValue="#{salle.codeSalle}"/>
+						 	</h:selectOneMenu >
+						 	<p:commandButton value="Charger" actionListener="#{salleBean.initModeleSalle}" update="table"/>
+			   			</p:panelGrid>
+				    	<br/>
+				    	<br/>
+				    	
+	   					<p:schedule draggable="false" value="#{salleBean.modele}" id="table" view="agendaWeek" maxTime="19" minTime="6" timeZone="EET" aspectRatio="0.5"/>
+	   					<br/>
+	   		
+				   		<center>
+				   			<p:commandButton action="#{navBean.ressoursallelisting}" value="Retour a la liste des salles" icon=""/>
+				   		</center>
+		   		</center>
+		   	</p:outputPanel>
+	   	</h:form>
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

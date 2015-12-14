@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="/WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codeclasse" value="#{timeClasseBean.codeclasse}"/>
+	  		<f:event type="preRenderView" listener="#{timeClasseBean.loadTimetableClasse}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Programmation enseignements
+   </ui:define>
+   
+   <ui:define name="content">
+   
+   		<h2><h:outputText value="Programmation enseignements"/></h2>
+   		<br/>
+   		<p:growl autoUpdate="true"/>
+   		
+   		<h:form id="form1">
+   			
+   			<p:outputPanel  id="panelcentral">
+   			
+		   			<p:panelGrid columns="2">
+			   			<h:selectOneMenu value="#{timeClasseBean.codeclasse}">
+			   				<f:selectItem itemLabel="Classe" itemValue=""/>
+			   				<f:selectItems value="#{etablissement.listeClasses}" var="classe" itemLabel="#{classe.codeClasse} - #{classe.libelle}" itemValue="#{classe.codeClasse}"/>
+					 	</h:selectOneMenu >
+					 	<p:commandButton value="Charger" actionListener="#{timeClasseBean.loadTimetable}" update="table"/>
+		   			</p:panelGrid>
+		   			
+		   			<center>
+				   		<p:ajaxStatus>
+							 <f:facet name="start">
+								 <p:graphicImage value="/resources/img/loading.gif" />
+							 </f:facet>
+							 <f:facet name="complete">
+									 <h:outputText value="" />
+							</f:facet>
+						</p:ajaxStatus>
+					</center>
+			    	<br/>
+			    	<p:messages autoUpdate="true"/>
+			    	<br/>
+			    	    
+			    	<p:panel id="table" >
+				    	<f:facet name="header">
+				    		Programmation Cours #{timeClasseBean.libelleclasse} Année #{timeClasseBean.annee}" 
+				    	</f:facet>
+			    	
+				   		<p:schedule draggable="false" leftHeaderTemplate="today" value="#{timeClasseBean.modele}" rightHeaderTemplate="agendaWeek" view="agendaWeek" maxTime="19" minTime="6" timeZone="EET" rendered="#{not empty timeClasseBean.codeclasse}" />
+					     
+					    
+			  		</p:panel> 		    
+			   		
+			   		
+				    <f:facet name="footer">
+				    	<center>
+				    		<p:commandButton value="Ajouter" action="#{timeClasseBean.navajoutertimetable}" icon="ui-icon-check" rendered="#{not empty timeClasseBean.codeclasse}"/>
+			  				<p:commandButton value="Modifier" action="#{timeClasseBean.naveditertimetable}" icon="ui-icon-pencil" rendered="#{not empty timeClasseBean.codeclasse}"/>
+			  				<p:commandButton value="Imprimer" type="button" icon="ui-icon-print" rendered="#{not empty timeClasseBean.codeclasse}">
+			  					<p:printer target="table"/>
+			  				</p:commandButton>
+	  					</center>
+				    </f:facet>    
+			</p:outputPanel>
+			  
+	    </h:form>
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

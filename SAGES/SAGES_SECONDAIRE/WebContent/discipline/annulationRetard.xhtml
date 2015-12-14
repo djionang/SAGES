@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="coderetard" value="#{retardBean.coderetard}"/>
+	  		<f:event type="preRenderView" listener="#{retardBean.initialize}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Annulation retard
+    </ui:define>
+   
+    <ui:define name="content">
+    <f:view>
+	    <h2>
+	   		<h:outputText value="Annulation d'un retard"/>
+	   	</h2>
+    
+   		<p:messages id="messages" autoUpdate="true"/>
+   		<br/>
+   	<h:form id="formretard">
+   	
+   	<p:panel id="panelretard"  style="margin-bottom:10px;"> 
+   		<p:panelGrid columns="2" style="width:100%;" id="grid2">
+   			<h:outputText value="Eleve"/>
+	    	<h:outputText value="#{retardBean.matriculeeleve} #{retardBean.nomeleve}"/> 
+	    	
+	    	<h:outputText value="Classe"/>
+	    	<h:outputText value="#{retardBean.codeclasse}"/>	   			
+	     
+		 	<h:outputText value="Date"/>
+		 	<h:outputText value="#{retardBean.dateretard}">
+		 		<f:convertDateTime pattern="dd/MM/yyyy"/>
+		 	</h:outputText>	    
+      		
+			<h:outputText value="Durée"/>				
+   			<h:outputText value="#{retardBean.duree} h"/>   			
+   	    	
+   	    	<h:outputText value="Justifiées *"/>
+   			<h:outputText value="#{retardBean.justifie} h"/>
+   			
+		</p:panelGrid>
+		  <br/>				
+		  <center>			  								
+		 		<p:commandButton value="Suppression"  icon="ui-icon-check" id="submitretard" action="#{retardBean.deleteRetard}" />
+		 		<p:commandButton value="Annuler" immediate="true" type="reset" icon="ui-icon-close" />	
+		 </center>
+	</p:panel>
+	
+	<p:blockUI block="panelretard" trigger="submitretard">  
+        Annulation...<br />  
+    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+    </p:blockUI>
+    
+	</h:form>
+	
+   </f:view>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

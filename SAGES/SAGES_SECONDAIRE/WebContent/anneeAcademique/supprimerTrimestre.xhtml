@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="numerotrimestre" value="#{trimestreBean.numero}" required="true" requiredMessage="Numero Trimestre non trouvé"/>
+	  		<f:event type="preRenderView" listener="#{trimestreBean.inittrimestre}"/>
+		</f:metadata>
+    </ui:define>
+   
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Suppression Trimestre
+    </ui:define>
+    <ui:define name="content">
+	    <h2>
+	   		<h:outputText value="Trimestre #{trimestreBean.numero}"/>
+	   	</h2>
+    <br/>
+    
+   		<p:messages id="messages" autoUpdate="true"/>
+	
+   	<h:form id="formtrimestre">
+   	
+   	<p:panel id="paneltrimestre"  style="margin-bottom:10px;">    	
+   		
+    	<h2>
+	   		<h:outputText value="Année académique #{sessionBean.anneeacademique} -- " rendered="#{not empty sessionBean.anneeacademique}"/>
+	   		<h:outputText value=" Du " rendered="#{not empty sessionBean.anneeacademique}"/>
+	   		<h:outputText value="#{sessionBean.datedebutannee}" rendered="#{not empty sessionBean.anneeacademique}">
+	   			<f:convertDateTime pattern="dd/MM/yyyy"/>
+			</h:outputText>
+	   		<h:outputText value=" Au " rendered="#{not empty anneeEnCoursBean.anneeacademique}"/>
+	   		<h:outputText value="#{sessionBean.datefinannee}" rendered="#{not empty sessionBean.anneeacademique}">
+	   			<f:convertDateTime pattern="dd/MM/yyyy"/>
+			</h:outputText>
+		</h2>   	
+   		
+	    <p:panelGrid columns="2" style="width:100%;" id="perso">	    
+	    	
+	    	<h:outputText value="Numero trimestre"/>	            			
+      		<h:outputText value="#{trimestreBean.numero}"/>      		
+	    	
+	    	<h:outputText value="Date début"/>
+	    	<h:outputText value="#{trimestreBean.datedebut}" >
+		       <f:convertDateTime pattern="dd/MM/yyyy"/>
+			</h:outputText> 
+      		
+      		<h:outputText value="Date fin"/> 	
+		 	<h:outputText value="#{trimestreBean.datefin}" >
+		       <f:convertDateTime pattern="dd/MM/yyyy"/>
+			</h:outputText> 	    			
+	     </p:panelGrid>		
+	     
+		 <br/>
+							
+		 <center>		  								
+		 	<p:commandButton value="Confirmation suppression"  icon="ui-icon-check" id="submittrimestre" action="#{trimestreBean.deleteTrimestre}" />
+		 	<p:commandButton value="Annuler"  icon="ui-icon-arrowreturnthick-1-w" action="#{navBean.anneetrim}" immediate="true" />
+		 </center>
+	</p:panel>
+	<p:blockUI block="paneltrimestre" trigger="submittrimestre">  
+        Suppression...<br />  
+    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+    </p:blockUI> 
+	
+	</h:form>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

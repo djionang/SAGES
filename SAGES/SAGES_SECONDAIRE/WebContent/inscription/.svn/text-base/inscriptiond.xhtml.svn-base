@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="/WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="idversement" value="#{printVersBean.idversement}"/>
+	  		<f:viewParam name="matricule" value="#{printVersBean.matricule}"/>
+	  		<f:event type="preRenderView" listener="#{printVersBean.loadToPrint}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Inscription
+   </ui:define>
+   
+   <ui:define name="content">
+   <h2><h:outputText value="Versement enregistré"/></h2>
+   <p:growl autoUpdate="true"/>
+   <p:messages autoUpdate="true"/>
+   <h:form id="formbouton">
+	      
+   		<center>
+   		
+   		<h2><h:outputText value="#{printVersBean.message}"/></h2>
+   		<br/>
+   		<br/>										
+		 	<p:commandButton value="Imprimer les factures" action="#{printVersBean.imprimerVersement}" icon="ui-icon-print" ajax="false">  
+				
+			</p:commandButton>
+		</center>
+	</h:form>
+	<br/>
+	   	  	
+   </ui:define>
+   
+   
+   </ui:composition>
+ 
+</html>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Recrutement
+   </ui:define>
+   
+   <ui:define name="content">
+   <h2><h:outputText value="Candidature enregistrée"/></h2>
+   <h:form id="formbouton">
+	   <p:panel id="paneldossier">
+	   
+	   	<h:panelGrid columns="2" columnClasses="label,value">
+	   		<h:outputText value="Code du dossier"/>
+	   		<h:outputText value="#{dossierBean.codedossier}"/>
+	   		
+	   		<h:outputText value="Nom"/>
+			<h:outputText value="#{dossierBean.nom}"/>
+	 		
+			<h:outputText value="Prénom"/>
+			<h:outputText value="#{dossierBean.prenom}"/>
+			
+			<h:outputText value="Né le"/>
+			<h:outputText value="#{dossierBean.dateNaissance}">
+				<f:convertDateTime pattern="dd/MM/yyyy"/>
+			</h:outputText>
+	 		
+			<h:outputText value="Niveau sollicité"/>
+			<h:outputText value="#{dossierBean.niveauDemande} (#{dossierBean.optionDemande})"/>
+	 		
+			<h:outputText value="Etat du dossier"/>
+			<h:outputText value="#{dossierBean.etat}"/>
+			
+			<h:outputText value="Date Dépot"/>
+			<h:outputText value="#{dossierBean.datePreinscription}">
+				<f:convertDateTime pattern="dd/MM/yyyy"/>
+			</h:outputText>
+	   		
+	   	</h:panelGrid>	
+	   </p:panel>
+	   <br/>
+	   <p:separator/>
+	   <br/>
+   
+   		<center>										
+		 	<p:commandButton value="Imprimer" type="button" icon="ui-icon-print">  
+				<p:printer target="paneldossier" />  
+			</p:commandButton>
+		 	<p:commandButton value="Nouvelle Candidature"  icon="ui-icon-check"  action="#{navBean.nouvellecandidature}" />
+			<p:commandButton value="Liste des Candidatures"  icon="ui-icon-arrowreturnthick-1-w"  action="#{navBean.listercandidatures}"/>
+		</center>
+	</h:form>
+	<br/>
+	   	  	
+   </ui:define>
+   
+   
+   </ui:composition>
+ 
+</html>

@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/inscription
+END
+ListeTrancheBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/inscription/ListeTrancheBean.java
+END
+AffectationClasseBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/inscription/AffectationClasseBean.java
+END
+ListDossierBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/inscription/ListDossierBean.java
+END
+ListeVersementBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/inscription/ListeVersementBean.java
+END
+VersementDataModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/inscription/VersementDataModel.java
+END
+DossierBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/inscription/DossierBean.java
+END
+ImpressionVersementBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/inscription/ImpressionVersementBean.java
+END
+TrancheDataModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/inscription/TrancheDataModel.java
+END
+InscriptionBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/school/!svn/ver/17/SAGES_SECONDAIRE/src/ages/beans/inscription/InscriptionBean.java
+END
+ListeProvisoireBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/inscription/ListeProvisoireBean.java
+END
+ParametreTrancheBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/inscription/ParametreTrancheBean.java
+END
+CopieTrancheBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/inscription/CopieTrancheBean.java
+END
+TrancheBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/inscription/TrancheBean.java
+END
+VersementBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/inscription/VersementBean.java
+END

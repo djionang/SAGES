@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codeoption" value="#{optionBean.codeOption}" required="true" requiredMessage="Code option non trouvé"/>
+	  		<f:event type="preRenderView" listener="#{optionBean.initoption}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Modification Option ou série
+    </ui:define>
+   
+    <ui:define name="content">
+	    <h2>
+	   		<h:outputText value="Mise à jour option #{optionBean.libelle}"/>
+	   	</h2>
+    <br/>
+   	<h:form id="formoption">
+   	
+   	<p:panel id="paneloption"  style="margin-bottom:10px;"> 
+   	
+   		<p:messages id="messages"/>
+   		
+	    <p:panelGrid columns="2" style="width:100%;" id="perso">	    
+	    				
+		 	<h:outputText value="libellé de l'option/Série*"/>	            			
+      		<p:inputText value="#{optionBean.libelle}" id="libelle" required="true" requiredMessage="libellé obligatoire"/>
+      		
+      		<h:outputText value="Niveau concerné"/>
+      		<h:selectOneMenu value="#{optionBean.codeniveau}" id="niveau" required="true" requiredMessage="Selection d'un niveau exigée">
+    			<f:selectItems value="#{configuration.niveauItems}"/>
+   	    	</h:selectOneMenu>
+      		
+   	    	            			
+	     </p:panelGrid>		
+		 <br/>
+							
+		  <center>	
+		  								
+		 		<p:commandButton value="Mettre à jour"  icon="ui-icon-check" id="submitoption" action="#{optionBean.modifyOption}" />
+		 		<p:commandButton value="Annuler" immediate="true" type="reset" icon="ui-icon-close"/>	
+		 </center>
+	</p:panel>
+	
+	<p:blockUI block="paneloption" trigger="submitoption">  
+        Mise à jour...<br />  
+    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+    </p:blockUI> 
+    
+	</h:form>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

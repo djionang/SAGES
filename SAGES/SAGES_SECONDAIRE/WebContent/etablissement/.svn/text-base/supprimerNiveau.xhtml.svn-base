@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codeniveau" value="#{niveauBean.codeNiveau}" required="true" requiredMessage="Code Niveau non trouvé"/>
+	  		<f:event type="preRenderView" listener="#{niveauBean.initniveau}"/>
+		</f:metadata>
+    </ui:define>
+   
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Suppression Niveau
+    </ui:define>
+    <ui:define name="content">
+	    <h2>
+	   		<h:outputText value="Niveau #{niveauBean.codeNiveau}"/>
+	   	</h2>
+    <br/>
+   	<h:form id="formnivo">
+   	
+   	<p:panel id="panelnivo"  style="margin-bottom:10px;"> 
+   	
+   		<p:messages id="messages" autoUpdate="true"/>
+   		
+	    <p:panelGrid columns="2" style="width:100%;" id="perso">	    
+	    	
+	    	<h:outputText value="Code niveau"/>	            			
+      		<h:outputText value="#{niveauBean.codeNiveau}"/>      		
+	    	
+	    	<h:outputText value="Libellé"/>	            			
+      		<h:outputText value="#{niveauBean.libelle}"/>
+      		 	
+		 	
+      		<h:outputText value="Cycle"/>
+      		<h:outputText value="#{niveauBean.codeCycle}(#{niveauBean.libellecycle})"/>
+		 		    			
+	     </p:panelGrid>		
+		 <br/>
+							
+		  <center>	
+		  								
+		 		<p:commandButton value="Confirmation suppression"  icon="ui-icon-check" id="submitnivo" action="#{niveauBean.deleteNiveau}" />
+		 </center>
+	</p:panel>
+	<p:blockUI block="panelnivo" trigger="submitnivo">  
+        Suppression...<br />  
+    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+    </p:blockUI> 
+	   
+	</h:form>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

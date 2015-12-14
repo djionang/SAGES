@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Tableau D&apos;honneur" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.2100000000000002"/>
+	<property name="ireport.x" value="52"/>
+	<property name="ireport.y" value="528"/>
+	<parameter name="DATE_JOUR" class="java.lang.String"/>
+	<parameter name="classe" class="java.lang.String"/>
+	<parameter name="NUMEROTRIMESTRE" class="java.lang.String"/>
+	<parameter name="matricule" class="java.lang.String"/>
+	<parameter name="codeetablissement" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+
+     etablissement.`acronyme` AS etablissement_acronyme,
+     etablissement.`adresse` AS etablissement_adresse,
+     etablissement.`arrondissement` AS etablissement_arrondissement,
+     etablissement.`codepostal` AS etablissement_codepostal,
+     etablissement.`departement` AS etablissement_departement,
+     etablissement.`devise` AS etablissement_devise,
+     etablissement.`email` AS etablissement_email,
+     etablissement.`logo` AS etablissement_logo,
+     etablissement.`nometab` AS etablissement_nometab,
+     etablissement.`region` AS etablissement_region,
+     etablissement.`siteweb` AS etablissement_siteweb,
+     etablissement.`telephone` AS etablissement_telephone,
+     etablissement.`type` AS etablissement_type,
+     etablissement.`pays` AS etablissement_pays,
+     eleve.`ancien` AS eleve_ancien,
+     eleve.`nom` AS eleve_nom,
+     eleve.`prenom` AS eleve_prenom,
+     eleve.`ANNEEACADEMIQUE` AS eleve_ANNEEACADEMIQUE,
+     eleve.`CODECLASSE` AS eleve_CODECLASSE,
+     trimestre.`numerotrimestre` AS trimestre_numerotrimestre,
+     classe.`codeclasse` AS classe_codeclasse,
+     eleve.`dateEnregistrement` AS eleve_dateEnregistrement,
+     etablissement.`devisepays` AS etablissement_devise_pays,
+
+(select ROUND(query2.moy,2) from (select  query1.moyenne as moy from (SELECT sum(note*cours.`COEFICIENT`)/sum(cours.`COEFICIENT`) as moyenne from composer,cours,eleve, evaluation,classe where composer.`CODEEVALUATION`=evaluation.`CODEEVALUATION`
+and composer.matricule=eleve.matricule and evaluation.codecours=cours.codecours and cours.codeclasse=classe.codeclasse and eleve.codeclasse= classe.codeclasse
+and eleve.matricule=$P{matricule} group by eleve.matricule) query1) query2) as   moyenne
+
+FROM
+     `classe` classe INNER JOIN `eleve` eleve ON classe.`codeclasse` = eleve.`CODECLASSE`,
+     `etablissement` etablissement,
+     `trimestre` trimestre
+WHERE
+     codeetablissement = $P{codeetablissement}
+ AND classe.codeclasse = $P{classe} and eleve.matricule=$P{matricule}]]>
+	</queryString>
+	<field name="etablissement_acronyme" class="java.lang.String"/>
+	<field name="etablissement_adresse" class="java.lang.String"/>
+	<field name="etablissement_arrondissement" class="java.lang.String"/>
+	<field name="etablissement_codepostal" class="java.lang.String"/>
+	<field name="etablissement_departement" class="java.lang.String"/>
+	<field name="etablissement_devise" class="java.lang.String"/>
+	<field name="etablissement_email" class="java.lang.String"/>
+	<field name="etablissement_logo" class="java.lang.String"/>
+	<field name="etablissement_nometab" class="java.lang.String"/>
+	<field name="etablissement_region" class="java.lang.String"/>
+	<field name="etablissement_siteweb" class="java.lang.String"/>
+	<field name="etablissement_telephone" class="java.lang.String"/>
+	<field name="etablissement_type" class="java.lang.String"/>
+	<field name="etablissement_pays" class="java.lang.String"/>
+	<field name="eleve_ancien" class="java.lang.Boolean"/>
+	<field name="eleve_nom" class="java.lang.String"/>
+	<field name="eleve_prenom" class="java.lang.String"/>
+	<field name="eleve_ANNEEACADEMIQUE" class="java.lang.String"/>
+	<field name="eleve_CODECLASSE" class="java.lang.String"/>
+	<field name="trimestre_numerotrimestre" class="java.lang.Integer"/>
+	<field name="classe_codeclasse" class="java.lang.String"/>
+	<field name="eleve_dateEnregistrement" class="java.sql.Date"/>
+	<field name="etablissement_devise_pays" class="java.lang.String"/>
+	<field name="moyenne" class="java.lang.Double"/>
+	<background>
+		<band height="555" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="-1" y="0" width="803" height="555" backcolor="#FFCCFF"/>
+			</rectangle>
+		</band>
+	</background>
+	<title>
+		<band height="507" splitType="Stretch">
+			<staticText>
+				<reportElement x="7" y="28" width="133" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Délégation Departementale de la]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="14" width="115" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Delegation Régionale du]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="141" y="2" width="100" height="13"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{etablissement_type}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="615" y="2" width="136" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Republique du ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="131" y="14" width="100" height="13"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{etablissement_region}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="717" y="2" width="100" height="13"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{etablissement_pays}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-1" y="2" width="173" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ministére des Enseignements]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="138" y="28" width="100" height="13"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{etablissement_departement}]]></textFieldExpression>
+			</textField>
+			<ellipse>
+				<reportElement x="193" y="23" width="407" height="203" backcolor="#CCFFCC"/>
+			</ellipse>
+			<staticText>
+				<reportElement x="267" y="176" width="253" height="33"/>
+				<textElement textAlignment="Center">
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[SCIENCE + CONSCIENCE]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="278" y="42" width="242" height="17"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{etablissement_devise}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="204" y="107" width="100" height="31"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[LYCEE]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="470" y="104" width="129" height="31"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{etablissement_nometab}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="164" y="238" width="483" height="48" backcolor="#FFFF99"/>
+				<textElement>
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[TABLEAU D'HONNEUR/ D'EXCELLENCE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="66" y="304" width="346" height="20"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[En vertu des pouvoirs qui leur sont conférés,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="263" y="340" width="410" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LE CONSEIL DE CLASSE ET LE CONSEIL DE DISCIPLINE ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="368" y="360" width="75" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DU LYCEE DE]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="443" y="360" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{etablissement_nometab}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="415" y="382" width="61" height="14"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[*****   *****]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="64" y="407" width="112" height="20"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Siègeant en date du ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="177" y="407" width="100" height="20"/>
+				<textElement>
+					<font size="12" isBold="true" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DATE_JOUR}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="277" y="407" width="123" height="20"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[décernant à l'élève]]></text>
+			</staticText>
+			<line>
+				<reportElement x="401" y="425" width="199" height="1"/>
+			</line>
+			<line>
+				<reportElement x="177" y="425" width="100" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="64" y="428" width="74" height="20"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[de la classe de]]></text>
+			</staticText>
+			<line>
+				<reportElement x="137" y="444" width="100" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="237" y="429" width="363" height="20"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[ses félicitations / Encouragements pour sa bonne 	]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="66" y="447" width="387" height="20"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[conduite et sa brillante prestation sur le plan scolaire au cours du ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="453" y="445" width="44" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NUMEROTRIMESTRE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="499" y="448" width="100" height="20"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[ème]]></text>
+			</staticText>
+			<line>
+				<reportElement x="453" y="463" width="44" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="64" y="466" width="130" height="20"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[trimestre de l'année]]></text>
+			</staticText>
+			<line>
+				<reportElement x="194" y="481" width="109" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="64" y="487" width="282" height="20"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[moyenne trimestrielle /annuelle obtenue]]></text>
+			</staticText>
+			<line>
+				<reportElement x="329" y="500" width="194" height="1"/>
+			</line>
+			<textField>
+				<reportElement x="660" y="14" width="129" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{etablissement_devise_pays}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="346" y="487" width="177" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{moyenne}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="408" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{eleve_nom}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="500" y="407" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{eleve_prenom}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="194" y="464" width="112" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{eleve_ANNEEACADEMIQUE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="137" y="429" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{classe}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="330" y="78" width="110" height="66"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{etablissement_logo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="2" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="2" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="41" splitType="Stretch">
+			<staticText>
+				<reportElement x="528" y="4" width="248" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pour le conseil de classe et de Discipline]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="628" y="23" width="100" height="18"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Le Directeur]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="319" y="26" width="156" height="13"/>
+				<textElement/>
+				<text><![CDATA[Designed by crecpro formations]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="2" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="/WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:event type="preRenderView" listener="#{groupeUserBean.initEmpty}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Nouveau Groupe Utilisateur
+    </ui:define>
+   
+    <ui:define name="content">
+    <f:view>
+	    <h2>
+	   		<h:outputText value="Nouveau groupe utilisateur"/>
+	   	</h2>
+    
+   		<p:messages id="messages" autoUpdate="true"/>
+   		<br/>
+   	<h:form id="formgroupeUser">
+   	
+   	<p:panel id="panelgroupeUser"  style="margin-bottom:10px;"> 
+   	
+   		
+	    <p:panelGrid columns="2" style="width:100%;" id="perso">	    
+	    		
+		 	<h:outputText value="libellé *"/>	            			
+      		<p:inputText value="#{groupeUserBean.libelle}" id="libelle" required="true" requiredMessage="Libellé du groupe Utilisateur obligatoire"/>
+      		
+   	    	<h:outputText value="Description"/>
+   	    	<p:inputTextarea value="#{groupeUserBean.description}"/>			
+      		
+      		<h:outputText value="Droits d'accès"/>
+      		<p:dataGrid var="habil" value="#{groupeUserBean.habilitations}" paginator="true" rows="2" emptyMessage="Aucun Niveau de role trouvé">  
+   				<p:column>
+				         <p:panel header="#{habil.item.libelle}" style="text-align:center"> 
+				             <h:selectBooleanCheckbox value="#{habil.create}"/> Créer <br/>
+			                 <h:selectBooleanCheckbox value="#{habil.update}"/> Modifier <br/>
+			                 <h:selectBooleanCheckbox value="#{habil.delete}"/> Supprimer <br/>
+			                 <h:selectBooleanCheckbox value="#{habil.view}"/> Visualiser <br/>
+			               
+				         </p:panel>  
+	   				</p:column>
+     		</p:dataGrid>             			
+	    </p:panelGrid>		
+		
+		  <br/>				
+		  <center>	
+		  								
+		 		<p:commandButton value="Enregistrer"  icon="ui-icon-check" id="submitgroupeUser" action="#{groupeUserBean.savegroupeUser}" />
+		 		<p:commandButton value="Annuler" immediate="true" type="reset" icon="ui-icon-close" />	
+		 </center>
+	</p:panel>
+	
+	<p:blockUI block="panelgroupeUser" trigger="submitgroupeUser">  
+        Enregistrement...<br />  
+    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+    </p:blockUI> 
+    
+	</h:form>
+	
+   </f:view>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

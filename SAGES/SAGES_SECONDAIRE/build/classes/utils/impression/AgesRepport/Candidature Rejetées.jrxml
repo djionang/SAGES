@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Candidature Rejetées" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="84"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#99FFCC" hAlign="Center"/>
+		</conditionalStyle>
+	</style>
+	<queryString>
+		<![CDATA[SELECT
+     pre_inscription.`nom` AS pre_inscription_nom,
+     pre_inscription.`prenom` AS pre_inscription_prenom,
+     pre_inscription.`sexe` AS pre_inscription_sexe,
+     pre_inscription.`telephone` AS pre_inscription_telephone,
+     pre_inscription.`datenaissance` AS pre_inscription_datenaissance,
+     etablissement.`acronyme` AS etablissement_acronyme,
+     etablissement.`adresse` AS etablissement_adresse,
+     etablissement.`arrondissement` AS etablissement_arrondissement,
+     etablissement.`codepostal` AS etablissement_codepostal,
+     etablissement.`departement` AS etablissement_departement,
+     etablissement.`devise` AS etablissement_devise,
+     etablissement.`email` AS etablissement_email,
+     etablissement.`logo` AS etablissement_logo,
+     etablissement.`nometab` AS etablissement_nometab,
+     etablissement.`region` AS etablissement_region,
+     etablissement.`siteweb` AS etablissement_siteweb,
+     etablissement.`supprime` AS etablissement_supprime,
+     etablissement.`telephone` AS etablissement_telephone,
+     etablissement.`type` AS etablissement_type,
+     etablissement.`pays` AS etablissement_pays,
+     pre_inscription.`supprime` AS pre_inscription_supprime,
+     pre_inscription.`niveaudemande` AS pre_inscription_niveaudemande,
+     pre_inscription.`etat` AS pre_inscription_etat,
+     pre_inscription.`ANNEEACADEMIQUE` AS pre_inscription_ANNEEACADEMIQUE
+FROM
+     `pre_inscription` pre_inscription,
+     `etablissement` etablissement
+WHERE
+     etat = 'rejette'
+ AND pre_inscription.supprime = false
+ AND codeetablissement = 'ETAB123'
+ AND niveaudemande = 'Tle']]>
+	</queryString>
+	<field name="pre_inscription_nom" class="java.lang.String"/>
+	<field name="pre_inscription_prenom" class="java.lang.String"/>
+	<field name="pre_inscription_sexe" class="java.lang.String"/>
+	<field name="pre_inscription_telephone" class="java.lang.String"/>
+	<field name="pre_inscription_datenaissance" class="java.sql.Date"/>
+	<field name="etablissement_acronyme" class="java.lang.String"/>
+	<field name="etablissement_adresse" class="java.lang.String"/>
+	<field name="etablissement_arrondissement" class="java.lang.String"/>
+	<field name="etablissement_codepostal" class="java.lang.String"/>
+	<field name="etablissement_departement" class="java.lang.String"/>
+	<field name="etablissement_devise" class="java.lang.String"/>
+	<field name="etablissement_email" class="java.lang.String"/>
+	<field name="etablissement_logo" class="java.lang.Object"/>
+	<field name="etablissement_nometab" class="java.lang.String"/>
+	<field name="etablissement_region" class="java.lang.String"/>
+	<field name="etablissement_siteweb" class="java.lang.String"/>
+	<field name="etablissement_supprime" class="java.lang.Boolean"/>
+	<field name="etablissement_telephone" class="java.lang.String"/>
+	<field name="etablissement_type" class="java.lang.String"/>
+	<field name="etablissement_pays" class="java.lang.String"/>
+	<field name="pre_inscription_supprime" class="java.lang.Boolean"/>
+	<field name="pre_inscription_niveaudemande" class="java.lang.String"/>
+	<field name="pre_inscription_etat" class="java.lang.String"/>
+	<field name="pre_inscription_ANNEEACADEMIQUE" class="java.lang.String"/>
+	<background>
+		<band height="752" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="0" y="0" width="573" height="752" backcolor="#FFFFFF"/>
+			</rectangle>
+		</band>
+	</background>
+	<title>
+		<band height="132" splitType="Stretch">
+			<textField>
+				<reportElement x="126" y="4" width="100" height="13"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{etablissement_pays}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="281" y="5" width="91" height="76"/>
+				<imageExpression><![CDATA["coffee.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="9" y="4" width="151" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Republique du ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="15" width="173" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ministére des Enseignements]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="33" y="27" width="115" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Delegation Régionale du]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="41" width="133" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Délégation Departementale de la]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="478" y="44" width="32" height="13"/>
+				<textElement/>
+				<text><![CDATA[BP:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="454" y="56" width="62" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tel:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="459" y="68" width="38" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[site:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="65" y="103" width="398" height="26" backcolor="#CCFFFF"/>
+				<textElement textAlignment="Center">
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[LISTE DES CANDIDATS REJETES DU NIVEAU:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="465" y="105" width="100" height="26" backcolor="#CCFFFF"/>
+				<textElement>
+					<font size="24"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pre_inscription_niveaudemande}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="144" y="15" width="100" height="13"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{etablissement_type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="134" y="27" width="100" height="13"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{etablissement_region}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="41" width="100" height="13"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{etablissement_departement}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="3" width="119" height="17"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{etablissement_nometab}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="424" y="20" width="135" height="16"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{etablissement_adresse}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="424" y="30" width="135" height="14"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{etablissement_devise}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="503" y="44" width="66" height="13"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{etablissement_codepostal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="504" y="56" width="68" height="13"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{etablissement_telephone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="493" y="67" width="74" height="14"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{etablissement_siteweb}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="505" y="109" width="82" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{pre_inscription_ANNEEACADEMIQUE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="498" y="109" width="3" height="20"/>
+				<textElement/>
+				<text><![CDATA[(]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="554" y="109" width="5" height="20"/>
+				<textElement/>
+				<text><![CDATA[)]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="1" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="5" y="3" width="128" height="18"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[NOM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="131" y="3" width="119" height="18"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[PRENOM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="250" y="3" width="123" height="17"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[DATE NAISSANCE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="373" y="2" width="108" height="18"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[TELEPHONE]]></text>
+			</staticText>
+			<line>
+				<reportElement x="6" y="18" width="566" height="1"/>
+			</line>
+			<line>
+				<reportElement x="6" y="2" width="566" height="1"/>
+			</line>
+			<line>
+				<reportElement x="5" y="3" width="1" height="15"/>
+			</line>
+			<line>
+				<reportElement x="133" y="3" width="1" height="15"/>
+			</line>
+			<line>
+				<reportElement x="251" y="3" width="1" height="15"/>
+			</line>
+			<line>
+				<reportElement x="373" y="4" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement x="571" y="3" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="481" y="3" width="92" height="15"/>
+				<textElement/>
+				<text><![CDATA[ETAT]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="5" y="4" width="550" height="17" backcolor="#FFFFFF"/>
+				<textField>
+					<reportElement x="0" y="1" width="125" height="15"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{pre_inscription_nom}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="125" y="1" width="120" height="15"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{pre_inscription_prenom}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="245" y="0" width="123" height="16"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{pre_inscription_datenaissance}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="368" y="0" width="108" height="17"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{pre_inscription_telephone}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<line>
+				<reportElement x="6" y="22" width="566" height="1"/>
+			</line>
+			<line>
+				<reportElement x="5" y="-17" width="1" height="39"/>
+			</line>
+			<line>
+				<reportElement x="133" y="-17" width="1" height="39"/>
+			</line>
+			<line>
+				<reportElement x="251" y="-3" width="1" height="25"/>
+			</line>
+			<line>
+				<reportElement x="373" y="-4" width="1" height="26"/>
+			</line>
+			<line>
+				<reportElement x="571" y="-17" width="1" height="40"/>
+			</line>
+			<textField>
+				<reportElement x="481" y="1" width="91" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{pre_inscription_etat}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="478" y="-17" width="1" height="39"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement x="451" y="-2" width="110" height="20"/>
+				<textElement/>
+				<text><![CDATA[Le Directeur/Proviseur]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="-2" width="279" height="15"/>
+				<textElement/>
+				<text><![CDATA[Veillez informer la direction en cas d'erreurs sur votre nom svp.]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="26" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="6" y="0" width="567" height="24" forecolor="#D0B48E" backcolor="#F2EBDF"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="521" y="0" width="40" height="20" forecolor="#736343"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="441" y="0" width="80" height="20" forecolor="#736343"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="5" y="1" width="197" height="20" forecolor="#736343"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+			<staticText>
+				<reportElement x="257" y="6" width="156" height="13"/>
+				<textElement/>
+				<text><![CDATA[Disigned by crecpro formations]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="3" splitType="Stretch"/>
+	</summary>
+</jasperReport>

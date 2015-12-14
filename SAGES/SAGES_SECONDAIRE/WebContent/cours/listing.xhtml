@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Listing des Cours
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2>Cours enregistrés</h2>
+   		
+   		<br/>
+   		
+   		<p:outputPanel style="width:100%;" id="panel">
+		 	<h:form id="form1">
+   			 
+	            <br/>
+	            
+	            <h:panelGrid columns="2">
+
+	            	
+	            	<h:selectOneMenu value="#{listCoursBean.classe}">
+	            		<f:selectItem itemLabel="-- Classe --" itemValue=""/>
+	            		<f:selectItems value="#{etablissement.listeClasses}"  var="classe" 
+						itemLabel="#{classe.libelle}" itemValue="#{classe.codeClasse}" /> 
+					</h:selectOneMenu>
+	            	
+	            	<p:commandButton icon="ui-icon-search" title="Recharger" actionListener="#{listCoursBean.loadCours}" id="loadcours" update=":panel"/>
+	            
+	            </h:panelGrid>
+            	<br/>
+		    	<p:dataTable id="tablecours" value="#{listCoursBean.cours}" var="cours" emptyMessage="Aucun cours trouvé"
+		    		paginator="true" rows="40" rowsPerPageTemplate="20,40,60,80" sortBy="#{cours.libelle}" sortOrder="ascending" widgetVar="tablecours"
+		    		tableStyleClass="tablelist" paginatorAlwaysVisible="false" rowIndexVar="num">
+			  	     
+			  	    <f:facet name="header">
+			  	    	<p:outputPanel>
+			  	    		<h:outputText value="Recherche"/>
+	                		<p:inputText id="globalFilter" onkeyup="tablecours.filter()"/> 
+	                	</p:outputPanel>
+			  	    </f:facet> 
+			  	     
+			  	    <p:column id="num" headerText="N°" >  
+	            		<h:outputText value="#{num+1}" />  
+	        		</p:column>
+			  	      
+	        		<p:column id="libelle" headerText="Libellé" >  
+	            		<h:outputText value="#{cours.libelle}" />  
+	        		</p:column> 
+	        
+	        		<p:column id="matiere" headerText="Matière" sortBy="#{cours.libellematiere}" >  
+	            		<h:outputText value="#{cours.libellematiere}" />  
+	        		</p:column>
+	        
+					<p:column id="classe" headerText="Classe" sortBy="#{cours.libelleclasse}">  
+			            <h:outputText value="#{cours.libelleclasse}" />
+			        </p:column> 
+			        
+					<p:column id="coef" headerText="Coef">  
+			             <h:outputText value="#{cours.coeficient}" /> 
+			        </p:column> 
+			        
+	        
+			        <p:column id="option" headerText="Options" width="65"> 
+			         	<p:panelGrid columns="4">
+				        	
+						    <h:link  includeViewParams="true" outcome="detailcours" title="Visualiser" >
+						    	<p:graphicImage value="../resources/img/view16.png" style="border:#CCCCCC 1px solid"/>  						        
+						    	<f:param name="codecours" value="#{cours.codecours}"/>						    
+						    </h:link>
+						    
+				            <h:link  includeViewParams="true" id="edit"  title="Editer" outcome="modifiercours">  
+						        <p:graphicImage value="../resources/img/edit16.png" style="border:#CCCCCC 1px solid"/>   
+						        <f:param name="codecours" value="#{cours.codecours}"/>
+						    </h:link>
+						    
+				            <h:link  includeViewParams="true" id="delete" outcome="supprimercours" title="Supprimer">  
+						        <p:graphicImage value="../resources/img/delete16.png" style="border:#CCCCCC 1px solid"/>
+						       <f:param name="codecours" value="#{cours.codecours}"/>
+						   </h:link>
+						    
+				            <h:link  includeViewParams="true" id="enseignant" title="Enseignant" outcome="enseignantcours">  
+						        <p:graphicImage value="../resources/img/handle16.png" style="border:#CCCCCC 1px solid"/>   
+						        <f:param name="codecours" value="#{cours.codecours}"/>
+						    </h:link>
+			            </p:panelGrid>
+			        </p:column> 
+			        <f:facet name="footer">
+			        	<center>
+				 			<p:commandButton value="Imprimer" type="button" icon="ui-icon-print">  
+        						<p:printer target="tablecours" />  
+    						</p:commandButton> 
+    					</center>
+			        </f:facet>
+				</p:dataTable>
+				
+				<br/>
+   			
+   			<center>
+   				<p:commandButton value="Nouveau cours" action="#{navBean.gestcourscreate}" icon="ui-icon-check"/>
+   			</center>
+							
+			</h:form>
+			
+			<p:blockUI block=":panel" trigger=":form1:loadcours">  
+		        Chargement...<br />  
+		    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+		    </p:blockUI>
+			  			
+			<br/>
+   		</p:outputPanel>
+   		
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

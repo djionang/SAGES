@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codecours" value="#{coursBean.codecours}"/>
+	  		<f:event type="preRenderView" listener="#{coursBean.initcours}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Suppression de cours
+    </ui:define>
+   
+    <ui:define name="content">
+    	
+    
+	    <h2>
+	   		<h:outputText value="Supprimer un cours"/>
+	   	</h2>
+	   	
+	   	<p:messages autoUpdate="true"/>
+    
+   	<h:form id="formmodifcours">
+   	
+   	<p:panel id="panel"  style="margin-bottom:10px;"> 
+   		<p:panelGrid columns="2" style="width:100%;" id="coursmodification">	  	    		  
+			<h:outputText value="Matière"/>
+	    	<h:outputText value="#{coursBean.libellematiere}" />	    	
+	    	
+	    	<h:outputText value="Classe"/>
+	    	<h:outputText value="#{coursBean.libelleclasse}"/>
+	    		    		
+		 	<h:outputText value="libellé *"/>	            			
+      		<h:outputText value="#{coursBean.libelle}"/>
+      		
+      		<h:outputText value="description"/>
+      		<h:outputText value="#{coursBean.description}"/>           			
+	    
+	    	<h:outputText value="Coefficient"/>
+      		<h:outputText value="#{coursBean.coeficient}" />          			
+	    
+	    	<h:outputText value="Groupe Matière"/>
+	    	<h:outputText value="#{coursBean.libellegm}"/>          			
+	     </p:panelGrid>	
+												
+		  <center>										
+		 		<p:commandButton value="Supprimer"  id="buttonsubmit" icon="ui-icon-check"  action="#{coursBean.supprimerCours}"/>
+		 									
+		  </center>
+	</p:panel>
+	
+	<p:blockUI block="panel" trigger="buttonsubmit">  
+        Suppression...<br />  
+    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+    </p:blockUI> 
+</h:form>
+   	
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

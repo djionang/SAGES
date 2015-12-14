@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="/WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codecdt" value="#{cdtBean.codecdt}"/>
+	  		<f:event type="preRenderView" listener="#{cdtBean.initcdt}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Suppression entrée Cahier de texte
+    </ui:define>
+   
+    <ui:define name="content">
+    	
+    
+	    <h2>
+	   		<h:outputText value="Supprimer une entrée de cahier de texte"/>
+	   	</h2>
+	   	
+	   	<p:messages autoUpdate="true"/>
+    
+	   	<h:form id="deletecdt">
+	   	
+		   	<p:panel id="panel"  style="margin-bottom:10px;"> 
+		   		<p:panelGrid columns="2" style="width:100%;" id="cdtmodification">	  	    		  
+					<h:outputText value="Titre"/>
+		   		    <h:outputText value="#{cdtBean.libelle}"/>
+		   		    
+		   		    <h:outputText value="Résumé"/>
+		   		    <h:outputText value="#{cdtBean.resume}" />
+		   		    
+		   		    <h:outputText value="Date"/>
+		   		    <h:outputText value="#{cdtBean.datejour}" >
+		   		    	<f:convertDateTime pattern="dd/MM/yyyy"/>
+		   		    </h:outputText>
+		   		    
+		   		    <h:outputText value="Heure début"/>
+				 	<h:outputText value="#{cdtBean.heuredebut}" >
+				 		<f:convertDateTime pattern="HH:mm"/>
+				 	</h:outputText>	    
+		      		
+		      		<h:outputText value="Heure fin"/>
+				 	<h:outputText value="#{cdtBean.heurefin}" >
+				 		<f:convertDateTime pattern="HH:mm"/>
+				 	</h:outputText>          			
+			     </p:panelGrid>	
+														
+				  <center>	
+				  		<br/>									
+				 		<p:commandButton value="Supprimer"  id="buttonsubmit" icon="ui-icon-check"  action="#{cdtBean.supprimerCdt}"/>
+				 		<p:commandButton value="Retour au listing" icon="ui-icon-arrowreturnthick-1-w"  action="#{navBean.gestscoolcdtvue}"/>							
+				  </center>
+			</p:panel>
+			
+			<p:blockUI block="panel" trigger="buttonsubmit">  
+		        Suppression...<br />  
+		    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+		    </p:blockUI> 
+		</h:form>
+   	
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

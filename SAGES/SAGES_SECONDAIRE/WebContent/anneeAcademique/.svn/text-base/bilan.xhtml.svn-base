@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Bilan annuel
+    </ui:define>
+    <ui:define name="content">
+	    <h2>
+	   		<h:outputText value="Bilan séquentiel annuel   "/>
+	   		<h:outputText value="Année académique #{sessionBean.anneeacademique} --" rendered="#{not empty sessionBean.anneeacademique}"/>
+		</h2>
+    <br/>
+   	<h:form id="formens">
+   	
+   	<p:panel id="panelbilan"  style="margin-bottom:10px;"> 
+   	
+   		<p:messages id="messages" autoUpdate="true"/>
+   		
+	    <h:panelGrid columns="3" style="width:100%;" id="perso">	    
+	    	<h:outputText value="Classe"/>	    
+			<h:selectOneMenu value="#{bilanBean.codeclasse}" id="class">
+   	    		<f:selectItems value="#{etablissement.listeClasses}" var="classe" itemLabel="#{classe.libelle}" itemValue="#{classe.codeClasse}"/>
+   	    	</h:selectOneMenu>
+   	    	<p:commandButton value="Visualiser"  icon="ui-icon-check" id="view" action="#{bilanBean.loadBilan}" />
+		 				
+	    </h:panelGrid>		
+		<br/>
+		 
+		<p:barChart/>
+	</p:panel>
+	
+	<p:blockUI block="panelbilan" trigger="view">  
+        Enregistrement...<br />  
+    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+    </p:blockUI> 
+    
+	</h:form>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

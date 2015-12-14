@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Liste des classes d'une option
+   </ui:define>
+   
+   <ui:define name="content">
+   
+   		<h2><h:outputText value="Liste des classes d'une option"/></h2>
+   		<br/>
+   		<p:growl autoUpdate="true"/>
+   		
+   		<h:form id="form1">
+   			
+   			<p:outputPanel  id="panelcentral">
+				<p:panelGrid columns="2" style="width:100%;" id="grid2">
+		   			<p:panel header="Option">
+			   			<h:selectOneMenu value="#{listClasseBean.codeoption}" required="true" requiredMessage="Aucune option sélectionnée">
+			   				<f:selectItem itemLabel="Option" itemValue=""></f:selectItem>
+			   				<f:selectItems value="#{etablissement.listeoptions}" var="option" itemLabel="#{option.codeOption} - #{option.libelle}" itemValue="#{option.codeOption}"/>
+					 		<p:ajax async="true" partialSubmit="true" listener="#{listClasseBean.loadClasses}" update="classes" process="@this"/>
+					 	</h:selectOneMenu >
+		   			</p:panel>
+			    	    
+			    	<p:panel header="Classes" id="classes">
+				   		<p:dataTable value="#{listClasseBean.classesoptions}" id="listClasses" var="classe" rowIndexVar="num"
+				   		emptyMessage="Aucune classe trouvée" sortBy="#{classe.libelle}">  
+					        					  		
+					  		<p:column headerText="" width="10">  
+					            <h:outputText value="#{num+1}" />  
+					        </p:column>
+					  		
+					        <p:column headerText="Code" sortBy="#{classe.codeClasse}">  
+					            <h:outputText value="#{classe.codeClasse}" />  
+					        </p:column>  
+					  
+					        <p:column headerText="Libelle" sortBy="#{classe.libelle}" >  
+					            <h:outputText value="#{classe.libelle}"/>  
+					        </p:column>  
+					        
+					        <p:column headerText="Contenance">  
+					            <h:outputText value="#{classe.contenanceActuelle} / #{classe.effectifMax}" />  
+					        </p:column>					   
+					        
+					    </p:dataTable>
+					    
+					    <f:facet name="footer">
+					    	<center>
+				  				<p:commandButton value="imprimer" type="button" icon="ui-icon-print">
+				  					<p:printer target="listClasses" />  
+				  				</p:commandButton>
+		  					</center>
+					    </f:facet>  
+					    
+			  		</p:panel> 
+			  		  	   			
+			    </p:panelGrid>			    
+			   		   
+			</p:outputPanel>
+			  
+	    </h:form>
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

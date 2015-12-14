@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+    <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codeenseignant" value="#{enseignantBean.codeenseignant}"/>
+	  		<f:event type="preRenderView" listener="#{enseignantBean.initialize}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Edition Enseignant
+    </ui:define>
+   
+    <ui:define name="content">
+    	
+    
+	    <h2>
+	   		<h:outputText value="Modifier l'enseignant -- Code: #{enseignantBean.codeenseignant}--"/>
+	   	</h2>	   	
+   		
+   		<p:messages id="messages" autoUpdate="true"/>
+    
+   	<h:form id="formapplication" enctype="multipart/form-data">
+   	
+   	<p:panel id="panel"  style="margin-bottom:10px;">
+   		<f:facet name="header">
+   			<center>
+   				<p:graphicImage value="#{enseignantBean.photo}"/>
+   			</center>
+   		</f:facet>
+   		
+	    <p:panelGrid columns="2" style="width:90%;" id="perso">	    
+	    			 	
+		 	<h:outputText value="Nom *"/>	            			
+      		<p:inputText value="#{enseignantBean.nomens}" id="nom" required="true" requiredMessage="Nom obligatoire"/>
+      		 	
+		 	<h:outputText value="Prénom"/>	            			
+      		<p:inputText value="#{enseignantBean.prenomens}" id="prenom"/>
+      		
+      		<h:outputText value="Sexe *"/>	            			
+      		<p:selectOneMenu value="#{enseignantBean.sexe}" id="sexe" required="true" requiredMessage="Champ Sexe requis">
+    			<f:selectItems value="#{configuration.sexeItems}"/>
+   	    	</p:selectOneMenu>
+      				
+			<h:outputText value="Adresse *"/>				
+   			<p:inputText value="#{enseignantBean.adresse}" id="adresse" required="true" requiredMessage="Champ Adresse requis"/>
+    		   	    	
+   	    	<h:outputText value="Email"/>			
+      		<p:inputText value="#{enseignantBean.email}" id="email" validator="EmailValidator" validatorMessage="Format Effectif maximal incorrect"/>      		
+       		        		    
+       		<h:outputText value="Telephone *"/>	            			
+      		<p:inputText value="#{enseignantBean.telephone}" id="telephone" validator="PhoneValidator" required="true" requiredMessage="Telephone obligatoire"/>
+      		 	
+		 	<h:outputText value="Civilité"/>	            			
+      		<p:selectOneMenu  value="#{enseignantBean.civilite}" id="civilite">
+    			<f:selectItems value="#{configuration.civiliteItems}"/>
+   	    	</p:selectOneMenu>
+   	    			
+			<h:outputText value="Date arrivée *"/>				
+   			<p:calendar mindate="01/01/1960" required="true"  maxdate="#{configuration.datejour}" pattern="dd/MM/yyyy" value="#{enseignantBean.datearrivee}" id="datearrivee" requiredMessage="Date d'arrivée obligatoire" />
+			   	    	
+   	    	<h:outputText value="Photo"/>			
+      		<p:fileUpload value="#{enseignantBean.photosent}" id="photo" showButtons="false" mode="simple"/>    		
+       		
+       		<h:outputText value="Compétences -- Matières,Niveaux"/>
+			<p:inputTextarea value="#{enseignantBean.competences}"/>      		       		    	    	      		               			
+	     </p:panelGrid>
+	     <br/>
+		 <p:panelGrid columns="2" style="width:90%;">    
+	    	<f:facet name="header">
+	    		<h:outputText value="#{enseignantBean.vacataire?'Enseignant Vacataire':'Enseignant Non Vacataire - Ne pas remplir Ici-'}"/>
+	    	</f:facet>
+	    	<h:outputText value="Salaire Horaire"/>
+			<p:inputText value="#{enseignantBean.salairehoraire}" >
+				<f:convertNumber type="number"/>
+			</p:inputText>
+			
+			<h:outputText value="Nombre d'heures mensuel"/>
+			<p:inputText value="#{enseignantBean.travailmensuel}" >
+				<f:convertNumber integerOnly="true" maxIntegerDigits="4"/>
+			</p:inputText>	 	    
+			       		         	             			
+	     </p:panelGrid>
+	 	  <br/> 									
+		  <center>										
+		 		<p:commandButton value="Mettre à jour"  id="buttonsubmit" icon="ui-icon-check"  action="#{enseignantBean.modifierenseignant}" ajax="false"/>
+		 									
+		  </center>
+	</p:panel>
+	<p:blockUI block="panel" trigger="buttonsubmit">  
+        Mise à jour...<br />  
+    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+    </p:blockUI> 
+</h:form>
+   	
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

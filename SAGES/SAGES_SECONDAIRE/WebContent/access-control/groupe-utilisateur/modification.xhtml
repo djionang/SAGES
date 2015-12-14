@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="/WEB-INF/templates/template.xhtml">
+   
+    <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="idgroupe" value="#{groupeUserBean.idgroupe}"/>
+	  		<f:event type="preRenderView" listener="#{groupeUserBean.initGroupeUser}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Edition de groupe utilisateur
+    </ui:define>
+   
+    <ui:define name="content">
+    
+	    <h2>
+	   		<h:outputText value="Modifier le groupe  #{groupeUserBean.libelle}"/>
+	   	</h2>
+	   	
+	   	<p:messages autoUpdate="true"/>
+	   	
+    	<br/>
+    	
+	   	<h:form id="formmodifgroupeUser">
+	   	
+	   	<p:panel id="panel"  style="margin-bottom:10px;" > 
+	   		<p:panelGrid columns="2" style="width:100%;" id="groupeUsermodification">	  	    		  
+				      		 	
+			 	<h:outputText value="libellé *"/>	            			
+	      		<p:inputText value="#{groupeUserBean.libelle}" id="libelle" required="true" requiredMessage="Libellé de la groupeUser obligatoire"/>
+	      		
+	   	    	<h:outputText value="Description"/>			
+	      		<p:inputTextarea value="#{groupeUserBean.description}" id="description" height="30" width="60"/>
+	       		
+	       		<h:outputText value="Droits d'accès"/>
+	      		<p:dataGrid var="habil" value="#{groupeUserBean.habilitations}" columns="3"  
+	         		 paginator="true" rows="2" emptyMessage="aucun droit trouvé">  
+	   				
+	   				<p:column>
+				         <p:panel header="#{habil.item.libelle}" style="text-align:center"> 
+				             <h:selectBooleanCheckbox value="#{habil.create}"/> Créer <br/>
+			                 <h:selectBooleanCheckbox value="#{habil.update}"/> Modifier <br/>
+			                 <h:selectBooleanCheckbox value="#{habil.delete}"/> Supprimer <br/>
+			                 <h:selectBooleanCheckbox value="#{habil.view}"/> Visualiser <br/>
+			               
+				         </p:panel>  
+	   				</p:column>
+	   				
+	     		</p:dataGrid>
+	       		             			
+		     </p:panelGrid>
+		     <br/>											
+			  <center>										
+			 		<p:commandButton value="Mettre à jour"  id="buttonsubmit" icon="ui-icon-check"  action="#{groupeUserBean.updategroupeUser}"/>
+	 		  		<p:commandButton value="Retour à la liste des groupes" action="#{navBean.listinggroupeuser}" icon="ui-icon-arrowreturnthick-1-w"/>
+	 		  </center>
+		</p:panel>
+		<p:blockUI block="panel" trigger="buttonsubmit">  
+	        Mise à jour...<br />  
+	    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+	    </p:blockUI> 
+	</h:form>
+   	
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

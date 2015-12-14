@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Listing Types d'enseignements
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2>Enseignements</h2>
+   		
+   		<br/>
+   		<p:growl autoUpdate="true" globalOnly="true"/>
+   		<p:scrollPanel style="width:100%;">
+		 	<h:form id="form1">
+   			 
+		    	<p:dataTable id="tableenseignements" value="#{listEnseignementBean.enseignements}" var="ens" emptyMessage="Aucun enseignement enregistré"
+		    		paginator="true" widgetVar="tableEns" tableStyleClass="tablelist" >
+			  	   
+			  	      
+	        		<p:column id="libelle" headerText="Libellé">  
+	            		<h:outputText value="#{ens.libelleens}" />  
+	        		</p:column> 
+	        
+	        		<p:column id="type" headerText="Type">  
+	            		<h:outputText value="#{ens.type}" />  
+	        		</p:column>
+	        
+					<p:column id="Etablissement" headerText="Etablissement">  
+			            <h:outputText value="#{ens.acronymeEtablissement}" />  
+			        </p:column> 
+			        
+	        
+			        <p:column id="option" headerText="Options" width="46"> 
+			         	<h:panelGrid columns="3">
+				        	
+						    <h:link  includeViewParams="true" outcome="detailenseignement" title="Visualiser" >
+						    	<p:graphicImage value="../resources/img/view16.png" style="border:#CCCCCC 1px solid"/>  						        
+						    	<f:param name="libelleens" value="#{ens.libelleens}"/>						    
+						    </h:link>
+						    
+				            <h:link  includeViewParams="true" id="edit"  title="Editer" outcome="modifierenseignement">  
+						        <p:graphicImage value="../resources/img/edit16.png" style="border:#CCCCCC 1px solid"/>   
+						        <f:param name="libelleens" value="#{ens.libelleens}"/>
+						    </h:link>
+						    
+				            <h:link  includeViewParams="true" id="delete" outcome="supprimerenseignement" title="Supprimer">  
+						        <p:graphicImage value="../resources/img/delete16.png" style="border:#CCCCCC 1px solid"/>
+						       <f:param name="libelleens" value="#{ens.libelleens}"/>
+						   </h:link>
+			            </h:panelGrid>
+			        </p:column> 
+			        <f:facet name="footer">
+			        	<center>
+				 			<p:commandButton value="Imprimer" type="button" icon="ui-icon-print">  
+        						<p:printer target="tableenseignements" />  
+    						</p:commandButton> 
+    					</center>
+			        </f:facet>
+				</p:dataTable>
+				
+				<br/>
+   			
+				<center>
+					<p:commandButton value="Nouvel Enseignement" action="#{navBean.etabenseicreate}" icon="ui-icon-check"/>
+				</center>
+				
+			</h:form>
+  			
+			<p:separator/>
+			<br/>
+   		</p:scrollPanel>
+   		
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

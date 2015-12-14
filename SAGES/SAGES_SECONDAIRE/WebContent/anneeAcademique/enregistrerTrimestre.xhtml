@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:event type="preRenderView" listener="#{trimestreBean.initNumeroTrimestre}"/>
+		</f:metadata>
+    </ui:define>
+    
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Nouveau Trimestre
+    </ui:define>
+    <ui:define name="content">
+	    <h2>
+	   		<h:outputText value="Nouveau trimestre"/>
+	   	</h2>
+    <br/>
+    <p:messages id="messages" autoUpdate="true"/>      
+   		
+   	<h:form id="formtrimestre">
+   	
+   	<p:panel id="paneltrimestre"  style="margin-bottom:10px;" >   	
+   		
+    	<h2>
+	   		<h:outputText value="Année académique #{sessionBean.anneeacademique} -- " />
+	   		<h:outputText value=" Du " />
+	   		<h:outputText value="#{sessionBean.datedebutannee}" rendered="#{not empty sessionBean.anneeacademique}">
+	   			<f:convertDateTime pattern="dd/MM/yyyy"/>
+			</h:outputText>
+	   		<h:outputText value=" Au " rendered="#{not empty anneeEnCoursBean.anneeacademique}"/>
+	   		<h:outputText value="#{sessionBean.datefinannee}" rendered="#{not empty sessionBean.anneeacademique}">
+	   			<f:convertDateTime pattern="dd/MM/yyyy"/>
+			</h:outputText>
+		</h2>
+   	
+   		<br/>
+   		<br/>
+   		<p:dataTable id="tabletrimestres" value="#{listTrimestreBean.trimestres}" var="trimestre" emptyMessage="Aucun trimestre enregistré pour l'année en cours"
+    		tableStyleClass="tablelist" >
+	  	   
+	  	    <p:column id="numero" headerText="numero Trim.">  
+           		<h:outputText value="#{trimestre.numero}" />  
+       		</p:column>
+	  	      
+       		<p:column id="datedebut" headerText="Du">  
+           		<h:outputText value="#{trimestre.datedebut}" >
+           			<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:outputText>  
+       		</p:column>      
+       
+			<p:column id="datefin" headerText="Au">  
+	            <h:outputText value="#{trimestre.datefin}" >
+			       <f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:outputText>  
+	        </p:column> 
+	        
+		</p:dataTable>  
+		<br/>
+		<br/>  	
+   		
+	    <p:panelGrid columns="2" style="width:100%;" id="perso">	    
+	    	
+	    	<h:outputText value="Numéro du trimestre *"/>	            			
+      		<p:inputText value="#{trimestreBean.numero}" required="true" requiredMessage="Champ numéro trimestre obligatoire"/>
+      		
+	    		    
+			<h:outputText value="Du *"/>
+			<p:calendar mindate="#{sessionBean.datedebutannee}" maxdate="#{sessionBean.datefinannee}" navigator="true" pattern="dd/MM/yyyy" value="#{trimestreBean.datedebut}" id="datedebut" required="true" requiredMessage="Champ date debut obligatoire" />
+			
+      		<h:outputText value="Au *"/>
+		 	<p:calendar mindate="#{sessionBean.datedebutannee}" maxdate="#{sessionBean.datefinannee}" navigator="true" pattern="dd/MM/yyyy" value="#{trimestreBean.datefin}" id="datedefin" required="true" requiredMessage="Champ date fin obligatoire" />
+			
+      					
+	     </p:panelGrid>		
+		 <br/>
+							
+		  <center>			  								
+		 		<p:commandButton value="Enregistrer"  icon="ui-icon-check" id="submittrimestre" action="#{trimestreBean.saveTrimestre}" />
+		  </center>
+	</p:panel>
+	
+	<p:blockUI block="paneltrimestre" trigger="submittrimestre">  
+        Enregistrement...<br />  
+    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+    </p:blockUI> 
+    
+	</h:form>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

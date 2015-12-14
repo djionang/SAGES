@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codeevaluation" value="#{notesBean.codeevaluation}"/>
+<!-- 	  		<f:viewParam name="codeevaluation" value="#{securityBean.codeevaluation}"/> -->
+	  		<f:event type="preRenderView" listener="#{notesBean.initialize}"/>
+	  	<!-- 	<f:event type="preRenderView" listener="#{securityBean.controlEditNotes}"/> -->
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | editer les notes d'une évaluation
+    </ui:define>
+   
+    <ui:define name="content">
+    <f:view>
+	    <h2>
+	   		<h:outputText value="Notes de l'évaluation #{notesBean.evaluation.libelle}"/>
+	   	</h2>
+	   	<br/>
+   		<p:messages id="messages" autoUpdate="true"/>
+   		
+   		<p:growl autoUpdate="true"/>
+	   	
+	   	<p:outputPanel id="panelnote"  style="margin-bottom:10px;">    	
+	   		
+			<h:form id="formnote">
+				<h:outputText value="Evaluation du "/>
+				<h:outputText value="#{notesBean.evaluation.datedebut}">
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:outputText>
+				<h:outputText value=" #{notesBean.evaluation.codematiere}, #{notesBean.evaluation.codeclasse}"/>
+				
+				<br/>
+				<br/>
+				
+				<p:dataTable value="#{notesBean.compositions}" var="compos" rowIndexVar="ligne" style="width:100%;" 
+					 emptyMessage="Aucune note enregistrée pour cette évaluation" id="data">
+					
+					<f:facet name="header">
+						<h:outputText value="Notes #{notesBean.evaluation.codematiere}, #{notesBean.evaluation.codeclasse}  Séquence #{notesBean.evaluation.numerosequence}"/>
+					</f:facet>
+					
+					<p:column headerText="N°">
+						<h:outputText value="#{ligne+1}"/>
+					</p:column>
+					
+					<p:column headerText="Matricule">
+						<h:outputText value="#{compos.eleve.matricule}"/>
+					</p:column>
+					
+					<p:column headerText="Nom et Prénoms" sortBy="#{compos.eleve.nom}">
+						<h:outputText value="#{compos.eleve.nom} #{compos.eleve.prenom}"/>
+					</p:column>
+					
+					<p:column headerText="Né(e) le:">
+						<h:outputText value="#{compos.eleve.dateNaissance}">
+							<f:convertDateTime pattern="dd/MM/yyyy"/>
+						</h:outputText>
+					</p:column>
+					
+					<p:column headerText="Note">
+						<p:inputText value="#{compos.note}" id="note" maxlength="5" size="5" converterMessage="Impossible de convertir une note entrée"/>
+						<p:watermark for="note" value="0"/>
+					</p:column>
+					
+					<f:facet name="footer">
+						<center>
+							<p:commandButton value="Enregistrer" id="buttonsubmit" icon="ui-icon-check" action="#{notesBean.enregistrerNotes}"/>
+							<p:commandButton value="Importer xls" icon="ui-icon-document" action="#{notesBean.importerXLS}"/>
+							<p:commandButton value="Visualiser" action="#{notesBean.visualiserNotes}" ajax="false"/>
+				 			<p:commandButton value="Retourner" icon="ui-icon-arrowreturnthick-1-w" action="#{navBean.examnotecreate}"/>
+						</center>
+					</f:facet>
+				
+				</p:dataTable>
+				<br/>
+				
+			</h:form>
+			
+			<p:blockUI block="panelnote" trigger=":formnote:data:buttonsubmit">  
+		        Enregistrement...<br />  
+		    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+		    </p:blockUI>
+		</p:outputPanel>
+			
+   </f:view>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../../WEB-INF/templates/template.xhtml">
+   
+    <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codeconvocation" value="#{convocationBean.idconvocation}"/>
+	  		<f:event type="preRenderView" listener="#{convocationBean.initConvocation}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Edition de Convocation
+    </ui:define>
+   
+    <ui:define name="content">
+    
+	    <h2>
+	   		<h:outputText value="Modifier la convocation  #{convocationBean.idconvocation}"/>
+	   	</h2>
+	   	
+	   	<br/>
+	   	
+	   	<p:messages autoUpdate="true"/>
+	   	
+    	<br/>
+    	
+	   	<h:form id="formmodifconvocation">
+	   	
+	   	<p:panel id="panel"  style="margin-bottom:10px;"> 
+	   		<p:panelGrid columns="2" style="width:100%;" id="convocationmodification">	  	    		  
+			
+				<h:outputText value="Elève concerné"/>
+				<h:outputText value="#{convocationBean.matriculeeleve} - #{convocationBean.nomeleve}"/>
+					   	    		
+			 	<h:outputText value="Libellé *"/>
+				<p:inputText value="#{convocationBean.libelle}"/>
+	   	    		
+			 	<h:outputText value="Date Rendez-Vous *"/>
+			 	<p:calendar value="#{convocationBean.dateeffet}" navigator="true" pattern="dd/MM/yyyy HH:mm" required="true" requiredMessage="Date de R.D.V obligatoire"/>	    
+	      		
+	   	    	<h:outputText value="Motif *"/>	            			
+	      		<p:inputTextarea value="#{convocationBean.description}" id="description" required="true" requiredMessage="Motif de la convocation obligatoire"/>
+      			      		         			
+		     </p:panelGrid>
+		     <br/>											
+			  <center>										
+			 		<p:commandButton value="Mettre à jour"  id="buttonsubmit" icon="ui-icon-check"  action="#{convocationBean.modifierConvocation}"/>
+	 		  		<p:commandButton value="Retour à la liste" action="#{navBean.listingconvocations}" icon="ui-icon-arrowreturnthick-1-w" immediate="true"/>
+	 		  </center>
+		</p:panel>
+		<p:blockUI block="panel" trigger="buttonsubmit">  
+	        Mise à jour...<br />  
+	    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+	    </p:blockUI> 
+	</h:form>
+   	
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

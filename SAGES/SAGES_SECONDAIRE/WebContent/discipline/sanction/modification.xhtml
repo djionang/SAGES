@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../../WEB-INF/templates/template.xhtml">
+   
+    <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codesanction" value="#{sanctionBean.idsanction}"/>
+	  		<f:event type="preRenderView" listener="#{sanctionBean.initSanction}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Edition de Sanction
+    </ui:define>
+   
+    <ui:define name="content">
+    
+	    <h2>
+	   		<h:outputText value="Modifier la sanction  #{sanctionBean.idsanction}"/>
+	   	</h2>
+	   	
+	   	<p:messages autoUpdate="true"/>
+	   	
+    	<br/>
+    	
+	   	<h:form id="formmodifsanction">
+	   	
+	   	<p:panel id="panel"  style="margin-bottom:10px;"> 
+	   		<p:panelGrid columns="2" style="width:100%;" id="sanctionmodification">	  	    		  
+			
+				<h:outputText value="Elève concerné"/>
+				<h:outputText value="#{sanctionBean.matriculeeleve} - #{sanctionBean.nomeleve}"/>
+					      		 	
+				<h:outputText value="Type de sanction *"/>
+				<h:selectOneMenu value="#{sanctionBean.codetype}" id="type" required="true" requiredMessage="Type sanction requis">
+	    			<f:selectItems value="#{etablissement.listetypeSanctions}" var="type" itemLabel="#{type.libelle}" itemValue="#{type.id}"/>
+	   	    	</h:selectOneMenu>
+	   	    		
+			 	<h:outputText value="Date effet *"/>
+			 	<p:calendar value="#{sanctionBean.dateeffet}" navigator="true" pattern="dd/MM/yyyy HH:mm" required="true" requiredMessage="Date de prise d'effet obligatoire"/>	    
+	      		
+				<h:outputText value="Durée *"/>				
+	   			<p:outputPanel>
+	   				<p:spinner value="#{sanctionBean.duree}" size="3" required="true" requiredMessage="Durée Sanction Obligatoire" min="0"/>
+	   				<h:outputText value="   "/>
+	   				<h:selectOneMenu value="#{sanctionBean.uniteduree}" >
+	   					<f:selectItem itemLabel="Heures" itemValue="heures"/>
+	   					<f:selectItem itemLabel="Jours" itemValue="jours"/>
+	   					<f:selectItem itemLabel="Semaines" itemValue="semaines"/>
+	   				</h:selectOneMenu>
+	   			</p:outputPanel>
+	   	    	
+	   	    	<h:outputText value="Motif *"/>	            			
+	      		<p:inputTextarea value="#{sanctionBean.motif}" id="motif" required="true" requiredMessage="Motif de la sanction obligatoire"/>
+	      		 
+	      		<h:outputText value="Etat"/>
+	      		<h:selectOneMenu value="#{sanctionBean.annule}">
+					<f:selectItem itemLabel="Annule" itemValue="true"/>
+					<f:selectItem itemLabel="Non annule" itemValue="false"/>
+				</h:selectOneMenu>
+	      		         			
+		     </p:panelGrid>
+		     <br/>											
+			  <center>										
+			 		<p:commandButton value="Mettre à jour"  id="buttonsubmit" icon="ui-icon-check"  action="#{sanctionBean.modifierSanction}"/>
+	 		  		<p:commandButton value="Retour à la liste" action="listing" icon="ui-icon-arrowreturnthick-1-w"/>
+	 		  </center>
+		</p:panel>
+		<p:blockUI block="panel" trigger="buttonsubmit">  
+	        Mise à jour...<br />  
+	    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+	    </p:blockUI> 
+	</h:form>
+   	
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codesection" value="#{sectionBean.codesection}" required="true" requiredMessage="Libelle Section non trouvé"/>
+	  		<f:event type="preRenderView" listener="#{sectionBean.initsection}"/>
+		</f:metadata>
+    </ui:define>
+    
+    
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Mise a jour section
+    </ui:define>
+    <ui:define name="content">
+	    <h2>
+	   		<h:outputText value="Modifier la section : #{sectionBean.codesection}"/>
+	   	</h2>
+    <br/>
+   	<h:form id="formsec">
+   	
+   	<p:panel id="panelsec"  style="margin-bottom:10px;"> 
+   	
+   		<p:messages id="messages" autoUpdate="true"/>
+   		
+	    <p:panelGrid columns="2" style="width:100%;" id="perso">	    
+	    		    
+			<h:outputText value="Libellé*"/>	            			
+      		<p:inputText value="#{sectionBean.libelle}" id="code" required="true" requiredMessage="Libellé seceignement obligatoire"/>
+      		
+      		<h:outputText value="Description"/>	            			
+      		<h:inputTextarea value="#{sectionBean.description}" id="description"/>
+      		 	
+		 	<h:outputText value="Enseignement"/>
+		 	<h:selectOneListbox value="#{sectionBean.enseignement}" required="true" requiredMessage="Champ Enseignement ne peut être vide">
+		 		<f:selectItems value="#{configuration.enseignementItems}"/>
+		 	</h:selectOneListbox>
+      					
+	     </p:panelGrid>		
+		 <br/>
+							
+		  <center>	
+		  								
+		 		<p:commandButton value="Mettre à jour"  icon="ui-icon-check" id="submitsec" action="#{sectionBean.modifySection}" />
+		 		<p:commandButton value="Annuler" immediate="true" type="reset" icon="ui-icon-close"/>	
+		 </center>
+	</p:panel>
+	
+	<p:blockUI block="panelsec" trigger="submitsec">  
+        Mise à jour...<br />  
+    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+    </p:blockUI> 
+    
+	</h:form>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

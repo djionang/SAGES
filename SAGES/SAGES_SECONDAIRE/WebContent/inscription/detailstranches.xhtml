@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Détails Frais d'Inscription
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2><h:outputText value="Détails Frais d'Inscription"/></h2>
+   
+   		<h:form id="form1">
+   			
+			<br/>
+			<p:messages autoUpdate="true"/>
+
+			<p:outputPanel id="optranche">
+				<p:panel id="panelclasse" header="Classe">
+					<p:dataTable var="classe" value="#{etablissement.modeleClasse}" rowKey="#{classe.codeClasse}" id="tabclas"
+						selection="#{listeTrancheBean.selectedClasse}" selectionMode="single" paginator="true" rows="20"  >
+				
+						<p:column id="code" headerText="Code Cl.">
+							<h:outputText value="#{classe.codeClasse}"/>
+						</p:column>
+						
+						<p:column headerText="Libellé">
+							<h:outputText value="#{classe.libelle}"/>				
+						</p:column>
+						
+						<p:column headerText="Option">
+							<h:outputText value="#{classe.option}"/>				
+						</p:column>
+					
+					</p:dataTable>
+					
+					<f:facet name="footer">
+						<center>
+							<p:commandButton id="loadtranche" value="Charger la liste tranches" actionListener="#{listeTrancheBean.chargerTranches}" update="optranche"/>
+						</center>
+					</f:facet>
+					
+				</p:panel>
+				<br/>
+				<p:panel  rendered="#{not empty listeTrancheBean.selectedClasse}" id="pantranche" header="Tranche">
+				
+					<p:dataTable value="#{listeTrancheBean.listeTranchesp}" var="tranche" id="tabeleve" paginator="true" rows="40"
+					emptyMessage="Aucun tranche enregistrée pour cette classe">
+					
+						<f:facet name="header">
+							<h:outputText value="Liste des tranches #{listeTrancheBean.selectedClasse.libelle}"/>
+						</f:facet>
+			              
+			            <p:column id="id" headerText="ID." sortBy="#{tranche.id}">
+							<h:outputText value="#{tranche.id}"/>
+							<f:facet name="footer">
+								<h:outputText value="Total"/>
+							</f:facet>
+						</p:column>
+						
+						  
+						<p:column id="type" headerText="Type">
+							<h:outputText value="#{tranche.type}"/>
+							
+						</p:column>
+						
+						<p:column id="montant" headerText="Montant">
+							<h:outputText value="#{tranche.montant}">
+				   				<f:convertNumber type="currency" currencySymbol="F." />
+							</h:outputText>
+							
+							<f:facet name="footer">
+								<h:outputText value="#{listeTrancheBean.total}">
+					   				<f:convertNumber type="currency" currencySymbol="F." />
+								</h:outputText>
+							</f:facet>
+							
+						</p:column> 
+						
+						<p:column id="delaiversement" headerText="Délai Vers.">
+							<h:outputText value="#{tranche.delaiVersement}">
+								<f:convertDateTime pattern="dd/MM/yyyy"/>
+							</h:outputText>
+						</p:column>
+										
+						
+					</p:dataTable>
+										
+				</p:panel>	
+				
+			</p:outputPanel>
+		
+			
+		    <p:blockUI block="panelclasse"  trigger="loadtranche">  
+		        Chargement...<br />  
+		    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+		    </p:blockUI>
+		    
+		    
+		     
+	    </h:form>
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SUPERIEUR | Bilan financier
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2>Bilan Financier Periodique</h2>
+   		<br/>
+   		<p:messages autoUpdate="true"/>
+   		
+   		<p:outputPanel id="panel" autoUpdate="true">
+	
+		<h:form id="formselectdepense">
+				<p:panel  id="panbilan" header="Bilan en Tableaux" >
+	  			 <p:dataTable value="#{listDepenseBean.depenses}" var="depense" id="tabdepense" paginator="true" widgetVar="table" rows="50" tableStyle="tablelist"
+					emptyMessage="Aucune depense enregistree" sortBy="#{depense.dateenreg}" sortOrder="descending" rowIndexVar="index">
+			              
+			            <p:column id="id" headerText="N°" >
+							<h:outputText value="#{index+1}"/>
+							<f:facet name="footer">
+								<h:outputText value="Total:"/>
+							</f:facet>
+						</p:column>
+						
+						
+						<p:column id="montant" headerText="Montant">
+							<h:outputText value="#{depense.montant}">
+				   				<f:convertNumber type="currency" currencySymbol="F." />
+							</h:outputText>
+							
+							<f:facet name="footer">
+								<h:outputText value="#{listDepenseBean.total}">
+									<f:convertNumber type="currency" currencySymbol="F." />
+								</h:outputText>
+							</f:facet>
+						</p:column>
+						
+						<p:column id="datevers" headerText="Date">
+							<h:outputText value="#{depense.dateenreg}">
+								<f:convertDateTime pattern="dd/MM/yyyy"/>
+							</h:outputText>
+						</p:column>
+						  
+						<p:column id="type" headerText="Pour le type">
+							<h:outputText value="#{depense.typedepense}"/>
+						</p:column>
+						
+					</p:dataTable>
+					
+					<f:facet name="footer">
+						<center>
+						<p:commandButton value="Imprimer Bilan depense"  icon="ui-icon-check" id="imprime" action="#{listDepenseBean.imprimerVersements}" ajax="false"/>	
+						</center>
+				      		</f:facet>
+				</p:panel>
+  		</h:form>
+  		</p:outputPanel>    	
+ 				
+ 			
+   		
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

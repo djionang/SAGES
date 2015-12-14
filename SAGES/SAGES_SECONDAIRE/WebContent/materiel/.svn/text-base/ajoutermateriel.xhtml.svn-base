@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codemateriel" value="#{materielBean.idmateriel}"/>
+	  		<f:event type="preRenderView" listener="#{materielBean.loadMateriel}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Ajouter Matériel 
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2><h:outputText value="Ajouter un matériel"/></h2>
+   		<br/>
+   		<p:messages autoUpdate="true" />
+   		
+		<p:outputPanel id="p" autoUpdate="true">
+			<h:form id="formdroit">
+				<p:panel id="paneleleve" header="Informations matériel">
+					
+					<br/>
+					<center>
+					<p:panelGrid columns="2" rendered="#{not empty materielBean.selectedMateriel}" id="paneleve" columnClasses="label,value" style="width:80%;align:center;">
+												
+						<f:facet name="header">
+							<h:outputText value="Matériel de code #{materielBean.selectedMateriel.codemateriel}"/>
+						</f:facet>
+				            
+				    <h:outputText value="Type Matériel"/>	            			
+		      		<h:outputText value="#{materielBean.selectedMateriel.typemateriel}" id="type"/>
+		      		 	
+				 	<h:outputText value="Designation"/>	            			
+		      		<h:outputText value="#{materielBean.selectedMateriel.designation}" id="designation"/>
+		      		
+		      		<h:outputText value="Quantité"/>	            			
+		      		<h:outputText value="#{materielBean.selectedMateriel.quantite}" id="qd"/>
+		    				      				
+					<h:outputText value="Quantité Bon état"/>				
+		   			<h:outputText value="#{materielBean.selectedMateriel.quantiteF}" id="qdf"/>
+		    		
+		   	    	
+		   	    	<h:outputText value="Prix (Frs)"/>			
+		      		<h:outputText value="#{materielBean.selectedMateriel.prix}" id="prix"/>      		
+		      				
+					<h:outputText value="Date Enregistrement"/>				
+		   			<h:outputText value="#{materielBean.selectedMateriel.dateenreg}">
+						 <f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputText> 
+							
+					</p:panelGrid>
+					</center>
+				</p:panel>
+			</h:form>
+   			<br/>
+   			<h:form id="formajout">
+			   	<p:panel rendered="#{not empty materielBean.selectedMateriel}" id="panelfees" header="Ajout">
+				   	<br/>
+				   	<center>	
+				   		<p:panelGrid columns="2">
+				   			<f:facet name="header">
+				   				<h:outputText value="Ajouter Ici"/>
+				   			</f:facet>
+				   			<h:outputText value="Quantite"/>				
+   							<p:inputText value="#{materielBean.quantite}" id="qd" required="true" requiredMessage="Champ Quantiterequis"/>
+							
+							<h:outputText value="Quantite Bon etat"/>				
+   							<p:inputText value="#{materielBean.quantiteF}" id="qdF" required="true" requiredMessage="Champ Fonctionnel requis"/>
+							
+							<h:outputText value="Prix (Frs)"/>
+							<p:inputText value="#{materielBean.prix}" required="true" requiredMessage="Montant requis" validator="MontantFrValidator"/>
+							
+							<h:outputText value="Date Enregistrement"/>
+			   				<p:calendar value="#{materielBean.dateenreg}" mindate="01/01/1960" maxdate="#{configuration.datejour}" required="true"  pattern="dd/MM/yyyy" requiredMessage="Date de enregistrement requise"/>
+							
+							<f:facet name="footer">
+								<center>
+									<p:commandButton value="Enregistrer"  icon="ui-icon-check" id="submitinscrip" action="#{materielBean.enregMateriel}" ajax="false"/>
+									<p:commandButton value="Annuler" immediate="true" type="reset" icon="ui-icon-close"/>	
+								</center>
+				      		</f:facet>
+				   		</p:panelGrid>
+				 	</center>	      	 	  	  	
+				</p:panel>
+			</h:form>
+		</p:outputPanel>
+	
+		<p:blockUI block=":formajout:panelfees"  trigger=":formajout:submitinscrip">  
+	        Chargement...<br />  
+	    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+	    </p:blockUI>
+	    
+    
+   </ui:define>
+   
+   
+   </ui:composition>
+ 
+</html>

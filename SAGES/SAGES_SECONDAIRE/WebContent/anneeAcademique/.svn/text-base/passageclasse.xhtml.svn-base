@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+       
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Passage classe
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2><h:outputText value="Copie -- Classe et option"/></h2>
+   
+		<br/>
+		<p:messages autoUpdate="true"/>
+		
+		<p:growl autoUpdate="true"/>
+   		
+  		<p:panel id="panglobal">
+   			<p:layout  style="width:100%;height:420px">
+   			
+				 <p:layoutUnit position="west" size="37%" header="Classe Source">
+				 	<h:form>					 
+					 	<h:selectOneListbox value="#{classeBean.codeClasse}" required="true" requiredMessage="Aucune classe source sélectionnée" size="7">
+					 	    <f:selectItems value="#{etablissement.listeClasses}" var="classe" itemLabel="#{classe.codeClasse} - #{classe.libelle}" itemValue="#{classe.codeClasse}" itemDescription="#{classe.libelle}"/>
+					 		<p:ajax async="true" partialSubmit="true" listener="#{listClasseBean.classes}" update=":formtable:tranches" process="@this"/>
+					 	</h:selectOneListbox >
+				 	</h:form>
+				 </p:layoutUnit>
+				 
+				 <p:layoutUnit position="center" size="63%" header="Detail">
+					 <h:form id="formtable">
+				              
+				            <p:column id="id" headerText="Code" sortBy="#{classe.codeClasse}">
+								<h:outputText value="#{classe.codeClasse}"/>
+							</p:column>
+							
+							  
+							<p:column id="columnlabel" headerText="Libellé">
+								<h:outputText value="#{classe.libelle}"/>
+							</p:column>
+							
+							<p:column headerText="Option">
+								<h:outputText value="#{classe.option}">
+					   				<f:convertNumber type="currency" currencySymbol="F." />
+								</h:outputText>
+							</p:column> 
+					</h:form>
+					<br/>
+					
+				 </p:layoutUnit>
+				 
+				 <p:layoutUnit position="south" size="200" header="Annee cible">
+				 	<h:form id="formcible">
+				 		<center>
+						 	<p:column headerText="Annee">
+								<h:outputText value="#{classe.initannee}">
+					   				<f:convertNumber type="currency" currencySymbol="F." />
+								</h:outputText>
+							</p:column>
+						</center>
+					 	
+				 	 	<br/>
+					 	<br/>
+					 	<center>
+					 		<p:commandButton value="Copier" action="#{classeBean.creerclasseN}" id="copier" icon="ui-icon-check"/>
+						</center> 	
+				 	</h:form>
+				 
+				 </p:layoutUnit>
+			</p:layout>
+   		</p:panel>
+		
+		<p:blockUI block="panglobal" trigger=":formcible:copier">  
+	        Enregistrement...<br />  
+	    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+	    </p:blockUI>
+
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:event type="preRenderView" listener="#{sequenceBean.initNumeroSequence}"/>
+		</f:metadata>
+    </ui:define>
+    
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Nouvelle Séquence
+    </ui:define>
+    <ui:define name="content">
+	    <h2>
+	   		<h:outputText value="Nouvelle sequence"/>
+	   	</h2>
+    <br/>    
+    
+    <p:messages id="messages" autoUpdate="true"/>
+   		
+   	<h:form id="formsequence">
+   	
+   	<p:panel id="panelsequence"  style="margin-bottom:10px;">
+   	   		
+	    <h2>
+		   		<h:outputText value="Année académique #{sessionBean.anneeacademique} --" rendered="#{not empty sessionBean.anneeacademique}"/>
+		   		<h:outputText value=" Du " rendered="#{not empty sessionBean.anneeacademique}"/>
+		   		<h:outputText value="#{sessionBean.datedebutannee}" rendered="#{not empty sessionBean.anneeacademique}">
+		   			<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:outputText>
+		   		<h:outputText value=" Au " rendered="#{not empty sessionBean.anneeacademique}"/>
+		   		<h:outputText value="#{sessionBean.datefinannee}" rendered="#{not empty sessionBean.anneeacademique}">
+		   			<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:outputText>
+		</h2>
+   	
+   		<p:dataTable id="tablesequences" value="#{listSequenceBean.sequences}" var="sequence" emptyMessage="Aucune séquence enregistrée pour l'année en cours"
+    		tableStyleClass="tablelist" >
+	  	   
+	  	    <p:column id="numero" headerText="Numero">  
+           		<h:outputText value="#{sequence.numero}" />  
+       		</p:column>
+	  	      
+       		<p:column id="datedebut" headerText="Du ">  
+           		<h:outputText value="#{sequence.datedebut}" >
+           			<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:outputText>  
+       		</p:column>         		
+       
+			<p:column id="datefin" headerText="Au ">  
+	            <h:outputText value="#{sequence.datefin}" >
+			       <f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:outputText>  
+	        </p:column> 
+	        
+	        <p:column id="trimestre" headerText="Trimestre">  
+	            <h:outputText value="#{sequence.trimestre}" />
+	        </p:column>			        
+       
+		</p:dataTable>    	
+   		<br/>
+   		<br/>
+	    <p:panelGrid columns="2" style="width:100%;" id="perso">	    
+	    	
+	    	<h:outputText value="Numéro sequence *"/>	            			
+      		<p:inputText value="#{sequenceBean.numero}" required="true" requiredMessage="Champ Numéro séquence obligatoire"/>
+      		
+	    		    
+			<h:outputText value="date début *"/>
+			<p:calendar mindate="01/01/1960" navigator="true" pattern="dd/MM/yyyy" value="#{sequenceBean.datedebut}" id="datedebut" required="true" requiredMessage="Champ date debut obligatoire" />
+			
+      		<h:outputText value="Date fin *"/>
+		 	<p:calendar mindate="01/01/1960" navigator="true" pattern="dd/MM/yyyy" value="#{sequenceBean.datefin}" id="datefin" required="true" requiredMessage="Champ date fin obligatoire" />
+			
+			<h:outputText value="Trimestre"/>
+		 	<h:selectOneMenu value="#{sequenceBean.trimestre}" id="trimestre" required="true" requiredMessage="Le champ Trimestre ne peut être vide">
+   	    		<f:selectItem itemLabel="Automatique" itemValue="0"/>
+   	    		<f:selectItems value="#{etablissement.listeTrimestres}" var="trimestre" itemLabel="#{trimestre.numero} (Du #{trimestre.datedebut} Au #{trimestre.datefin})" itemValue="#{trimestre.numero}"/>
+   	    	</h:selectOneMenu>
+      					
+	     </p:panelGrid>		
+		 <br/>
+							
+		  <center>			  								
+		 		<p:commandButton value="Enregistrer"  icon="ui-icon-check" id="submitsequence" action="#{sequenceBean.saveSequence}" />
+		  		<p:commandButton value="Retour"  icon="ui-icon-arrowreturnthick-1-w" immediate="true" action="#{navBean.anneeseq}" />
+		  </center>
+	</p:panel>
+	
+	<p:blockUI block="panelsequence" trigger="submitsequence">  
+        Enregistrement...<br />  
+    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+    </p:blockUI> 
+    
+	</h:form>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Listing Classes
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2>Classes enregistrées</h2>
+   		<br/>
+   		<h:form>
+   		<p:scrollPanel style="width:100%;">
+   			
+            
+	    	<p:dataTable id="tableclasses" value="#{listClasseBean.classes}" var="classe" emptyMessage="Aucune classe enregistrée"
+	    		paginator="true" rows="30" rowsPerPageTemplate="30,50,70">
+		  	        
+        		<p:column id="code" headerText="Code C.">  
+            		<h:outputText value="#{classe.codeClasse}" />  
+        		</p:column> 
+        
+        		<p:column id="libelle" sortBy="#{classe.libelle}" headerText="Libellé">  
+            		<h:outputText value="#{classe.libelle}" />  
+        		</p:column> 
+        		
+        
+        		<p:column id="option" headerText="Option" sortBy="#{classe.option}">  
+            		<h:outputText value="#{classe.option}" />  
+        		</p:column> 
+        
+				<p:column id="contenance" headerText="Contenance">  
+		            <h:outputText value="#{classe.contenanceActuelle} / #{classe.effectifMax}" />  
+		        </p:column> 
+        
+		        <p:column id="options" headerText="Options" width="60"> 
+		         	<p:panelGrid columns="4">
+				        	
+					    <h:link  includeViewParams="true" outcome="ressourclassevue" title="Visualiser" >
+					    	<p:graphicImage value="../resources/img/view16.png" style="border:#CCCCCC 1px solid"/>  						        
+					    	<f:param name="codeclasse" value="#{classe.codeClasse}"/>						    
+					    </h:link>
+					    
+			            <h:link  includeViewParams="true" id="edit"  title="Editer" outcome="ressourclasseedit">  
+					        <p:graphicImage value="../resources/img/edit16.png" style="border:#CCCCCC 1px solid"/>   
+					        <f:param name="codeclasse" value="#{classe.codeClasse}"/>
+					    </h:link>
+					    
+			            <h:link  includeViewParams="true" id="delete" outcome="ressourclassedelete" title="Supprimer">  
+					        <p:graphicImage value="../resources/img/delete16.png" style="border:#CCCCCC 1px solid"/>
+					       <f:param name="codeclasse" value="#{classe.codeClasse}"/>
+					   </h:link>
+					   
+					   <h:link  includeViewParams="true" id="programmation" outcome="progclassevue" title="Programmation">  
+					        <p:graphicImage value="../resources/img/handle16.png" style="border:#CCCCCC 1px solid"/>
+					       <f:param name="codeclasse" value="#{classe.codeClasse}"/>
+					   </h:link>
+		            </p:panelGrid>
+			        
+		        </p:column> 
+		
+			</p:dataTable>
+			<br/>
+   			
+   			<center>
+   				<p:commandButton value="Nouvelle classe" action="#{navBean.ressourclassecreate}" icon="ui-icon-check"/>
+   			</center>
+   		</p:scrollPanel>
+   		</h:form>
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

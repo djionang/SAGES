@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Listing Matieres
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2>Matieres enregistrées</h2>
+   		<br/>
+   		<p:growl autoUpdate="true" globalOnly="true"/>
+   			 <h:form id="form1">
+   			<p:panel header="Recherche"> 
+                <p:inputText id="globalFilter" style="width:150px"/>  
+            </p:panel> 
+            <br/>
+            <p:separator/>
+	    	<p:dataTable id="tablematieres" value="#{listMatiereBean.matieres}" var="matiere" emptyMessage="Aucune matiere enregistrée"
+	    		paginator="true" rows="20"  rowsPerPageTemplate="10,20,40" sortBy="#{matiere.libelle}" sortOrder="descending">
+		  	        
+        		<p:column id="code" headerText="Code M.">  
+            		<h:outputText value="#{matiere.codematiere}" />  
+        		</p:column> 
+        
+        		<p:column id="libelle"  sortBy="#{matiere.libelle}" headerText="Libellé">  
+            		<h:outputText value="#{matiere.libelle}" />  
+        		</p:column> 
+        
+        		<p:column id="type" headerText="Animateur Pedagog.">  
+            		<h:outputText value="#{matiere.animateur}" />  
+        		</p:column>         
+			
+		        <p:column id="option" headerText="Options" width="62"> 
+		         	<p:panelGrid columns="4">
+				        	
+					    <h:link  includeViewParams="true" outcome="detailmatiere" title="Visualiser" >
+					    	<p:graphicImage value="../resources/img/view16.png" style="border:#CCCCCC 1px solid"/>  						        
+					    	<f:param name="codematiere" value="#{matiere.codematiere}"/>						    
+					    </h:link>
+					    
+			            <h:link  includeViewParams="true" id="edit"  title="Editer" outcome="matiereedit">  
+					        <p:graphicImage value="../resources/img/edit16.png" style="border:#CCCCCC 1px solid"/>   
+					        <f:param name="codematiere" value="#{matiere.codematiere}"/>
+					    </h:link>
+					    
+			            <h:link  includeViewParams="true" id="delete" outcome="matieredelete" title="Supprimer">  
+					        <p:graphicImage value="../resources/img/delete16.png" style="border:#CCCCCC 1px solid"/>
+					       	<f:param name="codematiere" value="#{matiere.codematiere}"/>
+					   </h:link>
+					   
+					   <h:link  includeViewParams="true" id="animateur" outcome="matiereanimateur" title="Animateur pédagogique">  
+					        <p:graphicImage value="../resources/img/handle16.png" style="border:#CCCCCC 1px solid"/>
+					       	<f:param name="codematiere" value="#{matiere.codematiere}"/>
+					   </h:link>
+					   
+			         </p:panelGrid>
+			         
+		        </p:column> 
+		
+			</p:dataTable>
+			
+			<br/>
+   			
+			<center>
+				<p:commandButton value="Nouvelle Matière" action="#{navBean.gestmatcreate}" icon="ui-icon-check"/>
+			</center>
+			</h:form>
+  			
+  			
+		<p:separator/>
+		<br/>
+   		
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

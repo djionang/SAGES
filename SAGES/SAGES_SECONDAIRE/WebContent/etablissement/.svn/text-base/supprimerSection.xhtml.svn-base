@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codesection" value="#{sectionBean.codesection}" required="true" requiredMessage="Libelle Section non trouvé"/>
+	  		<f:event type="preRenderView" listener="#{sectionBean.initsection}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Suppression Section
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2>section <h:outputText value="#{sectionBean.codesection}"/></h2>
+   		<br/>
+   		<p:messages/>
+	   <h:form id="formdisplay">
+	   <p:panel id="panelsection">
+	   
+	   		<h:panelGrid columns="2" style="width:100%;" id="perso" columnClasses="label,value">	    
+	    
+				<h:outputText value="Libellé"/>	            			
+       			<h:outputText value="#{sectionBean.libelle}"/>
+				
+				
+				<h:outputText value="Description"/>	            			
+       			<h:outputText value="#{sectionBean.description}"/>
+				
+			 	<h:outputText value="Enseignement"/>	            			
+       			<h:outputText value="#{sectionBean.enseignement}"/>
+       		
+				<f:facet name="footer">
+					<center>
+						<br/>
+						<p:commandButton value="Confirmation de suppression"  id="submitsection" icon="ui-icon-close"  action="#{sectionBean.deleteSection}"/>
+					</center>
+				
+				</f:facet>
+	   	</h:panelGrid>	  
+	    
+	   </p:panel>
+	   <p:blockUI block="panelsection" trigger="submitsection">  
+        Suppression...<br />  
+    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+    </p:blockUI>
+	   </h:form>
+      
+   </ui:define>
+   
+   
+   </ui:composition>
+ 
+</html>

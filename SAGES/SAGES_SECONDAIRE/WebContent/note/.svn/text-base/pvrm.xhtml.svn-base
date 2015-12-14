@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="/WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Impression procès verbal Sequentiel + Moyenne
+    </ui:define>
+   
+    <ui:define name="content">
+	    <h2>
+	   		<h:outputText value="Impression PVR"/>
+	   	</h2>
+	   	<br/>
+   		<p:growl id="messages" autoUpdate="true"/>
+	   	
+	   	<p:outputPanel id="panelbulletin"  style="margin-bottom:10px;">    	
+	   		<center>
+		   		<p:ajaxStatus>
+					 <f:facet name="start">
+						 <p:graphicImage value="/resources/img/loading.gif" />
+					 </f:facet>
+					 <f:facet name="complete">
+							 <h:outputText value="" />
+					</f:facet>
+				</p:ajaxStatus>
+			</center>
+			
+	   		<h:form id="formbulletin">	   			
+				
+				<p:panel id="panel">
+				
+					<f:facet name="header">
+						Etablissement: #{sessionBean.codeetablissement}   		
+					    <h:panelGrid columns="2" style="width:100%;" id="f1">	    
+					    	<h:panelGroup>
+						    	<h:outputText value="Séquence"/>	            			
+					      		<h:selectOneMenu value="#{printBullBean.portee}" required="true" requiredMessage="Séquence ou trimestre obligatoire" converter="javax.faces.Integer">
+					    			
+					    			<f:selectItems value="#{etablissement.listesequences}" var="sequence" itemLabel="Séquence #{sequence.numero}" itemValue="#{sequence.numero}" itemDescription="Séquence #{sequence.numero}"/>
+					   	    	</h:selectOneMenu>
+							</h:panelGroup>
+							
+							<h:panelGroup>  	    	
+								<h:outputText value="Classe *"/>				
+			   						<h:selectOneMenu value="#{printBullBean.codeclasse}" id="classe" required="true" requiredMessage="Classe concernée Obligatoire">
+			    					<f:selectItems value="#{etablissement.listeClasses}" var="classe" itemLabel="#{classe.libelle}" itemValue="#{classe.codeClasse}" itemDescription="#{classe.libelle}"/>
+			   	    			</h:selectOneMenu>
+		   	    			</h:panelGroup>
+						</h:panelGrid>	
+								
+						<br/>
+					</f:facet>
+					
+					<f:facet name="footer">
+						<center>
+							<p:commandButton action="#{printBullBean.telechargerPVRM}" value="Imprimer" icon="ui-icon-print" ajax="false"/>
+						</center>
+					</f:facet>
+					
+				</p:panel>
+			</h:form>
+				 
+		</p:outputPanel>
+				
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

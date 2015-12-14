@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="/WEB-INF/templates/template.xhtml">
+   
+    <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codepartie" value="#{partieCoursBean.codepartie}"/>
+	  		<f:event type="preRenderView" listener="#{partieCoursBean.initpartie}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Edition Chapitre - Partie Cours
+    </ui:define>
+   
+    <ui:define name="content">
+    
+	    <h2>
+	   		<h:outputText value="Modifier le chapitre (la partie) d'un cours"/>
+	   	</h2>
+	   	
+	   	<p:messages autoUpdate="true"/>
+	   	
+    	<br/>
+    	
+	   	<h:form id="formmodifcours">
+	   	
+	   	<p:panel id="panel"  style="margin-bottom:10px;"> 
+	   		<p:panelGrid columns="2" style="width:100%;" id="coursmodification">	  	    		  
+				      		 	
+			 	<h:outputText value="Libellé *"/>
+	   		    <p:inputText value="#{partieCoursBean.libelle}" required="true" requiredMessage="Libellé obligatoire"/>
+	   		    
+	   		    <h:outputText value="Description *" required="true" requiredMessage="Description obligatoire"/>
+	   		    <p:inputTextarea value="#{partieCoursBean.description}"/>
+	   		    
+	   		    <h:outputText value="Programée Du"/>
+	   		    <p:calendar value="#{partieCoursBean.datedebut}" navigator="true" pattern="dd/MM/yyyy HH:mm" required="true" requiredMessage="Date Debut obligatoire"/>
+	   		    
+	   		    <h:outputText value="Au"/>
+			 	<p:calendar value="#{partieCoursBean.datefin}" navigator="true" pattern="dd/MM/yyyy HH:mm" required="true" requiredMessage="Date Finobligatoire"/>	    
+		      		          			
+		     </p:panelGrid>	
+		     <br/>										
+			 <center>										
+			 	<p:commandButton value="Mettre à jour"  id="buttonsubmit" icon="ui-icon-check"  action="#{partieCoursBean.modifierPartieCours}"/>
+	 		 	<p:commandButton value="Annuler" action="#{navBean.gestcourspartiecreate}" icon="ui-icon-arrowreturnthick-1-w" immediate="true"/>
+	 		 </center>
+		</p:panel>
+		
+		<p:blockUI block="panel" trigger="buttonsubmit">  
+	        Mise à jour...<br />  
+	    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+	    </p:blockUI> 
+	    
+	</h:form>
+   	
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

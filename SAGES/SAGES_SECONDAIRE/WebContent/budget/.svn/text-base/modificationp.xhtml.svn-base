@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+    <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="idprevision" value="#{previsionBean.idprevision}"/>
+	  		<f:event type="preRenderView" listener="#{previsionBean.initialize}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Edition de prévision
+    </ui:define>
+   
+    <ui:define name="content">
+    	
+    
+	    <h2>
+	   		<h:outputText value="Modifier le prévision -- Code: #{previsionBean.codeprevision}--"/>
+	   	</h2>
+    
+   	<h:form id="formapplication">
+   	
+   	<p:panel id="panel"  style="margin-bottom:10px;"> 
+   		
+   		<p:messages id="messages" autoUpdate="true"/>
+   		
+	    <p:panelGrid columns="2" style="width:100%;" id="f1">	    	    	
+			<h:outputText value="Type prévision"/>				
+			<h:selectOneMenu value="#{previsionBean.typeprevision}" id="type" required="true" requiredMessage=""  editable="true">
+      			<f:selectItems value="#{configuration.typesPrevisionItems}"/>
+			</h:selectOneMenu> 	
+			<h:outputText value="Description"/>				
+   			<p:inputTextarea rows="6" cols="33" value="#{previsionBean.description}" id="description"/>
+   			
+   			<h:outputText value="Montant prévision"/>				
+   			<p:inputText value="#{previsionBean.montant}" id="montant" required="true" requiredMessage="Champ montant requis" validator="MontantFrValidator"/>
+	
+			<h:outputText value="Date Enregistrement"/>
+			<p:calendar value="#{previsionBean.dateenreg}" mindate="01/01/1960" maxdate="#{configuration.datejour}" required="true"  pattern="dd/MM/yyyy" requiredMessage="Date de enregistrement requise"/>
+
+		</p:panelGrid> 
+	 	  <br/> 									
+		  <center>										
+		 		<p:commandButton value="Mettre à jour"  id="buttonsubmit" icon="ui-icon-check"  action="#{previsionBean.modifierprevision}" update="panel"/>
+		 									
+		  </center>
+	</p:panel>
+	<p:blockUI block="panel" trigger="buttonsubmit">  
+        Mise à jour...<br />  
+    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+    </p:blockUI> 
+</h:form>
+   	
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

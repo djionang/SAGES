@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/enseignement
+END
+MatiereBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/enseignement/MatiereBean.java
+END
+ListPartieCoursBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/enseignement/ListPartieCoursBean.java
+END
+ListCoursBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/enseignement/ListCoursBean.java
+END
+ListGroupeMatiereBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/enseignement/ListGroupeMatiereBean.java
+END
+PartieCoursBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/enseignement/PartieCoursBean.java
+END
+CoursBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/enseignement/CoursBean.java
+END
+GroupeMatiereBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/enseignement/GroupeMatiereBean.java
+END
+ListCdtBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/enseignement/ListCdtBean.java
+END
+CdtBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/enseignement/CdtBean.java
+END
+ListMatiereBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/ages/beans/enseignement/ListMatiereBean.java
+END

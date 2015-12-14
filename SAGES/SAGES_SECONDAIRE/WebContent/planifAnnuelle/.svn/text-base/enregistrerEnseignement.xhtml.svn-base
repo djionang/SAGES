@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Nouveau type d'enseignement
+    </ui:define>
+    <ui:define name="content">
+	    <h2>
+	   		<h:outputText value="Enseignement"/>
+	   	</h2>
+    <br/>
+   	<h:form id="formens">
+   	
+   	<p:panel id="panelens"  style="margin-bottom:10px;"> 
+   	
+   		<p:messages id="messages" autoUpdate="true"/>
+   		
+	    <p:panelGrid columns="2" style="width:100%;" id="perso">	    
+	    		    
+			<h:outputText value="Libellé*"/>	            			
+      		<p:inputText value="#{enseignementBean.libelleens}" id="code" required="true" requiredMessage="Libellé enseignement obligatoire"/>
+      		 	
+		 	<h:outputText value="Type"/>	            			
+      		<p:inputText value="#{enseignementBean.type}" id="type" required="true" requiredMessage="Champ Type obligatoire"/>
+      		
+      		<h:outputText value="Description"/>	            			
+      		<h:inputTextarea value="#{enseignementBean.description}" id="description"/>
+      		 
+      		<h:outputText value="Etablissement"/>
+		 	<h:selectOneListbox value="#{enseignementBean.etablissement}" required="true" requiredMessage="Champ Etablissement ne peut etre vide">
+		 		<f:selectItems value="#{configuration.etablissementItems}"/>
+		 	</h:selectOneListbox>			
+	     </p:panelGrid>		
+		 <br/>
+							
+		  <center>	
+		  								
+		 		<p:commandButton value="Enregistrer"  icon="ui-icon-check" id="submitens" action="#{enseignementBean.saveEnseignement}" />
+		 		<p:commandButton value="Annuler" immediate="true" type="reset" icon="ui-icon-close"/>	
+		 </center>
+	</p:panel>
+	
+	<p:blockUI block="panelens" trigger="submitens">  
+        Enregistrement...<br />  
+    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+    </p:blockUI> 
+    
+	</h:form>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

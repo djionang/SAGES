@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:t="http://myfaces.apache.org/tomahawk">
+
+   <ui:composition template="/WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:event type="preRenderView" listener="#{compteBean.initdataUser}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Mon Compte
+    </ui:define>
+   
+    <ui:define name="content">
+    	
+	    <h2>
+	   		<h:outputText value="Compte Utilisateur #{compteBean.nom}"/>
+	   	</h2>
+    	<br/>
+    	
+    	<p:messages autoUpdate="true"/>
+   		
+  		<h:form id="form">
+  			<center>
+	  			<p:panelGrid columns="2" columnClasses="label,value" style="width:80%;" id="panel">
+	  				<h:outputText value="Nom"/>
+	  				<h:outputText value="#{compteBean.nom}"/>
+	  				
+	  				<h:outputText value="Login"/>
+	  				<p:inputText value="#{compteBean.login}"/>
+	  				
+	  				<h:outputText value="Ancien Mot de passe"/>
+	  				<p:password value="#{compteBean.ancienmotdepasse}"/>
+	  				
+	  				<h:outputText value="Modifier Mot de passe"/>
+	  				<p:password id="pwd1" value="#{compteBean.password}" feedback="false" match="pwd2" label="Mot de passe1" required="true"/>
+	  				  				
+	  				<h:outputText value="Confirmer Mot de passe"/>
+	  				<p:password id="pwd2" value="#{compteBean.password}" feedback="false" label="Mot de passe2" required="true"/>
+	  				
+	  				
+	  			
+		  			<f:facet name="footer">
+	   						<center>
+	   							<p:commandButton value="Mettre à jour" actionListener="#{compteBean.updateAdmin}" icon="ui-icon-check" id="btn"/>
+	   						</center>   				
+	   				</f:facet>
+	  				
+	  			</p:panelGrid>
+	  			<br/>
+	  			
+  			</center> 		
+  		
+   		</h:form>
+		
+		<p:blockUI block=":form:panel" trigger=":form:btn">  
+		   Connexion...<br />  
+	    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+	    </p:blockUI>
+   	
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codeclasse" value="#{classeBean.codeClasse}" required="true" requiredMessage="Code classe Manquant"/>
+	  		<f:event type="preRenderView" listener="#{classeBean.initialize}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Visualiser Classe
+    </ui:define>
+   
+    <ui:define name="content">    	
+    
+	    <h2>
+	   		<h:outputText value="Visualiser la classe -- Code: #{classeBean.codeClasse} --"/>
+	   	</h2>
+	   	
+	   	<p:messages autoUpdate="true"/>
+    
+	   	<h:form id="formapplication">
+	   	
+		   	<p:panel id="panel"  style="margin-bottom:10px;"> 
+		   		
+			     <p:panelGrid columns="2" style="width:80%;" id="perso" columnClasses="label,value">	    
+			    			 	
+				 	<h:outputText value="libellé"/>	            			
+		      		<h:outputText value="#{classeBean.libelle}" id="libelle"/>
+		      		
+		      		<h:outputText value="Niveau"/>				
+		   			<h:outputText value="#{classeBean.niveau}" id="niveau"/>
+		   	    	
+		      		
+					<h:outputText value="Option de la classe"/>				
+		   			<h:outputText value="#{classeBean.option}" id="option"/>
+		   	    	
+		   	    	<h:outputText value="Effectif"/>			
+		      		<h:outputText value="#{classeBean.contenanceActuelle}" id="effectif"/> 
+		   	    	
+		   	    	<h:outputText value="Effectif maximal"/>			
+		      		<h:outputText value="#{classeBean.effectifMax}" id="effectifmax"/>      
+		      		
+		      		<h:outputText value="Délégué 1"/>			
+		      		<h:outputText value="#{classeBean.delegue1}" id="delegue1"/> 
+		      		
+		      		<h:outputText value="Délégué 2"/>			
+		      		<h:outputText value="#{classeBean.delegue2}" id="delegue2"/> 
+		      		
+		      		<h:outputText value="Enseignant principal"/>			
+		      		<h:outputText value="#{classeBean.enseignantPrincipal}" id="enseignantprinc"/> 		
+		       		    	    	      		               			
+			     </p:panelGrid>		
+			 	   <br/>									
+				  <center>										
+				 		<p:commandButton value="retour à la liste"  id="returnbtn" icon=""  action="#{navBean.ressourclasselisting}"/>
+				 									
+				  </center>
+				
+			</p:panel>
+			
+		</h:form>
+   	
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

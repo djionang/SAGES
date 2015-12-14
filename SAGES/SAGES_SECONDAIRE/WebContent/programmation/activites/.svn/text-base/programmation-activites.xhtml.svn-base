@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="/WEB-INF/templates/template.xhtml">
+      
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Programmation des activités
+   </ui:define>
+   
+   <ui:define name="content">
+   
+   		<h2><h:outputText value="Programmation activités"/></h2>
+   		<br/>
+   		<p:growl autoUpdate="true"/>
+   		
+   		<h:form id="form1">
+   			
+   			<p:outputPanel  id="panelcentral">
+			    	    
+			    	<p:panel header="Programmation activités #{sessionBean.}" id="table">
+				   		<p:schedule draggable="false" value="#{timeEvtBean.modeleEvt}" maxTime="19" minTime="6" timeZone="EET"/>
+					    
+					    <f:facet name="footer">
+					    	<center>
+					    		<p:commandButton value="Ajouter" action="#{navBean.navajoutertimetable}" icon="ui-icon-check" rendered="#{not empty timeClasseBean.codeclasse}"/>
+				  				<p:commandButton value="Listing" action="#{navBean.naveditertimetable}" icon="ui-icon-pencil" rendered="#{not empty timeClasseBean.codeclasse}"/>
+				  				
+		  					</center>
+					    </f:facet>  
+					    
+			  		</p:panel> 	    
+			   		   
+			</p:outputPanel>
+			  
+	    </h:form>
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

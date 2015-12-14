@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="libellegm" value="#{gmBean.libelle}"/>
+	  		<f:event type="preRenderView" listener="#{gmBean.initgm}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Suppression du groupe matiere
+    </ui:define>
+   
+    <ui:define name="content">       	
+    
+	    <h2>
+	   		<h:outputText value="Supprimer le groupe -- : #{gmBean.libelle} --"/>
+	   	</h2>
+	   	
+	   	<p:messages autoUpdate="true"/>
+	   	
+	   	<br/>
+    
+	   	<h:form id="formmodifgm">
+	   	
+		   	<p:panel id="panel"  style="margin-bottom:10px;"> 
+		   		<p:panelGrid columns="2" style="width:100%;" id="gmmodification" columnClasses="label,value">	  	    		  
+					      		 	
+				 	<h:outputText value="libellé"/>	            			
+		      		<h:outputText value="#{gmBean.libelle}" id="libelle"/>
+		      		
+		      		<h:outputText value="description"/>
+		      		<h:outputText value="#{gmBean.description}"/>          			
+			     </p:panelGrid>	
+				
+				 <br/>
+														
+				 <center>										
+				 	<p:commandButton value="Supprimer"  id="buttonsubmit" icon="ui-icon-check"  action="#{gmBean.supprimergm}"/>
+				 </center>
+			</p:panel>
+			
+			<p:blockUI block="panel" trigger="buttonsubmit">  
+		        Suppression...<br />  
+		    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+		    </p:blockUI> 
+		</h:form>
+   	
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

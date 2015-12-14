@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Nouvelle Sanction
+    </ui:define>
+   
+    <ui:define name="content">
+    <f:view>
+	    <h2>
+	   		<h:outputText value="Nouvelle sanction"/>
+	   	</h2>
+    
+   		<p:messages id="messages" autoUpdate="true"/>
+   		<br/>
+   	<h:form id="formsanction">
+   	
+   	<p:panel id="panelsanction"  style="margin-bottom:10px;"> 
+   		<p:panelGrid columns="2" style="width:100%;" id="grid2">
+   			<p:panel>
+	   			<h:selectOneMenu value="#{sanctionBean.codeclasse}" required="true" requiredMessage="Aucune classe sélectionnée">
+	   				<f:selectItem itemLabel="Classe" itemValue="" itemDescription=""/>
+			 	    <f:selectItems value="#{etablissement.listeClasses}" var="classe" itemLabel="#{classe.codeClasse} - #{classe.libelle}" itemValue="#{classe.codeClasse}" itemDescription="#{classe.libelle}"/>
+			 		<p:ajax async="true" partialSubmit="true" listener="#{sanctionBean.loadEleves}" update="eleves" process="@this"/>
+			 	</h:selectOneMenu >
+   			</p:panel>
+	    	    
+	    	<p:panel id="paneleves" header="Elèves">
+	   			<h:selectManyListbox value="#{sanctionBean.elevescibles}" style="max-height:600px;" required="true" requiredMessage="Aucun élève sélectionné" size="15" id="eleves" validatorMessage="Erreur de validation des données">
+			 		<f:selectItems value="#{sanctionBean.eleves}" var="eleve" itemLabel="#{eleve.matricule} - #{eleve.nom} #{eleve.prenom}" itemValue="#{eleve.matricule}" itemDescription="Né le: #{eleve.dateNaissance}"/>
+			 	</h:selectManyListbox>
+   			</p:panel>   	   			
+	    </p:panelGrid>		
+	    <br/>
+	    <p:panelGrid columns="2" style="width:100%;" id="grid1">
+   		    
+			<h:outputText value="Type de sanction *"/>
+			<h:selectOneMenu value="#{sanctionBean.codetype}" id="type" required="true" requiredMessage="Type sanction requis">
+    			<f:selectItems value="#{etablissement.listetypeSanctions}" var="type" itemLabel="#{type.libelle}" itemValue="#{type.id}"/>
+   	    	</h:selectOneMenu>
+   	    		
+		 	<h:outputText value="Date effet *"/>
+		 	<p:calendar value="#{sanctionBean.dateeffet}" navigator="true" pattern="dd/MM/yyyy HH:mm" required="true" requiredMessage="Date de prise d'effet obligatoire"/>	    
+      		
+			<h:outputText value="Durée *"/>				
+   			<p:outputPanel>
+   				<p:spinner value="#{sanctionBean.duree}" size="3" required="true" requiredMessage="Durée Sanction Obligatoire" min="0"/>
+   				<h:outputText value="   "/>
+   				<h:selectOneMenu value="#{sanctionBean.uniteduree}" >
+   					<f:selectItem itemLabel="Heures" itemValue="heures"/>
+   					<f:selectItem itemLabel="Jours" itemValue="jours"/>
+   					<f:selectItem itemLabel="Semaines" itemValue="semaines"/>
+   				</h:selectOneMenu>
+   			</p:outputPanel>
+   	    	
+   	    	<h:outputText value="Motif *"/>	            			
+      		<p:inputTextarea value="#{sanctionBean.motif}" id="motif" required="true" requiredMessage="Motif de la sanction obligatoire"/>
+      		
+		</p:panelGrid>
+		  <br/>				
+		  <center>			  								
+		 		<p:commandButton value="Enregistrer"  icon="ui-icon-check" id="submitsanction" action="#{sanctionBean.saveSanction}" />
+		 		<p:commandButton value="Annuler" immediate="true" type="reset" icon="ui-icon-close" />	
+		 </center>
+	</p:panel>
+	
+	<p:blockUI block="panelsanction" trigger="submitsanction">  
+        Enregistrement...<br />  
+    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+    </p:blockUI> 
+    
+	</h:form>
+	
+   </f:view>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

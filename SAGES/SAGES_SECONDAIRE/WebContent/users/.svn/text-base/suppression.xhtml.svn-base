@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:t="http://myfaces.apache.org/tomahawk">
+
+   <ui:composition template="/WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+   			<f:viewParam name="user" value="#{compteBean.idcompte}"/>
+	  		<f:event type="preRenderView" listener="#{compteBean.initUserLoaded}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Désactivation utilisateur
+    </ui:define>
+   
+    <ui:define name="content">
+    	
+	    <h2>
+	   		<h:outputText value="Compte Utilisateur #{compteBean.nom}"/>
+	   	</h2>
+    	<br/>
+    	
+    	<p:messages autoUpdate="true"/>
+   		
+   		<h:form id="formuser">
+	  		<p:panel id="panel">
+	  			<p:panelGrid columns="2" columnClasses="label,value" style="width:80%;">
+	  					  				
+	  				<h:outputText value="Login"/>
+	  				<h:outputText value="#{compteBean.login}"/>
+	  				
+	  				<h:outputText value="Nom"/>
+	  				<h:outputText value="#{compteBean.nom} #{compteBean.prenom}"/>
+	  				
+	  				<h:outputText value="Groupe Utilisateur"/>
+	  				<h:selectManyCheckbox value="#{compteBean.groupesusers}">
+	  					<f:selectItems value="#{etablissement.groupesUtilisateurs}" var="groupe" itemLabel="#{groupe.libelle}" itemValue="#{groupe.idgroupe}" itemDescription="#{groupe.description}" itemDisabled="true"/>
+	  				</h:selectManyCheckbox>
+	  			
+		  			<f:facet name="footer">
+		  				<br/>
+   						<center>
+   							<p:commandButton value="Supprimer" action="#{compteBean.desactivateUser}" icon="ui-icon-check" id="save"/>
+   							<p:commandButton value="Retourner à la liste" action="listing"  immediate="true" icon="ui-icon-arrowreturnthick-1-w"/>
+   						</center>   				
+	   				</f:facet>
+	  				
+	  			</p:panelGrid>
+	   		</p:panel>
+		    
+   		</h:form>
+   		
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="/WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Délégués d'une classe
+   </ui:define>
+   
+   <ui:define name="content">
+   
+   		<h2><h:outputText value="Liste des délégués d'une classe"/></h2>
+   		<br/>
+   		<p:growl autoUpdate="true"/>
+   		
+   		<h:form id="form1">
+   			
+   			<p:outputPanel  id="panelcentral">
+		   			<p:panel header="Classe">
+			   			<h:selectOneMenu value="#{deleguesBean.codeclasse}">
+			   				<f:selectItem itemLabel="Classe" itemValue=""></f:selectItem>
+			   				<f:selectItems value="#{etablissement.listeClasses}" var="classe" itemLabel="#{classe.codeClasse} - #{classe.libelle}" itemValue="#{classe.codeClasse}"/>
+					 		<p:ajax async="true" partialSubmit="true" listener="#{deleguesBean.loadClasses}" update="classes" process="@this"/>
+					 	</h:selectOneMenu >
+		   			</p:panel>
+			    	<br/>
+			    	<br/>    
+			    	<p:panel header="Délégués" id="delegues">
+				   		<p:dataTable value="#{deleguesBean.classes}" id="classes" var="classe" rowIndexVar="num"
+				   		emptyMessage="Aucun délégué de classe trouvé">  
+					        <f:facet name="header">
+					        	<h:outputText value="Délégués de classes"/>
+					        </f:facet>		
+					        			  		
+					  		<p:column headerText="" width="10">  
+					            <h:outputText value="#{num+1}" />  
+					        </p:column>
+					  		
+					        <p:column headerText="Classe" sortBy="#{classe.codeClasse}">  
+					            <h:outputText value="#{classe.codeClasse} - #{classe.libelle}" />  
+					        </p:column>
+					        
+					        <p:column headerText="Pr. Titu.">  
+					            <h:outputText value="#{not empty classe.nomenseignantTitulaire?classe.nomenseignantTitulaire:' -- '}"/>  
+					        </p:column>   
+					  
+					        <p:column headerText="Délégué 1">  
+					            <h:outputText value="#{not empty classe.delegue1?classe.delegue1:' -- '}"/>  
+					        </p:column>  
+					        
+					        <p:column headerText="Délégué 2">  
+					            <h:outputText value="#{not empty classe.delegue2?classe.delegue2:' -- '}" />  
+					        </p:column>		
+					        
+					        <p:column id="option" width="17"> 										    
+					            <h:link  includeViewParams="true" id="edit"  title="Editer" outcome="editdelegue">  
+							        <p:graphicImage value="/resources/img/edit16.png" style="border:#CCCCCC 1px solid"/>   
+							        <f:param name="codeclasse" value="#{classe.codeClasse}"/>
+							    </h:link>
+							     
+					        </p:column> 			   
+					        
+					    </p:dataTable>
+					    
+					    <f:facet name="footer">
+					    	<center>
+				  				<p:commandButton value="imprimer" type="button" icon="ui-icon-print">
+				  					<p:printer target="classes" />  
+				  				</p:commandButton>
+		  					</center>
+					    </f:facet>  
+					    
+			  		</p:panel> 		    
+			   		   
+			</p:outputPanel>
+			  
+	    </h:form>
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

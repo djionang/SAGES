@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="numerosequence" value="#{sequenceBean.numero}" required="true" requiredMessage="Numéro sequence non trouvé"/>
+	  		<f:event type="preRenderView" listener="#{sequenceBean.initsequence}"/>
+		</f:metadata>
+    </ui:define>
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Modification Séquence
+    </ui:define>
+    <ui:define name="content">
+	    <h2>
+	   		<h:outputText value="Modifier la séquence #{sequenceBean.numero}"/>
+	   	</h2>
+    <br/>
+    
+    <p:messages id="messages" autoUpdate="true"/>
+   	
+   	<h:form id="formsequence">
+   	
+   	<p:panel id="panelsequence"  style="margin-bottom:10px;">
+   	
+   		<h:outputText value="Année académique #{sessionBean.anneeacademique} --" rendered="#{not empty sessionBean.anneeacademique}"/>
+		   		    		
+	    <p:panelGrid columns="2" style="width:100%;" id="perso">	    
+	    	
+	    	<h:outputText value="Code de la sequence"/>	            			
+      		<h:outputText value="#{sequenceBean.numero}"/>
+      		
+	    		    
+			<h:outputText value="Date début*"/>
+			<p:calendar mindate="01/01/1960" navigator="true" pattern="dd/MM/yyyy" value="#{sequenceBean.datedebut}" id="datedebut" required="true" requiredMessage="Champ date debut obligatoire" />
+			
+      		<h:outputText value="Date fin"/>
+		 	<p:calendar mindate="01/01/1960" navigator="true" pattern="dd/MM/yyyy" value="#{sequenceBean.datefin}" id="datefin" required="true" requiredMessage="Champ date fin obligatoire" />
+			
+      		<h:outputText value="Trimestre"/>
+		 	<h:selectOneMenu value="#{sequenceBean.trimestre}" id="trimestre" required="true" requiredMessage="Le champ Trimestre ne peut être vide">
+   	    		<f:selectItems value="#{etablissement.listeTrimestres}" var="trimestre" itemLabel="#{trimestre.numero} (Du #{trimestre.datedebut} Au #{trimestre.datefin})" itemValue="#{trimestre.numero}"/>
+   	    	</h:selectOneMenu>			
+	     </p:panelGrid>		
+		 <br/>
+							
+		  <center>			  								
+		 		<p:commandButton value="Mettre à jour"  icon="ui-icon-check" id="submitsequence" action="#{sequenceBean.modifySequence}" />
+		  		<p:commandButton value="Retour"  icon="ui-icon-arrowreturnthick-1-w" action="#{navBean.anneeseq}" immediate="true"/>
+		  </center>
+	</p:panel>
+	
+	<p:blockUI block="panelsequence" trigger="submitsequence">  
+        Mise à jour...<br />  
+    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+    </p:blockUI> 
+    
+	</h:form>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

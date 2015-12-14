@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="/WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Nouvelle Assignation
+    </ui:define>
+   
+    <ui:define name="content">
+    <f:view>
+	    <h2>
+	   		<h:outputText value="Nouvelle Assignation"/>
+	   	</h2>
+    
+   		<p:messages id="messages" autoUpdate="true"/>
+   		<br/>
+   	<h:form id="formitemAssigne">
+   	
+   	<p:panel id="panelitemAssigne"  style="margin-bottom:10px;"> 
+   	
+   		
+	    <p:panelGrid columns="2" style="width:100%;" id="perso">	    
+			<h:outputText value="Type de Responsabilite (ex: directeur.)" />
+			 <p:selectOneMenu value="#{groupeUserBean.libelle}" style="width:140px;" required="true" requiredMessage="Type reponsabilite ne peut être vide" editable="true">
+			   <f:selectItems value="#{configuration.typesResponsabilite}"/>
+			 </p:selectOneMenu>
+			   <h:outputText value="Montant (Frs)"/>
+				<p:inputText value="#{groupeUserBean.montant}" required="true" requiredMessage="Montant responsabilite requis" validator="MontantFrValidator"/>			
+      		             			
+	    </p:panelGrid>		
+		
+		  <br/>				
+		  <center>	
+		  								
+		 		<p:commandButton value="Assigners"  icon="ui-icon-check" id="submititemAssigne" action="#{groupeUserBean.assigner}" />
+		 		<p:commandButton value="Annuler" immediate="true" type="reset" icon="ui-icon-close" />	
+		 </center>
+	</p:panel>
+	
+	<p:blockUI block="panelitemAssigne" trigger="submititemAssigne">  
+        Enregistrement...<br />  
+    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+    </p:blockUI> 
+    
+	</h:form>
+	
+   </f:view>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

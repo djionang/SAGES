@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+    <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codeenseignant" value="#{enseignantBean.codeenseignant}"/>
+	  		<f:event type="preRenderView" listener="#{enseignantBean.initialize}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Modifier Status Enseignant
+    </ui:define>
+   
+    <ui:define name="content">   	
+    
+	    <h2>
+	   		<h:outputText value="Enseignant : #{enseignantBean.codeenseignant}"/>
+	   	</h2>
+    
+    
+   		<p:messages id="messages" autoUpdate="true"/>
+    
+	   	<h:form id="formapplication">
+	   	
+		   	<p:panel id="panel"  style="margin-bottom:10px;"> 
+		   		
+		   		<f:facet name="header">
+		   			<center>
+		   				<p:graphicImage value="#{enseignantBean.photo}"/>
+		   			</center>
+		   		</f:facet>
+		   		
+			    <p:panelGrid columns="2" style="width:85%;" id="perso" columnClasses="label,value">	    
+			    			 	
+				 	<h:outputText value="Nom"/>	            			
+		      		<h:outputText value="#{enseignantBean.nomens}" id="nom"/>
+		      		 	
+				 	<h:outputText value="Prénom"/>	            			
+		      		<h:outputText value="#{enseignantBean.prenomens}" id="prenom"/>
+		      		
+		      		<h:outputText value="Sexe"/>	            			
+		      		<h:outputText value="#{enseignantBean.sexe}"/>
+		    		      				
+					<h:outputText value="Adresse"/>				
+		   			<h:outputText value="#{enseignantBean.adresse}" id="adresse"/>
+		    		   	    	
+		   	    	<h:outputText value="Email"/>			
+		      		<h:outputText value="#{enseignantBean.email}" id="email"/>      		
+		       		        		    
+		       		<h:outputText value="Telephone"/>	            			
+		      		<h:outputText value="#{enseignantBean.telephone}" id="telephone"/>
+		      		 	
+				 	<h:outputText value="Civilité"/>	            			
+		      		<h:outputText  value="#{enseignantBean.civilite}" id="civilite"/>
+		    		
+		   	    			
+					<h:outputText value="Date arrivée"/>				
+		   			<h:outputText  value="#{enseignantBean.datearrivee}">
+		   				<f:convertDateTime pattern="dd/MM/yyyy"/>
+		   			</h:outputText>
+					
+		       		<h:outputText value="Compétences"/>
+		       		<h:outputText value="#{enseignantBean.competences}"/>
+		       		
+		       		<h:outputText value="Statut"/>
+		       		<h:outputText value="#{enseignantBean.vacataire?'Vacataire':'Non Vacataire'}"/>
+		       		
+		       		<f:facet name="footer">
+		       			<center>
+		       				<br/>
+				    		<h:outputText value="Nouveau Statut Enseignant"/>
+				    		<br/>
+				    		<h:selectOneMenu value="#{enseignantBean.vacataire}">
+				    			<f:selectItem itemLabel="Enseignant Vacataire" itemValue="true"/>
+				    			<f:selectItem itemLabel="Enseignant Non vacataire" itemValue="false"/>
+				    		</h:selectOneMenu>
+				    	</center>
+			    	</f:facet>
+					    	    	      		               			
+			     </p:panelGrid>		
+			 	  <br/> 									
+				  <center>										
+				 		<p:commandButton value="Mettre à jour"  id="buttonsubmit" icon="ui-icon-check"  action="#{enseignantBean.modifierstatut}"/>
+				  </center>
+			</p:panel>
+			<p:blockUI block="panel" trigger="buttonsubmit">  
+		        Modification...<br />  
+		    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+		    </p:blockUI> 
+		</h:form>
+   	
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

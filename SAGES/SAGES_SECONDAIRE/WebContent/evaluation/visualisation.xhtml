@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codeevaluation" value="#{evaluationBean.codeevaluation}"/>
+	  		<f:event type="preRenderView" listener="#{evaluationBean.initialize}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Visualisation d'Evaluation
+    </ui:define>
+   
+    <ui:define name="content">
+    	
+    
+	    <h2>
+	   		<h:outputText value="Visualiser l'évaluation #{evaluationBean.libelle} "/>
+	   	</h2>
+    	
+    	<p:messages autoUpdate="true"/>
+   		<h:form id="formdeleteevaluation">
+	   	
+	   	<p:panel id="panel"  style="margin-bottom:10px;"> 
+	   		<p:panelGrid columns="2" style="width:100%;" id="perso" columnClasses="label,value">	    
+	    		    
+			<h:outputText value="Libelle"/>	            			
+      		<h:outputText value="#{evaluationBean.libelle}" id="libelle" required="true" requiredMessage="Libellé de l'évaluation obligatoire"/>
+      		 	
+		 	<h:outputText value="Séquence"/>	            			
+      		<h:outputText value="#{evaluationBean.numerosequence}"/>
+   	    	
+			<h:outputText value="Matiere - Classe"/>				
+   			<h:outputText value="#{evaluationBean.codematiere} - #{evaluationBean.codeclasse}"/>
+   	    	
+   	    	<h:outputText value="type dévaluation"/>	            			
+      		<h:outputText value="#{evaluationBean.typeevaluation} (#{evaluationBean.coefficient}/100)"/>
+    		   
+   	    	
+   	    	<h:outputText value="Du"/>	            			
+      		<h:outputText value="#{evaluationBean.datedebut}">
+      			<f:convertDateTime pattern="dd/MM/yyyy à HH:mm"/>
+      		</h:outputText>
+      		      		
+      		<h:outputText value="Au"/>	            			
+      		<h:outputText value="#{evaluationBean.datefin}" >
+      			<f:convertDateTime pattern="dd/MM/yyyy à HH:mm"/>
+      		</h:outputText>
+      		 
+   	    	       			
+	    </p:panelGrid>		
+		
+		  <br/>				
+		  <center>			  								
+		 		<p:commandButton value="Retour" immediate="true" icon="ui-icon-arrowreturnthick-1-w" action="#{navBean.examevallisting}"/>	
+		 </center>
+		</p:panel>
+	</h:form>
+   	
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

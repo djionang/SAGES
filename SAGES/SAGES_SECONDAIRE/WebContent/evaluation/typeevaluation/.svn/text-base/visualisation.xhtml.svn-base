@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../../WEB-INF/templates/template.xhtml">
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="typeevaluation" value="#{typeEvaluationBean.typeevaluation}"/>
+	  		<f:event type="preRenderView" listener="#{typeEvaluationBean.initTypeEvaluation}"/>
+		</f:metadata>
+    </ui:define>
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Visualiser un type d'évaluation
+    </ui:define>
+   
+    <ui:define name="content">
+    <f:view>
+	    <h2>
+	   		<h:outputText value="Type d'évaluation #{typeEvaluationBean.typeevaluation}"/>
+	   	</h2>
+       	<br/>  
+       	<p:panel>		
+	    	<p:panelGrid columns="2" style="width:100%;" columnClasses="label,value">	  	    		  
+			      		 	
+		 	<h:outputText value="libellé"/>	            			
+      		<h:outputText value="#{typeEvaluationBean.typeevaluation}" id="libelle" />
+      		
+      		<h:outputText value="Coefficient"/>	            			
+      		<h:outputText value="#{typeEvaluationBean.coefficient/100}">
+      			<f:convertNumber type="percent"/>
+      		</h:outputText>
+      		   	    	
+   	    	<h:outputText value="Description"/>			
+      		<h:outputText value="#{typeEvaluationBean.description}" id="description"/>
+       		             			
+	     </p:panelGrid>	
+			<br/>									
+		  <center>										
+		 		<p:commandButton value="Retour à la liste des types" action="#{navBean.typeevallisting}" icon="ui-icon-arrowreturnthick-1-w" immediate="true"/>							
+		  </center>
+		</p:panel>
+    </f:view>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

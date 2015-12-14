@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Editer des notes
+    </ui:define>
+   
+    <ui:define name="content">
+    <f:view>
+	    <h2>
+	   		<h:outputText value="Edition des notes"/>
+	   	</h2>
+	   	<br/>
+   		<p:messages id="messages" autoUpdate="true"/>
+	   	
+	   	<p:outputPanel id="panelnote"  style="margin-bottom:10px;">    	
+	   		<h:form id="formchoose">
+	   			<p:panel id="pan1">
+	   		
+				    <p:panelGrid columns="2" style="width:100%;" id="f1">	    
+				    	
+				    	<h:outputText value="Classe *"/>				
+			   			<h:selectOneMenu value="#{useEvalBean.codeclasse}" id="classe" required="true" requiredMessage="Classe concernée Obligatoire">
+			    			<f:selectItem itemLabel="" itemValue=""/>
+			    			<f:selectItems value="#{etablissement.listeClasses}" var="classe" itemLabel="#{classe.libelle}" itemValue="#{classe.codeClasse}" itemDescription="#{classe.libelle}"/>
+			   	    		<p:ajax async="true" partialSubmit="true" listener="#{useEvalBean.loadMatieresClasse}" event="change" update="matiere" process="@this"/>
+			   	    	</h:selectOneMenu>
+			   	    	
+			   	    	<h:outputText value="Matière"/>
+				    	<h:selectOneMenu value="#{useEvalBean.codematiere}" required="true" requiredMessage="Matière Obligatoire" id="matiere">
+				    		<f:selectItems value="#{useEvalBean.listeMatieres}" var="mat" itemLabel="#{mat.libelle}" itemValue="#{mat.codematiere}" itemDescription="#{mat.description} #{not empty mat.animateur?'animée par':''} #{mat.animateur}"/>
+				    	</h:selectOneMenu>
+				    	
+				    	<h:outputText value="Séquence *"/>	            			
+			      		<h:selectOneMenu value="#{useEvalBean.codesequence}" required="true" requiredMessage="Séquence evaluation obligatoire">
+			    			<f:selectItems value="#{etablissement.listesequences}" var="sequence" itemLabel="Séquence #{sequence.numero}" itemValue="#{sequence.idsequence}" itemDescription="Séquence #{sequence.numero} -trimestre #{sequence.trimestre}"/>
+			   	    	</h:selectOneMenu>						
+			   	    				   	    		    		    
+					</p:panelGrid>	
+		   	    	<f:facet name="footer">
+		   	    		<center>
+		   	    			<p:commandButton value="Charger" actionListener="#{useEvalBean.loadEvaluations}" icon="ui-icon-arrowrefresh-1-w" update=":panelnote" id="load"/>
+		   	    		</center>
+		   	    	</f:facet>		
+				</p:panel>
+				
+			</h:form>
+			
+			<br/>
+			
+			<h:form id="formnote">
+			
+				<p:panel id="panel">
+					<p:dataTable id="tableevaluations" value="#{useEvalBean.evaluations}" var="evaluation" emptyMessage="Aucune evaluation chargée"
+			    		paginator="true" rows="20" sortBy="#{evaluation.datedebut}" sortOrder="descending" rowIndexVar="ligne">
+				  	    
+				  	    <f:facet name="header">
+				  	    	<h:outputText value="Evaluation programmées "/>
+				  	    	<h:outputText value="Classe #{useEvalBean.codeclasse} "/>
+				  	    	<h:outputText value="Matiere #{useEvalBean.codematiere}"/>
+				  	    </f:facet>
+				  	        
+		        		<p:column id="code" headerText="N°">  
+		            		<h:outputText value="#{ligne+1}" />  
+		        		</p:column> 
+		        
+		        		<p:column id="libelle"  sortBy="#{evaluation.libelle}" headerText="Libellé">  
+		            		<h:outputText value="#{evaluation.libelle}" />  
+		        		</p:column> 
+		        
+		        		<p:column id="type" headerText="Type">  
+		            		<h:outputText value="#{evaluation.typeevaluation}(#{evaluation.coefficient}%)" />  
+		        		</p:column>         		
+		        		
+		        		<!-- <p:column id="date" headerText="Date">  
+		            		<h:outputText value="#{evaluation.datedebut}">
+		            			<f:convertDateTime pattern="dd/MM/yyyy"/>
+		            		</h:outputText>  
+		        		</p:column> -->
+		        
+						<p:column id="cours" headerText="Cours">  
+				            <h:outputText value="#{evaluation.libellecours}" />  
+				        </p:column>		        
+						
+		        		<p:column id="sequence" headerText="Séq.">  
+		            		<h:outputText value="#{evaluation.numerosequence}" />  
+		        		</p:column>
+		        		
+				        <p:column id="option" headerText="Options"> 
+				         	<p:panelGrid columns="4">
+						        	
+							    <h:link  includeViewParams="true" outcome="detailnotes" title="Visualiser les notes" >
+							    	<p:graphicImage value="../resources/img/view16.png" style="border:#CCCCCC 1px solid"/>  						        
+							    	<f:param name="codeevaluation" value="#{evaluation.codeevaluation}"/>						    
+							    </h:link>
+							    
+					            <h:link  includeViewParams="true" id="edit"  title="Editer les notes" outcome="editionnotes">  
+							        <p:graphicImage value="../resources/img/edit16.png" style="border:#CCCCCC 1px solid"/>   
+							        <f:param name="codeevaluation" value="#{evaluation.codeevaluation}"/>
+							    </h:link>
+							    
+					            <h:link  includeViewParams="true" id="importer" outcome="importnotes" title="Importer les notes">  
+							        <p:graphicImage value="../resources/img/upload1.jpg" style="border:#CCCCCC 1px solid"/>
+							       	<f:param name="codeevaluation" value="#{evaluation.codeevaluation}"/>
+							   </h:link>
+							   
+							   <h:link  includeViewParams="true" id="exporter" outcome="exportnotes" title="Exporter les notes">  
+							        <p:graphicImage value="../resources/img/download2.jpg" style="border:#CCCCCC 1px solid"/>
+							       	<f:param name="codeevaluation" value="#{evaluation.codeevaluation}"/>
+							   </h:link>
+					         </p:panelGrid>
+					         
+				        </p:column> 
+				
+					</p:dataTable>
+					
+				 </p:panel>
+			 </h:form>
+		</p:outputPanel>
+	    
+	    
+	    <p:blockUI block=":formchoose:pan1" trigger=":formchoose:load">  
+	      Enregistrement...<br />  
+	  		<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+		</p:blockUI>
+		
+	
+   </f:view>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

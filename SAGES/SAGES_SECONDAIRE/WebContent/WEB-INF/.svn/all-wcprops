@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/WebContent/WEB-INF
+END
+log4j.dtd
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/WebContent/WEB-INF/log4j.dtd
+END
+faces-config.xml
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/WebContent/WEB-INF/faces-config.xml
+END
+log4j.xml
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/WebContent/WEB-INF/log4j.xml
+END
+applicationContext.xml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/WebContent/WEB-INF/applicationContext.xml
+END
+applicationContextSecurity.xml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/WebContent/WEB-INF/applicationContextSecurity.xml
+END
+securities.bri
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/WebContent/WEB-INF/securities.bri
+END
+web.xml
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/WebContent/WEB-INF/web.xml
+END

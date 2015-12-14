@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Nouvelle année académique
+    </ui:define>
+    <ui:define name="content">
+	    <h2>
+	   		<h:outputText value="Enregistrer une année académique"/>
+	   	</h2>
+    <br/>
+    
+   		<p:messages id="messages" autoUpdate="true"/>
+    <br/>
+   	<h:form id="formannee">
+   	
+   	<p:panel id="panelannee"  style="margin-bottom:10px;"> 
+   	
+   		
+	    <p:panelGrid columns="2" style="width:80%;" id="perso">	    
+	    	
+	    	<h:outputText value="Date de début *"/>
+	    	<p:calendar mindate="01/01/1960" navigator="true" required="true" pattern="dd/MM/yyyy" value="#{anneeBean.datedebut}" id="datedebut" requiredMessage="Date de début d'année obligatoire" />
+				    
+			<h:outputText value="Date de fin *"/>
+			<p:calendar mindate="01/01/1960" navigator="true" pattern="dd/MM/yyyy" value="#{anneeBean.datefin}" id="datefin" required="true" requiredMessage="Champ date fin obligatoire" />
+						
+	     </p:panelGrid>		
+		 <br/>
+							
+		  <center>			  								
+		 		<p:commandButton value="Enregistrer"  icon="ui-icon-check" id="submitannee" action="#{anneeBean.saveAnnee}" />
+		 </center>
+	</p:panel>
+	
+	<p:blockUI block="panelannee" trigger="submitannee">  
+        Enregistrement...<br />  
+    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+    </p:blockUI> 
+    
+	</h:form>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

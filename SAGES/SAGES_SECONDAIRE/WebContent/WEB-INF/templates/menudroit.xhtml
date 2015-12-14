@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition>
+   		<center>
+   		<h:form>
+   		<br/>
+   		<p:accordionPanel activeIndex="#{sessionBean.rightTabIndex}">
+   		<p:ajax event="tabChange" listener="#{sessionBean.rightTabChange}" />
+		<p:tab title="Gestion Examens et Notes">
+	   		<p:menu>
+	   			 <p:submenu label="Evaluations">
+					<p:menuitem value="Nouvelle évaluation" action="#{navBean.examevalcreate}"/>
+					<p:menuitem value="créer liste évaluation" action="#{navBean.examevallistecreate}"/>
+				 	<p:menuitem value="Visualiser | Editer" action="#{navBean.examevallisting}" />
+				 	<p:separator/>
+				 	<p:menuitem value="Nouveau type d'évaluation" action="#{navBean.typeevalcreate}"/>
+				 	<p:menuitem value="Visualiser les Types" action="#{navBean.typeevallisting}"/>
+				 </p:submenu>
+				
+				 <p:submenu label="Notes">
+					<p:menuitem value="Enregistrer | editer" action="#{navBean.examnotecreate}"/>
+				 	<p:separator/>
+				 	<p:menuitem value="Enregistrer | editer note élève" action="#{navBean.examnoteelevecreate}"/>
+				 	<p:separator/>
+				 	<p:menuitem value="Formulaire vierge" action="#{navBean.telformulairenote}"  icon="ui-icon-document"/>
+				 	<p:menuitem value="Relever toutes les Notes" action="#{navBean.examimprimtoutesnotes}"/>
+				 	<p:separator/>
+				 	<p:menuitem value="Justification Absences" action="#{navBean.absenceexamen}"/>
+				 	<p:menuitem value="Annuler Justification" action="#{navBean.invabsenceexamen}"/>
+				 </p:submenu>
+			</p:menu>
+		</p:tab>
+		
+		<p:tab title="Bulletins et PVR">
+	   		<p:menu>
+				 <p:submenu label="Paramètrer Bulletins">
+					<p:menuitem value="Paramètres" action="#{navBean.exambullparam}" />
+				 	<p:menuitem value="Visualiser" action="#{navBean.exambullvue}" />
+				 </p:submenu>
+				 
+				 <p:submenu label="Bulletins">
+				 	<p:menuitem value="Carnet de notes Séquentiel" action="#{navBean.examimpressbullseq}" />
+					<p:menuitem value="Carnet de notes trimestriel" action="#{navBean.examimpressbulltrim}" />
+					<p:menuitem value="Carnet de notes trimestriel Complexe" action="#{navBean.examimpressbulltrimC}" />
+					<p:menuitem value="Carnet de notes annuel" action="#{navBean.examimpressbullannuel}" />
+					<p:menuitem value="Taux Réussite par matière" action="#{navBean.bilanreussitematiere}" />
+					<p:menuitem value="Taux Recapitulatif par sequence" action="#{navBean.tauxreussitesequence}" />
+				 </p:submenu>
+				 
+				 <p:submenu label="Procès Verbaux et bilans">
+					<p:menuitem value="Procès verbal sequentiel" action="#{navBean.pvr}" />
+					<p:menuitem value="Procès verbal trimestriel" action="#{navBean.pvrt}" />
+					<p:menuitem value="Procès verbal sequentiel moy" action="#{navBean.pvrm}" />
+					<p:menuitem value="Procès verbal trimestriel moy" action="#{navBean.pvrtm}" />
+				 	<p:menuitem value="Tableaux d'honneur" action="#{navBean.examimpresstab}" />
+				 	<p:menuitem value="Bilan sequentiel classe" action="#{navBean.examimpressbilanbulSeq}" />
+				 	<p:menuitem value="Bilan trimestriel classe" action="#{navBean.examimpressbilanbulTrim}" />
+				 	<p:menuitem value="Bilan annuel classe" action="#{navBean.examimpressbilanbul}" />
+				 </p:submenu>
+			</p:menu>
+		</p:tab>
+		
+		<p:tab title="Discipline">
+			<p:menu>
+				 <p:submenu label="Retards">
+					 <p:menuitem value="Enregistrer" action="#{navBean.disretardcreate}" />
+				 	<p:menuitem value="Visualiser | Editer" action="#{navBean.listingretards}"/>
+				 </p:submenu>
+				 <p:submenu label="Absences">
+					 <p:menuitem value="Enregistrer" action="#{navBean.disabsencecreate}"/>
+				 	<p:menuitem value="Visualiser | Editer" action="#{navBean.listingabsences}" />
+				 </p:submenu>
+				 <p:submenu label="Sanctions">
+					<p:menuitem value="Enregistrer" action="#{navBean.dissanctcreate}" />
+				 	<p:menuitem value="Visualiser | Editer" action="#{navBean.dissanctlisting}" />
+				 	<p:separator/>
+				 	<p:menuitem value="Type de Sanction" action="#{navBean.createtypesanction}" />
+				 	<p:menuitem value="Visualiser | Editer" action="#{navBean.listingtypesanction}" />
+				 </p:submenu>
+				 
+				 <p:submenu label="Convocations">
+					 <p:menuitem value="Enregistrer" action="#{navBean.disconvoccreate}"/>
+				 	<p:menuitem value="Visualiser | Editer" action="#{navBean.listingconvocations}" />
+				 </p:submenu>
+				 <p:separator/>
+				 <p:menuitem value="Journal disciplinaire" action="#{navBean.disjournalvue}"/>
+			</p:menu>
+		</p:tab>
+		
+		<p:tab title="Etablissement">
+			<p:menu>
+				<p:submenu label="Paramètres">
+					 <p:menuitem value="Editer" action="#{navBean.modifieretablissement}"/>
+				</p:submenu>
+				
+				<p:submenu label="Types Formation">
+					 <p:menuitem value="Nouveau" action="#{navBean.etabenseicreate}" />
+					 <p:menuitem value="Visualiser | Editer" action="#{navBean.etabenseilisting}" />
+				</p:submenu>
+				
+				<p:submenu label="Section">
+					 <p:menuitem value="Nouveau" action="#{navBean.etabsectioncreate}" />
+					 <p:menuitem value="Visualiser | Editer" action="#{navBean.etabsectionlisting}" />
+				</p:submenu>
+				
+				<p:submenu label="Cycles">
+					 <p:menuitem value="Nouveau" action="#{navBean.etabcyclecreate}"/>
+					 <p:menuitem value="Visualiser | Editer" action="#{navBean.etabcyclelisting}" />
+				</p:submenu>
+				
+				<p:submenu label="Niveaux">
+					 <p:menuitem value="Nouveau" action="#{navBean.etabnivocreate}"/>
+					 <p:menuitem value="Visualiser | Editer" action="#{navBean.etabnivolisting}" />
+				</p:submenu>
+				
+				<p:submenu label="Options">
+					 <p:menuitem value="Nouveau" action="#{navBean.etaboptioncreate}" />
+					 <p:menuitem value="Visualiser | Editer" action="#{navBean.etaboptionlisting}" />
+				</p:submenu>
+								
+			</p:menu>
+		</p:tab>
+		
+		<p:tab title="Statistique">	
+		<p:menu>
+		 	<p:submenu label="Classes">
+			 	<p:menuitem value="Meilieur Sequentielle" action="#{navBean.bilanseq}" />
+			 	<p:menuitem value="Meilieur Trimestrielle" action="#{navBean.bilantrim}" />
+		 		<p:menuitem value="Meilieur Annuelle" action="#{navBean.bilanannuel}" />
+		 	</p:submenu>
+		 	
+		 	<!-- <p:submenu label="Matieres">
+			 	<p:menuitem value="Meilieur Sequentielle" action="#{navBean.bilanseq}" />
+			 	<p:menuitem value="Meilieur Trimestrielle" action="#{navBean.bilantrim}" />
+		 		<p:menuitem value="Meilieur Annuelle" action="#{navBean.bilanannuel}" />
+		 	</p:submenu>
+		 	
+		 	<p:submenu label="Eleves">
+			 	<p:menuitem value="Meilleur Matiere" action="#{navBean.bilanseq}" />
+			 	<p:menuitem value="Meilleur Annee" action="#{navBean.bilantrim}" />
+		 		<p:menuitem value="Meilleur Rang annuel" action="#{navBean.bilanannuel}" />
+		 		<p:menuitem value="Filles/Garcons" action="#{navBean.bilantrim}" />
+		 	</p:submenu>
+		 	
+		 	<p:submenu label="Stat Génèrale">
+			 	<p:menuitem value="Meilleur Classe" action="#{navBean.ressourateliercreate}" />
+			 	<p:menuitem value="Meilleur Elève" action="#{navBean.ressouratelierlisting}" />
+			 	<p:menuitem value="Meilleur Progression" action="#{navBean.ressouratelierlisting}" />
+			 	<p:menuitem value="Filles/Garcons" action="#{navBean.bilantrim}" />
+			 	<p:menuitem value="Meilleur Annee" action="#{navBean.ressouratelieredit}" />
+			 	<p:menuitem value="Meilleur par niveau" action="#{navBean.ressourclassecreate}" />
+			 	<p:menuitem value="Profil etablissement" action="#{navBean.ressourclasselisting}" />
+			 	<p:menuitem value="Meilleur Cycle" action="#{navBean.ressourclasseedit}" />
+		 	</p:submenu> -->		
+		 			 
+		</p:menu>
+		</p:tab>
+		
+		<p:tab title="Années Scolaires">
+			<p:menu>							
+				 <p:submenu label="Année scolaire En cours">				 	
+				 	<p:menuitem value="Année" action="#{navBean.anneean}" />
+				 	<p:menuitem value="Trimestres" action="#{navBean.anneetrim}" />
+				 	<p:menuitem value="Séquences" action="#{navBean.anneeseq}" />
+				 	<p:menuitem value="bilan" action="#{navBean.anneebilan}" />
+				 	<p:menuitem value="Clôture" action="#{navBean.anneecloture}" />
+				 </p:submenu>				 
+				 
+				 <p:submenu label="Gérer">
+				 	<p:menuitem value="Nouvelle Année" action="#{navBean.anneecreate}" />
+				 	<p:menuitem value="Années enregistrées" action="#{navBean.anneelisting}" />
+				 </p:submenu>
+			</p:menu>
+		</p:tab>
+		
+		
+		<p:tab title="Ressources">	
+		<p:menu>
+					 	
+		 	<p:submenu label="Salles">
+			 	<p:menuitem value="Nouvelle salle" action="#{navBean.ressoursallecreate}" />
+			 	<p:menuitem value="Visualiser | Editer" action="#{navBean.ressoursallelisting}" />
+		 		<p:separator/>
+		 		<p:menuitem value="Nouveau Type de salle" action="#{navBean.ressourtypesallecreate}" />
+			 	<p:menuitem value="Visualiser les types" action="#{navBean.ressourtypesallelisting}" />
+		 	
+		 	</p:submenu>
+		 	<p:submenu label="Atéliers">
+			 	<p:menuitem value="Nouvel atélier" action="#{navBean.ressourateliercreate}" />
+			 	<p:menuitem value="Visualiser | Editer" action="#{navBean.ressouratelierlisting}" />
+			 	<p:menuitem value="Gérer" action="#{navBean.ressouratelieredit}" />
+		 	</p:submenu>
+		 
+			<p:submenu label="Classes">
+			 	<p:menuitem value="Nouvelle classe" action="#{navBean.ressourclassecreate}" />
+			 	<p:menuitem value="Visualiser | Editer" action="#{navBean.ressourclasselisting}" />
+			 	<p:menuitem value="Gérer" action="#{navBean.ressourclasseedit}" />
+		 	</p:submenu>		
+		 			 
+		</p:menu>
+		</p:tab>
+		
+		<p:tab title="Comptes utilisateur">
+			<p:menu>
+				<p:submenu label="Groupes Utilisateur">
+				 	<p:menuitem value="Nouveau groupe" action="#{navBean.creergroupeuser}" />
+				 	<p:menuitem value="Visualiser | Gérer" action="#{navBean.listinggroupeuser}" />
+				</p:submenu>
+			 	
+			 	<p:submenu label="Utilisateurs">
+				 	<p:menuitem value="Nouvel utilisateur" action="#{navBean.creerutilisateur}" />
+				 	<p:menuitem value="Visualiser | Gérer" action="#{navBean.listingutilisateur}" />
+				</p:submenu>
+			 	
+			 	<p:submenu label="Droits | Accès">
+				 	<p:menuitem value="Définir" action="#{navBean.creeritemrole}" />
+				 	<p:menuitem value="Gérer" action="#{navBean.listingdroitdacces}" />
+				</p:submenu>
+				
+				<p:submenu label="Mon Compte">
+				 	<p:menuitem value="Gérer" action="#{navBean.gestionmoncompte}" />
+				</p:submenu>
+			</p:menu>
+		</p:tab>
+				
+		<p:tab title="Calendrier">
+			<p:scrollPanel style="width:220px;height:180px">
+				<p:calendar mode="inline" locale="#{configurationBean.locale}"/>
+			</p:scrollPanel>
+		</p:tab>
+		
+		</p:accordionPanel>
+		</h:form>
+		</center>
+   </ui:composition>
+ 
+</html>

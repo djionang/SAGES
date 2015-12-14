@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Justifier une absence à une évaluation
+    </ui:define>
+   
+    <ui:define name="content">
+	    <h2>
+	   		<h:outputText value="Justification absence à une évaluation"/>
+	   	</h2>
+	   	<br/>
+   		<p:messages id="messages" autoUpdate="true"/>
+	   	
+	   	<p:outputPanel id="panelabsence"  style="margin-bottom:10px;">    	
+	   		
+	   		<h:form id="formevaluation">
+	   			<p:panel id="paneau">	   		
+				    <p:panelGrid columns="2" style="width:100%;" id="f1">	    
+				    	
+				    	<h:outputText value="Séquence *"/>	            			
+			      		<h:selectOneMenu value="#{absenceEvBean.codesequence}" required="true" requiredMessage="Séquence evaluation obligatoire">
+			    			<f:selectItems value="#{etablissement.listesequences}" var="sequence" itemLabel="Séquence #{sequence.numero}" itemValue="#{sequence.idsequence}" itemDescription="Séquence #{sequence.numero} -trimestre #{sequence.trimestre}"/>
+			   	    	</h:selectOneMenu>
+			   	    	
+						<h:outputText value="Classe *"/>				
+			   			<h:selectOneMenu value="#{absenceEvBean.codeclasse}" id="classe" required="true" requiredMessage="Classe concernée Obligatoire">
+			    			<f:selectItems value="#{etablissement.listeClasses}" var="classe" itemLabel="#{classe.libelle}" itemValue="#{classe.codeClasse}" itemDescription="#{classe.libelle}"/>
+			   	    	</h:selectOneMenu>
+			   	    				   	    		    		    
+					</p:panelGrid>	
+					
+					<f:facet name="footer">
+		   	    		<center>
+		   	    			<p:commandButton value="Charger" async="true" actionListener="#{absenceEvBean.loadEvaluationsOnly}" id="loadevals" icon="ui-icon-check" update=":panelabsence"/>
+		   	    		</center>
+	   	    		</f:facet>
+				</p:panel>
+			</h:form>
+			<br/>
+			<h:form id="formabsence">
+				<p:panel id="panel">
+					<p:panelGrid columns="2" style="width:100%;" id="f2">	    
+				    	
+				    	<p:panel id="paneval" header="Evaluation">
+				    		<h:selectOneListbox value="#{absenceEvBean.evaluation}" size="9" requiredMessage="Aucun éxamen sélectionné">
+				    			<f:selectItems value="#{absenceEvBean.evaluations}" var="evaluation" itemLabel="#{evaluation.libelle} (#{evaluation.codematiere})" itemValue="#{evaluation.codeevaluation}" itemDescription="Evaluation de #{evaluation.codematiere}"/>
+				    			<p:ajax async="true" partialSubmit="true" listener="#{absenceEvBean.loadElevesAbsents}" event="change" update="ele" process="@this"/>
+				    		</h:selectOneListbox>
+			   	    	</p:panel>
+			   	    	
+			   	    	<p:panel id="panelev" header="Elèves">		
+				   			<h:selectManyListbox value="#{absenceEvBean.eleveschoisis}" size="9" required="true" requiredMessage="Aucun élève sélectionné" id="ele">
+				    			<f:selectItems value="#{absenceEvBean.eleves}" var="eleve" itemLabel="#{eleve.matricule} - #{eleve.nom} #{eleve.prenom}" itemValue="#{eleve.matricule}" itemDescription="#{eleve.nom} mat:#{eleve.matricule}"/>
+				    		</h:selectManyListbox>
+			   	    	</p:panel>
+			   	    	
+			   	    	<h:outputText value="Motif absence *"/>
+				    	<p:inputText value="#{absenceEvBean.motifabsence}" required="true" requiredMessage="Motif absence obligatoire"/>
+			   	    		    		    
+					</p:panelGrid>
+					<br/>
+									
+					<center>			  								
+				 		<p:commandButton value="Justifier"  icon="ui-icon-check" id="submitabsence" action="#{absenceEvBean.saveJustification}" />
+				 		<p:commandButton value="Annuler" immediate="true" type="reset" icon="ui-icon-close" />	
+					 </center>
+				 </p:panel>
+			 </h:form>
+		</p:outputPanel>
+				    
+	    
+	    <p:blockUI block=":formevaluation:paneau" trigger=":formevaluation:loadevals">  
+	      Enregistrement...<br />  
+	  		<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+		</p:blockUI>
+		
+		<p:blockUI block=":formabsence:panel" trigger=":formabsence:submitabsence">  
+	        Chargement...<br />  
+	    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+	    </p:blockUI> 
+		
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

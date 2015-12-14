@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Listing Enseignants
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2>Enseignants enregistrés</h2>
+   		<br/>
+   		<h:form>
+   		<p:scrollPanel style="width:100%;">
+   			
+            
+	    	<p:dataTable id="tableenseignants" value="#{listEnseignantBean.enseignants}" var="enseignant" emptyMessage="Aucun enseignant enregistré"
+	    		paginator="true">
+	    		
+	    		<p:column id="photo" headerText="">  
+		            <p:graphicImage height="20" width="20" value="#{enseignant.photo}"/>  
+		        </p:column>
+		        
+		        <p:column id="Code" sortBy="#{enseignant.codeenseignant}" headerText="Code">  
+            		<h:outputText value="#{enseignant.codeenseignant}" />  
+        		</p:column>
+		  	        
+        		<p:column id="nom" sortBy="#{enseignant.nomens}" headerText="Nom">  
+            		<h:outputText value="#{enseignant.nomens}" />  
+        		</p:column> 
+        		
+        
+        		<p:column id="prenom" headerText="Prenom">  
+            		<h:outputText value="#{enseignant.prenomens}" />  
+        		</p:column> 
+        
+				<p:column id="telephone" headerText="Tel.">  
+		            <h:outputText value="#{enseignant.telephone}" />  
+		        </p:column>
+		                
+		        <p:column id="options" headerText="Options" width="60"> 
+		         	<h:panelGrid columns="4">
+				        	
+					    <h:link  includeViewParams="true" outcome="enseignantvue" title="Visualiser" >
+					    	<p:graphicImage value="../resources/img/view16.png" style="border:#CCCCCC 1px solid"/>  						        
+					    	<f:param name="codeenseignant" value="#{enseignant.codeenseignant}"/>						    
+					    </h:link>
+					    
+			            <h:link  includeViewParams="true" id="edit"  title="Editer" outcome="enseignantedit">  
+					        <p:graphicImage value="../resources/img/edit16.png" style="border:#CCCCCC 1px solid"/>   
+					        <f:param name="codeenseignant" value="#{enseignant.codeenseignant}"/>
+					    </h:link>
+					    
+			            <h:link  includeViewParams="true" id="delete" outcome="enseignantdelete" title="Supprimer">  
+					        <p:graphicImage value="../resources/img/delete16.png" style="border:#CCCCCC 1px solid"/>
+					       <f:param name="codeenseignant" value="#{enseignant.codeenseignant}"/>
+					    </h:link>
+					    
+					    <h:link  includeViewParams="true" id="status" outcome="enseignantstatus" title="Modifier Status">  
+					        <p:graphicImage value="../resources/img/handle16.png" style="border:#CCCCCC 1px solid"/>
+					       <f:param name="codeenseignant" value="#{enseignant.codeenseignant}"/>
+					    </h:link>
+		            </h:panelGrid>
+			        
+		        </p:column>
+		        
+		
+			</p:dataTable>
+		
+		<p:separator/>
+		<br/>
+   		</p:scrollPanel>
+   		</h:form>
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

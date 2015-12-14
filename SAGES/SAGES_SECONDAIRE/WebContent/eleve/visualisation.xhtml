@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+    <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="matricule" value="#{eleveBean.matricule}"/>
+	  		<f:event type="preRenderView" listener="#{eleveBean.initEleve}"/>
+		</f:metadata>
+    </ui:define>
+   
+    <ui:define name="title">
+   		SAGES SECONDAIRE | Visualiser Eleve
+    </ui:define>
+   
+    <ui:define name="content">   	
+    
+	    <h2>
+	   		<h:outputText value="Visualiser Eleve : #{eleveBean.matricule}"/>
+	   	</h2>
+    
+    
+   		<p:messages id="messages" autoUpdate="true"/>
+    
+	   	<p:panel id="panelapplication"  style="margin-bottom:10px;"> 
+		   	   			   	   		
+			    <p:panelGrid columns="2" style="width:100%;" id="perso" columnClasses="label,value">	    
+			    
+				    <f:facet name="header">
+					  	Informations Elève
+					  	<center>
+					  		<p:graphicImage value="#{eleveBean.photo}"/>
+					  	</center>
+					</f:facet>
+		 	
+				 	<h:outputText value="Nom de l'élève "/>	            			
+		      		<h:outputText value="#{eleveBean.nom}" id="nom" />
+		      		
+					<h:outputText value="Prénom"/>			
+		      		<h:outputText value="#{eleveBean.prenom}" id="prenom"/>
+		      			
+					<h:outputText value="Date de naissance (JJ/MM/AAAA) "/>		
+					<h:outputText value="#{eleveBean.dateNaissance}">
+						<f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputText>
+					
+		       		<h:outputText value="Lieu de naissance "/>			
+		      		<h:outputText value="#{eleveBean.lieuNaissance}"/>
+		       			
+		       		<h:outputText value="Sexe"/>				
+		   			<h:outputText value="#{eleveBean.sexe}" id="sexe"/>
+		   	    	
+		       			
+					<h:outputText value="Nationalité " />				
+		      		<h:outputText value="#{eleveBean.nationalite}" />	       		                   		
+		                       			
+		            <h:outputText value="Classe " />				
+					<h:outputText value="#{eleveBean.libelleClasse}" id="classe" />
+		   	    			   	    	
+		   	    	<h:outputText value="Statut" />				
+					<h:outputText value="#{eleveBean.redoublant?'Redoublant':'Non Redoublant'}" />
+		   	    			   	    	     		               			
+			     </p:panelGrid>
+					
+				<br/>						
+				    <p:panelGrid columns="2" style="width:100%;" id="localisation" columnClasses="label,value">
+				    <f:facet name="header">
+				  		Localisation et famille
+					</f:facet>
+				    
+					<h:outputText value="Adresse "/>	 						
+					<h:outputText value="#{eleveBean.adresse}" />
+			              			
+			        <h:outputText value="Email"/>			
+					<h:outputText value="#{eleveBean.email}">
+					</h:outputText>
+			              			                    	
+					<h:outputText value="Telephone"/>			 
+					<h:outputText value="#{eleveBean.telephone}" />
+					
+					<h:outputText value="Boite postale"/>				
+					<h:outputText value="#{eleveBean.boitePostale}" id="bp"/>
+					
+					<h:outputText value="Nom du père"/>	 						
+						<h:outputText value="#{eleveBean.nomPere}" id="nompere"/>
+			               		
+			            <h:outputText value="telephone du père"/>				
+						<h:outputText value="#{eleveBean.telephonePere}"/>
+			               			
+						<h:outputText value="profession"/>				
+						<h:outputText value="#{eleveBean.professionPere}" id="professionpere"/>
+			               			
+						<h:outputText value="Adresse email du père" />
+						<h:outputText value="#{eleveBean.emailPere}"/>
+			               		
+						<h:outputText value="Nom de la mère"/>				
+						<h:outputText value="#{eleveBean.nomMere}" id="nommere"/>
+			             
+			            <h:outputText value="telephone de la mère"/>				
+						<h:outputText value="#{eleveBean.telephoneMere}" id="phonemere"/>
+			               			
+						<h:outputText value="profession"/>				
+						<h:outputText value="#{eleveBean.professionMere}" id="professionmere"/>
+			             	               		
+						<h:outputText value="Adresse email"/>				
+						<h:outputText value="#{eleveBean.emailMere}" />
+						
+						<h:outputText value="Nom du tuteur "/>				
+						<h:outputText value="#{eleveBean.nomTuteur}" id="nomtuteur" />
+			             
+			            <h:outputText value="telephone du tuteur"/>				
+						<h:outputText value="#{eleveBean.telephoneTuteur}" id="phonetuteur"/>
+			               			
+						<h:outputText value="profession"/>				
+						<h:outputText value="#{eleveBean.professionTuteur}" id="professiontuteur"/>
+			               		
+						<h:outputText value="email du tuteur"/>				
+						<h:outputText value="#{eleveBean.emailTuteur}" />
+		
+				    </p:panelGrid>
+			 
+					<br/>				
+				    			
+				    <p:panelGrid columns="2" style="align=center; width:100%;" id="lastetablissement" columnClasses="label,value">
+				    	<h:outputText value="Statut au sein de l'établissement"/>
+					    <h:outputText value="#{eleveBean.ancien?'Ancien':'Nouveau'}" />
+					   	
+						<h:outputText value="Dernir établissement fréquenté"/>	 						
+						<h:outputText value="#{eleveBean.ancienEtablissement}" id="etablissementfrom"/>
+				        
+						<h:outputText value="Dernière classe fréquentée"/>				
+						<h:outputText value="#{eleveBean.classeAncienEtablissement}" id="derniereclasse"/>
+				            	
+						<h:outputText value="Derniere année dans l'établissement d'origine"/>				
+						<h:outputText value="#{eleveBean.anneeAncienEtablissement}" id="anneeAncienEtablissement"/>
+				        
+			         </p:panelGrid>
+			         <br/>									
+					  <center>
+					  		<p:commandButton value="Versement scolarite"  id="returnvrs" icon="ui-icon-arrowreturnthick-1-w"  action="#{navBean.inscriptionfrais}"/>										
+					 		<p:commandButton value="retour à la liste"  id="returnbtn" icon="ui-icon-arrowreturnthick-1-w"  action="#{navBean.elevelisting}"/>
+					 		<p:commandButton value="Nouvel élève"  id="newbtn" icon="ui-icon-check"  action="#{navBean.enregistrerEleve}"/>							
+					  </center>
+			</p:panel>
+   	
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

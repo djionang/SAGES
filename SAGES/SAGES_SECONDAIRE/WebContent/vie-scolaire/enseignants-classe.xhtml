@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE| Liste des enseignants d'une classe
+   </ui:define>
+   
+   <ui:define name="content">
+   
+   		<h2><h:outputText value="Liste des enseignants d'une classe"/></h2>
+   		<br/>
+   		<p:growl autoUpdate="true"/>
+   		
+   		<h:form id="form">
+   			
+   			<p:outputPanel  id="panelcentral">
+				<p:panelGrid columns="2" style="width:100%;" id="grid2">
+		   			<p:panel header="Classe">
+			   			<h:selectOneMenu value="#{listEnsClasseBean.codeclasse}" required="true" requiredMessage="Aucune classe sélectionnée">
+			   				<f:selectItem itemLabel="Classe" itemValue=""></f:selectItem>
+			   				<f:selectItems value="#{etablissement.listeClasses}" var="classe" itemLabel="#{classe.codeClasse} - #{classe.libelle}" itemValue="#{classe.codeClasse}"/>
+					 		<p:ajax async="true" partialSubmit="true" listener="#{listEnsClasseBean.loadEnseignants}" update="enseignants" process="@this"/>
+					 	</h:selectOneMenu >
+		   			</p:panel>
+			    	    
+			    	<p:panel header="Enseignants">
+				   		<p:dataTable value="#{listEnsClasseBean.enseignants}" id="enseignants" var="enseignant" rowIndexVar="num"
+				   		emptyMessage="Aucun enseignant trouvé">  
+					        					  		
+					  		<p:column headerText="" width="10">  
+					            <h:outputText value="#{num+1}" />  
+					        </p:column>
+					  		
+					        <p:column headerText="Code">  
+					            <h:outputText value="#{enseignant.codeenseignant}" />  
+					        </p:column>  
+					  
+					        <p:column headerText="Nom" sortBy="#{enseignant.nom}" >  
+					            <h:outputText value="#{enseignant.nom}"/>  
+					        </p:column>  
+					        
+					        <p:column headerText="Matières">  
+					            <h:outputText value="#{enseignant.matieres}" />  
+					        </p:column>					   
+					        
+					    </p:dataTable>
+					    
+					    <f:facet name="footer">
+					    	<center>
+				  				<p:commandButton value="imprimer" type="button" icon="ui-icon-print">
+				  					<p:printer target="enseignants" />  
+				  				</p:commandButton>
+		  					</center>
+					    </f:facet>  
+					    
+			  		</p:panel> 
+			  		  	   			
+			    </p:panelGrid>			    
+			   		   
+			</p:outputPanel>
+			  
+	    </h:form>
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

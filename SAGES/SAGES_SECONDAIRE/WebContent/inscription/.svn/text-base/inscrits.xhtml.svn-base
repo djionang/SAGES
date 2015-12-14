@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Liste des élèves inscrits
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2><h:outputText value="Liste des élèves inscrits"/></h2>
+   		<br/>
+   		<h:form id="form1">
+   			<p:messages autoUpdate="true"/>
+   			<p:outputPanel  id="panelliste">
+				<p:panel id="tabclasse" header="Sélection classe">
+					
+					<p:dataTable var="classe" value="#{etablissement.modeleClasse}" rowKey="#{classe.codeClasse}" widgetVar="tableclasse" 
+					emptyMessage="Aucune classe trouvée" selectionMode="single" 
+					  selection="#{listEleveBean.selectedClasse}">
+			              
+			              
+						<p:column id="code" headerText="Code">
+							<h:outputText value="#{classe.codeClasse}"/>
+						</p:column>
+						
+						<p:column id="libelle" headerText="Libellé" sortBy="#{classe.libelle}">
+							<h:outputText value="#{classe.libelle}"/>
+						</p:column>
+						
+						<p:column headerText="Option">
+							<h:outputText value="#{classe.option}"/>				
+						</p:column>
+								
+					</p:dataTable>				
+					
+					<f:facet name="footer">  
+		         		<center>
+							<p:commandButton value="Charger" actionListener="#{listEleveBean.loadEleveInscrits}" icon="ui-icon-search" id="load" update=":form1:panelliste" global="true"/>
+							
+						</center> 
+		     		</f:facet> 		
+				</p:panel>
+			   	
+			   	<p:panel rendered="#{not empty listEleveBean.selectedClasse}">
+			   		<p:dataTable value="#{listEleveBean.eleves}" id="listEleve" var="eleve" rowIndexVar="num"
+			   		emptyMessage="Aucun élève trouvé" sortBy="#{eleve.nom}">  
+				        <f:facet name="header">  
+				        	<h:outputText value="Liste des élèves inscrits Classe #{listEleveBean.selectedClasse.libelle}"/>				             
+				        </f:facet>  
+				  		
+				  		<p:column headerText="" width="10">  
+				            <h:outputText value="#{num+1}" />  
+				        </p:column>
+				  		
+				        <p:column headerText="Mat." sortBy="#{eleve.matricule}"  style="width:60px;">  
+				            <h:outputText value="#{eleve.matricule}" />  
+				        </p:column>  
+				  
+				        <p:column headerText="Nom" sortBy="#{eleve.nom}" >  
+				            <h:outputText value="#{eleve.nom}"/>  
+				        </p:column>  
+				        
+				        <p:column headerText="Prénoms" sortBy="#{eleve.prenom}">  
+				            <h:outputText value="#{eleve.prenom}" />  
+				        </p:column>
+				  
+				        <p:column headerText="Date et lieu Naissance" >  
+				            <h:outputText value="#{eleve.dateNaissance}">
+				            	<f:convertDateTime pattern="dd/MM/yyyy"/>
+				            </h:outputText> 
+				            <h:outputText value=" à #{eleve.lieuNaissance}" rendered="#{not empty eleve.lieuNaissance}"/>  
+				        </p:column>  
+				        
+				    </p:dataTable>
+				    <f:facet name="footer">
+				    	<center>
+			  				<p:commandButton value="imprimer" action="#{listEleveBean.imprimerInscrits}" icon="ui-icon-print" ajax="false"/>
+			  				
+	  					</center>
+				    </f:facet>  
+		  		</p:panel>	
+	  			<p:separator/>
+	  			
+			   		   
+			</p:outputPanel>
+		
+		
+			<p:blockUI block=":form1:tabclasse" trigger=":form1:load">  
+		        Chargement...<br />  
+		    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+		    </p:blockUI> 
+	    </h:form>
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

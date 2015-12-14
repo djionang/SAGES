@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codetypesalle" value="#{typeSalleBean.id}"/>
+	  		<f:event type="preRenderView" listener="#{typeSalleBean.initTypeSalle}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Suppression de type de salle
+    </ui:define>
+   
+    <ui:define name="content">
+    	
+    
+	    <h2>
+	   		<h:outputText value="Supprimer le type salle -- Code: #{typeSalleBean.id} --"/>
+	   	</h2>
+    
+   	<h:form id="formdeletesalle">
+   	
+   	<p:panel id="panel"  style="margin-bottom:10px;"> 
+   		<p:panelGrid columns="2" style="width:100%;" >	  	    		  
+			      		 	
+		 	<h:outputText value="libellé"/>	            			
+      		<h:outputText value="#{typeSalleBean.libelle}" id="libelle" />
+      		   	    	
+   	    	<h:outputText value="Description"/>			
+      		<h:outputText value="#{typeSalleBean.description}" id="description"/>
+       		             			
+	     </p:panelGrid>	
+												
+		  <center>										
+		 		<p:commandButton value="Supprimer"  id="buttonsubmit" icon="ui-icon-check"  action="#{typeSalleBean.supprimerTypeSalle}"/>
+		 		<p:commandButton value="Retour à la liste des salles" action="#{navBean.ressoursallelisting}" icon="ui-icon-arrowreturnthick-1-w" immediate="true"/>							
+		  </center>
+	</p:panel>
+	
+	<p:blockUI block="panel" trigger="buttonsubmit">  
+        Suppression...<br />  
+    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+    </p:blockUI> 
+</h:form>
+   	
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Nouveau retard
+    </ui:define>
+   
+    <ui:define name="content">
+    <f:view>
+	    <h2>
+	   		<h:outputText value="Nouveau retard"/>
+	   	</h2>
+    
+   		<p:messages id="messages" autoUpdate="true"/>
+   		<br/>
+   	<h:form id="formretard">
+   	
+   	<p:panel id="panelretard"  style="margin-bottom:10px;"> 
+   		<p:panelGrid columns="2" style="width:100%;" id="grid2">
+   			<p:panel>
+	   			<h:selectOneMenu value="#{retardBean.codeclasse}" required="true" requiredMessage="Aucune classe sélectionnée">
+	   				<f:selectItem itemLabel="Classe" itemValue="" itemDescription=""/>
+			 	    <f:selectItems value="#{etablissement.listeClasses}" var="classe" itemLabel="#{classe.codeClasse} - #{classe.libelle}" itemValue="#{classe.codeClasse}" itemDescription="#{classe.libelle}"/>
+			 		<p:ajax async="true" partialSubmit="true" listener="#{retardBean.loadEleves}" update="eleves" process="@this"/>
+			 	</h:selectOneMenu >
+   			</p:panel>
+	    	    
+	    	<p:panel id="paneleves" header="Elèves">
+	   			<h:selectOneListbox value="#{retardBean.matriculeeleve}" style="max-height:600px;" required="true" requiredMessage="Aucun élève sélectionné" size="15" id="eleves" validatorMessage="Erreur de validation des données">
+			 		<f:selectItems value="#{retardBean.eleves}" var="eleve" itemLabel="#{eleve.matricule} - #{eleve.nom} #{eleve.prenom}" itemValue="#{eleve.matricule}" itemDescription="Né le: #{eleve.dateNaissance}"/>
+			 	</h:selectOneListbox>
+   			</p:panel>   	   			
+	    </p:panelGrid>		
+	    <br/>
+	    <p:panelGrid columns="2" style="width:100%;" id="grid1">
+   		    
+		 	<h:outputText value="Date *"/>
+		 	<p:calendar value="#{retardBean.dateretard}" navigator="true" pattern="dd/MM/yyyy HH:mm" required="true" requiredMessage="Date Retard obligatoire"/>	    
+      		
+			<h:outputText value="Durée *"/>				
+   			<p:outputPanel>
+   				<p:spinner value="#{retardBean.duree}" size="3" required="true" requiredMessage="Durée Retard Obligatoire" min="0"/>
+   				<h:outputText value=" Heures"/>   				
+   			</p:outputPanel>
+   	    	
+   	    	<h:outputText value="Justifiées *"/>	            			
+      		<p:outputPanel>
+   				<p:spinner value="#{retardBean.justifie}" size="3" required="true" requiredMessage="Durée Retards justifiées Obligatoire" min="0"/>
+   				<h:outputText value=" Heures"/>   				
+   			</p:outputPanel>
+		</p:panelGrid>
+		  <br/>				
+		  <center>			  								
+		 		<p:commandButton value="Enregistrer"  icon="ui-icon-check" id="submitretard" action="#{retardBean.saveRetard}" />
+		 		<p:commandButton value="Annuler" immediate="true" type="reset" icon="ui-icon-close" />	
+		 </center>
+	</p:panel>
+	
+	<p:blockUI block="panelretard" trigger="submitretard">  
+        Enregistrement...<br />  
+    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+    </p:blockUI> 
+    
+	</h:form>
+	
+   </f:view>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

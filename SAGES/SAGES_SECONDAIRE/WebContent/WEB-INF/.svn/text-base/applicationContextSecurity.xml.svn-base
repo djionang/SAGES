@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xmlns:p="http://www.springframework.org/schema/p" 
+  xmlns:context="http://www.springframework.org/schema/context" 
+  xmlns:tx="http://www.springframework.org/schema/tx" 
+  xmlns:jee="http://www.springframework.org/schema/jee"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-2.5.xsd
+    http://www.springframework.org/schema/jee
+    http://www.springframework.org/schema/jee/spring-jee-2.5.xsd">
+
+	
+	<bean id="filterInvocationInterceptor"
+		class="org.acegisecurity.intercept.web.FilterSecurityInterceptor">
+		<property name="authenticationManager"
+			ref="authenticationManager"  />
+		<property name="accessDecisionManager"
+			ref="accessDecisionManager" />
+		<property name="objectDefinitionSource">
+			<value>
+				CONVERT_URL_TO_LOWERCASE_BEFORE_COMPARISON
+				PATTERN_TYPE_APACHE_ANT
+				
+				
+				/access-control/**=ROLE_GESTIONNAIRE
+				/administration/**=ROLE_ADMINISTRATEUR
+				/users/moncompte/**=ROLE_COMPTE_MANAGER,ROLE_GESTIONNAIRE
+				/users/**=ROLE_GESTIONNAIRE
+				/users/myaccount.jsf=ROLE_COMPTEPERSO_MANAGER
+				/anneeacademique/**=ROLE_GESTIONNAIRE, ROLE_PERSONNEL_MANAGER
+				
+				/web-inf/**=IS_AUTHENTICATED_ANONYMOUSLY
+				/contact/**=IS_AUTHENTICATED_ANONYMOUSLY
+				/reports/**=IS_AUTHENTICATED_REMEMBERED
+				/upimages/**=IS_AUTHENTICATED_ANONYMOUSLY
+				
+				/note/**=ROLE_NOTE_MANAGER,ROLE_GESTIONNAIRE
+				/note/absences.jsf=ROLE_DISCIPLINE_MANAGER
+				/note/annulerjustification.jsf=ROLE_DISCIPLINE_MANAGER
+				/note/enregistrernote**=ROLE_NOTE_CREATE,ROLE_NOTE_MANAGER,ROLE_GESTIONNAIRE
+				/note/exportnotes.jsf=ROLE_NOTE_VIEW,ROLE_NOTE_MANAGER,ROLE_GESTIONNAIRE
+				/note/visualisernotes.jsf=ROLE_NOTE_VIEW,ROLE_NOTE_MANAGER,ROLE_GESTIONNAIRE
+				/note/formulairenote.jsf=ROLE_NOTE_CREATE,ROLE_NOTE_VIEW,ROLE_NOTE_UPDATE,ROLE_NOTE_DELETE,ROLE_GESTIONNAIRE,ROLE_NOTE_MANAGER
+				
+				/note/**-bulletin**=ROLE_BULLETIN_MANAGER,ROLE_GESTIONNAIRE
+				/note/tableauhonneur.jsf=ROLE_BULLETIN_MANAGER,ROLE_GESTIONNAIRE
+				
+				/inscription/**=ROLE_INSCRIPTION_MANAGER, ROLE_GESTIONNAIRE
+				/inscription/inscription**.jsf=ROLE_INSCRIPTION_CREATE
+				/inscription/inscrits.jsf=ROLE_INSCRIPTION_VIEW
+				/inscription/modifiertranche.jsf=ROLE_TRANCHE_MANAGER
+				/inscription/parametres.jsf=ROLE_TRANCHE_MANAGER
+				/inscription/copieparametres.jsf=ROLE_TRANCHE_MANAGER
+				
+				/plannifanuelle/**=ROLE_GESTIONNAIRE,ROLE_PROGRAMMATION_MANAGER
+				/programmation/**=ROLE_GESTIONNAIRE,ROLE_PROGRAMMATION_MANAGER
+				/recrutement/**=ROLE_GESTIONNAIRE,ROLE_RECRUTEMENT_MANAGER
+
+
+				/salle/**=ROLE_GESTIONNAIRE,ROLE_SALLE_MANAGER
+				/atelier/**=ROLE_GESTIONNAIRE,ROLE_SALLE_MANAGER
+				/vie-scolaire/**=ROLE_GESTIONNAIRE
+
+
+				
+				/classe/**=ROLE_GESTIONNAIRE,ROLE_CLASSE_MANAGER
+				/contact/**=IS_AUTHENTICATED_REMEMBERED
+				
+				/cours/cdtexte/**=ROLE_GESTIONNAIRE,ROLE_CAHIERTEXTE_MANAGER
+				/cours/partie-chapitre/**=ROLE_GESTIONNAIRE,ROLE_PARTIECHAPITRE_MANAGER				
+				/matiere/**=ROLE_GESTIONNAIRE,ROLE_MATIERE_MANAGER
+				
+				
+				/discipline/**=ROLE_GESTIONNAIRE,ROLE_DISCIPLINE_MANAGER
+				/eleve/**=ROLE_GESTIONNAIRE,ROLE_ELEVE_MANAGER
+				
+				/enseignant/**=ROLE_GESTIONNAIRE,ROLE_PERSONNEL_MANAGER
+				/materiel/**=ROLE_GESTIONNAIRE
+				/responsabilite/**=ROLE_GESTIONNAIRE
+				/budget/**=ROLE_GESTIONNAIRE
+				/personnel/**=ROLE_GESTIONNAIRE,ROLE_PERSONNEL_MANAGER
+				
+				/etablissement/**=ROLE_GESTIONNAIRE
+				/evaluation/typeevaluation/**=ROLE_GESTIONNAIRE,ROLE_EVALUATION_MANAGER
+				/evaluation/creerevaluation.jsf=ROLE_GESTIONNAIRE,ROLE_EVALUATION_MANAGER,ROLE_EVALUATION_CREATE
+				/evaluation/listing.jsf=ROLE_GESTIONNAIRE,ROLE_EVALUATION_MANAGER,ROLE_EVALUATION_VIEW
+				/evaluation/visualisation.jsf=ROLE_GESTIONNAIRE,ROLE_EVALUATION_MANAGER,ROLE_EVALUATION_VIEW
+				/evaluation/modification.jsf=ROLE_GESTIONNAIRE,ROLE_EVALUATION_MANAGER,ROLE_ROLE_EVALUATION_EDIT
+				/accueil2.jsf=IS_AUTHENTICATED_REMEMBERED
+			</value>
+		</property>
+	</bean>
+
+	
+</beans>

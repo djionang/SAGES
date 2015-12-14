@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="/WEB-INF/templates/template.xhtml">
+   
+    <ui:define name="meta">
+   		<f:metadata>
+	  		<f:event type="preRenderView" listener="#{etablissementBean.initeditetablissement}"/>
+		</f:metadata>
+   </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Paramètres de l'établissement
+    </ui:define>
+    
+    <ui:define name="content">
+	    <h2>
+	   		<h:outputText value="Etablissement: #{etablissementBean.codeetablissement}"/>
+	   	</h2>
+    <br/>
+   	<h:form id="formetab" enctype="multipart/form-data">
+   	
+   	<p:panel id="paneletab"  style="margin-bottom:10px;"> 
+   	
+   		<p:messages id="messages" autoUpdate="true"/>
+   		
+	    <p:panelGrid columns="2" style="width:100%;" id="perso">	    
+	    	<f:facet name="header">
+	    		<center>
+	    			<p:graphicImage value="#{etablissementBean.logo}"/>
+	    		</center>	    	
+	    	</f:facet>	
+		 	<h:outputText value="Nom *"/>	            			
+      		<p:inputText value="#{etablissementBean.nom}" id="Nom" required="true" requiredMessage="Nom obligatoire"/>
+      		
+      		<h:outputText value="Acronyme"/>	            			
+      		<p:inputText value="#{etablissementBean.acronyme}" id="acronyme" required="true" requiredMessage="Acronyme etablissement obligatoire"/>
+      		 	
+		 	<h:outputText value="Devise"/>	            			
+      		<p:inputText value="#{etablissementBean.devise}" id="devise" required="true" requiredMessage="Devise obligatoire"/>
+      		
+      		<h:outputText value="Logo"/>      		            			
+      		<p:fileUpload value="#{etablissementBean.logoUploaded}"  mode="simple" showButtons="false" id="logo"/>
+      		 	
+		 	<h:outputText value="Type"/>	            			
+      		<p:inputText value="#{etablissementBean.type}" id="type"/>
+      		
+      		<h:outputText value="Code postal"/>	            			
+      		<p:inputText value="#{etablissementBean.codepostal}" id="codepostal" required="true" requiredMessage="Code postal obligatoire"/>
+      		 	
+		 	<h:outputText value="Email"/>	            			
+      		<p:inputText value="#{etablissementBean.email}" id="email"/>
+      		
+      		
+   	    	<h:outputText value="Telephone *"/>	            			
+      		<p:inputText value="#{etablissementBean.telephone}" id="telephone" required="true" requiredMessage="Champ Telephone obligatoire" validator="PhoneValidator"/>
+      		
+      		<h:outputText value="Site Web"/>	            			
+      		<p:inputText value="#{etablissementBean.siteweb}" id="site"/>
+      		 
+      		<h:outputText value="Pays"/>	            			
+      		<p:inputText value="#{etablissementBean.pays}" id="pays"/>
+      		
+      		<h:outputText value="Dévise du Pays"/>	            			
+      		<p:inputText value="#{etablissementBean.devisepays}" id="devisepays"/>
+      		 	
+		 	<h:outputText value="Région"/>	            			
+      		<p:inputText value="#{etablissementBean.region}" id="region"/>
+      		
+      		<h:outputText value="Département"/>	            			
+      		<p:inputText value="#{etablissementBean.departement}" id="departement" />
+      		 	
+		 	<h:outputText value="Arrondissement"/>	            			
+      		<p:inputText value="#{etablissementBean.arrondissement}" id="arrondissement" />
+      		
+      		<h:outputText value="Adresse *"/>	            			
+      		<p:inputText value="#{etablissementBean.adresse}" id="adresse" required="true" requiredMessage="Adresse obligatoire"/>
+      		            			
+	     </p:panelGrid>		
+		 <br/>
+							
+		  <center>	
+		  								
+		 		<p:commandButton value="Mettre à jour"  icon="ui-icon-check" id="submitetab" action="#{etablissementBean.modifierEtablissement}" ajax="false"/>
+		 		<p:commandButton value="Annuler" immediate="true" type="reset" icon="ui-icon-close"/>
+		 		<p:commandButton value="Retour au listing" immediate="true" icon="ui-icon-arrowreturnthick-1-w" id="listingetab" action="#{navBean.etablisting}" />	
+		 </center>
+	</p:panel>
+	
+	<p:blockUI block="paneletab" trigger="submitetab">  
+        Enregistrement...<br />  
+    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+    </p:blockUI> 
+    
+	</h:form>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

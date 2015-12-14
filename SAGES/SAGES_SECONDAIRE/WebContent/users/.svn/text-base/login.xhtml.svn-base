@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:t="http://myfaces.apache.org/tomahawk">
+
+   <ui:composition template="/WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="login" value="#{userBean.result}"/>
+	  		<f:event type="preRenderView" listener="#{userBean.showMessage}"/>
+		</f:metadata>
+    </ui:define>   
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Login page
+    </ui:define>
+    
+    <ui:define name="menuheader">
+   		<h:form>
+			<ul>
+				<li>				
+					<h:commandLink action="#{navBean.accueil}" value="Accueil"/>	
+				</li>
+			</ul>
+		</h:form>
+   	</ui:define>
+   	
+   	<ui:define name="middlemenu">
+	   	<center>
+	   		<p:graphicImage value="/resources/img/user32.png"/>
+	   	</center>
+   	</ui:define>
+   	
+   	<ui:define name="leftmenu">
+   	
+   		<p:accordionPanel>
+	   		<p:tab title="Calendrier">
+		   		<p:scrollPanel style="width:220px;height:180px">
+					<p:calendar mode="inline"/>
+				</p:scrollPanel>
+			</p:tab>
+		</p:accordionPanel>
+		
+   	</ui:define>
+   	
+  	<ui:define name="rightmenu">
+   		<p:graphicImage value="/resources/img/blanklight.gif"/>
+   	</ui:define>
+   
+    <ui:define name="content">
+    	<center>
+		    <h2>
+		    	<h:panelGrid columns="2">
+			    	<p:graphicImage value="/resources/img/cadena48.png"/>
+			   		<h:outputText value="Connexion"/>
+			   	</h:panelGrid>
+		   	</h2>
+	   	</center>
+	   	<br/>
+	   	<br/>
+	   	<p:messages autoUpdate="true"/>
+	   	
+	   	<p:ajaxStatus style="width:16px;height:16px;" id="ajaxStatusPanel">  
+		     <f:facet name="start">  
+		         <h:graphicImage value="/resources/img/loading.gif" />  
+		     </f:facet>  
+		       
+		     <f:facet name="complete">  
+		         <h:outputText value="" />  
+		     </f:facet>  
+		 </p:ajaxStatus> 
+		 
+    	<p:panel id="panel">
+    		<f:facet name="header">
+    			<center>
+    				<p:graphicImage value="/resources/img/key32.png"/>
+    			</center>
+    		</f:facet>
+	   		<h:form id="formlogin">
+		   		<center>
+		   			
+		   			<h:panelGrid columns="2">
+		   				<h:outputLabel value="Login" for="j_username"/>
+		   				<t:inputText id="j_username" forceId="true"
+							value="#{userBean.login}" size="30" maxlength="40"></t:inputText>
+		   				
+		   				<h:outputLabel value="Mot de passe" for="j_password"/>
+		   				<t:inputSecret id="j_password" forceId="true"
+							value="#{userBean.password}" size="30" maxlength="40" redisplay="true"></t:inputSecret>
+		   				
+		   				
+		   				<f:facet name="footer">
+		   					<br/>
+	   						<center>
+	   							<h:commandButton action="#{userBean.loguser}" value="Login" id="connect"/>
+	   						</center>	   				
+		   				</f:facet>
+		   			</h:panelGrid>
+		   		</center>
+			</h:form>
+		</p:panel>
+		
+   	
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

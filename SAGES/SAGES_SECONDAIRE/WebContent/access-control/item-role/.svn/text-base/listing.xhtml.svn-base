@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="/WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Listing Niveaux Roles
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2>Niveaux de Roles enregistrés</h2>
+   		<br/>
+   		<p:growl autoUpdate="true" globalOnly="true"/>
+   			 <h:form id="form1">
+   			
+	    	<p:dataTable id="tableitemRoles" value="#{listItemRoleBean.itemroles}" var="itemRole" emptyMessage="Aucun Niveau de Role enregistré"
+	    		paginator="true" rows="20"  rowsPerPageTemplate="10,20,40" sortBy="#{itemRole.libelle}" sortOrder="descending"  rowIndexVar="lig">
+		  	        
+        		<p:column id="code">  
+            		<h:outputText value="#{lig+1}" />  
+        		</p:column> 
+        
+        		<p:column id="libelle"  sortBy="#{itemRole.libelle}" headerText="Libellé">  
+            		<h:outputText value="#{itemRole.libelle}" />  
+        		</p:column> 
+        
+        		<p:column id="type" headerText="Description">  
+            		<h:outputText value="#{itemRole.description}" />  
+        		</p:column> 
+        				
+		        <p:column id="option" headerText="Options" width="31"> 
+		         	<h:panelGrid columns="2">		        
+					    
+			            <h:link  includeViewParams="true" id="edit"  title="Editer" outcome="updateitemrole">  
+					        <p:graphicImage value="/resources/img/edit16.png" style="border:#CCCCCC 1px solid"/>   
+					        <f:param name="iditem" value="#{itemRole.iditem}"/>
+					    </h:link>
+					    
+			            <h:link  includeViewParams="true" id="delete" outcome="deleteitemrole" title="Supprimer">  
+					        <p:graphicImage value="/resources/img/delete.png" style="border:#CCCCCC 1px solid"/>
+					       	<f:param name="iditem" value="#{itemRole.iditem}"/>
+					   </h:link>
+					   
+			         </h:panelGrid>
+			         
+		        </p:column> 
+		
+			</p:dataTable>
+			
+			<br/>
+   			
+			<center>
+				<p:commandButton value="Nouvel itemRole" action="#{navBean.creeritemrole}" icon="ui-icon-check"/>
+			</center>
+			</h:form>
+  			
+  			
+		<p:separator/>
+		<br/>
+   		
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

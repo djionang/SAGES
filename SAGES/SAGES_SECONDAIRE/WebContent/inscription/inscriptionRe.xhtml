@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Recherche élève -- Inscription
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2><h:outputText value="Inscription -- Recherche de l'élève"/></h2>
+   		<br/>
+   		<p:messages autoUpdate="true" />
+   		<p:growl autoUpdate="true"/>
+   		
+		<p:outputPanel id="panel" autoUpdate="true">
+			<f:facet name="header">
+				<center>
+					<h:outputText value="Recherche de l'élève"/>
+				</center>
+			</f:facet>
+					
+			<h:form id="rechercheeleve">
+				<h:panelGrid columns="5" id="grid" style="width:70%">
+					
+					<p:inputText value="#{rechercheEleveBean.motcle}" id="motcle" required="true" requiredMessage="Veuillez indiquer l'expression à rechercher"/>
+					<p:watermark for="motcle" value="Rechercher..."/>
+					<h:selectOneMenu value="#{rechercheEleveBean.filtre}">
+						<f:selectItem itemLabel="-- Filtre --" itemValue=""/>
+						<f:selectItem itemLabel="Matricule" itemValue="Matricule"/>
+						<f:selectItem itemLabel="Nom" itemValue="Nom"/>
+					</h:selectOneMenu>
+					
+					<h:selectOneMenu value="#{rechercheEleveBean.codeclasse}">
+						<f:selectItem itemLabel="-- Classe --" itemValue=""/>
+						<f:selectItems value="#{etablissement.listeClasses}"  var="classe" 
+						itemLabel="#{classe.libelle}" itemValue="#{classe.codeClasse}" /> 					
+					</h:selectOneMenu>
+					<p:commandButton id="loadeleve" icon="ui-icon-search" actionListener="#{rechercheEleveBean.chercherEleve}" update=":panel"/>
+				
+				</h:panelGrid>
+				
+				<p:blockUI block="grid"  trigger=":panel">  
+		        Chargement...<br />  
+			    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+			    </p:blockUI>
+			</h:form>
+				
+				<br/>
+			<h:form id="formeleve">
+				
+				<p:panel  id="paneleve" header="Trouvés" rendered="#{not empty rechercheEleveBean.modeleEleve}">
+				
+					<p:dataTable value="#{rechercheEleveBean.modeleEleve}" var="eleve" id="tabeleve" paginator="true" rows="30"
+					emptyMessage="Aucun élève correspondant aux critères" selection="#{rechercheEleveBean.selectedEleve}" selectionMode="single"
+					rowKey="#{eleve.matricule}" >
+					
+						<p:column width="8">
+							<h:link includeViewParams="true" outcome="inscriptioneleveform" title="Inscription" >
+						    	<p:graphicImage value="../resources/img/view16.png" style="border:#CCCCCC 1px solid"/>  						        
+						    	<f:param name="matricule" value="#{eleve.matricule}"/>						    
+						    </h:link>
+						</p:column>
+					
+						<p:column id="matricule" headerText="Matri.">
+							<h:outputText value="#{eleve.matricule}"/>
+						</p:column>
+					
+			            <p:column id="nom" headerText="Nom">
+							<h:outputText value="#{eleve.nom}"/>
+						</p:column>
+						
+						  
+						<p:column id="prenom" headerText="Prénom">
+							<h:outputText value="#{eleve.prenom}"/>
+						</p:column>
+						
+						<p:column id="datenaissance" headerText="Né le">
+							<h:outputText value="#{eleve.dateNaissance}">
+								<f:convertDateTime pattern="dd/MM/yyyy"/>
+							</h:outputText>
+						</p:column>
+						
+						<p:column id="classe" headerText="Classe">
+							<h:outputText value="#{eleve.codeClasse}"/>
+						</p:column>
+										
+						<p:column id="Tuteur" headerText="Tuteur">
+							<h:outputText value="#{eleve.nomTuteur}"/>
+						</p:column> 						
+						
+					</p:dataTable>
+					 
+				</p:panel>	
+			</h:form>
+   			
+		</p:outputPanel>
+	
+		
+	   
+	   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

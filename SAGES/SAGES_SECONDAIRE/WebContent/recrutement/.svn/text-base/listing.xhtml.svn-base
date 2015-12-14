@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Listing Recrutements
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2>Candidatures Recues</h2>
+   		
+   		<br/>
+
+	            <h:form id="form1">
+		    	<p:dataTable id="tabledossiers" value="#{listDossierBean.dossiers}" var="dossier" emptyMessage="Aucune candidature trouvée"
+		    		 sortBy="#{dossier.nom}" sortOrder="ascending" widgetVar="tabledossier"
+		    		tableStyleClass="tablelist"  filteredValue="#{listDossierBean.dossiers}">
+			  	      
+	        		<p:column id="code" headerText="Code D." >  
+	            		<h:outputText value="#{dossier.codedossier}" />  
+	        		</p:column> 
+	        
+	        		<p:column id="nom" headerText="Nom" sortBy="#{dossier.nom}"
+	        		filterBy="#{dossier.nom}" filterMatchMode="contains">  
+	            		<h:outputText value="#{dossier.nom} #{dossier.prenom}" />  
+	        		</p:column>
+	        
+					<p:column id="niveau1" headerText="Niveau"
+					 filterBy="#{dossier.niveauDemande}"   filterMatchMode="contains">  
+			          <h:outputText value="#{dossier.niveauDemande} (#{dossier.optionDemande})" />  
+			        </p:column> 
+			        
+					<p:column id="etat" headerText="Etat">  
+			             <h:outputText value="#{dossier.etat}" /> 
+			        </p:column> 
+	        
+			        <p:column id="option" headerText="Options" width="67" style="padding:0px;"> 
+			         	<p:panelGrid columns="4">
+				        	
+						    <h:link  includeViewParams="true" outcome="detailcandidature" title="Visualiser" >
+						    	<p:graphicImage value="../resources/img/view16.png" style="border:#CCCCCC 1px solid"/>  						        
+						    	<f:param name="codedossier" value="#{dossier.codedossier}"/>						    
+						    </h:link>
+						    
+				            <h:link  includeViewParams="true" id="edit"  title="Editer" outcome="modifiercandidature">  
+						        <p:graphicImage value="../resources/img/edit16.png" style="border:#CCCCCC 1px solid"/>   
+						        <f:param name="codedossier" value="#{dossier.codedossier}"/>
+						    </h:link>
+						    
+				            <h:link  includeViewParams="true" id="delete" outcome="supprimercandidature" title="Supprimer">  
+						        <p:graphicImage value="../resources/img/delete16.png" style="border:#CCCCCC 1px solid"/>
+						       <f:param name="codedossier" value="#{dossier.codedossier}"/>
+						   </h:link>
+						    
+				            <h:link  includeViewParams="true" id="handle" title="Etudier" outcome="etudiercandidature">  
+						        <p:graphicImage value="../resources/img/handle16.png" style="border:#CCCCCC 1px solid"/>   
+						        <f:param name="codedossier" value="#{dossier.codedossier}"/>
+						    </h:link>
+			            </p:panelGrid>
+			        </p:column> 
+			        
+			        		<br/>
+		   		<f:facet name="footer">
+					        	
+					<br/>
+					<center>
+						<p:commandButton value="Nouvelle candidature" icon="ui-icon-check" action="#{navBean.nouvellecandidature}"/>  
+				    </center>
+				</f:facet>
+				</p:dataTable>
+			</h:form>
+
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

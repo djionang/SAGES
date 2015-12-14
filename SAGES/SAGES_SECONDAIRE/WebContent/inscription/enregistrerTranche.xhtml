@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+  
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codeclasse" value="#{parametreTrancheBean.codeclasse}"/>
+	  		<f:event type="preRenderView" listener="#{parametreTrancheBean.initParamclasse}"/>
+		</f:metadata>
+    </ui:define>
+    
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Nouvelle Tranche
+    </ui:define>
+   
+    <ui:define name="content">
+	    <h2>
+	   		<h:outputText value="Nouvelle Tranche - Frais scolaires #{parametreTrancheBean.classe.libelle}"/>
+	   	</h2>
+	   	<p:growl autoUpdate="true"/>
+	   	<p:messages id="messages" autoUpdate="true"/>
+    <br/>
+    
+    <p:panel  rendered="#{not empty parametreTrancheBean.classe}" id="pantranche" header="Tranches">
+					
+		<p:dataTable value="#{parametreTrancheBean.listeTranches}" var="tranche" id="tabeleve" paginator="true" rows="40"
+		emptyMessage="Aucun tranche enregistrée pour cette classe" >
+		
+			<f:facet name="header">
+				<h:outputText value="Liste des tranches #{parametreTrancheBean.classe.libelle}"/>
+			</f:facet>
+              
+            <p:column id="id" headerText="ID." sortBy="#{tranche.id}">
+				<h:outputText value="#{tranche.id}"/>
+			</p:column>
+			
+			  
+			<p:column id="columntype" headerText="Type">
+				<h:outputText value="#{tranche.type}"/>
+			</p:column>
+			
+			<p:column headerText="Montant">
+				<h:outputText value="#{tranche.montant}">
+	   				<f:convertNumber type="currency" currencySymbol="F." />
+				</h:outputText>
+			</p:column> 
+			
+			<p:column id="delaiversement" headerText="Délai Vers.">
+				<h:outputText value="#{tranche.delaiVersement}">
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:outputText>
+			</p:column>
+							
+			
+		</p:dataTable>
+		
+	</p:panel>
+   	
+   	<br/>
+   	
+   	
+	<h:form id="formnveltranche">
+	   	<p:panel id="panelparam"  style="margin-bottom:10px;"> 
+	   	
+			    <p:panelGrid columns="2" cellpadding="5" id="pann">  
+			        <h:outputText value="Type de tranche (ex: inscr.)" />
+			        <p:selectOneMenu value="#{parametreTrancheBean.type}" style="width:140px;" required="true" requiredMessage="Type tranche ne peut être vide" editable="true">
+			        	<f:selectItems value="#{configuration.typesTranchesItems}"/>
+			        </p:selectOneMenu>
+			          
+			        <h:outputText value="Montant" />  
+			        <p:inputText value="#{parametreTrancheBean.montant}" required="true" requiredMessage="Montant obligatoire" validator="MontantFrValidator"/>  
+			        
+			        <h:outputText value="Délai versement"/>
+					<p:calendar navigator="true" mindate="{#configuration.datejour}" value="#{parametreTrancheBean.delai}" id="dateversnt" required="true" requiredMessage="Délai de versement obligatoire" />
+			          
+			    </p:panelGrid> 		    
+	         	<br/>
+	        	<center>
+	            	<p:commandButton id="savetranche" icon="ui-icon-check" value="Enregistrer" action="#{parametreTrancheBean.enregistrerTranche}"/>
+	            	<p:commandButton id="return" icon="ui-icon-arrowreturnthick-1-w" value="Retourner" action="#{parametreTrancheBean.retourner}" immediate="true"/>
+	            </center>
+	   		
+		</p:panel>
+		
+		<p:blockUI block="panelparam" trigger="savetranche">  
+	        Enregistrement...<br />  
+	    	<p:graphicImage value="/resources/img/ajax-loader.gif"/> 
+	    </p:blockUI> 
+	    
+	</h:form>
+	
+	
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

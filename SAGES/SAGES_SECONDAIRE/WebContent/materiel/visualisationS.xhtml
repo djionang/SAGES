@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="idsortie" value="#{sortieBean.idsortie}"/>
+	  		<f:event type="preRenderView" listener="#{sortieBean.initialize}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Visualiser Matériel sortie
+    </ui:define>
+   
+    <ui:define name="content">    	
+
+	   	<p:messages autoUpdate="true"/>
+    
+	   	<h:form id="formapplication">
+	   	
+		   	<p:panel id="panel"  style="margin-bottom:10px;" rendered="#{not empty sortieBean.idsortie}"> 
+		   		
+			     <p:panelGrid columns="2" style="width:80%;" id="perso" columnClasses="label,value">	    
+			    			 	
+				 	<h:outputText value="Type Matériel"/>	            			
+		      		<h:outputText value="#{sortieBean.typemateriel}" id="type"/>
+		      		 	
+				 	<h:outputText value="Désignation"/>	            			
+		      		<h:outputText value="#{sortieBean.designation}" id="designation"/>
+		      		
+		      		<h:outputText value="Quantité Bon état"/>	            			
+		      		<h:outputText value="#{sortieBean.quantite}" id="qd"/>
+		      		
+		      		<h:outputText value="Quantitv sortie"/>	            			
+		      		<h:outputText value="#{sortieBean.quantiteSortie}" id="qds"/>
+     		
+		      		<h:outputText value="Raison"/>	            			
+		      		<h:outputText value="#{sortieBean.raison}" id="raison"/>
+		      		
+		      		<h:outputText value="Utilisateur"/>	            			
+		      		<h:outputText value="#{sortieBean.utlisateur}" id="utilisateur"/>
+		      			
+					<h:outputText value="Date Enregistrement"/>				
+		   			<h:outputText value="#{sortieBean.daterenreg}">
+						 <f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputText> 
+					
+					<h:outputText value="Date Retrait"/>				
+		   			<h:outputText value="#{sortieBean.dateretrait}">
+						 <f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputText>    	      		               			
+			        	    	      		               			
+			     </p:panelGrid>		
+			 	 <br/>									
+				 <center>										
+				 	<p:commandButton value="Retour à la liste"  id="buttonsubmit" icon="ui-icon-arrowreturnthick-1-w"  action="#{navBean.sortielisting}"/>
+				 </center>
+				
+			</p:panel>
+			
+		</h:form>
+   	
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

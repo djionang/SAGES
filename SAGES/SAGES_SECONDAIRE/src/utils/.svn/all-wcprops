@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/utils
+END
+SecurityBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/utils/SecurityBean.java
+END
+ContexteJNDI.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/utils/ContexteJNDI.java
+END
+OperationResults.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/utils/OperationResults.java
+END
+UserDetailsServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/utils/UserDetailsServiceImpl.java
+END
+Log4JLoader.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/utils/Log4JLoader.java
+END
+CopyUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/utils/CopyUtil.java
+END
+Repertoire.java
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/school/!svn/ver/10/SAGES_SECONDAIRE/src/utils/Repertoire.java
+END
+Service.java
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/school/!svn/ver/18/SAGES_SECONDAIRE/src/utils/Service.java
+END

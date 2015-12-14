@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+  
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="idversement" value="#{VersementBean.id}"/>
+	  		<f:event type="preRenderView" listener="#{VersementBean.initVersement}"/>
+		</f:metadata>
+    </ui:define>
+    
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Modification versement
+    </ui:define>
+   
+    <ui:define name="content">
+	    <h2>
+	   		<h:outputText value="Modifier le versement #{VersementBean.id} "/>
+	   	</h2>
+	   	<p:growl autoUpdate="true"/>
+	   	<p:messages id="messages" autoUpdate="true"/>
+    <br/>   	
+   	
+	<h:form id="formmodversement">
+	   	<p:panel id="panelparam"  style="margin-bottom:10px;"> 
+	   	<center>
+				<p:panelGrid columns="2"  id="paneleve" columnClasses="label,value" style="width:80%;align:center;">
+												
+					<f:facet name="header">
+						<h:outputText value="Eleve de matricule #{VersementBean.matricule}"/>
+					</f:facet>
+				    <h:outputText value="Nom"/>
+				    <h:outputText value="#{VersementBean.nom}"/>
+							
+					<h:outputText value="Prénom"/>	
+					<h:outputText value="#{VersementBean.prenom}"/>
+				</p:panelGrid>
+			</center>
+	   	<center>
+	   	<br/>
+			    <p:panelGrid columns="2" cellpadding="5" id="pann">  
+			    
+			    <f:facet name="header">
+				   <h:outputText value="Versement"/>
+				</f:facet>
+			       <h:outputText value="Type de versement (ex: inscr.)" />
+			        <p:selectOneMenu value="#{VersementBean.typeversement}" editable="true" style="width:180px;" required="true" requiredMessage="Type tranche ne peut être vide">
+			        	<f:selectItems value="#{configuration.typesTranchesItems}"/>
+			        </p:selectOneMenu>
+			          
+			        <h:outputText value="Montant" />  
+			        <p:inputText value="#{VersementBean.montant}" required="true" requiredMessage="Montant obligatoire" validator="MontantFrValidator"/>  
+			        
+			        <h:outputText value="Délai versement"/>
+					<p:calendar pattern="dd/MM/yyyy" navigator="true" value="#{VersementBean.dateVers}" id="dateversnt" required="true" requiredMessage="Délai de versement obligatoire" />
+			          
+			    </p:panelGrid> 	
+	   </center>	    
+	         	<br/>
+	        	<center>
+	            	<p:commandButton id="modifyversement" icon="ui-icon-check" value="Mettre à jour" action="#{VersementBean.modifierVersement}"/>
+	            </center>
+	   		
+		</p:panel>
+		
+		<p:blockUI block="panelparam" trigger="modifyversement">  
+	        Mise à jour...<br />  
+	    	<p:graphicImage value="/resources/img/ajax-loader.gif"/> 
+	    </p:blockUI> 
+	    
+	</h:form>
+	
+	
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

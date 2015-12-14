@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="idprevision" value="#{previsionBean.idprevision}"/>
+	  		<f:event type="preRenderView" listener="#{previsionBean.loadPrevision}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Transfert 
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2><h:outputText value="Transferer"/></h2>
+   		<br/>
+   		<p:messages autoUpdate="true" />
+   		
+		<p:outputPanel id="p" autoUpdate="true">
+			<h:form id="formp">
+				<p:panel id="panprevision" header="Information prévision">
+				
+				<h:panelGrid columns="2" style="width:100%;" id="f1">	    
+				    	<h:panelGroup>
+					    	<h:outputText value="Type Prevsion"/>	            			
+				      		<h:selectOneMenu value="#{previsionBean.idprevision}" required="true" requiredMessage="type obligatoire" >
+				      			<f:selectItem itemLabel="Selection du prevision" itemValue=""/>
+				    			<f:selectItems value="#{etablissement.previsions}" var="prevision" itemLabel="#{prevision.typeprevision} --  #{prevision.reste}" itemValue="#{prevision.idprevision}"/>
+				   	    		<p:ajax async="true" partialSubmit="true" listener="#{previsionBean.chargerPrevision}" event="change" update=":p" process="@this"/>
+				   	    	</h:selectOneMenu> 	
+	   	    			</h:panelGroup>
+				</h:panelGrid>
+					
+					<br/>
+					<center>
+					<p:panelGrid columns="2" rendered="#{not empty previsionBean.selectedPrevision}" id="panpre" columnClasses="label,value" style="width:80%;align:center;">
+												
+						<f:facet name="header">
+							<h:outputText value="prévision de code #{previsionBean.selectedPrevision.codeprevision}"/>
+						</f:facet>
+				            
+				    <h:outputText value="Type prevision"/>	            			
+		      		<h:outputText value="#{previsionBean.selectedPrevision.typeprevision}" id="type"/>
+		      		 	
+				 	<h:outputText value="Description"/>	            			
+		      		<h:outputText value="#{previsionBean.selectedPrevision.description}" id="description"/>
+		      		
+		      		<h:outputText value="Montant"/>	            			
+		      		<h:outputText value="#{previsionBean.selectedPrevision.montant}" id="mantant"/>
+		    				      				
+					<h:outputText value="Nom Responsable"/>				
+		   			<h:outputText value="#{previsionBean.selectedPrevision.nomrespon}" id="nom"/>
+		    		
+		   	    	
+		   	    	<h:outputText value="Prenom Responsable"/>			
+		      		<h:outputText value="#{previsionBean.selectedPrevision.prenomrespon}" id="prenom"/>      		
+		      				
+					<h:outputText value="Date Enregistrement"/>				
+		   			<h:outputText value="#{previsionBean.selectedPrevision.dateenreg}">
+						 <f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputText> 
+							
+					</p:panelGrid>
+					</center>
+				</p:panel>
+			</h:form>
+   			<br/>
+   			<h:form id="formajout">
+			   	<p:panel rendered="#{not empty previsionBean.selectedPrevision}" id="panelfees" header="Tranfert">
+				   	<br/>
+				   	<center>	
+				   		<h:panelGrid columns="2" style="width:100%;" id="f1">	    
+				    	<h:panelGroup>
+					    	<h:outputText value="---->"/>	            			
+				      		<h:selectOneMenu value="#{previsionBean.idprevision}" required="true" requiredMessage="type obligatoire" >
+				      			<f:selectItem itemLabel="Selection du prevision" itemValue=""/>
+				    			<f:selectItems value="#{etablissement.previsions}" var="prevision" itemLabel="#{prevision.typeprevision} --  #{prevision.reste}" itemValue="#{prevision.idprevision}"/>
+				   	    	</h:selectOneMenu> 	
+	   	    			</h:panelGroup>
+						</h:panelGrid>
+				   		<p:panelGrid columns="2">
+				   			<f:facet name="header">
+				   				<h:outputText value="Transferer Ici"/>
+				   			</f:facet>
+							<h:outputText value="Montant Tranfert"/>				
+   							<p:inputText value="#{previsionBean.montant}" id="montant" required="true" requiredMessage="Champ montant requis" validator="MontantFrValidator"/>
+	
+							<h:outputText value="Description"/>				
+   							<p:inputTextarea rows="6" cols="33" value="#{previsionBean.description}" id="description"/>
+							
+							<h:outputText value="Date Transfert"/>
+			   				<p:calendar value="#{previsionBean.dateenreg}" mindate="01/01/1960" maxdate="#{configuration.datejour}" required="true"  pattern="dd/MM/yyyy" requiredMessage="Date de tranfert requise"/>
+							
+							<f:facet name="footer">
+								<center>
+									<p:commandButton value="Transferer"  icon="ui-icon-check" id="submitprevision" action="#{previsionBean.transfert}" ajax="false"/>
+									<p:commandButton value="Annuler" immediate="true" type="reset" icon="ui-icon-close"/>	
+								</center>
+				      		</f:facet>
+				   		</p:panelGrid>
+				 	</center>	      	 	  	  	
+				</p:panel>
+			</h:form>
+		</p:outputPanel>
+	
+		<p:blockUI block=":formajout:panelfees"  trigger=":formajout:submitprevision">  
+	        Chargement...<br />  
+	    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+	    </p:blockUI>
+	    
+    
+   </ui:define>
+   
+   
+   </ui:composition>
+ 
+</html>

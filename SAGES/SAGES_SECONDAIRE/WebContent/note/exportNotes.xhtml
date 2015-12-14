@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codeevaluation" value="#{notesBean.codeevaluation}"/>
+	  		<f:event type="preRenderView" listener="#{notesBean.initializeimport}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | exporter les notes d'une évaluation
+    </ui:define>
+   
+    <ui:define name="content">
+    <center>
+	    <h2>
+	   		<h:outputText value="Exporter Notes de l'évaluation #{notesBean.evaluation.libelle}"/>
+	   	</h2>
+	   	<br/>
+   		<p:messages id="messages" autoUpdate="true"/>
+   		
+   		<p:growl autoUpdate="true"/>
+   		
+		<br/>
+	   	
+	   	<p:outputPanel id="panelnote"  style="margin-bottom:10px;">    	
+	   		
+			<h:form id="formnote" enctype="multipart/form-data">
+				<h:outputText value="Evaluation du "/>
+				<h:outputText value="#{notesBean.evaluation.datedebut}">
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:outputText>
+				<h:outputText value=" #{notesBean.evaluation.codematiere}, #{notesBean.evaluation.codeclasse}"/>
+								
+				<br/>
+				
+				<p:panelGrid columns="2" columnClasses="label,value" style="width:80%;">
+								
+					<h:outputText value="Evaluation "/>				
+					<h:outputText value="#{notesBean.evaluation.libelle}"/>
+					
+					<h:outputText value="Cours "/>				
+					<h:outputText value="#{notesBean.evaluation.libellecours}"/>
+										
+					<h:outputText value="Séquence "/>				
+					<h:outputText value=" #{notesBean.evaluation.numerosequence}"/>
+					
+					<h:outputText value="Pourcentage sur la note séquentielle "/>				
+					<h:outputText value=" #{notesBean.evaluation.coefficient}%"/>
+									
+					<h:outputText value="Notes enregistrées pour cette évaluation"/>
+					<h:outputText value="#{notesBean.notesEnregistrees?'Oui':'Non'}"/>
+					
+				</p:panelGrid>
+				
+				<br/>
+				
+				<center>
+					<p:splitButton value="Exporter" icon="ui-icon-disk">
+						 <p:menuitem value=".pdf" action="#{notesBean.exporterPDF}" ajax="false" icon="ui-icon-print"/>
+						 <p:menuitem value=".xls" action="#{notesBean.exporterXLS}" ajax="false" icon="ui-icon-disk"/>
+					</p:splitButton>
+				</center>
+				
+			</h:form>
+		</p:outputPanel>
+			
+   </center>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

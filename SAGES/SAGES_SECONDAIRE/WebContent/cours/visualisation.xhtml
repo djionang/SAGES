@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codecours" value="#{coursBean.codecours}"/>
+	  		<f:event type="preRenderView" listener="#{coursBean.initcours}"/>
+		</f:metadata>
+    </ui:define>
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Visualiser un cours
+    </ui:define>
+   
+    <ui:define name="content">
+    <f:view>
+	    <h2>
+	   		<h:outputText value="Visualiser Un cours"/>
+	   	</h2>
+       	<br/>  
+       	<p:messages autoUpdate="true"/>
+       	<p:panel>		
+	    <p:panelGrid columns="2" style="width:70%;" id="perso" columnClasses="label,value">
+      		 	
+		 	<h:outputText value="Matière"/>
+	    	<h:outputText value="#{coursBean.libellematiere}" />	    	
+	    	
+	    	<h:outputText value="Classe"/>
+	    	<h:outputText value="#{coursBean.libelleclasse}"/>
+	    		    		
+		 	<h:outputText value="libellé"/>	            			
+      		<h:outputText value="#{coursBean.libelle}"/>
+      		
+      		<h:outputText value="description"/>
+      		<h:outputText value="#{coursBean.description}"/>
+      		
+      		<h:outputText value="Enseignant"/>
+	    	<h:outputText value="#{coursBean.libelleenseignant}"/>           			
+	    
+	    	<h:outputText value="Coefficient"/>
+      		<h:outputText value="#{coursBean.coeficient}" />          			
+	    
+	    	<h:outputText value="Groupe Matière"/>
+	    	<h:outputText value="#{coursBean.libellegm}"/>
+	    	       		             			
+	     </p:panelGrid>	
+		<br/>
+		<f:facet name="footer">
+			<h:form>
+				<center>
+					<p:commandButton value="Retour à la liste des cours" action="#{navBean.gestcourslisting}" icon="ui-icon-arrowreturnthick-1-w"/>
+				</center>
+			</h:form>
+		</f:facet>
+	</p:panel>
+   </f:view>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

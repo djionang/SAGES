@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="numero" value="#{listeBilanTrimBean.numerotrimestre}"/>
+	  		<f:event type="preRenderView" listener="#{listeBilanTrimBean.initialize}"/>
+		</f:metadata>
+    </ui:define>
+    
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Bilan Trimestriel
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2><h:outputText value="Statistique -- bilan trimestriel"/></h2>
+   
+			<br/>
+			<p:messages autoUpdate="true"/>
+			
+			<p:growl autoUpdate="true" id="growl"/>
+
+			<p:outputPanel id="optrimestre">
+				<h:form id="formselecttrimestre">
+					<p:panel id="paneltrimestre" header="Trimestre">
+						<p:dataTable var="trimestre" value="#{etablissement.modeleTrimestre}" rowKey="#{trimestre.numero}" id="tabtrim"
+							selection="#{listeBilanTrimBean.selectedTrimestre}" selectionMode="single" paginator="true" rows="20"  
+							emptyMessage="Aucun Trimestre trouvé">
+					
+							<p:column id="code" headerText="Code trimestre">
+								<h:outputText value="#{trimestre.numero}"/>
+							</p:column>
+							
+							<p:column headerText="Date debut">
+								<h:outputText value="#{trimestre.datedebut}"/>				
+							</p:column>
+							
+							<p:column headerText="Date fin">
+								<h:outputText value="#{trimestre.datefin}"/>				
+							</p:column>
+						
+						</p:dataTable>
+						
+						<f:facet name="footer">
+							<center>
+								<p:commandButton id="loadbilan" value="Voir bilan" actionListener="#{listeBilanTrimBean.chargerBilanTrim}" update=":optrimestre"/>
+							</center>
+						</f:facet>
+						
+					</p:panel>
+				</h:form>
+				
+				<br/>
+				
+				<h:form id="formselectbilan">
+					<p:panel  id="panbilan" header="Bilan en Tableaux" rendered="#{not empty listeBilanTrimBean.modeleBilan}">
+					
+						<p:dataTable value="#{listeBilanTrimBean.modeleBilan}" var="bilan" emptyMessage="Aucun bilan trouvée" >
+				              
+				            <p:column id="lib" headerText="Libelle" sortBy="#{bilan.codeclasse}">
+								<h:outputText value="#{bilan.libelleclasse}"/>
+								<f:facet name="footer">
+								<h:outputText value="Totaux Etab:"/>
+							    </f:facet>
+							</p:column>
+							<p:column headerText="Effectif">
+								<h:outputText value="#{bilan.effectif}">
+								</h:outputText>
+								<f:facet name="footer">
+								<h:outputText value="#{listeBilanTrimBean.totaleffectif}">
+								</h:outputText>
+							  </f:facet>
+							</p:column> 
+							  
+							<p:column id="moy" headerText="Moyenne classe">
+								<h:outputText value="#{bilan.moyenneclasse}"/>
+								<f:facet name="footer">
+								<h:outputText value="#{listeBilanTrimBean.totalmoyenne}">
+								</h:outputText>
+							  </f:facet>
+							</p:column>
+							
+							<p:column headerText="Taux reussite">
+								<h:outputText value="#{bilan.tauxreussite}">
+					   				<f:convertNumber type="currency" currencySymbol="%" />
+								</h:outputText>
+								<f:facet name="footer">
+								<h:outputText value="#{listeBilanTrimBean.total}">
+									<f:convertNumber type="currency" currencySymbol="%" />
+								</h:outputText>
+							  </f:facet>
+							</p:column> 
+												
+							<p:column headerText="Options" width="20" style="padding:0px;">
+								<p:panelGrid columns="2">
+									<h:link includeViewParams="true" outcome="visualiserbilantrim" title="Vilsualiser Detail" >
+								    	<p:graphicImage value="../resources/img/view16.png" style="border:#CCCCCC 1px solid"/>  						        
+								    	<f:param name="trim" value="#{bilan.trim}"/>	
+								    	<f:param name="codeclasse" value="#{bilan.codeclasse}"/>			    
+								    </h:link>
+							    </p:panelGrid>
+							</p:column>
+							
+						</p:dataTable>
+					</p:panel>
+				<p:panel  id="panstat" header="Bilan en Diagramme circulaire" rendered="#{not empty listeBilanTrimBean.modeleBilan}">	
+				<p:pieChart id="custom" value="#{listeBilanTrimBean.pieModel}" legendPosition="e" fill="false" showDataLabels="true"  
+                title="Statistique par classe" style="width:500px;height:400px" sliceMargin="3" diameter="300" /> 
+                
+                <f:facet name="footer">  
+			         <center>
+						<p:commandButton id="addBtnT" value="Bilan Sequentiel" action="bilanseq"/>
+						<p:commandButton id="addBtnA" value="Bilan Annuel" action="bilanannuel"/>
+					</center>
+			    </f:facet> 
+                
+                </p:panel>	
+				</h:form>
+			</p:outputPanel>
+		
+			
+		    <p:blockUI block=":formselecttrimestre:paneltrimestre"  trigger=":formselecttrimestre:loadbilan">  
+		        Chargement...<br />  
+		    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+		    </p:blockUI>			
+		    
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

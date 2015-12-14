@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Recrutement
+    </ui:define>
+   
+    <ui:define name="content">
+    
+    <f:view>
+    
+	    <h2>
+	   		<h:outputText value="Nouveau dossier de candidature"/>
+	   	</h2>
+    
+   	<h:form id="formapplication">
+   	
+   	<p:panel id="panelapplication"  style="margin-bottom:10px;"> 
+   	
+   		<p:messages id="messages" autoUpdate="true"/>
+   		
+	    <p:panelGrid columns="2" style="width:100%;" id="perso">	    
+	    
+		    <f:facet name="header">
+			  	Informations candidature
+			</f:facet>
+ 	
+		 	<h:outputText value="Nom du concerné *"/>	            			
+      		<p:inputText value="#{dossierBean.nom}" id="nom" required="true" requiredMessage="Champ Nom  obligatoire" title="nom du candidat" onkeydown="true" onkeyup="true"/>
+      		
+			<h:outputText value="Prénom"/>			
+      		<p:inputText value="#{dossierBean.prenom}" id="prenom"  title="prenom du candidat" onkeydown="true" onkeyup="true"/>
+      		
+      		<h:outputText value="Matricule"/>	            			
+      		<p:inputText value="#{dossierBean.matricule}" id="matricule" />
+      			
+			<h:outputText value="Date de naissance (JJ/MM/AAAA) *"/>		
+			<p:calendar mindate="01/01/1960" navigator="true" maxdate="#{configuration.datejour}" required="true" pattern="dd/MM/yyyy" value="#{dossierBean.dateNaissance}" id="datenaissance" locale="#{configuration.agesLocale}" requiredMessage="Champ date naissance obligatoire" pagedate="10/10/2000"/>
+       		
+       		<h:outputText value="Lieu de naissance *"/>			
+      		<p:inputText value="#{dossierBean.lieuNaissance}" id="lieunaissance" required="true" requiredMessage="Champ Lieu de naissance obligatoire"/>
+       			
+       		<h:outputText value="Sexe"/>				
+   			<h:selectOneMenu value="#{dossierBean.sexe}" id="sexe">
+   	    		<f:selectItems value="#{configuration.sexeItems}"/>
+   	    	</h:selectOneMenu>
+       			
+			<h:outputText value="Nationalité *" />				
+      		<p:inputText value="#{dossierBean.nationalite}" id="nationalite" required="true" requiredMessage="Champ Nationalité  obligatoire"/>	       		                   		
+               	    
+			<h:outputText value="Mot de passe dossier"/>				
+			<p:inputText value="#{dossierBean.password}" id="password"/>
+	               			                 		
+            <h:outputText value="date de préinscription *"/>
+		 	<p:calendar mindate="01/01/1960" required="true"  maxdate="#{configuration.datejour}" pattern="dd/MM/yyyy" value="#{dossierBean.datePreinscription}" id="datepreinscription" requiredMessage="Date de préinscription obligatoire" />
+				
+           	<h:outputText value="N° payement Préins."/>				
+			<p:inputText value="#{dossierBean.numeroPayement}" id="paymentid"/>
+              			
+            <h:outputText value="Niveau sollicité *"/>				
+            <h:selectOneMenu value="#{dossierBean.niveauDemande}" id="niveaudemande" required="true" requiredMessage="Niveau sollicité indisponible">
+   	    		<f:selectItem itemDescription="Sélection niveau" itemLabel="Niveau sollicité" itemValue="-"/>
+   	    		<f:selectItems value="#{configuration.niveauItems}"/>
+   	    		<p:ajax async="true" partialSubmit="true" listener="#{dossierBean.loadoptions}" update="optionsollicite" process="@this"/>
+   	    	</h:selectOneMenu>
+   	    	  			
+            <h:outputText value="Option sollicitée *" />				
+			<h:selectOneMenu value="#{dossierBean.optionDemande}" id="optionsollicite" required="true" requiredMessage="Option sollicitée indisponible">
+   	    		<f:selectItems value="#{dossierBean.options}" var="opt" itemLabel="#{opt.libelle}" itemValue="#{opt.codeOption}"/>
+   	    	</h:selectOneMenu>
+   	    	
+   	    	     		               			
+	     </p:panelGrid>
+			
+		<br/>						
+		    <p:panelGrid columns="2" style="width:100%;" id="localisation">
+		    <f:facet name="header">
+		  		Localisation
+			</f:facet>
+		    
+			<h:outputText value="Adresse *"/>	 						
+			<p:inputText value="#{dossierBean.adresse}" id="adresse" required="true" requiredMessage="Champ Adresse  obligatoire" />
+	              			
+	        <h:outputText value="Email"/>			
+			<p:inputText value="#{dossierBean.email}" id="email" validator="EmailValidator">
+			</p:inputText>
+	              			                    	
+			<h:outputText value="Telephone"/>			 
+			<p:inputText value="#{dossierBean.telephone}" id="telephone" validator="PhoneValidator"/>
+			
+			<h:outputText value="Boite postale"/>				
+			<p:inputText value="#{dossierBean.boitePostale}" id="bp"/>
+			
+		    </p:panelGrid>
+	 
+			<br/>				
+		    <p:panelGrid columns="2" style="width:100%;" id="famille">
+		    
+			    <f:facet name="header">
+			  		Famille
+				</f:facet>
+				
+				<h:outputText value="Nom du père"/>	 						
+				<p:inputText value="#{dossierBean.nomPere}" id="nompere"/>
+	               		
+	            <h:outputText value="telephone du père"/>				
+				<p:inputText value="#{dossierBean.telephonePere}" id="phonepere" validator="PhoneValidator"/>
+	               			
+				<h:outputText value="profession"/>				
+				<p:inputText value="#{dossierBean.professionPere}" id="professionpere"/>
+	               			
+				<h:outputText value="Adresse email du père" />
+				<p:inputText value="#{dossierBean.emailPere}" id="emailpere" validator="EmailValidator"/>
+	               		
+				<h:outputText value="Nom de la mère"/>				
+				<p:inputText value="#{dossierBean.nomMere}" id="nommere"/>
+	             
+	            <h:outputText value="telephone de la mère"/>				
+				<p:inputText value="#{dossierBean.telephoneMere}" id="phonemere"/>
+	               			
+				<h:outputText value="profession"/>				
+				<p:inputText value="#{dossierBean.professionMere}" id="professionmere"/>
+	             	               		
+				<h:outputText value="Adresse email"/>				
+				<p:inputText value="#{dossierBean.emailMere}" id="emailmere" validator="EmailValidator"/>
+				
+				<h:outputText value="Nom du tuteur *"/>				
+				<p:inputText value="#{dossierBean.nomTuteur}" id="nomtuteur" required="true" requiredMessage="Champ Nom du tuteur obligatoire"/>
+	             
+	            <h:outputText value="telephone du tuteur *"/>				
+				<p:inputText value="#{dossierBean.telephoneTuteur}" id="phonetuteur" required="true" validator="PhoneValidator" requiredMessage="Champ Téléphone tuteur obligatoire"/>
+	               			
+				<h:outputText value="profession"/>				
+				<p:inputText value="#{dossierBean.professionTuteur}" id="professiontuteur"/>
+	               		
+				<h:outputText value="email du tuteur"/>				
+				<p:inputText value="#{dossierBean.emailTuteur}" id="emailtuteur" validator="EmailValidator" />
+				
+	         </p:panelGrid>
+
+	<br/>						
+		    <p:panelGrid columns="2" style="align=center; width:100%;" id="lastetablissement">
+		    
+			    <f:facet name="header">
+			  		Dernier établissement fréquenté
+				</f:facet>
+		    
+				<h:outputText value="Etablissement d'origine *"/>	 						
+				<p:inputText value="#{dossierBean.ancienEtablissement}" id="etablissementfrom" required="true" requiredMessage="Dernier établissement fréquenté obligatoire"/>
+		        
+				<h:outputText value="Dernière classe fréquentée *"/>				
+				<p:inputText value="#{dossierBean.classeAncienEtablissement}" id="derniereclasse" required="true" requiredMessage="Derniere classe fréquentée obligatoire"/>
+		       
+		        <h:outputText value="Moyenne derniere année * (/20)"/>
+		        <p:inputText value="#{dossierBean.dernieremoyenne}" id="note" maxlength="5" size="5" converterMessage="Impossible de convertir une note entrée" required="true" requiredMessage="Moyenne derniere année"/>
+				   	
+				<h:outputText value="Derniere année dans l'établissement d'origine *"/>				
+				<p:inputText value="#{dossierBean.anneeAncienEtablissement}" id="anneeAncienEtablissement" required="true" requiredMessage="Année de départ dernier établissement obligatoire"/>
+		        
+	         </p:panelGrid>
+			 <br/>	
+			 <br/>	
+			 <p:watermark for="note" value="0.00"/>	   									
+		  <center>	
+		  								
+		 		<p:commandButton value="Enregistrer"  icon="ui-icon-check" id="submitapp" action="#{dossierBean.savedossier}" />
+		 		<p:commandButton value="Annuler" immediate="true" type="reset" icon="ui-icon-close"/>	
+		 </center>
+	</p:panel>
+	
+	<p:blockUI block="panelapplication" trigger="submitapp">  
+        Enregistrement...<br />  
+    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+    </p:blockUI> 
+    
+	</h:form>
+	
+   </f:view>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | créer un type d'évaluation
+    </ui:define>
+   
+    <ui:define name="content">
+    <f:view>
+	    <h2>
+	   		<h:outputText value="Nouveau type d'évaluation"/>
+	   	</h2>
+    
+   	<h:form id="formtypeEvaluation">
+   	
+   	<p:panel id="paneltypeEvaluation"  style="margin-bottom:10px;"> 
+   	
+   		<p:messages id="messages" autoUpdate="true"/>
+   		
+	    <p:panelGrid columns="2" style="width:100%;" id="perso">	    
+	    		
+		 	<h:outputText value="libellé type"/>	            			
+      		<p:inputText value="#{typeEvaluationBean.typeevaluation}" id="libelle" required="true" requiredMessage="Libellé du type d'Evaluation obligatoire"/>
+      		
+   	    	<h:outputText value="coefficient / note finale"/>
+   	    	<p:spinner value="#{typeEvaluationBean.coefficient}" suffix="%" max="100" size="5" min="1" required="true" requiredMessage="Coefficient type obligatoire"/>
+      		
+      		<h:outputText value="Description"/>	            			
+      		<p:inputTextarea value="#{typeEvaluationBean.description}" id="description"/>
+      		           			
+	    </p:panelGrid>		
+		
+		  <br/>				
+		  <center>	
+		  								
+		 		<p:commandButton value="Enregistrer"  icon="ui-icon-check" id="submittypeEvaluation" action="#{typeEvaluationBean.savetypeEvaluation}" />
+		 		<p:commandButton value="Annuler" immediate="true" type="reset" icon="ui-icon-close" />	
+		 </center>
+	</p:panel>
+	
+	<p:blockUI block="paneltypeEvaluation" trigger="submittypeEvaluation">  
+        Enregistrement...<br />  
+    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+    </p:blockUI> 
+    
+	</h:form>
+	
+   </f:view>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

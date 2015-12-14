@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codedossier" value="#{dossierBean.codedossier}"/>
+	  		<f:event type="preRenderView" listener="#{dossierBean.initDossier}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Etude de candidature
+    </ui:define>
+   
+    <ui:define name="content">
+    
+	    <h2>
+	   		<h:outputText value="Etudier le dossier -- Code: #{dossierBean.codedossier}--"/>
+	   	</h2>
+    	<p:messages autoUpdate="true"/>
+    	<p:growl autoUpdate="true"/>
+    	
+   		<h:form id="formapplication">
+   			<p:accordionPanel>
+   				<p:tab title="Informations personnelles">
+					 <h:panelGrid columns="2" columnClasses="label,value">
+					 	<h:outputText value="Nom"/>	            			
+		       			<h:outputText value="#{dossierBean.nom}"/>
+		       		
+						<h:outputText value="Prénom"/>			
+		       			<h:outputText value="#{dossierBean.prenom}"/>
+		       			
+		       			<h:outputText value="Matricule"/>			
+		       			<h:outputText value="#{dossierBean.matricule}"/>
+		       			
+						<h:outputText value="Date de naissance"/>			
+						<h:outputText value="#{dossierBean.dateNaissance}">
+							<f:convertDateTime pattern="dd/MM/yyyy"/>
+						</h:outputText>
+						
+			       		<h:outputText value="Sexe"/>				
+		       			<h:outputText value="#{dossierBean.sexe}"/>
+			       			
+						<h:outputText value="Nationalité" />				
+		       			<h:outputText value="#{dossierBean.nationalite}"/>	       		                   		
+			               	    
+						<h:outputText value="Mot de passe dossier"/>				
+						<h:outputText value="#{dossierBean.password}"/>
+			               			                 		
+			            <h:outputText value="date de préinscription"/>
+			            <h:outputText value="#{dossierBean.datePreinscription}">
+			            	<f:convertDateTime pattern="dd/MM/yyyy"/>
+			            </h:outputText>
+			            
+		               	<h:outputText value="numero de payement préinscription"/>			
+						<h:outputText value="#{dossierBean.numeroPayement}"/>
+		               			
+		               	<h:outputText value="Niveau actuel"/>			
+						<h:outputText value="#{dossierBean.niveauDemande}" />
+		               			
+		               	<h:outputText value="Option sollicitée" />			
+						<h:outputText value="#{dossierBean.optionDemande}"/>				
+					
+					 </h:panelGrid>
+				 </p:tab>
+				 <br/>
+				 
+				 <p:tab title="Localisation">
+					 <h:panelGrid columns="2" columnClasses="label,value">
+					 	<h:outputText value="Adresse"/>	 						
+						<h:outputText value="#{dossierBean.adresse}"/>
+				              			
+				        <h:outputText value="Email"/>				
+						<h:outputText value="#{dossierBean.email}"/>
+				              			                    	
+						<h:outputText value="Telephone"/>				 
+						<h:outputText value="#{dossierBean.telephone}"/>
+										
+						<h:outputText value="Boite postale"/>					
+						<h:outputText value="#{dossierBean.boitePostale}"/>
+				
+					 </h:panelGrid>
+				 </p:tab>
+				 <br/>
+				 				 
+				 <p:tab title="Famille">
+					 <h:panelGrid columns="2" columnClasses="label,value">
+						<h:outputText value="Nom du pere"/>	 						
+						<h:outputText value="#{dossierBean.nomPere}"/>
+			               		
+			            <h:outputText value="telephone du père"/>				
+						<h:outputText value="#{dossierBean.telephonePere}"/>
+			               			
+						<h:outputText value="profession"/>				
+						<h:outputText value="#{dossierBean.professionPere}"/>
+			               			
+						<h:outputText value="Adresse email"/>
+						<h:outputText value="#{dossierBean.emailPere}"/>
+			               		
+						<h:outputText value="Nom de la mère"/>				
+						<h:outputText value="#{dossierBean.nomMere}"/>
+			             
+			            <h:outputText value="telephone de la mère"/>				
+						<h:outputText value="#{dossierBean.telephoneMere}" />
+			               			
+						<h:outputText value="profession"/>				
+						<h:outputText value="#{dossierBean.professionMere}"/>
+			             	               		
+						<h:outputText value="Adresse email"/>				
+						<h:outputText value="#{dossierBean.emailMere}"/>
+						
+						<h:outputText value="Nom du tuteur"/>				
+						<h:outputText value="#{listDossierBean.selectedDossier.nomTuteur}" />
+			             
+			            <h:outputText value="telephone du tuteur"/>				
+						<h:outputText value="#{dossierBean.telephoneTuteur}"/>
+			               			
+						<h:outputText value="profession"/>				
+						<h:outputText value="#{dossierBean.professionTuteur}"/>
+			               		
+						<h:outputText value="email du tuteur"/>				
+						<h:outputText value="#{dossierBean.emailTuteur}"/>
+					 </h:panelGrid>
+				 </p:tab>
+				 <br/>
+				 
+				 <p:tab title="Dernier établissement fréquenté">
+					 <h:panelGrid columns="2" columnClasses="label,value">
+						<h:outputText value="Etablissement d'origine"/>	 						
+						<h:outputText value="#{dossierBean.ancienEtablissement}"/>
+			        	
+			        	<h:outputText value="Dernière classe fréquentée"/>				
+						<h:outputText value="#{dossierBean.classeAncienEtablissement}"/>
+				            	
+						<h:outputText value="Derniere année"/>				
+						<h:outputText value="#{dossierBean.anneeAncienEtablissement}"/>
+						
+						<h:outputText value="Moyenne derniere année"/>	
+		        		<h:outputText  value="#{dossierBean.dernieremoyenne} /20"/>
+		        		
+		        		<h:outputText value="Versement dernier"/>	
+		        		<h:outputText  value="#{dossierBean.sommeverse}"/>		
+					 </h:panelGrid>	  
+				 </p:tab>
+	    	</p:accordionPanel>
+	    	<br/>
+	    	
+	    	
+   			
+   			<center>
+   				<p:panel header="Décision" id="pandecision">
+   					<br/>
+   					<h:panelGrid columns="2">
+   						<h:outputText value="Décision:"/>
+						<h:selectOneMenu value="#{dossierBean.etat}" id="etat">
+			   	    		<f:selectItem itemLabel="Accepté" itemValue="accepte"/>
+			   	    		<f:selectItem itemLabel="Rejetté" itemValue="rejette"/>
+			   	    	</h:selectOneMenu>
+			   	    	<p:spacer/>
+			   	    	<p:spacer/>			   	  		
+			   	    	<h:outputText value=" >> Classe :"/>
+						<h:selectOneMenu value="#{dossierBean.codeClasse}" id="class">
+			   	    		<f:selectItem itemLabel="--Classe--" itemValue=""/>
+			   	    		<f:selectItems value="#{etablissement.listeClasses}" var="classe" itemLabel="#{classe.libelle} (#{classe.contenanceActuelle}/#{classe.effectifMax})" itemValue="#{classe.codeClasse}"/>
+			   	    	</h:selectOneMenu>
+					</h:panelGrid>
+					<br/>
+					<center>
+						<p:commandButton value="Verser Droits Scolaire"  icon="ui-icon-check" action="#{dossierBean.Droitscolaire}" id="btndroit"/>
+						<p:commandButton value="Valider"  icon="ui-icon-check" action="#{dossierBean.validerCandidature}" id="btnvalider"/>
+						<p:commandButton value="Annuler"  icon="ui-icon-close" action="#{navBean.listercandidatures}"/>
+					</center>	  
+   				
+   				</p:panel>
+   			</center>
+		</h:form>
+		
+		<p:blockUI block=":formapplication:pandecision"  trigger=":formapplication:btnvalider">  
+	        Chargement...<br />  
+	    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+	    </p:blockUI>
+   	
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="/WEB-INF/templates/template.xhtml">
+   
+    <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codecdt" value="#{cdtBean.codecdt}"/>
+	  		<f:event type="preRenderView" listener="#{cdtBean.initcdtModifie}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Edition de Cahier de texte
+    </ui:define>
+   
+    <ui:define name="content">
+    
+	    <h2>
+	   		<h:outputText value="Modifier une entrée cahier de texte"/>
+	   	</h2>
+	   	
+	   	<p:messages autoUpdate="true"/>
+	   	
+    	<br/>
+    	
+	   	<h:form id="formmodifcours">
+	   		<p:outputPanel style="width:100%;" id="panel">		 	
+   			 		    	    
+		    	<p:panel id="pancours" header="Parties | Chapitres">
+		   			<h:selectManyListbox value="#{cdtBean.selectedchapitres}" style="max-height:60px;" required="true" requiredMessage="Aucune partie sélectionnée" size="7" id="parties" validatorMessage="Erreur de validation des données">
+				 		<f:selectItems value="#{cdtBean.parties}" var="partie" itemLabel="#{partie.libelle}" itemValue="#{partie.codepartie}" itemDescription="#{partie.description}"/>
+				 	</h:selectManyListbox>
+	   			</p:panel>   	
+	   			
+			    <br/>
+				<br/>
+			    <p:panelGrid columns="2" style="width:100%;" id="grid1">
+		   		    
+		   		    <f:facet name="header">
+		   		    	<h:outputText value="Modification"/>
+		   		    </f:facet>
+		   		    
+		   		    <h:outputText value="Titre *"/>
+		   		    <p:inputText value="#{cdtBean.libelle}" required="true" requiredMessage="Titre obligatoire"/>
+		   		    
+		   		    <h:outputText value="Resumé *"/>
+		   		    <p:inputTextarea value="#{cdtBean.resume}"  required="true" requiredMessage="Resumé obligatoire"/>
+		   		    
+		   		    <h:outputText value="Date"/>
+		   		    <p:calendar value="#{cdtBean.datejour}" navigator="true" pattern="dd/MM/yyyy" required="true" requiredMessage="Date jour obligatoire"/>
+		   		    
+		   		    <h:outputText value="Heure début"/>
+				 	<p:calendar value="#{cdtBean.heuredebut}" navigator="true" timeOnly="true" pattern="HH:mm" required="true" requiredMessage="Heure début obligatoire"/>	    
+		      		
+		      		<h:outputText value="Heure fin"/>
+				 	<p:calendar value="#{cdtBean.heurefin}" navigator="true" timeOnly="true" pattern="HH:mm" required="true" requiredMessage="Heure Fin obligatoire"/>	    
+		      		
+		      		<f:facet name="footer">
+		      			<center>
+			   				<p:commandButton value="Mettre à jour" id="send" action="#{cdtBean.modifierCdt}" icon="ui-icon-check" update=":formmodifcours:panel"/>
+			   			</center>
+		      		</f:facet>
+				</p:panelGrid>
+				
+				<p:blockUI block="panel" trigger="send">  
+		        Mise à jour...<br />  
+		    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+		    </p:blockUI> 
+   			
+   			</p:outputPanel>
+	   	 
+	    
+		</h:form>
+   	
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

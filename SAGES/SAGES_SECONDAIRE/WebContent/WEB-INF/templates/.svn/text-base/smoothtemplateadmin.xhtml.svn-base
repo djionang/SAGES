@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+	
+<ui:insert name="meta">
+	
+</ui:insert>    
+      
+<h:head>
+  <title>
+  	<ui:insert name="title">
+		SAGES SECONDAIRE Software
+	</ui:insert>
+  </title>
+  
+  <script type="text/javascript">
+  	PrimeFaces.locales ['fr'] = {
+		    closeText: 'Fermer',
+		    prevText: 'Précédent',
+		    nextText: 'Suivant',
+		    monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre' ],
+		    monthNamesShort: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc' ],
+		    dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+		    dayNamesShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+		    dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+		    weekHeader: 'Semaine',
+		    firstDay: 1,
+		    isRTL: false,
+		    showMonthAfterYear: false,
+		    yearSuffix:'',
+		    timeOnlyTitle: 'Choisir l\'heure',
+		    timeText: 'Heure',
+		    hourText: 'Heures',
+		    minuteText: 'Minutes',
+		    secondText: 'Secondes',
+		    currentText: 'Maintenant',
+		    ampm: false,
+		    month: 'Mois',
+		    week: 'Semaine',
+		    day: 'Jour',
+		    allDayText: 'Toute la journée'
+		};
+  </script>
+  
+  
+  <h:outputStylesheet library="css" name="agesTheme.css" />
+  
+</h:head>
+
+<h:body>
+<f:view locale="fr">	
+<div id="page">	
+	
+	<!-- Menu du haut -->	
+	<div id="header">
+		
+		<!-- petit menu du haut la -->
+		<div id="top_menu">
+		
+			<div id="top_menu_container" >
+			
+				<!-- inserre la date du jour -->
+				
+				<div class="date">  
+					<ui:insert name="dateheader">
+	    				<ui:include src="/WEB-INF/templates/date.xhtml"/>
+	    			</ui:insert> 
+	    		</div>
+							
+	    		
+			</div>
+		</div>
+		
+		<!-- Baniere maintenant -->
+		
+		<div id="header_bottom">
+    		<div id="logo_banner_container">
+	            <div id="banner">
+	          		<div id="titre">
+	          			<!-- inserre ensuite le titre du college pris dans un fichier titre.xhtml -->
+						<ui:insert name="header">
+	    					<ui:include src="/WEB-INF/templates/title.xhtml"/>
+	    				</ui:insert>
+	        		</div>
+	        	</div>
+	            
+	            <div class="clear"></div>
+    		</div> <!-- close logo_banner_container -->
+    	</div>	
+	    
+	</div>
+	
+	<!-- Msg de bienvenue -->
+	
+	<div id="welcome">
+		<ui:insert name="welcome">
+	    	<ui:include src="/WEB-INF/templates/welcome.xhtml"/>
+	    </ui:insert>
+	</div>
+		
+	<!-- Corps de page -->
+	<div id="main_container">
+			    
+	    <!-- Contenu -->
+		<div>
+			
+	    	<ui:insert name="content">
+	    		<ui:include src="loginadmin.xhtml"></ui:include>
+	    	</ui:insert> 
+	    	
+	    </div>
+	    	    
+	</div>
+	
+	<!-- Pied de page -->
+	<div id="footer">
+	  <ui:insert name="footer">
+	    	<ui:include src="/WEB-INF/templates/footer.xhtml"/>
+	  </ui:insert>
+	</div>
+</div>	
+</f:view>		
+</h:body>
+
+</html>

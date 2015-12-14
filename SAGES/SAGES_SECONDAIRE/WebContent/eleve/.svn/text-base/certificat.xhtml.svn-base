@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="matricule" value="#{inscriptionBean.matricule}"/>
+	  		<f:event type="preRenderView" listener="#{inscriptionBean.loadElevesFees}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Certificat de Scolarité
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2><h:outputText value="Certificat de scolarité"/></h2>
+   		<br/>
+   		<p:messages autoUpdate="true" />
+   		
+		<p:outputPanel id="p" autoUpdate="true">
+			<h:form id="formrechercheleve">
+				<p:panel id="paneleleve" header="Recherche de l'élève">
+					<h:panelGrid columns="2" style="width:100%;" id="f1">	    
+				    	<h:panelGroup>
+					    	<h:outputText value="Classe"/>	            			
+				      		<h:selectOneMenu value="#{inscriptionBean.classe}" required="true" requiredMessage="filiere obligatoire" >
+				      			<f:selectItem itemLabel="Selection de la filiere" itemValue=""/>
+				    			<f:selectItems value="#{etablissement.listeClasses}" var="classe" itemLabel="#{classe.libelle} - #{classe.codeClasse}" itemValue="#{classe.codeClasse}" itemDescription="#{classe.libelle}"/>
+				   	    		<p:ajax async="true" partialSubmit="true" listener="#{inscriptionBean.loadElevesClasse}" event="change" update="formrechercheleve:paneleleve" process="@this"/>
+				   	    	</h:selectOneMenu>
+						</h:panelGroup>
+						
+						<h:panelGroup>  	    	
+							<h:outputText value="Elèvetudiant"/>				
+				   			<h:selectOneMenu value="#{inscriptionBean.matricule}" id="matricule" required="true" requiredMessage="">
+				   				<f:selectItem itemLabel="Choix de l'élève" itemValue=""/>
+				   				<f:selectItems value="#{inscriptionBean.listeeleves}" var="eleve" itemLabel="#{eleve.nom} - #{eleve.matricule}" itemValue="#{eleve.matricule}" itemDescription="#{eleve.nom}"/>
+				   	    		<p:ajax async="true" partialSubmit="true" listener="#{inscriptionBean.chargerEleveFees}" event="change" update=":p" process="@this"/>
+				   	    	</h:selectOneMenu> 	
+	   	    			</h:panelGroup>
+					</h:panelGrid>	
+					
+					<br/>
+					<center>
+						<p:panelGrid columns="2" rendered="#{not empty inscriptionBean.selectedEleve}" id="paneleve" columnClasses="label,value" style="width:80%;align:center;">
+												
+							<f:facet name="header">
+								<h:outputText value="Elèvet de matricule #{inscriptionBean.selectedEleve.matricule}"/>
+							</f:facet>
+				            
+				            <h:outputText value="Nom"/>
+				            <h:outputText value="#{inscriptionBean.selectedEleve.nom}"/>
+							
+							<h:outputText value="Prénom"/>	
+							<h:outputText value="#{inscriptionBean.selectedEleve.prenom}"/>
+							
+							<h:outputText value="Date de naissance"/>
+							<h:outputText value="#{inscriptionBean.selectedEleve.dateNaissance}">
+								<f:convertDateTime pattern="dd/MM/yyyy"/>
+							</h:outputText>
+							
+							<h:outputText value="Lieu de naissance"/>
+							<h:outputText value="#{inscriptionBean.selectedEleve.lieuNaissance}"/>
+							
+							<h:outputText value="Classe"/>
+							<h:outputText value="#{inscriptionBean.selectedEleve.codeClasse} -- #{inscriptionBean.selectedEleve.libelleClasse}"/>
+							
+							<h:outputText value="Tuteur"/>
+							<h:outputText value="#{inscriptionBean.selectedEleve.nomTuteur}"/>
+							
+							<f:facet name="footer">
+								<center>
+						   		<h2><h:outputText value="#{printVersBean.message}"/></h2>
+						   		<br/>										
+								 	<p:commandButton value="Enregistrer"  icon="ui-icon-check" id="submitcertif" action="#{inscriptionBean.saveCertificat}" ajax="false"/>
+				
+								</center>
+							</f:facet>
+						</p:panelGrid>
+					</center>
+				</p:panel>
+			</h:form>
+		</p:outputPanel>
+          
+    
+   </ui:define>
+   
+   
+   </ui:composition>
+ 
+</html>

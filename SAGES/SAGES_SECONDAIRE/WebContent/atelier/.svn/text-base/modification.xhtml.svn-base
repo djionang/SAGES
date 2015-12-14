@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+    <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codeatelier" value="#{salleBean.codeSalle}"/>
+	  		<f:event type="preRenderView" listener="#{salleBean.initSalle}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Edition d'atelier
+    </ui:define>
+   
+    <ui:define name="content">
+    
+	    <h2>
+	   		<h:outputText value="Modifier l'atelier #{salleBean.codeSalle}"/>
+	   	</h2>
+	   	
+	   	<p:messages autoUpdate="true"/>
+	   	
+    	<br/>
+    	
+	   	<h:form id="formmodifsalle">
+	   	
+	   	<p:panel id="panel"  style="margin-bottom:10px;" rendered="#{not empty salleBean.libelle}"> 
+	   		<p:panelGrid columns="2" style="width:100%;" id="sallemodification">	  	    		  
+				<h:outputText value="Type"/>	 	
+			 	<h:outputText value="#{salleBean.type}"/>
+			 	
+			 	<h:outputText value="libellé *"/>	            			
+	      		<p:inputText value="#{salleBean.libelle}" id="libelle" required="true" requiredMessage="Libellé de la salle obligatoire"/>
+	      			   	    	
+	   	    	<h:outputText value="Contenance maximale *"/>	            			
+	      		<p:inputText value="#{salleBean.capacite}" required="true" requiredMessage="Contenance maximale requise" validator="IntegerValidator" validatorMessage="Le champ contenance maximale doit etre un entier"/>
+	   	    	
+	   	    	<h:outputText value="Utilisation"/>			
+	      		<p:inputTextarea value="#{salleBean.description}" id="description" height="30" width="60"/>
+	       		             			
+		     </p:panelGrid>	
+		     <br/>										
+			  <center>										
+			 		<p:commandButton value="Mettre à jour"  id="buttonsubmit" icon="ui-icon-check"  action="#{salleBean.modifierAtelier}"/>
+	 										
+			  </center>
+		</p:panel>
+		<p:blockUI block="panel" trigger="buttonsubmit">  
+	        Mise a jour...<br />  
+	    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+	    </p:blockUI> 
+	</h:form>
+   	
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

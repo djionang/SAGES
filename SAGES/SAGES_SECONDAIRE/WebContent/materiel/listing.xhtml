@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Listing Matériel
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2>Matériels enregistrés</h2>
+   		<br/>
+   		<h:form>
+   		<p:scrollPanel style="width:100%;">
+   			
+            
+	    	<p:dataTable id="tablemateriels" value="#{listMaterielBean.materiels}" var="materiel" emptyMessage="Aucun materiel enregistré"
+	    		paginator="true" rows="30" rowsPerPageTemplate="30,50,70"   rowIndexVar="index">
+		  	    
+		  	   <p:column id="id" headerText="N°" >
+					<h:outputText value="#{index+1}"/>
+					<f:facet name="footer">
+						<h:outputText value="Total:"/>
+					</f:facet>
+				</p:column>
+		  	   
+		  	   
+		  	   
+		  	    <p:column id="code" sortBy="#{materiel.codemateriel}" headerText="Code">  
+            		<h:outputText value="#{materiel.codemateriel}" />  
+        		</p:column> 
+		  	            
+        		<p:column id="desig" sortBy="#{materiel.designation}" headerText="Désignation">  
+            		<h:outputText value="#{materiel.designation}" />  
+        		</p:column> 
+        
+				<p:column id="quantite" headerText="Quantité">  
+		            <h:outputText value="#{materiel.quantite}">
+		            </h:outputText>  
+		        </p:column>
+		        
+		        <p:column id="prix" headerText="Prix" >             			
+		      	<h:outputText value="#{materiel.prix}"/>
+		      	
+		      	<f:facet name="footer">
+					<h:outputText value="#{listMaterielBean.total}">
+						<f:convertNumber type="currency" currencySymbol="F." />
+					</h:outputText>
+				</f:facet>
+        		</p:column> 
+		        <p:column id="options" headerText="Options" width="60"> 
+		         	<h:panelGrid columns="4">
+				        	
+					    <h:link  includeViewParams="true" outcome="materielvue" title="Visualiser" >
+					    	<p:graphicImage value="../resources/img/view16.png" style="border:#CCCCCC 1px solid"/>  						        
+					    	<f:param name="codemateriel" value="#{materiel.idmateriel}"/>						    
+					    </h:link>
+					    
+			            <h:link  includeViewParams="true" id="edit"  title="Editer" outcome="materieledit">  
+					        <p:graphicImage value="../resources/img/edit16.png" style="border:#CCCCCC 1px solid"/>   
+					        <f:param name="codemateriel" value="#{materiel.idmateriel}"/>
+					    </h:link>
+					   <h:link  includeViewParams="true" id="handle" title="Ajouter" outcome="ajoutermateriel">  
+						        <p:graphicImage value="../resources/img/handle16.png" style="border:#CCCCCC 1px solid"/>   
+						        <f:param name="codemateriel" value="#{materiel.idmateriel}"/>
+						    </h:link>
+		            </h:panelGrid>
+			        
+		        </p:column> 
+		
+			</p:dataTable>
+			
+			<br/>
+   			
+			<center>
+				<p:commandButton value="Nouveau matériel" action="#{navBean.materielcreate}" icon="ui-icon-check"/>
+			</center>
+		
+		<p:separator/>
+		<br/>
+   		</p:scrollPanel>
+   		</h:form>
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Listing Prévisions
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2>Prévisions enregistrées</h2>
+   		<br/>
+   		<h:form>
+   		<p:scrollPanel style="width:100%;">
+   			
+            
+	    	<p:dataTable id="tableprevisions" value="#{listPrevisionBean.previsions}" var="prevision" emptyMessage="Aucune prévision enregistré"
+	    		paginator="true" rows="30" rowsPerPageTemplate="30,50,70"  rowIndexVar="index">
+		  	    
+		  	    <p:column id="id" headerText="N°" >
+					<h:outputText value="#{index+1}"/>
+					<f:facet name="footer">
+						<h:outputText value="Total:"/>
+					</f:facet>
+				</p:column>
+		  	    
+		  	    <p:column id="code" sortBy="#{prevision.codeprevision}" headerText="Code">  
+            		<h:outputText value="#{prevision.codeprevision}" />  
+        		</p:column>
+ 
+        		<p:column id="type" headerText="Type prévision" >  
+            		<h:outputText value="#{prevision.typeprevision}"/>  
+        		</p:column> 
+        		
+        		<p:column id="montant" headerText="Montant" >             			
+		      	<h:outputText value="#{prevision.montant}"/>
+		      	
+		      	<f:facet name="footer">
+					<h:outputText value="#{listPrevisionBean.total}">
+						<f:convertNumber type="currency" currencySymbol="F." />
+					</h:outputText>
+				</f:facet>
+        		</p:column> 
+        		
+				<p:column id="transfert" headerText="Transfert">  
+		            <h:outputText value="#{prevision.tranfert}">
+		            </h:outputText>  
+		        </p:column>
+		        <p:column id="options" headerText="Options" width="60"> 
+		         	<h:panelGrid columns="4">
+				        	
+					    <h:link  includeViewParams="true" outcome="previsionvue" title="Visualiser" >
+					    	<p:graphicImage value="../resources/img/view16.png" style="border:#CCCCCC 1px solid"/>  						        
+					    	<f:param name="idprevision" value="#{prevision.idprevision}"/>						    
+					    </h:link>
+					    
+			            <h:link  includeViewParams="true" id="edit"  title="Editer" outcome="previsionedit">  
+					        <p:graphicImage value="../resources/img/edit16.png" style="border:#CCCCCC 1px solid"/>   
+					        <f:param name="idprevision" value="#{prevision.idprevision}"/>
+					    </h:link>
+					   <h:link  includeViewParams="true" id="handle" title="Ajouter" outcome="ajouterprevision">  
+						        <p:graphicImage value="../resources/img/handle16.png" style="border:#CCCCCC 1px solid"/>   
+						        <f:param name="idprevision" value="#{prevision.idprevision}"/>
+						    </h:link>
+		            </h:panelGrid>
+			        
+		        </p:column> 
+		
+			</p:dataTable>
+			
+			<br/>
+   			
+			<center>
+				<p:commandButton value="Nouvelle prévision" action="#{navBean.previsioncreate}" icon="ui-icon-check"/>
+			</center>
+		
+		<p:separator/>
+		<br/>
+   		</p:scrollPanel>
+   		</h:form>
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

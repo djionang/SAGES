@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Nouveau matériel
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2><h:outputText value="Nouveau Matériel"/></h2>
+   		<br/>
+   		<p:messages autoUpdate="true" />
+   		
+		<p:outputPanel id="p" autoUpdate="true">
+			<h:form id="formmateriel">
+				<p:panel id="panelmateriel" header="Matériel">
+					<p:panelGrid columns="2" style="width:100%;" id="f1">	    	    	
+							<h:outputText value="Type Matériel"/>				
+				   			<h:selectOneMenu value="#{materielBean.typemateriel}"  id="type" required="true" requiredMessage="Champ type requis">
+      							<f:selectItems value="#{configuration.typematerielItems}"/>
+				   	    	</h:selectOneMenu> 	
+				   			<h:outputText value="Désignation"/>				
+   							<p:inputText value="#{materielBean.designation}" id="dg" required="true" requiredMessage="Champ Designation requis"/>
+   			
+   							<h:outputText value="Numero Serie"/>				
+   							<p:inputText value="#{materielBean.numeroserie}" id="numeroserie" required="true" requiredMessage="Champ Numero serie requis"/>
+   							
+   							<h:outputText value="Quantité"/>				
+   							<p:inputText value="#{materielBean.quantite}" id="qd" required="true" requiredMessage="Champ Quantiterequis"/>
+							
+							<h:outputText value="Quantité Bon état"/>				
+   							<p:inputText value="#{materielBean.quantiteF}" id="qdF" required="true" requiredMessage="Champ Fonctionnel requis"/>
+							
+							<h:outputText value="Prix (Frs)"/>
+							<p:inputText value="#{materielBean.prix}" required="true" requiredMessage="Montant requis" validator="MontantFrValidator"/>
+							
+							<h:outputText value="Date Enregistrement"/>
+			   				<p:calendar value="#{materielBean.dateenreg}" mindate="01/01/1960" maxdate="#{configuration.datejour}" required="true"  pattern="dd/MM/yyyy" requiredMessage="Date de enregistrement requise"/>
+							
+							<f:facet name="footer">
+								<center>
+									<p:commandButton value="Enregistrer"  icon="ui-icon-check" id="submitmateriel" action="#{materielBean.savemateriel}"/>
+									<p:commandButton value="Annuler" immediate="true" type="reset" icon="ui-icon-close"/>	
+								</center>
+				      		</f:facet>
+				   		</p:panelGrid>      	 	  	  	
+				</p:panel>
+			</h:form>
+		</p:outputPanel>
+	
+		<p:blockUI block=":formmateriel:panelmateriel"  trigger=":formmateriel:submitmateriel">  
+	        Chargement...<br />  
+	    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+	    </p:blockUI>
+	    
+    
+   </ui:define>
+   
+   
+   </ui:composition>
+ 
+</html>

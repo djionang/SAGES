@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="/WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Listing Convocations
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2>Convocations enregistrées</h2>
+   		<br/>
+   		<p:growl autoUpdate="true" globalOnly="true"/>
+   			 <h:form id="form1">
+   			
+	    	<p:dataTable id="tableconvocations" value="#{listConvocationBean.listeConvocations}" var="convocation" emptyMessage="Aucune convocation enregistrée"
+	    		paginator="true" rows="30" tableStyleClass="tablelist" rowsPerPageTemplate="20,40,60" rowIndexVar="num" sortBy="convocation.dateeffet" sortOrder="descending">
+		  	    
+		  	    <f:facet name="header">
+					<p:outputPanel>
+						 <h:outputText value="Filtre: " />
+						 <h:outputText value=" Du" />
+						 <p:calendar value="#{listConvocationBean.datedebut}" navigator="true"/>
+						 <h:outputText value=" Au "/>
+						 <p:calendar value="#{listConvocationBean.datefin}" navigator="true"/>
+						 <p:commandButton id="filter" icon="ui-icon-search" title="Charger" actionListener="#{listConvocationBean.chargerConvocations}" update=":form1:tableconvocations"/>
+					</p:outputPanel>
+				</f:facet>
+		  	        
+        		<p:column id="num" >  
+            		<h:outputText value="#{num+1}" />  
+        		</p:column> 
+        
+        		<p:column id="libelle" headerText="Libelle">  
+            		<h:outputText value="#{convocation.libelle}" />  
+        		</p:column> 
+        
+        		<p:column id="eleve" headerText="Concerné">  
+            		<h:outputText value="#{convocation.matriculeeleve} - #{convocation.nomeleve}" />  
+        		</p:column>
+        		
+        		<p:column id="dateconvocation" headerText="Délivré le:" sortBy="#{convocation.datedelivrance}">  
+		            <h:outputText value="#{convocation.datedelivrance}">
+		            	<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+		            </h:outputText>  
+		        </p:column> 
+        		
+				<p:column id="dateeffet" headerText="Date R.D.V" sortBy="#{convocation.dateeffet}">  
+		            <h:outputText value="#{convocation.dateeffet}">
+		            	<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+		            </h:outputText>  
+		        </p:column> 
+		        
+				
+		        <p:column id="option" headerText="Options" style="width:50px;" width="47"> 
+		         	<p:panelGrid columns="3">
+				        	
+					    <h:link  includeViewParams="true" outcome="detailconvocation" title="Visualiser" >
+					    	<p:graphicImage value="../../resources/img/view16.png" style="border:#CCCCCC 1px solid"/>  						        
+					    	<f:param name="codeconvocation" value="#{convocation.idconvocation}"/>						    
+					    </h:link>
+					    
+			            <h:link  includeViewParams="true" id="edit"  title="Editer" outcome="disconvocationedit">  
+					        <p:graphicImage value="../../resources/img/edit16.png" style="border:#CCCCCC 1px solid"/>   
+					        <f:param name="codeconvocation" value="#{convocation.idconvocation}"/>
+					    </h:link>
+					    
+			            <h:link  includeViewParams="true" id="cancel" outcome="disconvocationcancel" title="Annuler la convocation">  
+					        <p:graphicImage value="../../resources/img/delete16.png" style="border:#CCCCCC 1px solid"/>
+					       	<f:param name="codeconvocation" value="#{convocation.idconvocation}"/>
+					   </h:link>
+					</p:panelGrid>    
+		        </p:column> 
+		
+			</p:dataTable>
+			
+			<br/>
+   			
+			<center>
+				<p:commandButton value="Nouvelle convocation" action="#{navBean.disconvoccreate}" icon="ui-icon-check"/>
+			</center>
+			</h:form>
+  			
+   		
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

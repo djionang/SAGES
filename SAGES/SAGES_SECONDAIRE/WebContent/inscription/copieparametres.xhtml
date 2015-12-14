@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+       
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Copie Paramètres Inscription
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2><h:outputText value="Copie -- Frais d'inscription"/></h2>
+   
+		<br/>
+		<p:messages autoUpdate="true"/>
+		
+		<p:growl autoUpdate="true"/>
+   		
+  		<p:panel id="panglobal">
+   			<p:layout  style="width:100%;height:420px">
+   			
+				 <p:layoutUnit position="west" size="37%" header="Classe Source">
+				 	<h:form>					 
+					 	<h:selectOneListbox value="#{copieTrancheBean.codeclasse}" required="true" requiredMessage="Aucune classe source sélectionnée" size="7">
+					 	    <f:selectItems value="#{etablissement.listeClasses}" var="classe" itemLabel="#{classe.codeClasse} - #{classe.libelle}" itemValue="#{classe.codeClasse}" itemDescription="#{classe.libelle}"/>
+					 		<p:ajax async="true" partialSubmit="true" listener="#{copieTrancheBean.loadTranches}" update=":formtable:tranches" process="@this"/>
+					 	</h:selectOneListbox >
+				 	</h:form>
+				 </p:layoutUnit>
+				 
+				 <p:layoutUnit position="center" size="63%" header="Tranches">
+					 <h:form id="formtable">
+					 	<p:dataTable value="#{copieTrancheBean.listeTranches}" var="tranche" 
+						emptyMessage="Aucune tranche trouvée" id="tranches" tableStyleClass="tablelist">
+						
+							<f:facet name="header">
+								<h:outputText value="Liste des tranches #{copieTrancheBean.codeclasse}"/>
+							</f:facet>
+				              
+				            <p:column id="id" headerText="ID." sortBy="#{tranche.id}">
+								<h:outputText value="#{tranche.id}"/>
+							</p:column>
+							
+							  
+							<p:column id="columnlabel" headerText="Libellé">
+								<h:outputText value="#{tranche.type}"/>
+							</p:column>
+							
+							<p:column headerText="Montant">
+								<h:outputText value="#{tranche.montant}">
+					   				<f:convertNumber type="currency" currencySymbol="F." />
+								</h:outputText>
+							</p:column> 
+							
+							<p:column id="delaiversement" headerText="Délai Vers.">
+								<h:outputText value="#{tranche.delaiVersement}">
+									<f:convertDateTime pattern="dd/MM/yyyy"/>
+								</h:outputText>
+							</p:column>
+														
+						</p:dataTable>
+					</h:form>
+					<br/>
+					
+				 </p:layoutUnit>
+				 
+				 <p:layoutUnit position="south" size="200" header="Classes cibles (Sélect. multiple)">
+				 	<h:form id="formcible">
+				 		<center>
+						 	<h:selectManyListbox value="#{copieTrancheBean.classescibles}" style="max-height:130px;" required="true" requiredMessage="Aucune Classe cible sélectionnée" size="7">
+						 		<f:selectItems value="#{etablissement.listeClasses}" var="classe" itemLabel="#{classe.codeClasse} - #{classe.libelle}" itemValue="#{classe.codeClasse}" itemDescription="#{classe.libelle}"/>
+						 	</h:selectManyListbox>
+						 	
+						 	<br/>
+						</center>
+					 	
+				 	 	<br/>
+					 	<br/>
+					 	<center>
+					 		<p:commandButton value="Copier" action="#{copieTrancheBean.copierTranches}" id="copier" icon="ui-icon-check"/>
+						</center> 	
+				 	</h:form>
+				 
+				 </p:layoutUnit>
+			</p:layout>
+   		</p:panel>
+		
+		<p:blockUI block="panglobal" trigger=":formcible:copier">  
+	        Enregistrement...<br />  
+	    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+	    </p:blockUI>
+
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

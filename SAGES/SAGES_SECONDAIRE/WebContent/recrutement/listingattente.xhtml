@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="/WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:event type="preRenderView" listener="#{listDossierBean.initattente}"/>
+		</f:metadata>
+    </ui:define>
+      
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Listing des candidatures en attente
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2>Candidatures En attente</h2>
+   		
+   		<br/>
+   		
+   		<p:messages autoUpdate="true"/>
+   		
+   		<p:growl autoUpdate="true"/>
+   		
+   		<p:panel style="width:100%;" id="panel">
+   			<center>
+		   		<p:ajaxStatus>
+					 <f:facet name="start">
+						 <p:graphicImage value="/resources/img/loading.gif" />
+					 </f:facet>
+					 <f:facet name="complete">
+							 <h:outputText value="" />
+					</f:facet>
+				</p:ajaxStatus>
+			</center>
+		 		
+	        <br/>
+			
+		 	<h:form id="form1">
+   			 	            
+		    	<p:dataTable id="tabledossiers" value="#{listDossierBean.dossiers}" var="dossier" emptyMessage="Aucune candidature en attente"
+		    		paginator="true" rows="30" rowsPerPageTemplate="30,50,70" sortBy="#{dossier.datePreinscription}" sortOrder="descending" widgetVar="tabledossier"
+		    		tableStyleClass="tablelist" paginatorAlwaysVisible="false">
+			  	    
+			  	    <f:facet name="header">
+		        		<center>
+			        		<h:selectOneMenu value="#{listDossierBean.niveauDemande}">
+				 				<f:selectItem itemLabel="Tous les niveaux" itemValue="" itemDescription="Tous les niveaux"/>
+				 				<f:selectItems value="#{etablissement.listeNiveaux}" var="niveau" itemLabel="#{niveau.libelle}" itemValue="#{niveau.codeNiveau}" itemDescription="#{niveau.codeNiveau} #{niveau.libellecycle}"/>
+				 				<p:ajax async="true" partialSubmit="true" listener="#{listDossierBean.loadDossiersAttenteNiveau}" event="change" update=":panel" process="@this"/>
+				 			</h:selectOneMenu>
+							<br/>
+				 		</center>
+	        		</f:facet>
+			  	      
+	        		<p:column id="code" headerText="Code D." >  
+	            		<h:outputText value="#{dossier.codedossier}" />  
+	        		</p:column> 
+	        
+	        		<p:column id="nom" headerText="Nom" sortBy="#{dossier.nom}">  
+	            		<h:outputText value="#{dossier.nom} #{dossier.prenom}" />  
+	        		</p:column>
+	        
+					<p:column id="niveau" headerText="Niveau" >  
+			            <h:outputText value="#{dossier.niveauDemande} (#{dossier.optionDemande})" />  
+			        </p:column> 
+			        
+					<p:column id="etat" headerText="Etat" sortBy="#{dossier.etat}">  
+			             <h:outputText value="#{dossier.etat}" /> 
+			        </p:column> 
+	        		
+	        		<f:facet name="footer">
+		        		<center>
+							<br/>
+				 			<p:commandButton value="Imprimer" action="#{listDossierBean.imprimerCandidaturesAttente}" icon="ui-icon-print" immediate="true" ajax="false" rendered="#{not empty listDossierBean.dossiers}"/>
+							
+		  					<p:commandButton value="Nouvelle candidature" icon="ui-icon-check" action="#{navBean.nouvellecandidature}"/>  
+		        		</center>
+	        		</f:facet>
+				</p:dataTable>
+				
+			</h:form>
+			
+   		</p:panel>
+   		
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

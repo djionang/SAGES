@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codematiere" value="#{matiereBean.codematiere}"/>
+	  		<f:event type="preRenderView" listener="#{matiereBean.initmatiere}"/>
+		</f:metadata>
+    </ui:define>
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Visualiser une matiere
+    </ui:define>
+   
+    <ui:define name="content">
+    <f:view>
+	    <h2>
+	   		<h:outputText value="matiere #{matiereBean.codematiere}"/>
+	   	</h2>
+       	<br/>  
+       	<p:messages autoUpdate="true"/>
+       	<p:panel>		
+	    <h:panelGrid columns="2" style="width:70%;" id="perso" columnClasses="label,value">
+      		 	
+		 	<h:outputText value="libellé"/>	            			
+      		<h:outputText value="#{matiereBean.libelle}" id="libelle" required="true" />
+      		
+      		<h:outputText value="description"/>
+      		<h:outputText value="#{matiereBean.description}"/>
+      		
+      		<h:outputText value="Animateur"/>
+      		<h:outputText value="#{matiereBean.animateur}"/>       		             			
+	     </h:panelGrid>	
+		<br/>
+		<f:facet name="footer">
+			<h:form>
+				<center>
+					<p:commandButton value="Retour à la liste des matieres" action="#{navBean.gestmatlisting}" icon="ui-icon-arrowreturnthick-1-w"/>
+				</center>
+			</h:form>
+		</f:facet>
+	</p:panel>
+   </f:view>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="/WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codeclasse" value="#{classeBean.codeClasse}"/>
+	  		<f:event type="preRenderView" listener="#{classeBean.initialize}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Edition Délégués et Encadreur titulaire d'une classe
+   </ui:define>
+   
+   <ui:define name="content">
+   
+   		<h2><h:outputText value="Edition des délégués et Encadreur titulaire d'une classee"/></h2>
+   		<br/>
+   		<p:growl autoUpdate="true"/>
+   		
+   		<h:form id="form1">
+   			
+   			<p:outputPanel  id="panel">
+   				<center>
+	   			<h:panelGrid  columns="2" style="width:85%">
+					<p:panelGrid id="delegues" columns="2">
+						<f:facet name="header">
+							<h:outputText value="Responsables actuels #{classeBean.codeClasse}"/>
+						</f:facet>   
+						
+						<h:outputText value="Enseignant titulaire"/>
+						<h:outputText value="#{not empty classeBean.nomenseignantTitulaire?classeBean.nomenseignantTitulaire:' -- '}"/>
+						
+						
+						<h:outputText value="Délégué 1"/>
+						<h:outputText value="#{not empty classeBean.delegue1?classeBean.delegue1:' -- '}"/>
+						
+						<h:outputText value="Délégué 2"/>
+						<h:outputText value="#{not empty classeBean.delegue2?classeBean.delegue2:' -- '}"/>
+						    
+				  	</p:panelGrid> 	
+				  	
+				  	<p:panelGrid id="nouveauxdelegues" columns="2">
+						<f:facet name="header">					
+							<h:outputText value="Nouveaux responsables #{classeBean.codeClasse}"/>
+						</f:facet>   
+						
+						<h:outputText value="Enseignant titulaire"/>
+						<h:selectOneMenu value="#{classeBean.codeEnseignantTitulaire}" requiredMessage="Titulaire Obligatoire" required="true">
+							<f:selectItems value="#{classeBean.enseignants}" var="ens" itemLabel="#{ens.nom}" itemValue="#{ens.codeenseignant}"/>
+						</h:selectOneMenu>
+						
+						<h:outputText value="Délégué 1"/>
+						<h:selectOneMenu value="#{classeBean.nouveaudelegue1}" requiredMessage="Délégué 1 Obligatoire" required="true">
+							<f:selectItems value="#{classeBean.eleves}" var="eleve" itemLabel="#{eleve.nom} #{eleve.prenom}" itemValue="#{eleve.nom} #{eleve.prenom}"/>
+						</h:selectOneMenu>
+						
+						<h:outputText value="Délégué 2"/>
+						<h:selectOneMenu value="#{classeBean.nouveaudelegue2}">
+							<f:selectItems value="#{classeBean.eleves}" var="eleve" itemLabel="#{eleve.nom} #{eleve.prenom}" itemValue="#{eleve.nom} #{eleve.prenom}"/>
+						</h:selectOneMenu>
+						
+						<f:facet name="footer">
+							<center>
+								<p:commandButton value="Mettre à jour"  id="buttonsubmit" icon="ui-icon-check"  action="#{classeBean.modifierresponsables}"/>
+			 					<p:commandButton value="Retour"  icon="ui-icon-arrowreturnthick-1-w"  action="#{navBean.etabclassedeleguevue}" immediate="true"/>
+							</center>
+						</f:facet> 
+						    
+				  	</p:panelGrid> 
+				  	
+			  	</h:panelGrid>
+			  	</center>
+			  	<p:blockUI block="panel" trigger="buttonsubmit">  
+			        Mise a jour...<br />  
+			    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+			    </p:blockUI>   
+			   		   
+			</p:outputPanel>
+			  
+	    </h:form>
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

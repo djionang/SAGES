@@ -1,0 +1,131 @@
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ejb
+END
+GestionCahierScolaireLocal.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ejb/GestionCahierScolaireLocal.java
+END
+GestionPayeRemote.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ejb/GestionPayeRemote.java
+END
+GestionEleveRemote.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ejb/GestionEleveRemote.java
+END
+GestionExamensLocal.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ejb/GestionExamensLocal.java
+END
+GestionProgrammationLocal.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ejb/GestionProgrammationLocal.java
+END
+GestionEleveLocal.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ejb/GestionEleveLocal.java
+END
+GestionPayeLocal.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ejb/GestionPayeLocal.java
+END
+UtilitairesLocal.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ejb/UtilitairesLocal.java
+END
+GestionMaterielLocal.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ejb/GestionMaterielLocal.java
+END
+GestionMatiereGroupeLocal.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ejb/GestionMatiereGroupeLocal.java
+END
+GestionEtablissementLocal.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ejb/GestionEtablissementLocal.java
+END
+GestionInscriptionLocal.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ejb/GestionInscriptionLocal.java
+END
+GestionBulletinNotesLocal.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ejb/GestionBulletinNotesLocal.java
+END
+GestionRessourceLocal.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ejb/GestionRessourceLocal.java
+END
+GestionRessourceRemote.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ejb/GestionRessourceRemote.java
+END
+GestionInscriptionRemote.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ejb/GestionInscriptionRemote.java
+END
+GestionEtablissementRemote.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ejb/GestionEtablissementRemote.java
+END
+GestionDisciplineLocal.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ejb/GestionDisciplineLocal.java
+END
+GestionMaterielRemote.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ejb/GestionMaterielRemote.java
+END
+GestionMatiereGroupeRemote.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ejb/GestionMatiereGroupeRemote.java
+END
+GestionUtilisateurLocal.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ejb/GestionUtilisateurLocal.java
+END

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Année académique en cours
+    </ui:define>
+    <ui:define name="content">
+    <p:growl autoUpdate="true"/>
+	    <h2>
+	   		<h:outputText value="Année académique #{anneeEnCoursBean.anneeacademique} -- " rendered="#{not empty anneeEnCoursBean.anneeacademique}"/>
+	   		<h:outputText value="   Du " rendered="#{not empty anneeEnCoursBean.anneeacademique}"/>
+	   		<h:outputText value="#{anneeEnCoursBean.datedebut}" rendered="#{not empty anneeEnCoursBean.anneeacademique}">
+	   			<f:convertDateTime pattern="dd/MM/yyyy"/>
+			</h:outputText>
+	   		<h:outputText value="   Au " rendered="#{not empty anneeEnCoursBean.anneeacademique}"/>
+	   		<h:outputText value="#{anneeEnCoursBean.datefin}" rendered="#{not empty anneeEnCoursBean.anneeacademique}">
+	   			<f:convertDateTime pattern="dd/MM/yyyy"/>
+			</h:outputText>
+	   	</h2>
+	    
+	    <h2>
+	   		<h:outputText value="Aucune année scolaire en cours d'exercice" rendered="#{empty anneeEnCoursBean.anneeacademique}"/>
+	   	</h2>
+	   	<br/>
+	   	<p:messages autoUpdate="true"/>
+	   	<p:panel id="panelannee"  style="margin-bottom:10px;" rendered="#{not empty anneeEnCoursBean.anneeacademique}"> 
+	   		<p:schedule locale="fr" draggable="false" resizable="false" value="#{anneeEnCoursBean.modeleProgrammation}"/>	
+	   		
+	   		<br/>
+			<center>
+				<h:form>
+					<p:commandButton value="modifier" action="#{anneeEnCoursBean.navmodifier}" icon="ui-icon-pencil"/>
+					<p:commandButton value="bilan" action="#{navBean.anneebilan}" icon="ui-icon-arrowrefresh-1-w"/>
+					<p:commandButton value="Cloturer" action="#{navBean.anneecloture}" icon="ui-icon-close"/>
+				</h:form>
+			</center>   		
+		</p:panel>		
+	   
+	</ui:define>
+	   
+   </ui:composition>
+ 
+</html>

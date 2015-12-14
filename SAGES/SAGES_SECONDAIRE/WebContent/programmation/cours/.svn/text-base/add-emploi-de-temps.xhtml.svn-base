@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="/WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codeclasse" value="#{timeClasseBean.codeclasse}"/>
+	  		<f:event type="preRenderView" listener="#{timeClasseBean.initializeAdd}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Programmation enseignements
+   </ui:define>
+   
+   <ui:define name="content">
+   
+   		<h2><h:outputText value="Nouveau Cours - Programmation enseignements"/></h2>
+   		<br/>
+   		<p:growl autoUpdate="true"/>
+   		
+   		<h:form id="form">
+   			
+   			<p:outputPanel  id="panelcentral">
+				<center>
+			    	    
+			    	<h:panelGrid id="table" columns="3">
+				   		<f:facet name="header">
+					    	<center>
+					    		<h:outputText value="Cours #{timeClasseBean.libelleclasse}"/>
+					    		<h:outputText value=" "/>
+				  				<h:selectOneMenu value="#{timeClasseBean.codecours}">
+				  					<f:selectItems value="#{timeClasseBean.cours}" var="cour" itemLabel="#{cour.libelle}" itemValue="#{cour.codecours}"/>
+				  				</h:selectOneMenu>
+				  				<br/>
+				  				<br/>
+		  					</center>
+					    </f:facet>
+					    
+					    <h:outputText value="Lundi"/>
+					    <h:panelGroup>
+					    	De
+					    	<p:calendar timeOnly="true" value="#{timeClasseBean.debutlundi}" pattern="HH:mm"/>
+					    	<br/>
+					    </h:panelGroup>
+					    
+					    <h:panelGroup> 
+					    	à
+					    	<p:calendar timeOnly="true" value="#{timeClasseBean.finlundi}" pattern="HH:mm"/>
+					    	<br/>
+					    </h:panelGroup>
+					    
+					    
+					    <h:outputText value="Mardi"/>
+					    <h:panelGroup>
+					    	De
+					    	<p:calendar timeOnly="true" value="#{timeClasseBean.debutmardi}" pattern="HH:mm"/>
+					    	<br/>
+					    </h:panelGroup>
+					    
+					    <h:panelGroup> 
+					    	à
+					    	<p:calendar timeOnly="true" value="#{timeClasseBean.finmardi}" pattern="HH:mm"/>
+					    	<br/>
+					    </h:panelGroup>
+					    
+					    
+					    <h:outputText value="Mercredi"/>
+					    <h:panelGroup>
+					    	De
+					    	<p:calendar timeOnly="true" value="#{timeClasseBean.debutmercredi}" pattern="HH:mm"/>
+					    	<br/>
+					    </h:panelGroup>
+					    
+					    <h:panelGroup> 
+					    	à
+					    	<p:calendar timeOnly="true" value="#{timeClasseBean.finmercredi}" pattern="HH:mm"/>
+					    	<br/>
+					    </h:panelGroup>
+					    					    
+					    
+					    <h:outputText value="Jeudi"/>
+					    <h:panelGroup>
+					    	De
+					    	<p:calendar timeOnly="true" value="#{timeClasseBean.debutjeudi}" pattern="HH:mm"/>
+					    	<br/>
+					    </h:panelGroup>
+					    
+					    <h:panelGroup> 
+					    	à
+					    	<p:calendar timeOnly="true" value="#{timeClasseBean.finjeudi}" pattern="HH:mm"/>
+					    	<br/>
+					    </h:panelGroup>
+					    
+					    
+					    
+					    <h:outputText value="Vendredi"/>
+					    <h:panelGroup>
+					    	De
+					    	<p:calendar timeOnly="true" value="#{timeClasseBean.debutvendredi}" pattern="HH:mm"/>
+					    	<br/>
+					    </h:panelGroup>
+					    
+					    <h:panelGroup> 
+					    	à
+					    	<p:calendar timeOnly="true" value="#{timeClasseBean.finvendredi}" pattern="HH:mm"/>
+					    	<br/>
+					    </h:panelGroup>
+					    
+					    
+					    
+					    <h:outputText value="Samedi"/>
+					    <h:panelGroup>
+					    	De
+					    	<p:calendar timeOnly="true" value="#{timeClasseBean.debutsamedi}" pattern="HH:mm"/>
+					    	<br/>
+					    </h:panelGroup>
+					    
+					    <h:panelGroup> 
+					    	à
+					    	<p:calendar timeOnly="true" value="#{timeClasseBean.finsamedi}" pattern="HH:mm"/>
+					    	<br/>
+					    </h:panelGroup>
+					    				    
+					    
+					    
+					    <f:facet name="footer">
+					    	<br/>
+					    	<center>
+				  				<p:commandButton value="Enregistrer" action="#{timeClasseBean.enregistrerProgrammation}" icon="ui-icon-check" id="save"/>
+				  				<p:commandButton value="Retourner" action="#{timeClasseBean.navReturn}" icon="ui-icon-arrowreturnthick-1-w"/>
+		  					</center>
+					    </f:facet>  
+					    
+			  		</h:panelGrid> 
+			  		  	   			
+			    </center>			    
+			   		   
+			</p:outputPanel>
+			  
+	    </h:form>
+	    <p:blockUI block=":form:panelcentral"  trigger=":form:save">  
+	        Enregistrement...<br />  
+	    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+	    </p:blockUI>
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

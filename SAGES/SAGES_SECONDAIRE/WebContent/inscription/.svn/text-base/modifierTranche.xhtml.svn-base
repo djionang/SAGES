@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+  
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codeclasse" value="#{trancheBean.codeclasse}"/>
+	  		<f:viewParam name="idtranche" value="#{trancheBean.id}"/>
+	  		<f:event type="preRenderView" listener="#{trancheBean.initTrancheclasse}"/>
+		</f:metadata>
+    </ui:define>
+    
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Modification de tranche
+    </ui:define>
+   
+    <ui:define name="content">
+	    <h2>
+	   		<h:outputText value="Modifier la tranche #{trancheBean.id} de la classe #{trancheBean.codeclasse}"/>
+	   	</h2>
+	   	<p:growl autoUpdate="true"/>
+	   	<p:messages id="messages" autoUpdate="true"/>
+    <br/>   	
+   	
+	<h:form id="formmodtranche">
+	   	<p:panel id="panelparam"  style="margin-bottom:10px;"> 
+	   	
+			    <p:panelGrid columns="2" cellpadding="5" id="pann">  
+			       <h:outputText value="Type de tranche (ex: inscr.)" />
+			        <p:selectOneMenu value="#{trancheBean.type}" editable="true" style="width:180px;" required="true" requiredMessage="Type tranche ne peut être vide">
+			        	<f:selectItems value="#{configuration.typesTranchesItems}"/>
+			        </p:selectOneMenu>
+			          
+			        <h:outputText value="Montant" />  
+			        <p:inputText value="#{trancheBean.montant}" required="true" requiredMessage="Montant obligatoire" validator="MontantFrValidator"/>  
+			        
+			        <h:outputText value="Délai versement"/>
+					<p:calendar pattern="dd/MM/yyyy" navigator="true" value="#{trancheBean.delaiVersement}" id="dateversnt" required="true" requiredMessage="Délai de versement obligatoire" />
+			          
+			    </p:panelGrid> 		    
+	         	<br/>
+	        	<center>
+	            	<p:commandButton id="modifytranche" icon="ui-icon-check" value="Mettre à jour" action="#{trancheBean.modifierTranche}"/>
+	            </center>
+	   		
+		</p:panel>
+		
+		<p:blockUI block="panelparam" trigger="modifytranche">  
+	        Mise à jour...<br />  
+	    	<p:graphicImage value="/resources/img/ajax-loader.gif"/> 
+	    </p:blockUI> 
+	    
+	</h:form>
+	
+	
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

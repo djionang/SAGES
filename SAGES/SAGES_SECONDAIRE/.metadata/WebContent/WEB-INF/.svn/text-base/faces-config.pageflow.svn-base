@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf13331938631710" configfile="/AgesWeb/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="accueil.xhtml" x="338" y="178" id="pf133319611312512" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf13336299858591" path="/accueil.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="navigation" x="122" y="1330" id="pf13334445412031" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf13336299858591 pf13336299858592 pf13336299858593 pf13336322663288 pf13336322663289 pf133363226632810 pf13336382160160" path="*"/>
+  <nodes xsi:type="pageflow:PFPage" name="contact/contact.xhtml" x="338" y="562" id="pf13336299858755" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" inlinks="pf13336299858592" path="/contact/contact.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="agesregards/regards.xhtml" x="338" y="946" id="pf13336299858756" referenceLink="//@navigationRule.0/@navigationCase.2/@toViewId|" inlinks="pf13336299858593" path="/agesregards/regards.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="recrutement/recrutement" x="338" y="1330" id="pf133363226632812" referenceLink="//@navigationRule.0/@navigationCase.3/@toViewId|" inlinks="pf13336322663288" path="/recrutement/recrutement.jsp"/>
+  <nodes xsi:type="pageflow:PFPage" name="recrutement/recrutement.xhtml" x="338" y="1714" id="pf133363226632813" referenceLink="//@navigationRule.0/@navigationCase.4/@toViewId|" inlinks="pf13336322663289" path="/recrutement/recrutement.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="recrutement/listing.xhtml" x="338" y="2098" id="pf133363226632814" referenceLink="//@navigationRule.0/@navigationCase.5/@toViewId|" inlinks="pf133363226632810" path="/recrutement/listing.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="index" x="122" y="2098" id="pf133363226632815" referenceLink="//@navigationRule.0/@navigationCase.6/@toViewId|" path="index.jsp"/>
+  <nodes xsi:type="pageflow:PFPage" name="recrutement/recrutementd.xhtml" x="338" y="2482" id="pf13336382160321" referenceLink="//@navigationRule.0/@navigationCase.6/@toViewId|" inlinks="pf13336382160160" path="/recrutement/recrutementd.xhtml"/>
+  <links id="pf13336299858591" target="pf133319611312512" source="pf13334445412031"/>
+  <links id="pf13336299858592" target="pf13336299858755" source="pf13334445412031"/>
+  <links id="pf13336299858593" target="pf13336299858756" source="pf13334445412031"/>
+  <links id="pf13336322663288" target="pf133363226632812" source="pf13334445412031"/>
+  <links id="pf13336322663289" target="pf133363226632813" source="pf13334445412031"/>
+  <links id="pf133363226632810" target="pf133363226632814" source="pf13334445412031"/>
+  <links id="pf13336382160160" target="pf13336382160321" source="pf13334445412031"/>
+</pageflow:Pageflow>

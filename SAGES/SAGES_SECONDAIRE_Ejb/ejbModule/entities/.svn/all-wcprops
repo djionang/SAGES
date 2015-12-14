@@ -1,0 +1,431 @@
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities
+END
+CodeMateriel.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/CodeMateriel.java
+END
+DispenserPK.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/DispenserPK.java
+END
+Enseignement.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/Enseignement.java
+END
+Prevision.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/Prevision.java
+END
+GpUserRole.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/GpUserRole.java
+END
+PlanificationAnnuelle.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/PlanificationAnnuelle.java
+END
+EnsTitulaire.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/EnsTitulaire.java
+END
+CodeVersement.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/CodeVersement.java
+END
+ParametreTranche.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/ParametreTranche.java
+END
+CodePers.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/CodePers.java
+END
+AnimateurPedagogiquePK.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/AnimateurPedagogiquePK.java
+END
+Sequence.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/Sequence.java
+END
+Composer.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/Composer.java
+END
+CahierCours.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/CahierCours.java
+END
+CodeDossier.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/CodeDossier.java
+END
+Niveau.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/Niveau.java
+END
+Activite.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/Activite.java
+END
+CodeCycle.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/CodeCycle.java
+END
+PreInscription.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/PreInscription.java
+END
+Enseignant.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/Enseignant.java
+END
+TrimestrePK.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/TrimestrePK.java
+END
+GroupeUser.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/GroupeUser.java
+END
+Matiere.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/Matiere.java
+END
+Convocation.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/Convocation.java
+END
+ItemRole.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/ItemRole.java
+END
+Transfert.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/Transfert.java
+END
+EtudCoursPK.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/EtudCoursPK.java
+END
+Section.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/Section.java
+END
+EnsTitulairePK.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/EnsTitulairePK.java
+END
+EnseignerPK.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/EnseignerPK.java
+END
+CodeSection.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/CodeSection.java
+END
+PartieCour.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/PartieCour.java
+END
+Configuration.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/Configuration.java
+END
+Versement.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/Versement.java
+END
+Eleve.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/Eleve.java
+END
+Programmation.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/Programmation.java
+END
+CodeEtablissement.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/CodeEtablissement.java
+END
+Cour.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/Cour.java
+END
+Exercice.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/Exercice.java
+END
+OptionSerie.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/OptionSerie.java
+END
+Cycle.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/Cycle.java
+END
+TransfertPK.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/TransfertPK.java
+END
+Utilisateur.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/Utilisateur.java
+END
+Annee.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/Annee.java
+END
+Personnel.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/Personnel.java
+END
+Direction.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/Direction.java
+END
+CodePrevision.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/CodePrevision.java
+END
+Absence.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/Absence.java
+END
+TypeSalle.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/TypeSalle.java
+END
+TypeEvaluation.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/TypeEvaluation.java
+END
+Retard.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/Retard.java
+END
+TypeSanction.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/TypeSanction.java
+END
+Classe.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/Classe.java
+END
+CahierDeTexte.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/CahierDeTexte.java
+END
+CodeNiveau.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/CodeNiveau.java
+END
+Depense.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/Depense.java
+END
+Groupematiere.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/Groupematiere.java
+END
+UtilisateurGroupe.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/UtilisateurGroupe.java
+END
+AnimateurPedagogique.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/AnimateurPedagogique.java
+END
+Certificats.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/school/!svn/ver/14/SAGES_SECONDAIRE_Ejb/ejbModule/entities/Certificats.java
+END
+Materiel.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/Materiel.java
+END
+ParametreTranchePK.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/ParametreTranchePK.java
+END
+CodeDepense.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/CodeDepense.java
+END
+Evaluation.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/Evaluation.java
+END
+ComposerPK.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/ComposerPK.java
+END
+CahierCoursPK.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/CahierCoursPK.java
+END
+Salle.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/Salle.java
+END
+Sanction.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/Sanction.java
+END
+Trimestre.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/Trimestre.java
+END
+Etablissement.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/Etablissement.java
+END
+SortieM.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/entities/SortieM.java
+END

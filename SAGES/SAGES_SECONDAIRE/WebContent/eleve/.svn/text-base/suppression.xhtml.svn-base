@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+	<ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="matricule" value="#{eleveBean.matricule}"/>
+	  		<f:event type="preRenderView" listener="#{eleveBean.initEleve}"/>
+		</f:metadata>
+    </ui:define>
+   
+    <ui:define name="title">
+   		SAGES SECONDAIRE | Suppression élève
+    </ui:define>
+   
+    <ui:define name="content">
+    	
+    
+	    <h2>
+	   		<h:outputText value="Supprimer l'élève -- Mat: #{eleveBean.matricule} --"/>
+	   	</h2>
+    
+    <p:messages id="messages" autoUpdate="true"/>
+   
+   	<h:form id="formapplication">
+   	
+   	<p:panel id="panel"  style="margin-bottom:10px;"> 
+   		
+	    <p:panelGrid columns="2" style="width:100%;" id="perso">	    
+	    
+		    <f:facet name="header">
+			  	Informations Elève
+			  	<center>
+			  		<p:graphicImage value="#{eleveBean.photo}"/>
+			  	</center>
+			</f:facet>
+ 	
+		 	<h:outputText value="Nom de l'élève "/>	            			
+      		<h:outputText value="#{eleveBean.nom}" id="nom" />
+      		
+			<h:outputText value="Prénom"/>			
+      		<h:outputText value="#{eleveBean.prenom}" id="prenom"/>
+      			
+			<h:outputText value="Date de naissance (JJ/MM/AAAA) "/>		
+			<h:outputText value="#{eleveBean.dateNaissance}">
+				<f:convertDateTime pattern="dd/MM/yyyy"/>
+			</h:outputText>
+			
+       		<h:outputText value="Lieu de naissance "/>			
+      		<h:outputText value="#{eleveBean.lieuNaissance}"/>
+       			
+       		<h:outputText value="Sexe"/>				
+   			<h:outputText value="#{eleveBean.sexe}" id="sexe"/>
+   	    	
+       			
+			<h:outputText value="Nationalité " />				
+      		<h:outputText value="#{eleveBean.nationalite}" />	       		                   		
+            	             			
+            <h:outputText value="Classe " />				
+			<h:outputText value="#{eleveBean.libelleClasse}" id="classe" />
+   	    			   	    	
+   	    	<h:outputText value="Statut" />				
+			<h:outputText value="#{eleveBean.redoublant?'Redoublant':'Non Redoublant'}" />
+   	    			   	    	     		               			
+	     </p:panelGrid>
+			
+		 <br/>	
+		 <br/>	   									
+		 <center>										
+		 	<p:commandButton value="Supprimer"  id="buttonsubmit" icon="ui-icon-check"  action="#{eleveBean.supprimerEleve}"/>
+		 	<p:commandButton value="retour à la liste"  id="returnbtn" icon="ui-icon-arrowreturnthick-1-w"  action="#{navBean.elevelisting}"/>
+		 </center>
+	</p:panel>
+	
+	<p:blockUI block="panel" trigger="buttonsubmit">  
+        Suppression...<br />  
+    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+    </p:blockUI> 
+</h:form>
+   	
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

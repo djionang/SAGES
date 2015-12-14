@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="/WEB-INF/templates/template.xhtml">
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codeatelier" value="#{salleBean.codeSalle}" required="true" requiredMessage="Code salle manquant"/>
+	  		<f:event type="preRenderView" listener="#{salleBean.initSalle}"/>
+		</f:metadata>
+    </ui:define>
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Visualiser un atélier
+    </ui:define>
+   
+    <ui:define name="content">
+    <f:view>
+	    <h2>
+	   		<h:outputText value="Atelier #{salleBean.codeSalle}"/>
+	   	</h2>
+       	   		
+	    <h:panelGrid columns="2" style="width:70%;" id="perso" columnClasses="label,value">
+      		 	
+		 	<h:outputText value="libellé"/>	            			
+      		<h:outputText value="#{salleBean.libelle}" id="libelle" required="true" />
+      		
+			<h:outputText value="Type"/>				
+   			<h:outputText value="#{salleBean.type}"/>
+   	    	
+   	    	<h:outputText value="Contenance maximale "/>	            			
+      		<h:outputText value="#{salleBean.capacite}" id="capacite"/>
+   	    	
+   	    	<h:outputText value="Utilisation"/>			
+      		<h:outputText value="#{salleBean.description}" id="description"/>       		             			
+	     </h:panelGrid>	
+		
+		<h:form>
+			<center>
+				<p:commandButton value="Retour à la liste des ateliers" action="listing"/>
+			</center>
+		</h:form>
+	
+   </f:view>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

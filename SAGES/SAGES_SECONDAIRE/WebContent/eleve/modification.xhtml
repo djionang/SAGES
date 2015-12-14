@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+    <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="matricule" value="#{eleveBean.matricule}"/>
+	  		<f:event type="preRenderView" listener="#{eleveBean.initEleve}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Editer un eleve
+    </ui:define>
+   
+    <ui:define name="content">
+    	
+    
+	    <h2>
+	   		<h:outputText value="Modifier l'élève -- Matricule: #{eleveBean.matricule}--"/>
+	   	</h2>
+    
+   		<h:form id="formapplication" enctype="multipart/form-data">
+	   	
+		   	<p:panel id="panelapplication"  style="margin-bottom:10px;"> 
+		  
+		   	   		
+			    <p:panelGrid columns="2" style="width:100%;" id="perso">	    
+			    
+				    <f:facet name="header">
+					  	Informations Elève
+					  	<center>
+					  		<p:graphicImage value="#{eleveBean.photo}"/>
+					  	</center>
+					  	
+					</f:facet>
+		 	
+		 			<h:outputText value="Matricule *"/>	            			
+		      		<p:inputText value="#{eleveBean.matricule}" id="matricule" required="true" requiredMessage="Champ Matricule  obligatoire"/>
+		      		
+		 			
+				 	<h:outputText value="Nom de l'élève *"/>	            			
+		      		<p:inputText value="#{eleveBean.nom}" id="nom" required="true" requiredMessage="Champ Nom  obligatoire"/>
+		      		
+					<h:outputText value="Prénom"/>			
+		      		<p:inputText value="#{eleveBean.prenom}" id="prenom"/>
+		      			
+					<h:outputText value="Date de naissance (JJ/MM/AAAA) *"/>		
+					<p:calendar mindate="01/01/1960" navigator="true" maxdate="#{configuration.datejour}" required="true" pattern="dd/MM/yyyy" value="#{eleveBean.dateNaissance}" id="datenaissance" locale="#{configuration.locale}" requiredMessage="Champ date naissance obligatoire" pagedate="10/10/2000"/>
+		       		
+		       		<h:outputText value="Lieu de naissance *"/>			
+		      		<p:inputText value="#{eleveBean.lieuNaissance}" id="lieunaissance" required="true" requiredMessage="Champ Lieu de naissance obligatoire"/>
+		       			
+		       		<h:outputText value="Sexe"/>				
+		   			<h:selectOneMenu value="#{eleveBean.sexe}" id="sexe">
+		   	    		<f:selectItems value="#{configuration.sexeItems}"/>
+		   	    	</h:selectOneMenu>
+		       			
+					<h:outputText value="Nationalité *" />				
+		      		<p:inputText value="#{eleveBean.nationalite}" id="nationalite" required="true" requiredMessage="Champ Nationalité  obligatoire"/>	       		                   		
+		            
+		            <h:outputText value="Photo"/>	            			
+      				<p:fileUpload value="#{eleveBean.photoUploaded}" allowTypes="/(\.|\/)(gif|jpeg|png)$/" showButtons="false" mode="simple" id="photo"/>
+      		 		             			
+		            <h:outputText value="Classe *" />				
+					<h:selectOneMenu value="#{eleveBean.codeClasse}" id="classe" required="true" requiredMessage="Classe indisponible">
+		   	    		<f:selectItems value="#{etablissement.listeClasses}" var="classe" itemLabel="#{classe.libelle} (#{classe.contenanceActuelle}/#{classe.effectifMax})" itemValue="#{classe.codeClasse}"/>
+			   	    </h:selectOneMenu>
+		   	    	
+		   	    	<h:outputText value="Statut *" />				
+					<h:selectOneMenu value="#{eleveBean.redoublant}" id="redoublant" required="true" requiredMessage="Statut Obligatoire">
+		   	    		<f:selectItems value="#{configuration.etatEleveItems}"/>
+			   	    </h:selectOneMenu>
+		   	    	     		               			
+			     </p:panelGrid>
+					
+				<br/>						
+				    <p:panelGrid columns="2" style="width:100%;" id="localisation">
+				    <f:facet name="header">
+				  		Localisation et famille
+					</f:facet>
+				    
+					<h:outputText value="Adresse"/>	 						
+					<p:inputText value="#{eleveBean.adresse}" id="adresse"/>
+			              			
+			        <h:outputText value="Email"/>			
+					<p:inputText value="#{eleveBean.email}" id="email" validator="EmailValidator">
+					</p:inputText>
+			              			                    	
+					<h:outputText value="Telephone"/>			 
+					<p:inputText value="#{eleveBean.telephone}" id="telephone" validator="PhoneValidator"/>
+					
+					<h:outputText value="Boite postale"/>				
+					<p:inputText value="#{eleveBean.boitePostale}" id="bp"/>
+					
+					<h:outputText value="Nom du père"/>	 						
+						<p:inputText value="#{eleveBean.nomPere}" id="nompere"/>
+			               		
+			            <h:outputText value="telephone du père"/>				
+						<p:inputText value="#{eleveBean.telephonePere}" id="phonepere" validator="PhoneValidator"/>
+			               			
+						<h:outputText value="profession"/>				
+						<p:inputText value="#{eleveBean.professionPere}" id="professionpere"/>
+			               			
+						<h:outputText value="Adresse email du père" />
+						<p:inputText value="#{eleveBean.emailPere}" id="emailpere" validator="EmailValidator"/>
+			               		
+						<h:outputText value="Nom de la mère"/>				
+						<p:inputText value="#{eleveBean.nomMere}" id="nommere"/>
+			             
+			            <h:outputText value="telephone de la mère"/>				
+						<p:inputText value="#{eleveBean.telephoneMere}" id="phonemere"/>
+			               			
+						<h:outputText value="profession"/>				
+						<p:inputText value="#{eleveBean.professionMere}" id="professionmere"/>
+			             	               		
+						<h:outputText value="Adresse email"/>				
+						<p:inputText value="#{eleveBean.emailMere}" id="emailmere" validator="EmailValidator"/>
+						
+						<h:outputText value="Nom du tuteur *"/>				
+						<p:inputText value="#{eleveBean.nomTuteur}" id="nomtuteur" required="true" requiredMessage="Champ Nom du tuteur obligatoire"/>
+			             
+			            <h:outputText value="telephone du tuteur *"/>				
+						<p:inputText value="#{eleveBean.telephoneTuteur}" id="phonetuteur" required="true" validator="PhoneValidator" requiredMessage="Champ Téléphone tuteur obligatoire"/>
+			               			
+						<h:outputText value="profession"/>				
+						<p:inputText value="#{eleveBean.professionTuteur}" id="professiontuteur"/>
+			               		
+						<h:outputText value="email du tuteur"/>				
+						<p:inputText value="#{eleveBean.emailTuteur}" id="emailtuteur" validator="EmailValidator" />
+						
+					
+				    </p:panelGrid>
+			 
+					<br/>				
+				    				
+				    <p:panelGrid columns="2" style="align=center; width:100%;" id="lastetablissement">
+				    
+					    <f:facet name="header">
+					    	<center>
+						  		Statut au sein de l'établissement
+						  		<br/>
+						  		<h:selectOneMenu value="#{eleveBean.ancien}" required="true" requiredMessage="Etat Obligatoire">
+					   	    		<f:selectItem itemLabel="Ancien" itemValue="true"/>
+					   	    		<f:selectItem itemLabel="Nouveau" itemValue="false"/>
+						   	    </h:selectOneMenu>
+						   	    <br/>
+					  		</center>
+						</f:facet>
+				    
+						<h:outputText value="Dernier établissement fréquenté"/>	 						
+						<p:inputText value="#{eleveBean.ancienEtablissement}" id="etablissementfrom"/>
+				        
+						<h:outputText value="Dernière classe fréquentée"/>				
+						<p:inputText value="#{eleveBean.classeAncienEtablissement}" id="derniereclasse"/>
+				            	
+						<h:outputText value="Derniere année dans l'établissement d'origine"/>				
+						<p:inputText value="#{eleveBean.anneeAncienEtablissement}" id="anneeAncienEtablissement"/>
+				        
+			         </p:panelGrid>
+					 <br/>	
+					 <br/>	   									
+				  <center>									
+			 		<p:commandButton value="Mise à jour"  icon="ui-icon-check" id="submitapp" action="#{eleveBean.updateeleve}" ajax="false"/>
+				 	<p:commandButton value="retour à la liste"  id="returnbtn" icon="ui-icon-arrowreturnthick-1-w"  action="#{navBean.elevelisting}" immediate="true"/>
+				  </center>
+			</p:panel>
+			
+			<p:blockUI block="panelapplication" trigger="submitapp">  
+		        Enregistrement...<br />  
+		    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+		    </p:blockUI> 
+	    
+		</h:form>
+   	
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

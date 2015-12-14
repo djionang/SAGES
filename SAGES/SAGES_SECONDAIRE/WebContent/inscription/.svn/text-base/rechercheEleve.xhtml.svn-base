@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Recherche élève
+   </ui:define>
+   
+   <ui:define name="content">
+   <h2><h:outputText value="Droits de scolarité"/></h2>
+   
+   <h:form id="formeleve">
+	   <p:panel header="Eleve">
+	   	
+	   	<h:panelGrid columns="2" >
+	   		
+	   		<f:facet name="header">
+		   		<h:outputText value="Recherche"/>
+		   	</f:facet>
+		   	<h:inputText id="cle" value="#{droitsScolairesBean.cleRecherche}"/>
+		   	
+		   	<p:selectOneMenu value="#{droitsScolairesBean.categorierecherche}">
+		   		<f:selectItems value="#{configuration.rechercheelevesItems}" />	   	
+		   	</p:selectOneMenu>
+		   	
+		   	<f:facet name="footer">
+		   		<p:commandButton value="rechercher" actionListener="#{droitsScolairesBean.chercherEleve}" update="tableeleves"/>
+		   	</f:facet>
+	   	
+	   	</h:panelGrid>
+	   		
+	   	<p:dataTable value="#{droitsScolairesBean.eleves}" id="tableeleves" var="eleve">
+		 	<p:column id="matricule" headerText="Matricule">
+	            <h:outputText value="eleve.matricule" />  
+	        </p:column> 
+	   	
+	   		<p:column id="nom" headerText="Nom - Prénom">
+	            <h:outputText value="#{eleve.nom} #{eleve.prenom}" />  
+	        </p:column> 
+	   	
+	   		<p:column id="classe" headerText="Classe">
+	            <h:outputText value="#{eleve.classe}" />  
+	        </p:column> 
+	   	
+	   	</p:dataTable>
+	   </p:panel>
+   </h:form>
+   
+   <br/>	
+   		<p:separator/>
+   <br/>	
+   
+   <h:form id="formtranche">
+	   <p:panel header="Reçu">
+	   		<p:dataTable value="#{droitsScolairesBean.selectedEleve.tranches}" var="tranche">
+	   			<p:column id="id" headerText="id">
+	            <h:outputText value="tranche.id" />  
+	        </p:column> 
+	   	
+	   		<p:column id="montant" headerText="Montant reçu">
+	            <h:outputText value="tranche.montant" />  
+	        </p:column> 
+	   	
+	   		<p:column id="date" headerText="Date">
+	            <h:outputText value="tranche.dateVersement" />  
+	        </p:column> 
+	   		
+	   		</p:dataTable>
+	      
+	   </p:panel>
+	   
+	   <p:panel header="Versement" id="panelversement">
+	    	<h:panelGrid>
+	    		<h:outputText value="Id."/>
+	    		<h:outputText value="#{droitsScolairesBean.idTranche}"/>
+	   			<h:outputText value="Montant"/>
+	   			<p:inputText value="#{droitsScolairesBean.montant}"/>
+	   			<h:outputText value="Date versement"/>
+	   			<p:calendar mindate="01/01/1960" maxdate="#{configuration.datejour}" required="true"  pattern="dd/MM/yyyy" value="#{droitsScolairesBean.dateVersement}" id="dateversement" navigator="true" mode="popup" showOn="button" popupIconOnly="true" />
+	       		
+	      	</h:panelGrid>  	  	  	
+		</p:panel>
+		
+		<p:panel>
+			<center>
+				<p:commandButton value="Enregistrer"  icon="ui-icon-check" id="submitds" action="#{droitsScolairesBean.saveTranche}" />
+				<p:commandButton value="Annuler" immediate="true" type="reset" icon="ui-icon-close"/>	
+			</center>		
+		</p:panel>
+		
+		<p:blockUI block="panelversement" trigger="submitds">  
+	        Enregistrement...<br />  
+	    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+	    </p:blockUI> 
+    
+    </h:form>
+    
+   </ui:define>
+   
+   
+   </ui:composition>
+ 
+</html>

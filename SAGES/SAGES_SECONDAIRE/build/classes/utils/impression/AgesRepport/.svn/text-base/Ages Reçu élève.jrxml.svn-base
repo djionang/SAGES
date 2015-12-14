@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Ages Reçu élève" pageWidth="592" pageHeight="295" columnWidth="552" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="192"/>
+	<parameter name="matricule" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     eleve.`matricule` AS eleve_matricule,
+     eleve.`nom` AS eleve_nom,
+     etablissement.`devise` AS etablissement_devise,
+     etablissement.`logo` AS etablissement_logo,
+     etablissement.`nometab` AS etablissement_nometab,
+     versement.`idversement` AS versement_idversement,
+     versement.`dateVersement` AS versement_dateVersement,
+     versement.`montant` AS versement_montant,
+     versement.`ANNEEACADEMIQUE` AS versement_ANNEEACADEMIQUE,
+     versement.`MATRICULEELEVE` AS versement_MATRICULEELEVE,
+     eleve.`numeroPayement` AS eleve_numeroPayement,
+     eleve.`prenom` AS eleve_prenom,
+     tranche.`typetranche` AS tranche_typetranche,
+     eleve.`ANNEEACADEMIQUE` AS eleve_ANNEEACADEMIQUE,
+     etablissement.`pays` AS etablissement_pays,
+     etablissement.`devise_pays` AS etablissement_devise_pays
+FROM
+     `eleve` eleve INNER JOIN `versement` versement ON eleve.`matricule` = versement.`MATRICULEELEVE`
+     INNER JOIN `tranche` tranche ON eleve.`matricule` = tranche.`MATRICULE`,
+     `etablissement` etablissement
+where eleve.matricule=$P{matricule}]]>
+	</queryString>
+	<field name="eleve_matricule" class="java.lang.String"/>
+	<field name="eleve_nom" class="java.lang.String"/>
+	<field name="etablissement_devise" class="java.lang.String"/>
+	<field name="etablissement_logo" class="java.lang.Object"/>
+	<field name="etablissement_nometab" class="java.lang.String"/>
+	<field name="versement_idversement" class="java.lang.Integer"/>
+	<field name="versement_dateVersement" class="java.sql.Date"/>
+	<field name="versement_montant" class="java.lang.Float"/>
+	<field name="versement_ANNEEACADEMIQUE" class="java.lang.String"/>
+	<field name="versement_MATRICULEELEVE" class="java.lang.String"/>
+	<field name="eleve_numeroPayement" class="java.lang.String"/>
+	<field name="eleve_prenom" class="java.lang.String"/>
+	<field name="tranche_typetranche" class="java.lang.String"/>
+	<field name="eleve_ANNEEACADEMIQUE" class="java.lang.String"/>
+	<field name="etablissement_pays" class="java.lang.String"/>
+	<field name="etablissement_devise_pays" class="java.lang.String"/>
+	<background>
+		<band height="253" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="0" y="2" width="554" height="249" backcolor="#CCFFCC"/>
+			</rectangle>
+		</band>
+	</background>
+	<title>
+		<band height="239" splitType="Stretch">
+			<staticText>
+				<reportElement x="7" y="168" width="141" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[DATE PAYEMENT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="149" width="141" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[NOM  ET PRENOM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="93" width="141" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[TYPE DE PAYEMENT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="111" width="141" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[NUMEROPAYEMENT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="130" width="141" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[MONTANT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="183" y="60" width="169" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reçu de paiyement]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="147" y="168" width="204" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{versement_dateVersement}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="148" y="149" width="121" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{eleve_nom}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="269" y="144" width="83" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{eleve_prenom}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="148" y="130" width="204" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{versement_montant}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="148" y="112" width="204" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{versement_idversement}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="147" y="93" width="204" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{tranche_typetranche}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="360" y="62" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{eleve_ANNEEACADEMIQUE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="378" y="62" width="7" height="20"/>
+				<textElement/>
+				<text><![CDATA[(]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="439" y="62" width="8" height="20"/>
+				<textElement/>
+				<text><![CDATA[)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="392" y="191" width="163" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Signature du Responsable]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="225" y="3" width="93" height="52"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""+$F{etablissement_logo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="92" y="6" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{etablissement_pays}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="128" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Republique du Cameroun]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="12" y="19" width="135" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{etablissement_devise_pays}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="392" y="0" width="163" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{etablissement_nometab}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="392" y="18" width="163" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{etablissement_devise}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="161" y="228" width="157" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Disigned by crecpro]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="147" y="186" width="204" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{matricule}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="7" y="183" width="141" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[MATRICULE]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="2" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

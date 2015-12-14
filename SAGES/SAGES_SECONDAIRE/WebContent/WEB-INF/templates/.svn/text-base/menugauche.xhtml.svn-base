@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition>
+   	<center>
+   		<br/>
+   		<h:form>
+   		<p:accordionPanel  activeIndex="#{sessionBean.leftTabIndex}">
+   		<p:ajax event="tabChange" listener="#{sessionBean.leftTabChange}" />
+   		
+   		<p:tab title="Inscription">
+	   		<p:menu>
+			 	<p:submenu label="Candidatures">
+					 <p:menuitem value="Nouvelle candidature" action="#{navBean.nouvellecandidature}"/>
+					 <p:menuitem value="Visualiser | Gérer" action="#{navBean.listercandidatures}" />
+					 <p:menuitem value="C. Acceptées" action="#{navBean.listercandidaturesacceptees}" />
+					 <p:menuitem value="C. Rejetées" action="#{navBean.listercandidaturesrejetees}" />
+					 <p:menuitem value="C. En attente" action="#{navBean.listercandidaturesattente}" />
+			 	</p:submenu>
+			 	<p:submenu label="Inscriptions">
+			 		<p:menuitem value="Elèves > Classes" action="#{navBean.inscriptioneleveversclasse}"/>
+			 		<p:menuitem value="Listes provisoires" action="#{navBean.inscriptionlisteprovisoire}"/>
+					<p:menuitem value="Inscription élève" action="#{navBean.inscriptioneleve}"/>
+					<p:menuitem value="Bilan financier par classe" action="#{navBean.inscriptionetateleve}"/>
+				</p:submenu>
+			 	<p:submenu label="Frais exigibles">
+					 <p:menuitem value="Nouveau versement" action="#{navBean.inscriptionfrais}"/>
+					 <p:menuitem value="Profil individuel" action="#{navBean.inscriptionfraisindiv}"/>
+					 <p:menuitem value="Versements enregistrés" action="#{navBean.inscriptionlisteversement}" />
+					 <p:menuitem value="Bilan Financier" action="#{navBean.bilanfinancier}" />
+					 <p:menuitem value="Détail montant/classe" action="#{navBean.inscriptiondetailtranches}" />
+			 		 
+				 </p:submenu>
+				 
+				 <p:submenu label="Etats">
+					 <p:menuitem value="Liste élèves en règle" action="#{navBean.elevesenregle}"/>
+					 <p:menuitem value="Liste élèves non en règle" action="#{navBean.elevesnenregle}"/>
+					 <p:menuitem value="Liste élèves Inscrits" action="#{navBean.elevesinscrits}" />
+					 
+				 </p:submenu>
+			 	
+			</p:menu>
+			</p:tab>
+		
+		<p:tab title="Programmation">
+			<p:menu>
+				<p:submenu label="Enseignements">
+					 <p:menuitem value="Visualiser | Editer" action="#{navBean.progenseivue}" />
+				</p:submenu>
+				
+				<p:submenu label="Salles">
+					 <p:menuitem value="Visualiser" action="#{navBean.progsallevue}"/>
+				</p:submenu>
+				
+				<p:submenu label="Ateliers">
+					 <p:menuitem value="Visualiser" action="#{navBean.progateliervue}" />
+				</p:submenu>
+				
+				<p:submenu label="Activités/événements">
+					<p:menuitem value="Visualiser | Editer" action="#{navBean.progactivvue}"/>
+					<p:menuitem value="Enregistrer" action="#{navBean.progactivsave}" />
+				</p:submenu>
+				<p:submenu label="Enseignants">
+					 <p:menuitem value="Visualiser" action="#{navBean.progenseignvue}" />
+				</p:submenu>
+				<p:submenu label="évaluations/Examens">
+					 <p:menuitem value="Visualiser" action="#{navBean.progexamvue}" />
+				</p:submenu>
+			</p:menu>
+		</p:tab>
+		
+		<br/>
+   		<p:tab title="Gestion Scolaire">   		
+	   		<p:menu>
+	   			 <p:submenu label="Matieres">
+					<p:menuitem value="Nouvelle matière" action="#{navBean.gestmatcreate}" />
+				 	<p:menuitem value="Visualiser | Editer" action="#{navBean.gestmatlisting}" />
+				 </p:submenu>
+				 <p:submenu label="Groupes de Matieres">
+					<p:menuitem value="Nouveau groupe" action="#{navBean.gestgrpecreate}" />
+				 	<p:menuitem value="Visualiser | Editer" action="#{navBean.gestgrpelisting}"/>
+				 </p:submenu>
+				 <p:submenu label="Cours">
+					<p:menuitem value="Nouveau" action="#{navBean.gestcourscreate}"/>
+					<p:menuitem value="Copier Cours" action="#{navBean.gestcourscopier}"/>
+				 	<p:menuitem value="Visualiser | Editer" action="#{navBean.gestcourslisting}" />
+				 	<p:menuitem value="Enseignants" action="#{navBean.etabclasseenseignvue}" />
+				 	<p:separator/>
+				 	
+				 	<p:menuitem value="Partie | Chapitre" action="#{navBean.gestcourspartiecreate}"/>
+				 </p:submenu>
+				 
+				<p:submenu label="Classes">
+					 <p:menuitem value="Série | Option" action="#{navBean.etabclasseoptionvue}"/>
+					 <p:menuitem value="Liste des élèves" action="#{navBean.etabclasseelevvue}"/>
+					 <p:menuitem value="Enseignants" action="#{navBean.etabclasseenseignvue}" />
+					 
+					 <p:menuitem value="Titulaire - Délégués" action="#{navBean.etabclassedeleguevue}" />
+				</p:submenu>
+				
+				<p:submenu label="Cahier de texte">
+					<p:menuitem value="Nouvelle entrée" action="#{navBean.gestscoolcdtcreate}" />
+				 	<p:menuitem value="Visualiser | Editer" action="#{navBean.gestscoolcdtvue}" />
+				</p:submenu>
+			</p:menu>
+			</p:tab>
+		<br/>
+		<p:tab title="Elèves">
+			<p:menu>
+				<p:menuitem value="Enregistrer" action="#{navBean.enregistrerEleve}"/>
+				
+				<p:menuitem value="Visualiser | Editer" action="#{navBean.elevelisting}" />
+				
+				<p:separator/>
+				
+				<p:menuitem value="Rechercher" action="#{navBean.rechercheeleve}" />
+				<p:menuitem value="Effectifs Eleves" action="#{navBean.classelisting}" />
+			</p:menu>
+		</p:tab>
+		<br/>
+		<p:tab title="Materiels">
+	   		<p:menu>
+			 	<p:submenu label="Entrer">
+					 <p:menuitem value="Nouveau Materiel" action="#{navBean.materielcreate}"/>
+					 <p:menuitem value="Visualiser | Gérer" action="#{navBean.materiellisting}" />
+					 <p:menuitem value="Ajouter Materiel" action="#{navBean.ajoutermaterielN}" />
+			 	</p:submenu>
+			 	<p:submenu label="Sortie">
+			 		<p:menuitem value="Nouvelle Sortie" action="#{navBean.sortiemateriel}"/>
+					 <p:menuitem value="Visualiser | Gérer" action="#{navBean.sortielisting}" />
+				</p:submenu>
+			</p:menu>
+		</p:tab>
+		<br/>
+		<p:tab title="Personnel">
+			<p:menu>
+					 <p:menuitem value="Nouveau" action="#{navBean.personelcreate}" />
+					 <p:menuitem value="Visualiser | Editer" action="#{navBean.personellisting}"/>
+					 <p:submenu label="Enseignants">
+					 	<p:menuitem value="Enregistrer enseignant" action="#{navBean.personenseigncreate}" />
+					 	<p:menuitem value="Visualiser | Editer" action="#{navBean.personenseignlisting}"/>
+					 </p:submenu>					 	 
+			</p:menu>
+		</p:tab>
+		<br/>
+		<p:tab title="Paramètres scolarités">
+			<p:menu>
+				 
+				 <p:submenu label="Frais de scolarités">
+				 	<p:menuitem value="Enregistrer | Editer" action="#{navBean.inscriptionfraisparam}" />
+				 	<p:menuitem value="Copier Frais exigibles" action="#{navBean.inscriptionfraispropag}" />
+				 					 	
+				 </p:submenu>
+			</p:menu>
+		</p:tab>
+		<br/>
+		<p:tab title="Gestion Budget et Paye">
+			<p:menu>
+			
+				<p:submenu label="Budget">
+						<p:menuitem value="Enregistrer Prevision" action="#{navBean.previsioncreate}" />
+					 	<p:menuitem value="Previsions enregistrées" action="#{navBean.previsionlisting}" />	
+					 	<p:menuitem value="Nouveau Depense" action="#{navBean.depense}" />
+					 	<p:menuitem value="Depenses enregistrées" action="#{navBean.depenselisting}" />
+					 	<p:menuitem value="Tranfert prevision" action="#{navBean.transfert}" />
+<!-- 					 	<p:menuitem value="Bilan Depense" action="#{navBean.personenseignpayeparam}" /> -->
+				</p:submenu>
+				 				 
+				 <p:submenu label="Paye">
+						<p:menuitem value="Paramètres" action="#{navBean.personenseignpayeparam}" />
+					 	<p:menuitem value="Evaluation" action="#{navBean.personenseignpayeeval}" />
+				</p:submenu>
+				<p:submenu label="Responsabilités">
+				 	<p:menuitem value="Assigner" action="#{navBean.assigner}" />
+				 	<p:menuitem value="Modifier" action="#{navBean.listingrespo}" />
+				</p:submenu>
+			</p:menu>
+		</p:tab>
+		<p:tab title="Suivi Pédagogique">
+			<p:menu>				 				 
+				 <p:submenu label="Suivi">
+					 
+				     <p:menuitem value="Travail et Performances" action="#{navBean.personenseignwork}" />
+					 <p:menuitem value="Evaluation" action="#{navBean.personenseignpayeeval}" />
+				</p:submenu>
+			</p:menu>
+		</p:tab>
+		
+		<p:tab title="Administration">
+			<p:menu>
+				 
+				 <p:submenu label="Etablissements">
+				 	<p:menuitem value="Nouvel etablissement" action="#{navBean.etabcreate}" />
+				 	<p:menuitem value="Enregistrés" action="#{navBean.etablisting}" />
+				 					 	
+				 </p:submenu>
+				 				 
+				 <p:submenu label="Mon compte">
+						<p:menuitem value="Editer" action="#{navBean.editcompteadmin}" />
+				</p:submenu>
+			</p:menu>
+		</p:tab>
+		<br/>
+		</p:accordionPanel>
+		
+		</h:form>
+		<br/>
+				
+		</center>
+   </ui:composition>
+ 
+</html>

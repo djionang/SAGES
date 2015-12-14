@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Listing Groupes Matieres
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2>Groupes de Matieres enregistrés</h2>
+   		
+   		<br/>
+   		
+   		<p:growl autoUpdate="true" globalOnly="true"/>
+   		
+   		<h:form id="form1">
+   			
+	    	<p:dataTable id="tablegms" value="#{listgmBean.groupesmatieres}" var="gm" emptyMessage="Aucun groupe de matières enregistré"
+	    		paginator="true" rows="20"  rowsPerPageTemplate="10,20,40" sortBy="#{gm.libelle}" sortOrder="descending">
+		  	    
+        		<p:column id="libelle"  sortBy="#{gm.libelle}" headerText="Libellé">  
+            		<h:outputText value="#{gm.libelle}" />  
+        		</p:column> 
+        
+        		<p:column id="description" headerText="Description">  
+            		<h:outputText value="#{gm.description}" />  
+        		</p:column>         
+			
+		        <p:column id="option" headerText="Options" width="46"> 
+		         	<p:panelGrid columns="3">
+				        	
+					    <h:link  includeViewParams="true" outcome="detailgm" title="Visualiser" >
+					    	<p:graphicImage value="../../resources/img/view16.png" style="border:#CCCCCC 1px solid"/>  						        
+					    	<f:param name="libellegm" value="#{gm.libelle}"/>						    
+					    </h:link>
+					    
+			            <h:link  includeViewParams="true" id="edit"  title="Editer" outcome="gmedit">  
+					        <p:graphicImage value="../../resources/img/edit16.png" style="border:#CCCCCC 1px solid"/>   
+					        <f:param name="libellegm" value="#{gm.libelle}"/>
+					    </h:link>
+					    
+			            <h:link  includeViewParams="true" id="delete" outcome="gmdelete" title="Supprimer">  
+					        <p:graphicImage value="../../resources/img/delete16.png" style="border:#CCCCCC 1px solid"/>
+					       	<f:param name="libellegm" value="#{gm.libelle}"/>
+					   </h:link>
+					   					   
+			         </p:panelGrid>
+			         
+		        </p:column> 
+		
+			</p:dataTable>
+			
+			<br/>
+   			
+			<center>
+				<p:commandButton value="Nouveau groupe" action="#{navBean.gestgrpecreate}" icon="ui-icon-check"/>
+			</center>
+			</h:form>
+  			
+  			
+		<p:separator/>
+		<br/>
+   		
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

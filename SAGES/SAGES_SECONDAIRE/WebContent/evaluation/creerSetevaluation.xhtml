@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Enregistrer les évaluations d'une classe
+    </ui:define>
+   
+    <ui:define name="content">
+
+	    <h2>
+	   		<h:outputText value="Enregistrer les évaluations d'une classe pour une sequence choisi"/>
+	   	</h2>
+	   	
+   		<p:messages id="messages" autoUpdate="true"/>
+    
+   	<h:form id="formevaluation">
+   	
+   	<p:panel id="panelevaluation"  style="margin-bottom:10px;"> 
+   	   		
+	    <p:panelGrid columns="2" style="width:100%;" id="perso">	    
+	    		    
+			<h:outputText value="Séquence *"/>	            			
+      		<h:selectOneMenu value="#{evaluationBean.codesequence}" required="true" requiredMessage="Séquence evaluation obligatoire">
+    			<f:selectItems value="#{etablissement.listesequences}" var="sequence" itemLabel="Séquence #{sequence.numero} (Du #{sequence.datedebut} Au #{sequence.datefin})" itemValue="#{sequence.idsequence}" itemDescription="Séquence #{sequence.numero} -trimestre #{sequence.trimestre}"/>
+   	    	</h:selectOneMenu>
+   	    	
+   	    	<h:outputText value="Classe *"/>				
+   			<h:selectOneMenu value="#{evaluationBean.codeclasse}" id="classe" required="true" requiredMessage="Classe concernée Obligatoire">
+    			<f:selectItem itemLabel="" itemValue=""/>
+    			<f:selectItems value="#{etablissement.listeClasses}" var="classe" itemLabel="#{classe.libelle}" itemValue="#{classe.codeClasse}" itemDescription="#{classe.libelle}"/>
+   	    		<p:ajax async="true" partialSubmit="true" listener="#{evaluationBean.loadMatieresClasseN}" event="change" update="panelevaluation" process="@this"/>
+   	    	</h:selectOneMenu> 
+
+   	    	<h:outputText value="type dévaluation *"/>	            			
+      		<h:selectOneMenu value="#{evaluationBean.typeevaluation}" id="type" required="true" requiredMessage="Type de l'évaluation obligatoire">
+    			<f:selectItems value="#{etablissement.listetypeEvaluations}" var="type" itemLabel="#{type.typeevaluation} (#{type.coefficient}/100)" itemValue="#{type.typeevaluation}" itemDescription="#{type.description}"/>
+   	    	</h:selectOneMenu>  
+   	    	
+   	    	<h:outputText value="Date début *"/>	            			
+      		<p:calendar value="#{evaluationBean.datedebut}" id="debut" required="true" requiredMessage="date de debut de l'évaluation obligatoire" pattern="dd/MM/yyyy HH:mm"/>
+      		 
+      		<h:outputText value="Date fin *"/>	            			
+      		<p:calendar value="#{evaluationBean.datefin}" id="fin" required="true" requiredMessage="date de fin de l'évaluation obligatoire" pattern="dd/MM/yyyy HH:mm"/>
+      		        			
+	    </p:panelGrid>		
+		
+		  <br/>				
+		  <center>			  								
+		 		<p:commandButton value="Enregistrer"  icon="ui-icon-check" id="submitevaluation" action="#{evaluationBean.saveSetEvaluation}" />
+		 		<p:commandButton value="Annuler" immediate="true" type="reset" icon="ui-icon-close" />	
+		 </center>
+	</p:panel>
+	
+	<p:blockUI block="panelevaluation" trigger="submitevaluation">  
+        Enregistrement...<br />  
+    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+    </p:blockUI> 
+    
+	</h:form>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

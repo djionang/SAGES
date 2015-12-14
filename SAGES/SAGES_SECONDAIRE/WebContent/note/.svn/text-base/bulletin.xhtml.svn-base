@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="/WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Visualisation Bulletin
+    </ui:define>
+   
+    <ui:define name="content">
+	    <h2>
+	   		<h:outputText value="Visualisation bulletin"/>
+	   	</h2>
+	   	<br/>
+   		<p:messages id="messages" autoUpdate="true"/>
+	   	
+	   	<p:outputPanel id="panelbulletin"  style="margin-bottom:10px;">    	
+	   		
+	   		<h:form id="formbulletin">
+	   				   		
+			    <p:panelGrid columns="2" style="width:100%;" id="f1">	    
+			    	
+			    	<p:panel id="paneaugauche">
+			    	
+				    	<h:outputText value="Séquence"/>	            			
+			      		<h:selectOneMenu value="#{bulletinBean.codesequence}" required="true" requiredMessage="Séquence obligatoire">
+			    			<f:selectItems value="#{etablissement.listesequences}" var="sequence" itemLabel="Séquence #{sequence.numero}" itemValue="#{sequence.idsequence}" itemDescription="Séquence #{sequence.numero} -trimestre #{sequence.trimestre}"/>
+			   	    	</h:selectOneMenu>
+			   	    	
+			   	    	<br/>
+			   	    	
+						<h:outputText value="Classe"/>				
+			   			<h:selectOneMenu value="#{bulletinBean.codeclasse}" id="classe" required="true" requiredMessage="">
+			   				<f:selectItem itemLabel="classe" itemValue="" itemDescription="selectionner une classe"/>
+			    			<f:selectItems value="#{etablissement.listeClasses}" var="classe" itemLabel="#{classe.libelle}" itemValue="#{classe.codeClasse}" itemDescription="#{classe.libelle}"/>
+			   	    		<p:ajax async="true" partialSubmit="true" listener="#{bulletinBean.loadElevesClasse}" event="change" update="paneaudroit" process="@this"/>
+			   	    	</h:selectOneMenu>
+		   	    	
+		   	    	</p:panel>
+		   	    	
+		   	    	<p:panel id="paneaudroit" header="Eleve">
+			    	
+				    	<h:selectOneListbox value="#{bulletinBean.matriculeeleve}" size="10">
+				    		<f:selectItems value="#{bulletinBean.listeeleves}" var="eleve" itemLabel="#{eleve.matricule} - #{eleve.nom} #{eleve.prenom}" itemValue="#{eleve.matricule}"/>
+				    	</h:selectOneListbox>
+		   	    	
+		   	    	</p:panel>			   	    		    		    
+					
+				
+					<f:facet name="footer">
+		   	    		<center>
+		   	    			<p:commandButton value="Visualiser" async="true" actionListener="#{bulletinBean.loadBulletin}" id="loadbull" icon="ui-icon-check" update=":formbulletin:panel"/>
+		   	    		</center>
+	   	    		</f:facet>
+   	    		
+				</p:panelGrid>				
+				
+				<br/>
+				
+				<p:panel id="panel">
+					<p:graphicImage value="/resources/img/ajax-loader.gif"/>
+				</p:panel>
+				
+			</h:form>
+			
+				 
+		</p:outputPanel>
+				
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

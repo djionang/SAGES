@@ -1,0 +1,143 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ages/exception
+END
+ChevauchementDateException.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ages/exception/ChevauchementDateException.java
+END
+CoursNonDefiniException.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ages/exception/CoursNonDefiniException.java
+END
+DroitsScolairesNonDefinis.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ages/exception/DroitsScolairesNonDefinis.java
+END
+TotalVersementExcedantException.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ages/exception/TotalVersementExcedantException.java
+END
+UnknownException.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ages/exception/UnknownException.java
+END
+ElementNOtFoundException.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ages/exception/ElementNOtFoundException.java
+END
+SuccessDuplicateLabelException.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ages/exception/SuccessDuplicateLabelException.java
+END
+EleveDSCompletException.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ages/exception/EleveDSCompletException.java
+END
+ErrorDuplicateLabelException.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ages/exception/ErrorDuplicateLabelException.java
+END
+EleveDupliqueException.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ages/exception/EleveDupliqueException.java
+END
+MontantInscriptionInsuffisant.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ages/exception/MontantInscriptionInsuffisant.java
+END
+UnAuthorizedOperationException.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ages/exception/UnAuthorizedOperationException.java
+END
+AgesException.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ages/exception/AgesException.java
+END
+DuplicateKeyException.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ages/exception/DuplicateKeyException.java
+END
+NoteNonConforme.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ages/exception/NoteNonConforme.java
+END
+UnknownUserException.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ages/exception/UnknownUserException.java
+END
+ClassToBeanCopyException.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ages/exception/ClassToBeanCopyException.java
+END
+AnneeEnCoursNonDefinieException.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ages/exception/AnneeEnCoursNonDefinieException.java
+END
+EtablissementUndefinedException.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ages/exception/EtablissementUndefinedException.java
+END
+JPAException.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ages/exception/JPAException.java
+END
+NonUniqueResultException.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ages/exception/NonUniqueResultException.java
+END
+AdminstrateurNotFoundException.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ages/exception/AdminstrateurNotFoundException.java
+END
+PourcentageEvaluationExedantException.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/school/!svn/ver/12/SAGES_SECONDAIRE_Ejb/ejbModule/ages/exception/PourcentageEvaluationExedantException.java
+END

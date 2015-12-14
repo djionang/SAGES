@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="idprevision" value="#{previsionBean.idprevision}"/>
+	  		<f:event type="preRenderView" listener="#{previsionBean.initialize}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Visualiser prévision
+    </ui:define>
+   
+    <ui:define name="content">    	
+    
+	    <h2>
+	   		<h:outputText value="Visualiser le prévision-- Code: #{previsionBean.codeprevision} --"/>
+	   	</h2>
+	   	
+	   	<p:messages autoUpdate="true"/>
+    
+	   	<h:form id="formapplication">
+	   	
+		   	<p:panel id="panel"  style="margin-bottom:10px;" rendered="#{not empty previsionBean.codeprevision}"> 
+		   		
+			     <p:panelGrid columns="2" style="width:80%;" id="perso" columnClasses="label,value">	    
+			    			 	
+				 	<h:outputText value="Type prevision"/>	            			
+		      		<h:outputText value="#{previsionBean.typeprevision}" id="type"/>
+		      		 	
+				 	<h:outputText value="Description"/>	            			
+		      		<h:outputText value="#{previsionBean.description}" id="description"/>
+		      		
+		      		<h:outputText value="Montant"/>	            			
+		      		<h:outputText value="#{previsionBean.montant}" id="mantant"/>
+		    				      				
+					<h:outputText value="Nom Responsable"/>				
+		   			<h:outputText value="#{previsionBean.nomrespon}" id="nom"/>
+		    		
+		   	    	
+		   	    	<h:outputText value="Prenom Responsable"/>			
+		      		<h:outputText value="#{previsionBean.prenomrespon}" id="prenom"/>
+		      		
+		      		<h:outputText value="Transfert"/>			
+		      		<h:outputText value="#{previsionBean.tranfert}" id="transfert"/>        		
+		      				
+					<h:outputText value="Date Enregistrement"/>				
+		   			<h:outputText value="#{previsionBean.dateenreg}">
+						 <f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputText>     	      		               			
+			        	    	      		               			
+			     </p:panelGrid>		
+			 	 <br/>									
+				 <center>										
+				 	<p:commandButton value="Retour à la liste"  id="buttonsubmit" icon="ui-icon-arrowreturnthick-1-w"  action="#{navBean.previsionlisting}"/>
+				 </center>
+				
+			</p:panel>
+			
+		</h:form>
+   	
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

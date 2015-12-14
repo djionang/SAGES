@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="/WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Listing Atéliers
+   </ui:define>
+   
+   <ui:define name="content">
+   		<f:view>
+	   		<h2>Ateliers enregistrés</h2>
+	   		<br/>
+	   		
+	   			 <h:form id="form1" target="_blank">
+	   			<p:panel header="Recherche"> 
+	                <p:inputText id="globalFilter" style="width:150px"/>  
+	            </p:panel> 
+	            <br/>
+	            <p:separator/>
+		    	<p:dataTable id="tableateliers" value="#{listSalleBean.listeAteliers}" var="atelier" emptyMessage="Aucun atelier enregistré"
+		    		paginator="true" rows="10"  rowsPerPageTemplate="10,20,40" sortBy="#{atelier.libelle}" sortOrder="descending">
+			  	        
+	        		<p:column id="code" headerText="Code At.">  
+	            		<h:outputText value="#{atelier.codeSalle}" />  
+	        		</p:column> 
+	        
+	        		<p:column id="libelle"  sortBy="#{atelier.libelle}" headerText="Libellé">  
+	            		<h:outputText value="#{atelier.libelle}" />  
+	        		</p:column> 
+	        
+	        		<p:column id="type" headerText="Type">  
+	            		<h:outputText value="#{atelier.type}" />  
+	        		</p:column> 
+	        
+					<p:column id="capacite" headerText="Cap." sortBy="#{atelier.capacite}">  
+			            <h:outputText value="#{atelier.capacite}" />  
+			        </p:column> 
+			        
+					
+			        <p:column id="option" headerText="Options"> 
+			         	<h:panelGrid columns="4">
+					        	
+						    <h:link  includeViewParams="true" outcome="detailatelier" title="Visualiser" >
+						    	<p:graphicImage value="../resources/img/view16.png" style="border:#CCCCCC 1px solid"/>  						        
+						    	<f:param name="codeatelier" value="#{atelier.codeSalle}"/>						    
+						    </h:link>
+						    
+				            <h:link  includeViewParams="true" id="edit"  title="Editer" outcome="ressouratelieredit">  
+						        <p:graphicImage value="../resources/img/edit16.png" style="border:#CCCCCC 1px solid"/>   
+						        <f:param name="codeatelier" value="#{atelier.codeSalle}"/>
+						    </h:link>
+						    
+				            <h:link  includeViewParams="true" id="delete" outcome="ressouratelierdelete" title="Supprimer">  
+						        <p:graphicImage value="../resources/img/delete16.png" style="border:#CCCCCC 1px solid"/>
+						       	<f:param name="codeatelier" value="#{atelier.codeSalle}"/>
+						   </h:link>
+						    
+				            <h:link  includeViewParams="true" id="handle" title="Programmation" outcome="progateliervue">  
+						        <p:graphicImage value="../resources/img/handle16.png" style="border:#CCCCCC 1px solid"/>   
+						        <f:param name="codeatelier" value="#{atelier.codeSalle}"/>
+						    </h:link>
+				         </h:panelGrid>
+				         
+			        </p:column> 
+			
+				</p:dataTable>
+				<br/>
+	   			
+	   			<center>
+	   				<p:commandButton value="Nouvel atelier" action="#{navBean.ressourateliercreate}" icon="ui-icon-check"/>
+	   			</center>
+				</h:form>
+  			</f:view>
+		
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

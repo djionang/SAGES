@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codedossier" value="#{dossierBean.codedossier}"/>
+	  		<f:event type="preRenderView" listener="#{dossierBean.initDossier}"/>
+		</f:metadata>
+    </ui:define>
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Suppression de candidature
+    </ui:define>
+   
+    <ui:define name="content">
+    	
+    
+	    <h2>
+	   		<h:outputText value="Supprimer le dossier -- Code: #{dossierBean.codedossier} --"/>
+	   	</h2>
+    
+   	<h:form id="formapplication">
+   	
+   	<p:panel id="panel"  style="margin-bottom:10px;"> 
+   		
+	    <p:panelGrid columns="2" style="width:100%;" id="perso">	    
+	    
+		    <f:facet name="header">
+			  	Informations de candidature
+			</f:facet>
+			 	
+		 	<h:outputText value="Nom du concerné"/>	            			
+     		<h:outputText value="#{dossierBean.nom}" id="nom" required="true" requiredMessage="*"/>
+      		
+			<h:outputText value="Prénom"/>			
+      		<h:outputText value="#{dossierBean.prenom}" id="prenom"/>
+      			
+			<h:outputText value="Date de naissance "/>		
+			<h:outputText value="#{dossierBean.dateNaissance}" id="datenaissance">
+				<f:convertDateTime pattern="dd/MM/yyyy"/>
+			</h:outputText>
+       			
+       		<h:outputText value="Lieu de naissance"/>			
+      		<h:outputText value="#{dossierBean.lieuNaissance}" id="lieunaissance"/>	
+       		
+       		<h:outputText value="Sexe"/>				
+      		<h:outputText value="#{dossierBean.sexe}" id="sexe"/>
+       			
+			<h:outputText value="Nationalité" />				
+      		<h:outputText value="#{dossierBean.nationalite}" id="nationalite"/>	       		                   		
+               	    
+			<h:outputText value="Mot de passe dossier"/>				
+			<h:outputText value="#{dossierBean.password}" id="password"/>
+	               			                 		
+            <h:outputText value="date de préinscription"/>
+            <h:outputText value="#{dossierBean.datePreinscription}" id="datepreinscription">
+				<f:convertDateTime pattern="dd/MM/yyyy"/>
+			</h:outputText>
+			
+				
+           	<h:outputText value="numero de payement préinscription"/>				
+			<h:outputText value="#{dossierBean.numeroPayement}" id="paymentid" />
+              			
+            <h:outputText value="Niveau sollicité "/>				
+			<h:outputText value="#{dossierBean.niveauDemande}" id="niveausollicite" required="true"/>
+              			
+            <h:outputText value="Option sollicitée " />				
+			<h:outputText value="#{dossierBean.optionDemande}" id="optionsollicite" required="true"/>
+	               		               			
+	     </p:panelGrid>
+			
+			 <br/>	
+			 <br/>	   									
+		  <center>										
+		 		<p:commandButton value="Supprimer"  id="buttonsubmit" icon="ui-icon-check"  action="#{dossierBean.supprimerDossier}"/>
+		 		<p:commandButton value="Retour à la liste"  id="buttonreturn" icon="ui-icon-arrowreturnthick-1-w" immediate="true" action="#{navBean.listercandidatures}"/>							
+		  </center>
+	</p:panel>
+	<p:blockUI block="panel" trigger="buttonsubmit">  
+        Suppression...<br />  
+    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+    </p:blockUI> 
+</h:form>
+   	
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

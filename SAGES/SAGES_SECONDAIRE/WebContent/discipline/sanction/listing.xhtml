@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Listing Sanctions
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2>Sanctions enregistrées</h2>
+   		<br/>
+   		<p:growl autoUpdate="true" globalOnly="true"/>
+   			 <h:form id="form1">
+   			
+	    	<p:dataTable id="tablesanctions" value="#{listSanctionBean.listeSanctions}" var="sanction" emptyMessage="Aucune sanction enregistrée"
+	    		paginator="true" rows="30" tableStyleClass="tablelist" rowsPerPageTemplate="20,40,60" rowIndexVar="num" sortBy="sanction.datedecision" sortOrder="descending">
+		  	        
+        		<p:column id="num" >  
+            		<h:outputText value="#{num+1}" />  
+        		</p:column> 
+        
+        		<p:column id="type" headerText="Type">  
+            		<h:outputText value="#{sanction.libelletype}" />  
+        		</p:column> 
+        
+        		<p:column id="eleve" headerText="Concerné">  
+            		<h:outputText value="#{sanction.matriculeeleve} - #{sanction.nomeleve}" />  
+        		</p:column> 
+        
+        		<p:column id="etat" headerText="Etat" sortBy="#{sanction.annule}">  
+		            <h:outputText value="#{sanction.annule?'Annulé':'Non annulé'}"/>
+		        </p:column> 
+        
+				<p:column id="dateeffet" headerText="Date Effet" sortBy="#{sanction.dateeffet}">  
+		            <h:outputText value="#{sanction.dateeffet}">
+		            	<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+		            </h:outputText>  
+		        </p:column> 
+		        
+				
+		        <p:column id="option" headerText="Options" width="46"> 
+		         	<p:panelGrid columns="3">
+				        	
+					    <h:link  includeViewParams="true" outcome="detailsanction" title="Visualiser" >
+					    	<p:graphicImage value="../../resources/img/view16.png" style="border:#CCCCCC 1px solid"/>  						        
+					    	<f:param name="codesanction" value="#{sanction.idsanction}"/>						    
+					    </h:link>
+					    
+			            <h:link  includeViewParams="true" id="edit"  title="Editer" outcome="dissanctionedit">  
+					        <p:graphicImage value="../../resources/img/edit16.png" style="border:#CCCCCC 1px solid"/>   
+					        <f:param name="codesanction" value="#{sanction.idsanction}"/>
+					    </h:link>
+					    
+			            <h:link  includeViewParams="true" id="cancel" outcome="dissanctioncancel" title="Annuler la sanction">  
+					        <p:graphicImage value="../../resources/img/delete16.png" style="border:#CCCCCC 1px solid"/>
+					       	<f:param name="codesanction" value="#{sanction.idsanction}"/>
+					   </h:link>
+					</p:panelGrid>    
+		        </p:column> 
+		
+			</p:dataTable>
+			
+			<br/>
+   			
+			<center>
+				<p:commandButton value="Nouvelle sanction" action="#{navBean.dissanctcreate}" icon="ui-icon-check"/>
+			</center>
+			</h:form>
+  			
+  			
+		<p:separator/>
+		<br/>
+   		
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

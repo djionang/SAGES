@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="/WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Nouvelle activité [Evénement]
+    </ui:define>
+   
+    <ui:define name="content">
+    <f:view>
+	    <h2>
+	   		<h:outputText value="Nouvel évenement"/>
+	   	</h2>
+    
+   	<h:form id="formevt">
+   	
+   	<p:panel id="panelevt"  style="margin-bottom:10px;"> 
+   	
+   		<p:messages id="messages"/>
+   		
+	    <p:panelGrid columns="2" style="width:100%;" id="perso">	    
+	    	
+		 	<h:outputText value="libellé *"/>	            			
+      		<p:inputText value="#{evtBean.libelle}" id="libelle" required="true" requiredMessage="Libellé de la evt obligatoire"/>
+      		
+      		<h:outputText value="Description"/>
+   	    	<p:inputTextarea value="#{evtBean.description}"/>
+      			    
+			<h:outputText value="Type"/>
+			<p:autoComplete value="#{evtBean.type}" completeMethod="#{etablissement.completeTypesEvt}" minQueryLength="3" maxResults="10" dropdown="true" size="20" required="true" requiredMessage="Type activité obligatoire"/>	            			
+      		 	   	    	
+   	    	<h:outputText value="Date début"/>	            			
+      		<p:calendar value="#{evtBean.datedebut}" id="datedebut" pattern="dd/MM/yyyy HH:mm" required="true" requiredMessage="date de début obligatoire"/>
+      		
+      		<h:outputText value="Date fin"/>	            			
+      		<p:calendar value="#{evtBean.datefin}" id="datefin" pattern="dd/MM/yyyy HH:mm" required="true" requiredMessage="Date de fin obligatoire"/>
+      		
+      		<h:outputText value="Repétition"/>	            			
+      		<p:inputText value="#{evtBean.repetition}" id="repetition" required="true" requiredMessage="Repetition invalide"/>
+      		
+   	    				
+      		             			
+	    </p:panelGrid>		
+		
+		  <br/>				
+		  <center>	
+		  								
+		 		<p:commandButton value="Enregistrer"  icon="ui-icon-check" id="submitevt" action="#{evtBean.saveActivite}" />
+		 		<p:commandButton value="Annuler" immediate="true" type="reset" icon="ui-icon-close"/>	
+		 </center>
+	</p:panel>
+	
+	<p:blockUI block="panelevt" trigger="submitevt">  
+        Enregistrement...<br />  
+    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+    </p:blockUI> 
+    
+	</h:form>
+	
+   </f:view>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+  
+   <ui:define name="meta">
+   		<f:metadata>
+	  		<f:viewParam name="codeclasse" value="#{trancheBean.codeclasse}"/>
+	  		<f:viewParam name="idtranche" value="#{trancheBean.id}"/>
+	  		<f:event type="preRenderView" listener="#{trancheBean.initTrancheclasse}"/>
+		</f:metadata>
+    </ui:define>
+    
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Suppression de tranche
+    </ui:define>
+   
+    <ui:define name="content">
+	    <h2>
+	   		<h:outputText value="Supprimer la tranche #{trancheBean.id} de la classe #{trancheBean.codeclasse}"/>
+	   	</h2>
+	   	<p:growl autoUpdate="true"/>
+	   	<p:messages id="messages" autoUpdate="true"/>
+    <br/>   	
+   	
+	<h:form id="formdeltranche">
+	   	<p:panel id="panelparam"  style="margin-bottom:10px;"> 
+	   	
+			    <p:panelGrid columns="2" cellpadding="5" id="pann" columnClasses="label,value" style="width:80%">  
+			        <h:outputText value="libellé de tranche (ex: inscr.)" />
+			        <h:outputText value="#{trancheBean.type}"/>
+			        				          
+			        <h:outputText value="Montant" />  
+			        <h:outputText value="#{trancheBean.montant}">
+			        	<f:convertNumber type="currency" currencySymbol="F."/>
+			        </h:outputText>  
+			        
+			        <h:outputText value="Délai versement"/>
+					<h:outputText value="#{trancheBean.delaiVersement}" id="dateversnt">
+						<f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputText>
+			          
+			    </p:panelGrid> 		    
+	         	<br/>
+	        	<center>
+	            	<p:commandButton id="deletetranche" icon="ui-icon-check" value="Confirmation suppression" action="#{trancheBean.supprimerTranche}"/>
+	            </center>
+	   		
+		</p:panel>
+		
+		<p:blockUI block="panelparam" trigger="deletetranche">  
+	        Suppression...<br />  
+	    	<p:graphicImage value="/resources/img/ajax-loader.gif"/> 
+	    </p:blockUI> 
+	    
+	</h:form>	
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

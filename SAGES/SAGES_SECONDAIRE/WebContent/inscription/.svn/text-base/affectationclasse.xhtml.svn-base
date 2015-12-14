@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Affectation d'élèves aux classes
+   </ui:define>
+   
+   <ui:define name="content">
+   	<h2><h:outputText value="Affectation aux classes"/></h2>
+   	<br/>
+   	<p:messages autoUpdate="true"/>
+   <h:form>
+   
+   
+	   	<p:scrollPanel id="panel">
+	   	
+		   	<h:panelGrid columns="2">
+		   		<p:dataTable var="dossier" value="#{affectationClasseBean.dossiers}" id="tabledossiers" widgetVar="dossierstable" 
+		   		emptyMessage="Aucun dossier pour les critères fournis">
+		   			
+		   			<f:facet name="header">  
+			            <p:outputPanel>  
+			                <h:outputText value="Recherche:" />  
+			                <p:inputText id="globalFilter" onkeyup="dossierstable.filter()" style="width:150px" />  
+			            </p:outputPanel>  
+			        </f:facet>  
+				   			
+		   			<p:column headerText="Code D.">
+			 			<h:outputText value="#{dossier.codedossier}" />
+					</p:column>
+		   		
+		   			<p:column headerText="Nom" sortBy="#{dossier.nom}">
+			 			<h:outputText value="#{dossier.nom} #{dossier.prenom}" />
+					</p:column>
+					
+					<p:column headerText="Soll." sortBy="#{dossier.niveauDemande}">
+			 			<h:outputText value="#{dossier.niveauDemande}(#{dossier.optionDemande})" />
+					</p:column>  
+					
+					<p:column headerText="S." style="width:10px;">  
+	            		 <h:selectBooleanCheckbox value="#{dossier.selected}"/>
+	        		</p:column>  
+	  
+				</p:dataTable>		
+			
+				<p:panel header=" --> Classe">
+				
+					<h:selectOneListbox id="selclasse" value="#{affectationClasseBean.codeClasse}" required="true" requiredMessage="Aucune classe sélectionnée">
+						<f:selectItems value="#{etablissement.listeClasses}"  var="classe" 
+						itemLabel="#{classe.codeClasse} -- #{classe.libelle} (#{classe.contenanceActuelle}/#{classe.effectifMax})" itemValue="#{classe.codeClasse}" /> 
+					</h:selectOneListbox>
+				</p:panel>
+			</h:panelGrid>
+			
+		</p:scrollPanel>
+		
+		<p:panel>
+			<center>
+				<p:commandButton id="valider" icon="ui-icon-check" value="Sauvegarder" action="#{affectationClasseBean.sauvegarderAffectation}"/>
+				
+				<p:commandButton value="Recharger" icon="" immediate="true" type="reset"/>
+			</center>
+		</p:panel>
+		
+		<p:blockUI block="panel" trigger="valider">  
+	        Enregistrement...<br />  
+	    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+	    </p:blockUI> 
+		
+   </h:form>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

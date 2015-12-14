@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="/WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE| Cahier de texte
+   </ui:define>
+   
+   <ui:define name="content">
+   		<h2>Cahier de texte</h2>
+   		
+   		<br/>
+   		<h:form id="form">
+   		
+   		<p:outputPanel style="width:100%;" id="panel">
+	   			<center>
+			   		<p:ajaxStatus>
+						 <f:facet name="start">
+							 <p:graphicImage value="/resources/img/loading.gif" />
+						 </f:facet>
+						 <f:facet name="complete">
+								 <h:outputText value="" />
+						</f:facet>
+					</p:ajaxStatus>
+				</center>		 	
+   			 
+   			 	<br/>
+   			 
+	            <p:panelGrid columns="2" style="width:100%;" id="grid2">
+		   			<p:panel>
+			   			<h:selectOneMenu value="#{listCdtBean.codeclasse}" required="true" requiredMessage="Aucune classe sélectionnée">
+			   				<f:selectItem itemLabel="Classe" itemValue="" itemDescription=""/>
+					 	    <f:selectItems value="#{etablissement.listeClasses}" var="classe" itemLabel="#{classe.codeClasse} - #{classe.libelle}" itemValue="#{classe.codeClasse}" itemDescription="#{classe.libelle}"/>
+					 		<p:ajax async="true" partialSubmit="true" listener="#{listCdtBean.loadCours}" update="cours" process="@this"/>
+					 	</h:selectOneMenu >
+		   			</p:panel>
+			    	    
+			    	<p:panel id="pancours" header="Cours">
+			   			<h:selectOneListbox value="#{listCdtBean.codecours}" style="max-height:190px;" required="true" requiredMessage="Aucun cours sélectionné" size="7" id="cours" validatorMessage="Erreur de validation des données">
+					 		<f:selectItems value="#{listCdtBean.cours}" var="cours" itemLabel="#{cours.libelle} - #{cours.libellematiere} #{cours.libelleclasse}" itemValue="#{cours.codecours}" itemDescription="#{cours.description}"/>
+					 		<p:ajax async="true" partialSubmit="true" listener="#{listCdtBean.loadCdt}" update="table" process="@this"/>
+					 	</h:selectOneListbox>
+		   			</p:panel>   	   			
+			    </p:panelGrid>		
+			    <br/>
+	            
+		    	<p:dataTable id="table" value="#{listCdtBean.cdts}" var="cdt" emptyMessage="Aucune entrée trouvée" rowIndexVar="num"
+		    	sortBy="#{cdt.datejour}" sortOrder="descending">
+			  	    
+			  	    <p:column id="num" headerText="N°" >  
+	            		<h:outputText value="#{num+1}" />  
+	        		</p:column>
+			  	      
+	        		<p:column id="titre" headerText="Titre" >  
+	            		<h:outputText value="#{cdt.libelle}" />  
+	        		</p:column> 
+	        
+	        		<p:column id="cours" headerText="Cours" >  
+	            		<h:outputText value="#{cdt.libellecours}" />  
+	        		</p:column>
+	        
+					<p:column id="date" headerText="Le" sortBy="#{cdt.datejour}">  
+			            <h:outputText value="#{cdt.datejour}">
+			            	<f:convertDateTime pattern="dd/MM/yyyy"/>
+			            </h:outputText>
+			            
+			            <h:outputText value=" De "/>
+			            
+			            <h:outputText value="#{cdt.heuredebut}">
+			            	<f:convertDateTime pattern="HH:mm"/>
+			            </h:outputText>
+			            
+			            <h:outputText value=" à "/>
+			            
+			            <h:outputText value="#{cdt.heurefin})">
+			            	<f:convertDateTime pattern="HH:mm"/>
+			            </h:outputText>
+			        </p:column> 
+			        
+			        <p:column id="option" headerText="Options" width="46"> 
+			         	<p:panelGrid columns="3">				        	
+				            <h:link  includeViewParams="true" id="view"  title="Visualiser" outcome="detailcdt">  
+						        <p:graphicImage value="/resources/img/view16.png" style="border:#CCCCCC 1px solid"/>   
+						        <f:param name="codecdt" value="#{cdt.codecdt}"/>
+						    </h:link>
+						    
+						    <h:link  includeViewParams="true" id="edit"  title="Editer" outcome="cdtedit">  
+						        <p:graphicImage value="/resources/img/edit16.png" style="border:#CCCCCC 1px solid"/>   
+						        <f:param name="codecdt" value="#{cdt.codecdt}"/>
+						    </h:link>
+						    
+				            <h:link  includeViewParams="true" id="delete" outcome="cdtdelete" title="Supprimer">  
+						        <p:graphicImage value="/resources/img/delete16.png" style="border:#CCCCCC 1px solid"/>
+						        <f:param name="codecdt" value="#{cdt.codecdt}"/>
+						   </h:link>
+			            </p:panelGrid>
+			        </p:column> 
+				</p:dataTable>
+				   			
+   		</p:outputPanel>
+   		</h:form>	
+   		
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>

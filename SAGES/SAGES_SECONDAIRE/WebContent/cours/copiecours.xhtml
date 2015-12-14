@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+
+   <ui:composition template="../WEB-INF/templates/template.xhtml">
+   
+   <ui:define name="title">
+   		SAGES SECONDAIRE | Copier les cours d'une classe
+    </ui:define>
+   
+    <ui:define name="content">
+    <f:view>
+	    <h2>
+	   		<h:outputText value="copier les cours d'une année à l'autre dans une classe"/>
+	   	</h2>
+	   	
+	   	<p:messages autoUpdate="true"/>
+    
+	   	<h:form id="formcours">
+	   	
+	   	<p:panel id="panelcours"  style="margin-bottom:10px;"> 
+	   	
+		    <p:panelGrid columns="2" style="width:100%;" id="perso">	    
+		    	<h:selectOneMenu value="#{coursBean.codeclasse}" required="true" requiredMessage="La classe ne peut être vide">
+		    		<f:selectItems value="#{etablissement.listeClasses}" var="clas" itemLabel="#{clas.libelle}" itemValue="#{clas.codeClasse}" itemDescription="#{clas.libelle}"/>
+		    	    <p:ajax async="true" partialSubmit="true" listener="#{coursBean.loadCoursClasseN}" event="change" update="panelcours" process="@this"/>
+		    	</h:selectOneMenu>
+		    		
+		    	<h:selectOneMenu  value="#{coursBean.annee}" required="true" requiredMessage="L'annee ne peut être vide">
+		    		<f:selectItems value="#{etablissement.listeAnnees}" var="an" itemLabel="#{an.anneeacademique}" itemValue="#{an.anneeacademique}"/>
+		    	</h:selectOneMenu>
+		    </p:panelGrid>		
+			
+			 <br/>
+				<p:selectManyCheckbox  value="#{coursBean.courstoprint}"   layout="pageDirection" converter="javax.faces.Integer">
+					<f:selectItems value="#{coursBean.listeCours}" var="cours" itemLabel="#{cours.codematiere} - #{cours.libelle}" itemValue="#{cours.codecours}"/>
+				</p:selectManyCheckbox>
+
+			 <br/>				
+			 
+			 <f:facet name="footer">
+			 <center>			  								
+			 		<p:commandButton value="Copier cours"  icon="ui-icon-check" id="submitcours" action="#{coursBean.copieCours}" />
+			 </center>
+			 </f:facet>
+		</p:panel>
+		
+		<p:blockUI block="panelcours" trigger="submitcours">  
+	        Copie en cours...<br />  
+	    	<p:graphicImage value="/resources/img/ajax-loader.gif"/>  
+	    </p:blockUI> 
+	    
+		</h:form>
+	
+   </f:view>
+   
+   </ui:define>
+   
+   </ui:composition>
+ 
+</html>
